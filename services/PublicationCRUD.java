@@ -1,13 +1,13 @@
 package services;
 
 import entities.Publication;
-import entities.Publication;
 import utils.MyConnection;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.constant.ConstantDescs.NULL;
 
 public class PublicationCRUD {
     Connection cnxx;
@@ -16,40 +16,54 @@ public class PublicationCRUD {
         cnxx = MyConnection.getInstance().getCnx();
     }
 
+
+
     public long ajouterPublication (Publication p) {
         long id = 0;
-        String req = "INSERT INTO Publication (idPublication,object,description,nbrVote,archive,idClient ) VALUES (?,?,?,?,?,?)";
-        try {
-            PreparedStatement pst = cnxx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
-            pst.setInt(1, p.getId_publication());
-            pst.setString(2, p.getTitre());
-            pst.setString(3, p.getDesc());
-            pst.setInt(4, p.getNbrVote());
-            pst.setBoolean(5, p.isArchive());
-            pst.setInt(6, p.getId_client());
-            pst.executeUpdate();
-            System.out.println("Publication ajoutée avec succés");
-            ResultSet rs = pst.getGeneratedKeys();
-            if (rs.next()) {
-                id = rs.getLong(1);
+        if(verifPublication(p) && !verifQuotaPub(p.getId_client())) {
+            String req = "INSERT INTO Publication (idPublication,object,description,nbrVote,archive,idClient ) VALUES (?,?,?,?,?,?)";
+            try {
+                PreparedStatement pst = cnxx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
+                pst.setInt(1, p.getId_publication());
+                pst.setString(2, p.getTitre());
+                pst.setString(3, p.getDesc());
+                pst.setInt(4, p.getNbrVote());
+                pst.setBoolean(5, p.isArchive());
+                pst.setInt(6, p.getId_client());
+                pst.executeUpdate();
+                System.out.println("Publication ajoutée avec succés");
+                ResultSet rs = pst.getGeneratedKeys();
+                if (rs.next()) {
+                    id = rs.getLong(1);
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
             }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
+        }else if (verifQuotaPub(p.getId_client())){
+
+        }else
+        {
+            System.out.println("Champ titre invalide");
         }
         return id;
     }
 
     public void modifierPublication(Publication p) {
         String req = "UPDATE publication SET object=? ,description=?, description=?,nbrVote=? WHERE idPublication=? "; //id_client est fixe //archive aura son propre methode
-        try {
-            PreparedStatement pst = cnxx.prepareStatement(req);
-            pst.setString(2, p.getTitre());
-            pst.setString(3, p.getDesc());
-            pst.setInt(4,p.getNbrVote());
-            pst.executeUpdate();
-            System.out.println("Publication modifiée avec succés");
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+        if(verifPublication(p)) {
+            try {
+                PreparedStatement pst = cnxx.prepareStatement(req);
+                pst.setString(2, p.getTitre());
+                pst.setString(3, p.getDesc());
+                pst.setInt(4,p.getNbrVote());
+                pst.executeUpdate();
+                System.out.println("Publication modifiée avec succés");
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage());
+            }
+        }else
+        {
+            System.out.println("Champ titre invalide");
         }
     }
 
@@ -69,7 +83,7 @@ public class PublicationCRUD {
     public Publication afficherPublication(int idP){
         Publication p = new Publication();
         try {
-            String req = "SELECT * FROM commentaire WHERE idCommentaire = ?";
+            String req = "SELECT * FROM publication WHERE idPublication = ?";
             PreparedStatement pst = cnxx.prepareStatement(req);
             pst.setInt(1,idP);
             ResultSet rs = pst.executeQuery();
@@ -86,8 +100,8 @@ public class PublicationCRUD {
         return p;
     }
 
-    public List<Publication> afficherPublication() {
-        List listePublications = new ArrayList();
+    public ArrayList<Publication> afficherPublication() {
+        ArrayList listePublications = new ArrayList();
         try {
             Statement st = cnxx.createStatement();
             String req = "SELECT * FROM publication";
@@ -98,7 +112,7 @@ public class PublicationCRUD {
                 p.setTitre(rs.getString(2));
                 p.setDesc(rs.getString(3));
                 p.setNbrVote(rs.getInt(4));
-                p.setNbrVote(rs.getInt(5));
+                p.setArchive(rs.getBoolean(5));
                 p.setId_client(rs.getInt(6));
                 listePublications.add(p);
             }
@@ -106,6 +120,36 @@ public class PublicationCRUD {
             System.err.println(ex.getMessage());
         }
         return listePublications;
+    }
+
+    public boolean verifPublication(Publication p){ //on teste si le champ titre est vide oubien nulle on retourne faux;
+        return !p.getTitre().equals("") && !p.getTitre().equals(NULL);
+    };
+
+    public boolean verifQuotaPub(int idClient){ //on retourne TRUE si notre quota est attein
+        String req = "SELECT count(*) FROM publication WHERE idClient = ? AND archive = 0"; // on teste uniquement les postes non archivé
+        try {
+            PreparedStatement pst = cnxx.prepareStatement(req);
+            pst.setInt(1,idClient);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1)>10; //on a un maximum quota de 10 postes courants par client / user
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public void archiver(Publication p){
+        if(!p.isArchive()){
+            p.setArchive(true);
+            modifierPublication(p);
+        }
+    }
+
+    public void autoArchive(Publication p){
+
     }
 
 }

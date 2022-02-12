@@ -1,11 +1,14 @@
 package services;
 
 import entities.Commentaire;
+import entities.Publication;
 import utils.MyConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.constant.ConstantDescs.NULL;
 
 public class CommentaireCRUD {
     Connection cnxx;
@@ -14,24 +17,31 @@ public class CommentaireCRUD {
         cnxx = MyConnection.getInstance().getCnx();
     }
 
+    public boolean verifCommentaire(Commentaire c){ //on teste si le champ titre est vide oubien nulle on retourne faux;
+        return !c.getDescription().equals("") && !c.getDescription().equals(NULL);
+    };
+
     public int ajouterCommentaire(Commentaire c) {
         int id = 0;
-        String req = "INSERT INTO commentaire (idPublication,description) VALUES (?,?)";
-        try {
-            PreparedStatement pst = cnxx.prepareStatement(req,Statement.RETURN_GENERATED_KEYS);
-            pst.setInt(1, c.getId_publication());
-            pst.setString(2, c.getDescription());
-            pst.executeUpdate();
-            System.out.println("Commentaire ajouté avec succés");
-            ResultSet rs = pst.getGeneratedKeys();
-            if (rs.next()) {
-                id = rs.getInt(1);
+        if (verifCommentaire(c)) {
+            String req = "INSERT INTO commentaire (idPublication,description) VALUES (?,?)";
+            try {
+                PreparedStatement pst = cnxx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
+                pst.setInt(1, c.getId_publication());
+                pst.setString(2, c.getDescription());
+                pst.executeUpdate();
+                System.out.println("Commentaire ajouté avec succés");
+                ResultSet rs = pst.getGeneratedKeys();
+                if (rs.next()) {
+                    id = rs.getInt(1);
+                }
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
             }
-            return id;
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
+        } else {
+            System.out.println("Champ description invalide");
         }
-    return id;
+        return id;
     }
 
     public void modifierCommentaire(Commentaire c) {
