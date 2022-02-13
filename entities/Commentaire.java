@@ -1,16 +1,25 @@
 package entities;
 
 public class Commentaire {
-    int id_commentaire, id_publication;
+    int id_commentaire, id_publication,idClient;
     String description;
 
     public Commentaire() {
     }
 
-    public Commentaire(int id_commentaire, int id_publication, String description) {
+    public Commentaire(int id_commentaire, int id_publication, int idClient, String description) {
         this.id_commentaire = id_commentaire;
         this.id_publication = id_publication;
+        this.idClient = idClient;
         this.description = description;
+    }
+
+    public int getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
     }
 
     public int getId_commentaire() {

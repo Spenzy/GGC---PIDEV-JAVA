@@ -7,6 +7,8 @@ import services.CommentaireCRUD;
 import services.PublicationCRUD;
 import services.VoteCRUD;
 
+import java.time.LocalDateTime;
+
 public class MainClass {
     public static void main(String[] args) {
 /*
@@ -32,8 +34,16 @@ public class MainClass {
         vc.modifierVote(v);
         System.out.println(vc.afficherVote());
         vc.supprimerVote(1,1);
-*/
 
+
+
+
+        pc.autoArchive(p, LocalDateTime.now());
+*/
+        PublicationCRUD pc = new PublicationCRUD();
+        Publication p = pc.afficherPublication(1);
+        pc.archiver(p);
+        System.out.println(pc.afficherPublication());
 
 
 

@@ -5,6 +5,7 @@ import entities.Publication;
 import utils.MyConnection;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,11 +26,14 @@ public class CommentaireCRUD {
         int id = 0;
         if (verifCommentaire(c)) {
             String req = "INSERT INTO commentaire (idPublication,description) VALUES (?,?)";
+            PublicationCRUD pc = new PublicationCRUD();
             try {
                 PreparedStatement pst = cnxx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
                 pst.setInt(1, c.getId_publication());
                 pst.setString(2, c.getDescription());
-                pst.executeUpdate();
+                pst.executeUpdate(); //execution update query
+                //execution d'autoarchivage
+                pc.autoArchive(pc.afficherPublication(c.getIdClient()), LocalDateTime.now());
                 System.out.println("Commentaire ajouté avec succés");
                 ResultSet rs = pst.getGeneratedKeys();
                 if (rs.next()) {
@@ -45,13 +49,14 @@ public class CommentaireCRUD {
     }
 
     public void modifierCommentaire(Commentaire c) {
-        String req = "UPDATE commentaire SET idPublication=? ,description=? WHERE idCommentaire = ? ";
+        String req = "UPDATE commentaire SET idPublication=?,idClient=? ,description=? WHERE idCommentaire = ? ";
         PreparedStatement pst;
         try {
             pst = cnxx.prepareStatement(req);
             pst.setInt(1, c.getId_publication());
-            pst.setString(2, c.getDescription());
-            pst.setInt(3, c.getId_commentaire());
+            pst.setInt(2, c.getIdClient());
+            pst.setString(3, c.getDescription());
+            pst.setInt(4, c.getId_commentaire());
             pst.executeUpdate();
             System.out.println("Commentaire modifié avec succés");
         } catch (SQLException ex) {
@@ -82,7 +87,8 @@ public class CommentaireCRUD {
             rs.next();
             c.setId_commentaire(rs.getInt(1));
             c.setId_publication(rs.getInt(2));
-            c.setDescription(rs.getString(3));
+            c.setIdClient(rs.getInt(3));
+            c.setDescription(rs.getString(4));
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }

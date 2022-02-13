@@ -4,8 +4,15 @@ import entities.Publication;
 import utils.MyConnection;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.constant.ConstantDescs.NULL;
 
@@ -31,6 +38,7 @@ public class PublicationCRUD {
                 pst.setBoolean(5, p.isArchive());
                 pst.setInt(6, p.getId_client());
                 pst.executeUpdate();
+                autoArchive(p, LocalDateTime.now());
                 System.out.println("Publication ajoutée avec succés");
                 ResultSet rs = pst.getGeneratedKeys();
                 if (rs.next()) {
@@ -49,14 +57,17 @@ public class PublicationCRUD {
     }
 
     public void modifierPublication(Publication p) {
-        String req = "UPDATE publication SET object=? ,description=?, description=?,nbrVote=? WHERE idPublication=? "; //id_client est fixe //archive aura son propre methode
+        String req = "UPDATE publication SET object=?, description=?, nbrVote=?, archive = ? WHERE idPublication=? "; //id_client est fixe //archive aura son propre methode
         if(verifPublication(p)) {
             try {
                 PreparedStatement pst = cnxx.prepareStatement(req);
-                pst.setString(2, p.getTitre());
-                pst.setString(3, p.getDesc());
-                pst.setInt(4,p.getNbrVote());
+                pst.setString(1, p.getTitre());
+                pst.setString(2, p.getDesc());
+                pst.setInt(3,p.getNbrVote());
+                pst.setBoolean(4, p.isArchive());
+                pst.setInt(5, p.getId_publication());
                 pst.executeUpdate();
+                autoArchive(p, LocalDateTime.now());
                 System.out.println("Publication modifiée avec succés");
             } catch (SQLException ex) {
                 System.err.println(ex.getMessage());
@@ -142,14 +153,23 @@ public class PublicationCRUD {
     }
 
     public void archiver(Publication p){
-        if(!p.isArchive()){
+        if(p.isArchive()){
             p.setArchive(true);
             modifierPublication(p);
-        }
+        }else
+            System.out.println("publication déja archivé");
     }
 
-    public void autoArchive(Publication p){
-
+    public void autoArchive(Publication p, LocalDateTime dateAjout){
+        final Runnable autoArch = new Runnable() { //ScheduledExecutorService nécessite un objet runnable pour fonctionner ou on fait appel a notre methode archiver
+            public void run() {
+                //archiver(p);
+                System.out.println(p);//pour tester le chrono
+            }
+        };
+        long delai = ChronoUnit.MILLIS.between(dateAjout, dateAjout.plusDays(5)); //ici on fait calculer le delai de 5 jours depuis la date d'ajout
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1); //ici on initialise un nouveau thread de ScheduledExecutorService
+        scheduler.schedule(autoArch, delai, TimeUnit.MILLISECONDS); //ici on programme le chrono du methode
     }
 
 }
