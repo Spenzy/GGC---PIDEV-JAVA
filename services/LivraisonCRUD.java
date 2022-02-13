@@ -6,6 +6,7 @@
 package sprint1.pidev.services;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -135,4 +136,40 @@ public class LivraisonCRUD {
         }
         return testLivreur;
     }
+
+   //fonction remise si la livraison est en retard
+    public void RemiseLivraison(){
+        Date sysdate = null;
+                
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT idCommande,DateHeure FROM livraison";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            while (rs.next()) {
+                if (rs.getDate(2) == sysdate) {
+                    //remiseLivraison();
+                }
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+    }
+    
+    /*public void livraisonRetard(Livraison l, LocalDateTime dateAjout){
+        final Runnable remiseLivraison = new Runnable() { //ScheduledExecutorService nécessite un objet runnable pour fonctionner ou on fait appel a notre methode archiver
+            public void run() {
+                remiseLivraison(l);
+                System.out.println(l);//pour tester le chrono
+            }
+        };
+        long delai = ChronoUnit.MILLIS.between(dateAjout, dateAjout.plusDays(1)); //ici on fait calculer le delai d'un jour depuis la date de livraison
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1); //ici on initialise un nouveau thread de ScheduledExecutorService
+        scheduler.schedule(remiseLivraison , delai, TimeUnit.MILLISECONDS); //ici on programme le chrono du methode
+    }
+    
+    public void remiseLivraison(Livraison l){
+        
+    }*/
 }
