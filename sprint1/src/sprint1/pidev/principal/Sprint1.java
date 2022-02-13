@@ -22,7 +22,7 @@ public class Sprint1 {
      */
     public static void main(String[] args) {
         //test crud commande
-        Commande c1 = new Commande(6253, 9512, 2, "2 rue des narcisses, carthage byrsa", 100);
+        Commande c1 = new Commande(6253, 9512, 2, "2 rue des narcisses, carthage byrsa");
         CommandeCRUD c = new CommandeCRUD();
 
         if (c.VerifClient(c1.getIdClient())) {
@@ -36,8 +36,6 @@ public class Sprint1 {
         }
         System.out.println(c.afficher());
 
-        
-        c1.setIdCommande(1);
         c1.setLivree(true);
         c1.setAdresse("gammarth");
         c1.setIdClient(6253);
@@ -55,15 +53,12 @@ public class Sprint1 {
         } else {
             System.out.println("Erreur modification commande, Cette commande n'existe pas");
         }
-        
-        if(c.VerifCommande(21)){
+
+        if (c.VerifCommande(21)) {
             c.supprimerCommande(21);
-        }else {
+        } else {
             System.out.println("Erreur suppression commande, Cette commande n'existe pas");
         }
-        
-        
-        
         
         //test CRUD livraison
         /*LivraisonCRUD l = new LivraisonCRUD();

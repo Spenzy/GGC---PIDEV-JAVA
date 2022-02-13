@@ -18,12 +18,12 @@ public class Commande {
     public Commande() {
     }
 
-    public Commande(int idClient, int idProduit, int quantite, String adresse, float prix) {
+    public Commande(int idClient, int idProduit, int quantite, String adresse) {
         this.idClient = idClient;
         this.idProduit = idProduit;
         this.quantite = quantite;
         this.adresse = adresse;
-        this.prix = prix;
+        this.prix = 0;
         this.livree = false;
     }
 

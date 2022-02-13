@@ -28,11 +28,12 @@ public class CommandeCRUD {
     }
 
     public void ajouterCommande(Commande c) {
-
+        
         String req = "INSERT INTO commande (idClient,idProduit,quantite,adresse,prix,livree) VALUES (?,?,?,?,?,?)";
         PreparedStatement pst;
         try {
-            pst = cnxx.prepareStatement(req);
+
+            pst = cnxx.prepareStatement(req,Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, c.getIdClient());
             pst.setInt(2, c.getIdProduit());
             pst.setInt(3, c.getQuantite());
@@ -40,6 +41,14 @@ public class CommandeCRUD {
             pst.setFloat(5, c.getPrix());
             pst.setBoolean(6, c.isLivree());
             pst.executeUpdate();
+
+            ResultSet rs = pst.getGeneratedKeys();
+            rs.next();
+            long pk = rs.getLong(1);
+            c.setIdCommande((int) pk);
+            
+            calculPrixCommande(c);
+
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -77,6 +86,8 @@ public class CommandeCRUD {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+
+        calculPrixCommande(c);
 
     }
 
@@ -164,4 +175,22 @@ public class CommandeCRUD {
         }
         return testProduit;
     }
+
+    //métier calcul du prix automatique à partir de la table commande(idProduit,quantite) et de la table produit(idProduit,prix)
+    //si le total dépasse 100 dinars il ny a pas de frais de livraison
+    public void calculPrixCommande(Commande c) {
+        String req = "update commande set prix=(select prix from produit where reference=?)*quantite where idCommande = ? ";
+        PreparedStatement pst;
+        try {
+            pst = cnxx.prepareStatement(req);
+            pst.setFloat(1, c.getIdProduit());
+            pst.setInt(2, c.getIdCommande());
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        //frais de livraison
+    }
+
 }
