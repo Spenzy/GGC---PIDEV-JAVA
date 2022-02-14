@@ -20,8 +20,7 @@ public class Avis {
 
     }
 
-    public Avis(int idAvis, int referenceProduit, String description, String type) {
-        this.idAvis = idAvis;
+    public Avis(int referenceProduit, String description, String type) {
         this.referenceProduit = referenceProduit;
         this.description = description;
         if (type.equals("excellent") || type.equals("mediocre") || type.equals("moyen")) {

@@ -20,51 +20,76 @@ public class JavaApplication12 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//MyConnection mc =  MyConnection.getInstance();
 
         ProduitCRUD p = new ProduitCRUD();
 
         Produit p1 = new Produit(9512, "A32", "Telephone", "ecran...camera....", (float) 700.5);
-        Produit p2 = new Produit(5632, "bleudragon", "test", "testestest", (float) 1000.5);
-        Produit p3 = new Produit(999, "paul", "Clavier", "testestest", (float) 300.5);
-        //p.ajouterProduit(p1);
-        //p.ajouterProduit(p2);
-        //p.ajouterProduit(p3);
-        System.out.println(p.afficher());
+        Produit p2 = new Produit(999, "paul", "Clavier", "testestest", (float) 300.5);
 
+        /*p.ajouterProduit(p1);
+        p.ajouterProduit(p2);
+        System.out.println(p.afficher());*/
+        
+        
+        
+        
+        
+        /*p1.setNom("RedDragonKumara");
         p1.setCategorie("Clavier");
-        p1.setNom("RedDragonKumara");
         p1.setFiche_technique("RGBQ lights");
         p1.setPrix((float) 290);
 
-        //p.modifierProduit(p1);
-        System.out.println(p.afficher());
+        p.modifierProduit(p1);
+        System.out.println(p.afficher());*/
+        
+        
+        
+        
+        /*p.supprimerProduit(999);
+        System.out.println(p.afficher());*/
+        
+        
+        
 
-        //p.supprimerProduit(5632);
-        System.out.println(p.afficher());
-
-        //*************
+        //test avis
         AvisCRUD a = new AvisCRUD();
+        Avis a1 = new Avis(9512, "ce clavier est excellent", "excellent");
 
-        Avis a1 = new Avis(6, 9512, "ce clavier est excellent", "excellent");
+        /*a.ajouterAvis(a1);
+        System.out.println(a.afficher());*/
 
-        //a.ajouterAvis(a1);
-        System.out.println(a.afficher());
-
+        
+        
+        
+        /*a1.setIdAvis(8);//juste pour pouvoir modifier dans la base de données
         a1.setDescription("ce clavier n'est pas excellent ");
         a1.setType("mediocre");
 
-        //a.modifierAvis(a1);
-        System.out.println(a.afficher());
+        a.modifierAvis(a1);
+        System.out.println(a.afficher());*/
 
-        //a.supprimerAvis(6);
-        System.out.println(a.afficher());
+        
+        /*a.supprimerAvis(8);
+        System.out.println(a.afficher());*/
+        
+        
 
-        //a.supprimerAvisParProduit(9512);
-        System.out.println(a.afficher());
+        /*a.supprimerAvisParProduit(9512);
+        System.out.println(a.afficher());*/
 
-        p.remiseCategorie("fvghb", 50);
-        p.remiseCategorie("Clavier", 50);
+        
+        /*if (p.verifCategorieProduit("fvghb")) {
+            p.remisePrixCategorie("fvghb", 50);
+        } else {
+            System.out.println("la categorie saisie n'existe pas");
+        }
+        
+        if (p.verifCategorieProduit("Clavier")) {
+            p.remisePrixCategorie("Clavier", 50);
+        } else {
+            System.out.println("la categorie saisie n'existe pas");
+        }*/
+
     }
 
 }

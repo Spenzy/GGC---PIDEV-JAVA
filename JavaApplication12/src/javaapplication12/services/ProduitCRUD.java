@@ -103,30 +103,20 @@ public class ProduitCRUD {
         return myList;
     }
 
-    public void remiseCategorie(String categorie, float remise) {
+        public boolean verifCategorieProduit(String categorie){
+        String req = "SELECT * FROM produit WHERE categorie = ?";
         try {
-            Statement st = cnxx.createStatement();
-            String req = "SELECT categorie FROM produit";
-            ResultSet rs;
-            rs = st.executeQuery(req);
-            boolean testCategorie = false;
-            while (rs.next()) {
-                if (rs.getString(1).equals(categorie)) {
-                    testCategorie = true;
-                };
-            }
-            if (testCategorie == false) {
-                System.out.println("la categorie saisie n'existe pas");
-            } else {
-                modifierPrixRemise(categorie, remise);
-            }
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-            //   return null;
+            PreparedStatement pst = cnxx.prepareStatement(req);
+            pst.setString(1,categorie);
+            ResultSet rs = pst.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
         }
+        return false;
     }
-
-    public void modifierPrixRemise(String categorie, float remise) {
+    
+    public void remisePrixCategorie(String categorie, float remise) {
         String req = "update produit set prix=prix/100*" + remise + " where categorie = '" + categorie+"'";
         PreparedStatement pst;
         try {
