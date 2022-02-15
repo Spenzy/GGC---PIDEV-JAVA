@@ -1,11 +1,14 @@
 package services;
 
 import entities.Publication;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
 import utils.MyConnection;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -15,6 +18,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import static java.lang.constant.ConstantDescs.NULL;
+import static org.quartz.JobBuilder.newJob;
+import static org.quartz.TriggerBuilder.newTrigger;
 
 public class PublicationCRUD {
     Connection cnxx;
@@ -38,7 +43,7 @@ public class PublicationCRUD {
                 pst.setBoolean(5, p.isArchive());
                 pst.setInt(6, p.getId_client());
                 pst.executeUpdate();
-                autoArchive(p, LocalDateTime.now());
+                //autoArchive(p, LocalDateTime.now());
                 System.out.println("Publication ajoutée avec succés");
                 ResultSet rs = pst.getGeneratedKeys();
                 if (rs.next()) {
@@ -67,7 +72,7 @@ public class PublicationCRUD {
                 pst.setBoolean(4, p.isArchive());
                 pst.setInt(5, p.getId_publication());
                 pst.executeUpdate();
-                autoArchive(p, LocalDateTime.now());
+                //autoArchive(p, LocalDateTime.now());
                 System.out.println("Publication modifiée avec succés");
             } catch (SQLException ex) {
                 System.err.println(ex.getMessage());
@@ -164,12 +169,53 @@ public class PublicationCRUD {
         final Runnable autoArch = new Runnable() { //ScheduledExecutorService nécessite un objet runnable pour fonctionner ou on fait appel a notre methode archiver
             public void run() {
                 //archiver(p);
+                p.setArchive(!p.isArchive());
                 System.out.println(p);//pour tester le chrono
             }
-        };
-        long delai = ChronoUnit.MILLIS.between(dateAjout, dateAjout.plusDays(5)); //ici on fait calculer le delai de 5 jours depuis la date d'ajout
+        };                                                          //pour tester 5 secondes au lieu de 5 jrs
+        long delai = ChronoUnit.MILLIS.between(dateAjout, dateAjout.plusSeconds(5)); //ici on fait calculer le delai de 5 jours depuis la date d'ajout
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1); //ici on initialise un nouveau thread de ScheduledExecutorService
         scheduler.schedule(autoArch, delai, TimeUnit.MILLISECONDS); //ici on programme le chrono du methode
     }
 
+    /*
+    public void autoArchive(Publication p){
+        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+        try {
+            Scheduler scheduler = schedulerFactory.getScheduler();
+
+            JobDetail archJob = newJob(ArchJob.class)
+                    .withIdentity("ArchiveJob"+p.getId_publication()+":"+p.getId_client(), "ArchJobGroup")
+                    .build();
+
+            Date dateArch = (Date) Date.from(LocalDateTime.now()
+                                                    .plusSeconds(5)
+                                                    .atZone(ZoneId.systemDefault())
+                                                    .toInstant());
+
+            Trigger archTrigger = newTrigger()
+                                .withIdentity("ArchiveTrigger"+p.getId_publication()+":"+p.getId_client(), "ArchiveTriggerGroup")
+                                .startAt(dateArch)
+                                .build();
+
+            scheduler.scheduleJob(archJob, archTrigger);
+            System.out.println(archJob.getKey() + " will run at: "+ dateArch);
+
+            scheduler.start();
+        }catch (SchedulerException e){
+            System.err.println(e.getMessage());
+        }
+    }
+
+ */
+
 }
+/*
+class ArchJob implements Job {
+
+    public void execute(JobExecutionContext jobExecutionContext) {
+        System.out.println("testing job");
+    }
+}
+
+ */

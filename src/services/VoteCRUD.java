@@ -110,11 +110,15 @@ public class VoteCRUD {
 
     public void voter(int idClient,int idPublication, String type){
         Vote v = new Vote(idClient,idPublication,type);
-        if (verifVote(idClient)) {
+        if (verifVote(idClient)) { //on modifie le type en cas d'existence
             modifierVote(v);
-        }else{
+        }else{ //on ajoute si le vote n'existe pas
             ajouterVote(v);
         }
+    }
+
+    public void nbrVote(){
+
     }
 
 

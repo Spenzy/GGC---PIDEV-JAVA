@@ -25,15 +25,16 @@ public class CommentaireCRUD {
     public int ajouterCommentaire(Commentaire c) {
         int id = 0;
         if (verifCommentaire(c)) {
-            String req = "INSERT INTO commentaire (idPublication,description) VALUES (?,?)";
+            String req = "INSERT INTO commentaire (idPublication,id_client,descritption) VALUES (?,?,?)";
             PublicationCRUD pc = new PublicationCRUD();
             try {
                 PreparedStatement pst = cnxx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
                 pst.setInt(1, c.getId_publication());
-                pst.setString(2, c.getDescription());
+                pst.setInt(2, c.getIdClient());
+                pst.setString(3, c.getDescription());
                 pst.executeUpdate(); //execution update query
                 //execution d'autoarchivage
-                pc.autoArchive(pc.afficherPublication(c.getIdClient()), LocalDateTime.now());
+                //pc.autoArchive(pc.afficherPublication(c.getIdClient()), LocalDateTime.now());
                 System.out.println("Commentaire ajouté avec succés");
                 ResultSet rs = pst.getGeneratedKeys();
                 if (rs.next()) {
