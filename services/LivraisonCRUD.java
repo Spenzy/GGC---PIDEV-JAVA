@@ -88,9 +88,10 @@ public class LivraisonCRUD {
             while (rs.next()) {
 
                 Livraison l = new Livraison();
-                l.setIdLivreur(rs.getInt(1));
-                l.setIdCommande(rs.getInt(2));
+                l.setIdCommande(rs.getInt(1));
+                l.setIdLivreur(rs.getInt(2));
                 l.setDateHeure(rs.getDate(3));
+                myList.add(l);
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -137,18 +138,19 @@ public class LivraisonCRUD {
         return testLivreur;
     }
 
-   //fonction remise si la livraison est en retard
-    public void RemiseLivraison(){
-        Date sysdate = null;
-                
+    //fonction remise si la livraison est en retard
+    public void RemiseLivraison() {
+        Date sysdate = new Date(System.currentTimeMillis());
+
         try {
             Statement st = cnxx.createStatement();
-            String req = "SELECT idCommande,DateHeure FROM livraison";
+            String req = "select idCommande,DateHeure from livraison where idCommande in (select idCommande from commande WHERE livree=0)";
             ResultSet rs;
             rs = st.executeQuery(req);
             while (rs.next()) {
-                if (rs.getDate(2) == sysdate) {
-                    //remiseLivraison();
+                if (rs.getDate(2).before(sysdate)) {
+                    System.out.println("livraison en retard, vous aurez une remise de 30% sur la commande "+rs.getInt(1));
+                    remiseRetard(rs.getInt(1));
                 }
             }
         } catch (SQLException ex) {
@@ -156,20 +158,19 @@ public class LivraisonCRUD {
             //   return null;
         }
     }
-    
-    /*public void livraisonRetard(Livraison l, LocalDateTime dateAjout){
-        final Runnable remiseLivraison = new Runnable() { //ScheduledExecutorService nécessite un objet runnable pour fonctionner ou on fait appel a notre methode archiver
-            public void run() {
-                remiseLivraison(l);
-                System.out.println(l);//pour tester le chrono
-            }
-        };
-        long delai = ChronoUnit.MILLIS.between(dateAjout, dateAjout.plusDays(1)); //ici on fait calculer le delai d'un jour depuis la date de livraison
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1); //ici on initialise un nouveau thread de ScheduledExecutorService
-        scheduler.schedule(remiseLivraison , delai, TimeUnit.MILLISECONDS); //ici on programme le chrono du methode
+
+    public void remiseRetard(int idCommande) {
+        String req = "update commande set prix=prix*30/100 where idCommande = ?";
+        PreparedStatement pst;
+        try {
+            pst = cnxx.prepareStatement(req);
+            pst.setInt(1, idCommande);
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
     }
     
-    public void remiseLivraison(Livraison l){
-        
-    }*/
+
 }

@@ -28,12 +28,12 @@ public class CommandeCRUD {
     }
 
     public void ajouterCommande(Commande c) {
-        
+
         String req = "INSERT INTO commande (idClient,idProduit,quantite,adresse,prix,livree) VALUES (?,?,?,?,?,?)";
         PreparedStatement pst;
         try {
 
-            pst = cnxx.prepareStatement(req,Statement.RETURN_GENERATED_KEYS);
+            pst = cnxx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, c.getIdClient());
             pst.setInt(2, c.getIdProduit());
             pst.setInt(3, c.getQuantite());
@@ -46,7 +46,7 @@ public class CommandeCRUD {
             rs.next();
             long pk = rs.getLong(1);
             c.setIdCommande((int) pk);
-            
+
             calculPrixCommande(c);
 
         } catch (SQLException ex) {
@@ -189,8 +189,11 @@ public class CommandeCRUD {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-
-        //frais de livraison
     }
 
+    public void commandeLivree(Commande c) {
+        c.setLivree(true);
+        modifierCommande(c);
+        System.out.println("Commande " + c.getIdCommande() + " livrée");
+    }
 }
