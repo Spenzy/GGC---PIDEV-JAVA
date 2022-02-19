@@ -6,7 +6,6 @@
 package sprint1.pidev.entities;
 
 import java.sql.Date;
-import java.sql.Time;
 
 /**
  *

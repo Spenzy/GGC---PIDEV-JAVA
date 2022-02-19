@@ -29,26 +29,24 @@ public class CommandeCRUD {
 
     public void ajouterCommande(Commande c) {
 
-        String req = "INSERT INTO commande (idClient,idProduit,quantite,adresse,prix,livree) VALUES (?,?,?,?,?,?)";
+        String req = "INSERT INTO commande (idCommande,idClient,adresse,prix,livree,DateCommande) VALUES (?,?,?,?,?,?)";
         PreparedStatement pst;
         try {
 
             pst = cnxx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
-            pst.setInt(1, c.getIdClient());
-            pst.setInt(2, c.getIdProduit());
-            pst.setInt(3, c.getQuantite());
-            pst.setString(4, c.getAdresse());
-            pst.setFloat(5, c.getPrix());
-            pst.setBoolean(6, c.isLivree());
+            pst.setInt(1, c.getIdCommande());
+            pst.setInt(2, c.getIdClient());
+            pst.setString(3, c.getAdresse());
+            pst.setFloat(4, c.getPrix());
+            pst.setBoolean(5, c.isLivree());
+            pst.setDate(6, c.getDateCommande());
             pst.executeUpdate();
 
             ResultSet rs = pst.getGeneratedKeys();
             rs.next();
             long pk = rs.getLong(1);
             c.setIdCommande((int) pk);
-
-            calculPrixCommande(c);
-
+            
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -56,7 +54,8 @@ public class CommandeCRUD {
     }
 
     public void supprimerCommande(int idCommande) {
-
+        LigneCommandeCRUD LC = new LigneCommandeCRUD();
+        LC.supprimerLignesCommande(idCommande);
         String req = "delete from commande where idCommande=?";
         PreparedStatement pst;
         try {
@@ -71,23 +70,20 @@ public class CommandeCRUD {
 
     public void modifierCommande(Commande c) {
 
-        String req = "update commande set idClient=? , idProduit=? ,quantite=?,adresse=?,prix=?,livree=? where idCommande = ? ";
+        String req = "update commande set idClient=? , adresse=? , prix=? , livree=? , DateCommande=? where idCommande = ? ";
         PreparedStatement pst;
         try {
             pst = cnxx.prepareStatement(req);
             pst.setInt(1, c.getIdClient());
-            pst.setInt(2, c.getIdProduit());
-            pst.setInt(3, c.getQuantite());
-            pst.setString(4, c.getAdresse());
-            pst.setFloat(5, c.getPrix());
-            pst.setBoolean(6, c.isLivree());
-            pst.setInt(7, c.getIdCommande());
+            pst.setString(2, c.getAdresse());
+            pst.setFloat(3, c.getPrix());
+            pst.setBoolean(4, c.isLivree());
+            pst.setDate(5, c.getDateCommande());
+            pst.setInt(6, c.getIdCommande());
             pst.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-
-        calculPrixCommande(c);
 
     }
 
@@ -105,12 +101,16 @@ public class CommandeCRUD {
                 Commande p = new Commande();
                 p.setIdCommande(rs.getInt(1));
                 p.setIdClient(rs.getInt(2));
-                p.setIdProduit(rs.getInt(3));
-                p.setQuantite(rs.getInt(4));
-                p.setAdresse(rs.getString(5));
-                p.setPrix(rs.getFloat(6));
-                p.setLivree(rs.getBoolean(7));
+                p.setAdresse(rs.getString(3));
+                p.setPrix(rs.getFloat(4));
+                p.setLivree(rs.getBoolean(5));
+                p.setDateCommande(rs.getDate(6));
+                
+                LigneCommandeCRUD LC=new LigneCommandeCRUD();
+                p.setLignes(LC.afficher(rs.getInt(1)));       
+                
                 myList.add(p);
+                                
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -157,34 +157,15 @@ public class CommandeCRUD {
         return testClient;
     }
 
-    public boolean VerifProduit(int idProduit) {
-        boolean testProduit = false;
-        try {
-            Statement st = cnxx.createStatement();
-            String req = "SELECT reference FROM produit";
-            ResultSet rs;
-            rs = st.executeQuery(req);
-            while (rs.next()) {
-                if (rs.getInt(1) == idProduit) {
-                    testProduit = true;
-                }
-            }
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-            //   return null;
-        }
-        return testProduit;
-    }
-
     //métier calcul du prix automatique à partir de la table commande(idProduit,quantite) et de la table produit(idProduit,prix)
     //si le total dépasse 100 dinars il ny a pas de frais de livraison
-    public void calculPrixCommande(Commande c) {
-        String req = "update commande set prix=(select prix from produit where reference=?)*quantite where idCommande = ? ";
+    public void calculPrixCommande(int idCommande) {
+        String req = "update commande set prix=(select sum(prix) from LigneCommande where idCommande=?) where idCommande = ? ";
         PreparedStatement pst;
         try {
             pst = cnxx.prepareStatement(req);
-            pst.setFloat(1, c.getIdProduit());
-            pst.setInt(2, c.getIdCommande());
+            pst.setInt(1, idCommande);
+            pst.setInt(2, idCommande);
             pst.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());

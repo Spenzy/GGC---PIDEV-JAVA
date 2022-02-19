@@ -141,16 +141,18 @@ public class LivraisonCRUD {
     //fonction remise si la livraison est en retard
     public void RemiseLivraison() {
         Date sysdate = new Date(System.currentTimeMillis());
-
         try {
             Statement st = cnxx.createStatement();
-            String req = "select idCommande,DateHeure from livraison where idCommande in (select idCommande from commande WHERE livree=0)";
+            // String req = "select idCommande,DateHeure from livraison where idCommande in (select idCommande from commande WHERE livree=0)";
+            String req = "select livraison.idCommande,livraison.DateHeure from livraison inner join commande on (commande.idCommande=livraison.idCommande) where commande.livree=0 ";
             ResultSet rs;
             rs = st.executeQuery(req);
             while (rs.next()) {
                 if (rs.getDate(2).before(sysdate)) {
-                    System.out.println("livraison en retard, vous aurez une remise de 30% sur la commande "+rs.getInt(1));
+                    System.out.println("livraison en retard, vous aurez une remise de 70% sur la commande " + rs.getInt(1));
                     remiseRetard(rs.getInt(1));
+                    String email = recupererMailClient(rs.getInt(1));
+                    //envoyerMailExcuse(email);
                 }
             }
         } catch (SQLException ex) {
@@ -169,8 +171,26 @@ public class LivraisonCRUD {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        
-    }
-    
 
+    }
+
+    public String recupererMailClient(int idCommande) {
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "select personne.email from livraison inner join commande on(commande.idCommande=livraison.idCommande) inner join client on(client.idClient=commande.idClient) inner join personne on(personne.id_personne=client.idClient) where(commande.idCommande="+idCommande+");";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        return "Erreur dans idCommande , cette commande n'est pas affectée à une livraison donc il est inutile de récuperer l'adresse mail du client";
+    }
+
+    public void envoyerMailExcuse(String email) {
+
+    }
 }
