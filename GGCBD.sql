@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3308
--- Généré le :  jeu. 10 fév. 2022 à 21:56
--- Version du serveur :  5.7.28
--- Version de PHP :  7.3.12
+-- Hôte : 127.0.0.1:3306
+-- Généré le : sam. 19 fév. 2022 à 11:28
+-- Version du serveur : 5.7.36
+-- Version de PHP : 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `pidev`
+-- Base de données : `pidev`
 --
 
 -- --------------------------------------------------------
@@ -48,12 +47,20 @@ DROP TABLE IF EXISTS `client`;
 CREATE TABLE IF NOT EXISTS `client` (
   `idClient` int(11) NOT NULL AUTO_INCREMENT,
   `nbrAvertissement` int(11) NOT NULL,
-  `ban` tinyint(1) NOT NULL,
-  `etat` tinyint(1) NOT NULL,
+  `ban` int(1) NOT NULL,
   `dateDebutBlock` date NOT NULL,
   `dateFinBlock` date NOT NULL,
   PRIMARY KEY (`idClient`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6254 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `client`
+--
+
+INSERT INTO `client` (`idClient`, `nbrAvertissement`, `ban`, `dateDebutBlock`, `dateFinBlock`) VALUES
+(111, 0, 0, '2022-02-08', '2022-02-15'),
+(222, 0, 0, '2022-02-13', '2022-02-15'),
+(6253, 0, 0, '2022-02-17', '2022-02-22');
 
 -- --------------------------------------------------------
 
@@ -65,15 +72,22 @@ DROP TABLE IF EXISTS `commande`;
 CREATE TABLE IF NOT EXISTS `commande` (
   `idCommande` int(11) NOT NULL AUTO_INCREMENT,
   `idClient` int(11) NOT NULL,
-  `idProduit` int(11) NOT NULL,
-  `quantite` int(11) NOT NULL,
-  `adresse` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `adresse` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `prix` float NOT NULL,
-  `livrée` tinyint(1) NOT NULL,
-  PRIMARY KEY (`idCommande`,`idClient`,`idProduit`),
-  KEY `fk_client_commande` (`idClient`),
-  KEY `fk_produit_commande` (`idProduit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `livree` tinyint(1) NOT NULL,
+  `DateCommande` date NOT NULL,
+  PRIMARY KEY (`idCommande`,`idClient`) USING BTREE,
+  KEY `fk_client_commande` (`idClient`)
+) ENGINE=InnoDB AUTO_INCREMENT=457 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `commande`
+--
+
+INSERT INTO `commande` (`idCommande`, `idClient`, `adresse`, `prix`, `livree`, `DateCommande`) VALUES
+(9, 111, 'gammarth', 30, 0, '2020-01-25'),
+(10, 6253, 'azertyu', 270, 0, '2022-02-09'),
+(456, 222, 'tyuiompù', 100, 1, '2022-02-08');
 
 -- --------------------------------------------------------
 
@@ -86,6 +100,7 @@ CREATE TABLE IF NOT EXISTS `commentaire` (
   `idCommentaire` int(11) NOT NULL AUTO_INCREMENT,
   `idPublication` int(11) NOT NULL,
   `descritption` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `date` date NOT NULL,
   PRIMARY KEY (`idCommentaire`,`idPublication`),
   KEY `fk_commentaire` (`idPublication`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -100,7 +115,7 @@ DROP TABLE IF EXISTS `evenement`;
 CREATE TABLE IF NOT EXISTS `evenement` (
   `reference` int(11) NOT NULL,
   `dateDebut` date NOT NULL,
-  `heureFin` time NOT NULL,
+  `dateFin` date NOT NULL,
   `localisation` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `descritption` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `nbrParticipant` int(11) NOT NULL,
@@ -110,18 +125,53 @@ CREATE TABLE IF NOT EXISTS `evenement` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `lignecommande`
+--
+
+DROP TABLE IF EXISTS `lignecommande`;
+CREATE TABLE IF NOT EXISTS `lignecommande` (
+  `idLigne` int(11) NOT NULL AUTO_INCREMENT,
+  `idCommande` int(11) NOT NULL,
+  `idProduit` int(11) NOT NULL,
+  `quantite` int(11) NOT NULL,
+  `prix` float NOT NULL,
+  PRIMARY KEY (`idLigne`,`idCommande`) USING BTREE,
+  KEY `fk_ligne_produit` (`idProduit`),
+  KEY `fk_ligne_commande` (`idCommande`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `lignecommande`
+--
+
+INSERT INTO `lignecommande` (`idLigne`, `idCommande`, `idProduit`, `quantite`, `prix`) VALUES
+(11, 9, 1010, 2, 50),
+(12, 9, 1010, 10, 100),
+(13, 9, 9512, 5, 725);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `livraison`
 --
 
 DROP TABLE IF EXISTS `livraison`;
 CREATE TABLE IF NOT EXISTS `livraison` (
-  `id_livreur` int(11) NOT NULL,
   `idCommande` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `heure` time NOT NULL,
-  PRIMARY KEY (`id_livreur`,`idCommande`),
-  KEY `fk_livraison_commande` (`idCommande`)
+  `idLivreur` int(11) NOT NULL,
+  `DateHeure` date NOT NULL,
+  PRIMARY KEY (`idCommande`),
+  KEY `fk_livraison_commande` (`idCommande`),
+  KEY `fk_livraison_livreur` (`idLivreur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `livraison`
+--
+
+INSERT INTO `livraison` (`idCommande`, `idLivreur`, `DateHeure`) VALUES
+(9, 111, '2022-02-18'),
+(10, 222, '2022-02-11');
 
 -- --------------------------------------------------------
 
@@ -132,9 +182,18 @@ CREATE TABLE IF NOT EXISTS `livraison` (
 DROP TABLE IF EXISTS `livreur`;
 CREATE TABLE IF NOT EXISTS `livreur` (
   `idLivreur` int(11) NOT NULL AUTO_INCREMENT,
-  `disponibilité` tinyint(1) NOT NULL,
+  `disponibilité` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idLivreur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6254 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `livreur`
+--
+
+INSERT INTO `livreur` (`idLivreur`, `disponibilité`) VALUES
+(111, NULL),
+(222, NULL),
+(6253, NULL);
 
 -- --------------------------------------------------------
 
@@ -156,10 +215,12 @@ CREATE TABLE IF NOT EXISTS `moderateur` (
 
 DROP TABLE IF EXISTS `participation`;
 CREATE TABLE IF NOT EXISTS `participation` (
+  `idParticipation` int(11) NOT NULL AUTO_INCREMENT,
   `idClient` int(11) NOT NULL,
   `idEvent` int(11) NOT NULL,
   `nbrEtoile` int(11) NOT NULL,
-  PRIMARY KEY (`idClient`,`idEvent`),
+  PRIMARY KEY (`idParticipation`),
+  KEY `fk_participation_client` (`idClient`),
   KEY `fk_participation_event` (`idEvent`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -179,6 +240,15 @@ CREATE TABLE IF NOT EXISTS `personne` (
   `telephone` int(11) NOT NULL,
   PRIMARY KEY (`id_personne`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `personne`
+--
+
+INSERT INTO `personne` (`id_personne`, `nom`, `prenom`, `dateNaissance`, `email`, `telephone`) VALUES
+(111, 'marwa', 'ayari', '2001-02-02', 'maroua.ayari@esprit.tn', 54342461),
+(222, 'cft', 'yugy', '2022-02-09', 'maroua.ayari@esprit.tn', 84562357),
+(6253, 'zied', 'dridi', '2022-02-01', 'zied.dridi@esprit.tn', 78945612);
 
 -- --------------------------------------------------------
 
@@ -209,12 +279,21 @@ CREATE TABLE IF NOT EXISTS `plan` (
 DROP TABLE IF EXISTS `produit`;
 CREATE TABLE IF NOT EXISTS `produit` (
   `reference` int(11) NOT NULL,
-  `nom` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `libelle` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `categorie` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `fiche_technique` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `prix` float NOT NULL,
   PRIMARY KEY (`reference`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `produit`
+--
+
+INSERT INTO `produit` (`reference`, `libelle`, `categorie`, `description`, `prix`) VALUES
+(1010, 'aaaa', 'Clavier', 'testestest', 150.25),
+(9512, 'RedDragonKumara', 'Clavier', 'RGBQ lights', 145),
+(11111, 'aaaaa', 'moyen', 'dxrftgyhj', 100);
 
 -- --------------------------------------------------------
 
@@ -230,6 +309,7 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `nbrVote` int(11) NOT NULL,
   `archive` tinyint(1) NOT NULL,
   `idClient` int(11) NOT NULL,
+  `date` date NOT NULL,
   PRIMARY KEY (`idPublication`),
   KEY `fk_publication_client` (`idClient`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -283,8 +363,7 @@ ALTER TABLE `client`
 -- Contraintes pour la table `commande`
 --
 ALTER TABLE `commande`
-  ADD CONSTRAINT `fk_client_commande` FOREIGN KEY (`idClient`) REFERENCES `client` (`idClient`),
-  ADD CONSTRAINT `fk_produit_commande` FOREIGN KEY (`idProduit`) REFERENCES `produit` (`reference`);
+  ADD CONSTRAINT `fk_client_commande` FOREIGN KEY (`idClient`) REFERENCES `client` (`idClient`);
 
 --
 -- Contraintes pour la table `commentaire`
@@ -293,11 +372,18 @@ ALTER TABLE `commentaire`
   ADD CONSTRAINT `fk_commentaire` FOREIGN KEY (`idPublication`) REFERENCES `publication` (`idPublication`);
 
 --
+-- Contraintes pour la table `lignecommande`
+--
+ALTER TABLE `lignecommande`
+  ADD CONSTRAINT `fk_ligne_commande` FOREIGN KEY (`idCommande`) REFERENCES `commande` (`idCommande`),
+  ADD CONSTRAINT `fk_ligne_produit` FOREIGN KEY (`idProduit`) REFERENCES `produit` (`reference`);
+
+--
 -- Contraintes pour la table `livraison`
 --
 ALTER TABLE `livraison`
   ADD CONSTRAINT `fk_livraison_commande` FOREIGN KEY (`idCommande`) REFERENCES `commande` (`idCommande`),
-  ADD CONSTRAINT `fk_livraison_livreur` FOREIGN KEY (`id_livreur`) REFERENCES `livreur` (`idLivreur`);
+  ADD CONSTRAINT `fk_livraison_livreur` FOREIGN KEY (`idLivreur`) REFERENCES `livreur` (`idLivreur`);
 
 --
 -- Contraintes pour la table `livreur`
