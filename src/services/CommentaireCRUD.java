@@ -1,15 +1,13 @@
 package services;
 
 import entities.Commentaire;
-import entities.Publication;
 import utils.MyConnection;
 
 import java.sql.*;
-import java.time.LocalDateTime;
+import static java.sql.JDBCType.NULL;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.constant.ConstantDescs.NULL;
 
 public class CommentaireCRUD {
     Connection cnxx;
@@ -25,13 +23,12 @@ public class CommentaireCRUD {
     public int ajouterCommentaire(Commentaire c) {
         int id = 0;
         if (verifCommentaire(c)) {
-            String req = "INSERT INTO commentaire (idPublication,id_client,descritption) VALUES (?,?,?)";
-            PublicationCRUD pc = new PublicationCRUD();
+            String req = "INSERT INTO commentaire (idPublication,description,idClient) VALUES (?,?,?)";
             try {
                 PreparedStatement pst = cnxx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
                 pst.setInt(1, c.getId_publication());
-                pst.setInt(2, c.getIdClient());
-                pst.setString(3, c.getDescription());
+                pst.setString(2, c.getDescription());
+                pst.setInt(3, c.getIdClient());
                 pst.executeUpdate(); //execution update query
                 //execution d'autoarchivage
                 //pc.autoArchive(pc.afficherPublication(c.getIdClient()), LocalDateTime.now());
@@ -78,35 +75,37 @@ public class CommentaireCRUD {
         }
     }
 
-    public Commentaire afficherCommentaire(int idC){
+    public Commentaire afficherCommentaire(int idCommentaire){
         Commentaire c = new Commentaire();
         try {
             String req = "SELECT * FROM commentaire WHERE idCommentaire = ?";
             PreparedStatement pst = cnxx.prepareStatement(req);
-            pst.setInt(1,idC);
+            pst.setInt(1,idCommentaire);
             ResultSet rs = pst.executeQuery();
             rs.next();
             c.setId_commentaire(rs.getInt(1));
             c.setId_publication(rs.getInt(2));
-            c.setIdClient(rs.getInt(3));
-            c.setDescription(rs.getString(4));
+            c.setDescription(rs.getString(3));
+            c.setIdClient(rs.getInt(4));
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
         return c;
     }
 
-    public List<Commentaire> afficherCommentaires() {
+    public List<Commentaire> afficherCommentaires(int idPub) {
         ArrayList listeCommentaires = new ArrayList();
         try {
-            Statement st = cnxx.createStatement();
-            String req = "SELECT * FROM commentaire";
-            ResultSet rs = st.executeQuery(req);
+            String req = "SELECT * FROM commentaire WHERE idPublication = ?";
+            PreparedStatement pst = cnxx.prepareStatement(req);
+            pst.setInt(1,idPub);
+            ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 Commentaire c = new Commentaire();
                 c.setId_commentaire(rs.getInt(1));
                 c.setId_publication(rs.getInt(2));
                 c.setDescription(rs.getString(3));
+                c.setIdClient(rs.getInt(4));
                 listeCommentaires.add(c);
             }
         } catch (SQLException e) {

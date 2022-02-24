@@ -1,17 +1,23 @@
 package entities;
 
 public class Publication {
-    int id_publication,id_client,nbrVote;
+    int id_publication,id_client;
     String titre,desc;
     boolean archive;
 
     public Publication() {
     }
+    
+    public Publication(int id_client,String titre, String desc, boolean archive) {
+        this.id_client = id_client;
+        this.titre = titre;
+        this.desc = desc;
+        this.archive = archive;
+    }
 
-    public Publication(int id_publication, int id_client, int nbrVote, String titre, String desc, boolean archive) {
+    public Publication(int id_publication, int id_client,String titre, String desc, boolean archive) {
         this.id_publication = id_publication;
         this.id_client = id_client;
-        this.nbrVote = nbrVote;
         this.titre = titre;
         this.desc = desc;
         this.archive = archive;
@@ -31,14 +37,6 @@ public class Publication {
 
     public void setId_client(int id_client) {
         this.id_client = id_client;
-    }
-
-    public int getNbrVote() {
-        return nbrVote;
-    }
-
-    public void setNbrVote(int nbrVote) {
-        this.nbrVote = nbrVote;
     }
 
     public String getTitre() {
@@ -70,7 +68,6 @@ public class Publication {
         return "Publication{" +
                 "id_publication=" + id_publication +
                 ", id_client=" + id_client +
-                ", nbrVote=" + nbrVote +
                 ", titre='" + titre + '\'' +
                 ", desc='" + desc + '\'' +
                 ", archive=" + archive +

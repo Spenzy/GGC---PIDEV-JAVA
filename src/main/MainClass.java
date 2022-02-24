@@ -7,13 +7,15 @@ import services.CommentaireCRUD;
 import services.PublicationCRUD;
 import services.VoteCRUD;
 
-import java.time.LocalDateTime;
+import org.apache.log4j.BasicConfigurator;
 
 public class MainClass {
     public static void main(String[] args) {
+        
+        BasicConfigurator.configure();
 
         //*************Publication
-        Publication p = new Publication(1,30,6,"QUESTION?","JUST RANDOM FOLLOW STUFF",false);
+        Publication p = new Publication(-1,30,"QUESTION?","JUST RANDOM FOLLOW STUFF",false);
         PublicationCRUD pc = new PublicationCRUD();
 
         //pc.ajouterPublication(p);
@@ -33,8 +35,8 @@ public class MainClass {
         //cc.modifierCommentaire(c12);
         //System.out.println(cc.afficherCommentaire(5));
         //System.out.println(cc.afficherCommentaires());
-        cc.supprimerCommentaire(1);
-        System.out.println(cc.afficherCommentaires());
+        //cc.supprimerCommentaire(1);
+        //System.out.println(cc.afficherCommentaires());
 
         //************Vote
         VoteCRUD vc = new VoteCRUD();
@@ -45,5 +47,9 @@ public class MainClass {
         //vc.modifierVote(ve);
         //System.out.println(vc.afficherVote());
         //vc.supprimerVote(1,1);
+
+        //************testing
+        //pc.autoArchive(p);
+        //System.out.println(cc.afficherCommentaires(2));
     }
 }

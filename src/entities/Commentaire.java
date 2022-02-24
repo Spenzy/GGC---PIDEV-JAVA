@@ -1,10 +1,17 @@
 package entities;
 
 public class Commentaire {
-    int id_commentaire, id_publication,idClient;
+
+    int id_commentaire, id_publication, idClient;
     String description;
 
     public Commentaire() {
+    }
+
+    public Commentaire(int id_publication, int idClient, String description) {
+        this.id_publication = id_publication;
+        this.idClient = idClient;
+        this.description = description;
     }
 
     public Commentaire(int id_commentaire, int id_publication, int idClient, String description) {
@@ -48,10 +55,10 @@ public class Commentaire {
 
     @Override
     public String toString() {
-        return "Commentaire{" +
-                "id_commentaire=" + id_commentaire +
-                ", id_publication=" + id_publication +
-                ", description='" + description + '\'' +
-                '}';
+        return "Commentaire{"
+                + "id_commentaire=" + id_commentaire
+                + ", id_publication=" + id_publication
+                + ", description='" + description + '\''
+                + '}';
     }
 }
