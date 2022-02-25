@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 19 fév. 2022 à 11:28
+-- Généré le : ven. 25 fév. 2022 à 16:33
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -31,11 +31,20 @@ DROP TABLE IF EXISTS `avis`;
 CREATE TABLE IF NOT EXISTS `avis` (
   `idAvis` int(11) NOT NULL AUTO_INCREMENT,
   `referenceProduit` int(11) NOT NULL,
+  `idClient` int(11) NOT NULL,
   `description` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `type` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`idAvis`),
-  KEY `fk_avis_produit` (`referenceProduit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `fk_avis_produit` (`referenceProduit`),
+  KEY `fk_avis_client` (`idClient`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `avis`
+--
+
+INSERT INTO `avis` (`idAvis`, `referenceProduit`, `idClient`, `description`, `type`) VALUES
+(23, 123, 111, 'multicolore!!!', 'excellent');
 
 -- --------------------------------------------------------
 
@@ -78,16 +87,19 @@ CREATE TABLE IF NOT EXISTS `commande` (
   `DateCommande` date NOT NULL,
   PRIMARY KEY (`idCommande`,`idClient`) USING BTREE,
   KEY `fk_client_commande` (`idClient`)
-) ENGINE=InnoDB AUTO_INCREMENT=457 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `commande`
 --
 
 INSERT INTO `commande` (`idCommande`, `idClient`, `adresse`, `prix`, `livree`, `DateCommande`) VALUES
-(9, 111, 'gammarth', 30, 0, '2020-01-25'),
-(10, 6253, 'azertyu', 270, 0, '2022-02-09'),
-(456, 222, 'tyuiompù', 100, 1, '2022-02-08');
+(13, 111, 'aaaaaaaaa', 402, 0, '2022-02-25'),
+(14, 111, 'aaaaaaaaaaaaaaaaaa', 402, 0, '2022-02-25'),
+(15, 111, 'zsxxxxxxxxxxxx', 301.5, 0, '2022-02-25'),
+(16, 111, 'zzzzzzzzzzzzzzzzz', 100.5, 0, '2022-02-25'),
+(17, 111, 'ssssssssssss', 1105.5, 0, '2022-02-25'),
+(18, 111, 'ppppppppppppppppppppp', 100.5, 0, '2022-02-25');
 
 -- --------------------------------------------------------
 
@@ -100,9 +112,11 @@ CREATE TABLE IF NOT EXISTS `commentaire` (
   `idCommentaire` int(11) NOT NULL AUTO_INCREMENT,
   `idPublication` int(11) NOT NULL,
   `descritption` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `idClient` int(11) NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`idCommentaire`,`idPublication`),
-  KEY `fk_commentaire` (`idPublication`)
+  KEY `fk_commentaire` (`idPublication`),
+  KEY `fk_commentaire_client` (`idClient`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -138,16 +152,20 @@ CREATE TABLE IF NOT EXISTS `lignecommande` (
   PRIMARY KEY (`idLigne`,`idCommande`) USING BTREE,
   KEY `fk_ligne_produit` (`idProduit`),
   KEY `fk_ligne_commande` (`idCommande`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `lignecommande`
 --
 
 INSERT INTO `lignecommande` (`idLigne`, `idCommande`, `idProduit`, `quantite`, `prix`) VALUES
-(11, 9, 1010, 2, 50),
-(12, 9, 1010, 10, 100),
-(13, 9, 9512, 5, 725);
+(14, 13, 123, 1, 100.5),
+(15, 13, 123, 0, 0),
+(16, 14, 123, 4, 402),
+(17, 15, 123, 3, 301.5),
+(18, 16, 123, 1, 100.5),
+(19, 17, 123, 11, 1105.5),
+(20, 18, 123, 1, 100.5);
 
 -- --------------------------------------------------------
 
@@ -164,14 +182,6 @@ CREATE TABLE IF NOT EXISTS `livraison` (
   KEY `fk_livraison_commande` (`idCommande`),
   KEY `fk_livraison_livreur` (`idLivreur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Déchargement des données de la table `livraison`
---
-
-INSERT INTO `livraison` (`idCommande`, `idLivreur`, `DateHeure`) VALUES
-(9, 111, '2022-02-18'),
-(10, 222, '2022-02-11');
 
 -- --------------------------------------------------------
 
@@ -283,6 +293,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `categorie` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `prix` float NOT NULL,
+  `note` int(11) NOT NULL,
   PRIMARY KEY (`reference`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -290,10 +301,8 @@ CREATE TABLE IF NOT EXISTS `produit` (
 -- Déchargement des données de la table `produit`
 --
 
-INSERT INTO `produit` (`reference`, `libelle`, `categorie`, `description`, `prix`) VALUES
-(1010, 'aaaa', 'Clavier', 'testestest', 150.25),
-(9512, 'RedDragonKumara', 'Clavier', 'RGBQ lights', 145),
-(11111, 'aaaaa', 'moyen', 'dxrftgyhj', 100);
+INSERT INTO `produit` (`reference`, `libelle`, `categorie`, `description`, `prix`, `note`) VALUES
+(123, 'RedDragonKumara', 'clavier', 'bon', 100.5, 2);
 
 -- --------------------------------------------------------
 
@@ -306,7 +315,6 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `idPublication` int(11) NOT NULL AUTO_INCREMENT,
   `object` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `nbrVote` int(11) NOT NULL,
   `archive` tinyint(1) NOT NULL,
   `idClient` int(11) NOT NULL,
   `date` date NOT NULL,
@@ -351,6 +359,7 @@ CREATE TABLE IF NOT EXISTS `vote` (
 -- Contraintes pour la table `avis`
 --
 ALTER TABLE `avis`
+  ADD CONSTRAINT `fk_avis_client` FOREIGN KEY (`idClient`) REFERENCES `client` (`idClient`),
   ADD CONSTRAINT `fk_avis_produit` FOREIGN KEY (`referenceProduit`) REFERENCES `produit` (`reference`);
 
 --
@@ -369,7 +378,8 @@ ALTER TABLE `commande`
 -- Contraintes pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
-  ADD CONSTRAINT `fk_commentaire` FOREIGN KEY (`idPublication`) REFERENCES `publication` (`idPublication`);
+  ADD CONSTRAINT `fk_commentaire` FOREIGN KEY (`idPublication`) REFERENCES `publication` (`idPublication`),
+  ADD CONSTRAINT `fk_commentaire_client` FOREIGN KEY (`idClient`) REFERENCES `client` (`idClient`);
 
 --
 -- Contraintes pour la table `lignecommande`
