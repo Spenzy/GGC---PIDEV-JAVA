@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="GUI.ListeClientController">
+   <children>
+      <VBox layoutX="14.0" layoutY="102.0" prefHeight="231.0" prefWidth="142.0" spacing="15.0">
+         <children>
+            <Label prefHeight="27.0" prefWidth="64.0" text="idClient" />
+            <Label prefHeight="27.0" prefWidth="105.0" text="nbrAvertissement" />
+            <Label prefHeight="27.0" prefWidth="64.0" text="ban" />
+            <Label prefHeight="27.0" prefWidth="64.0" text="etat" />
+            <Label prefHeight="27.0" prefWidth="92.0" text="dateDebutBlock" />
+            <Label prefHeight="27.0" prefWidth="88.0" text="dateFinBlock" />
+         </children>
+      </VBox>
+      <VBox layoutX="137.0" layoutY="105.0" prefHeight="249.0" prefWidth="172.0" spacing="15.0">
+         <children>
+            <TextField fx:id="tfid" />
+            <TextField fx:id="tfnbr" />
+            <TextField fx:id="tfban" />
+            <TextField fx:id="tfetat" />
+            <TextField fx:id="tfdatedebut" />
+            <TextField fx:id="tfdatefin" />
+         </children>
+      </VBox>
+      <TableView fx:id="tvBooks" layoutX="334.0" layoutY="105.0" onSort="#showClient" prefHeight="249.0" prefWidth="434.0">
+        <columns>
+          <TableColumn fx:id="colid" prefWidth="51.0" text="idClient" />
+          <TableColumn fx:id="colnbr" prefWidth="110.0" text="nbrAvertissement" />
+            <TableColumn fx:id="colban" prefWidth="37.0" text="ban" />
+            <TableColumn fx:id="coletat" prefWidth="37.0" text="etat" />
+            <TableColumn fx:id="coldatedebut" prefWidth="102.0" text="dateDebutBlock" />
+            <TableColumn fx:id="coldatefin" prefWidth="96.0" text="dateFinBlock" />
+        </columns>
+      </TableView>
+      <Button fx:id="btninsert" layoutX="24.0" layoutY="380.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="Insert" />
+      <Button layoutX="192.0" layoutY="379.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="Avertir" />
+      <Button fx:id="btnupdate" layoutX="108.0" layoutY="379.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="64.0" text="Update" />
+      <Button layoutX="281.0" layoutY="379.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="Ban" />
+   </children>
+</AnchorPane>
