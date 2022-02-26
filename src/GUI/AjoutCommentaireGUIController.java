@@ -18,6 +18,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import services.CommentaireCRUD;
+import services.PersonneCRUD;
 
 /**
  * FXML Controller class
@@ -34,12 +35,11 @@ public class AjoutCommentaireGUIController implements Initializable {
     private Button btnCommenter;
     @FXML
     private Label errDesc;
-//    @FXML
-//    private AfficherPublicationGUIController apc;
 
     int idClient;
     int idPublication;
     CommentaireCRUD cc = new CommentaireCRUD();
+    PersonneCRUD pcrud = new PersonneCRUD();
             
     public AjoutCommentaireGUIController() {
     }
@@ -56,6 +56,7 @@ public class AjoutCommentaireGUIController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        lblClient.setText(pcrud.getUsername(idClient));
         //Lors du click sur le bouton publier
         btnCommenter.setOnAction((ActionEvent a) -> {
             errDesc.setText("");
@@ -75,11 +76,10 @@ public class AjoutCommentaireGUIController implements Initializable {
                     cc.ajouterCommentaire(c);
                     //message de test
                     System.out.println("Commentaire ajouté avec succée!");
+
                     //refresh
-//                    apc.initCommentaires();
-//                    AfficherPublicationGUIController apc = new AfficherPublicationGUIController(idClient,idPublication);
-//                    apc.initCommentaires();
-                    //btnCommenter.getScene().getWindow().;
+                    AfficherPublicationGUIController apc = new AfficherPublicationGUIController(idClient,idPublication);
+                    apc.refreshPublication(btnCommenter);
                 } else {
                     System.out.println("Erreur de confirmation!");
                 }

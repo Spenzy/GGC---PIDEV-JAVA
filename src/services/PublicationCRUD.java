@@ -31,13 +31,14 @@ public class PublicationCRUD {
     public long ajouterPublication(Publication p) {
         long id = 0;
         if (verifPublication(p) && !verifQuotaPub(p.getId_client())) {
-            String req = "INSERT INTO Publication (object,description,archive,idClient) VALUES (?,?,?,?)";
+            String req = "INSERT INTO Publication (object,description,archive,idClient,date) VALUES (?,?,?,?,?)";
             try {
                 PreparedStatement pst = cnxx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
                 pst.setString(1, p.getTitre());
                 pst.setString(2, p.getDesc());
                 pst.setBoolean(3, p.isArchive());
                 pst.setInt(4, p.getId_client());
+                pst.setDate(5, p.getDatePub());
                 pst.executeUpdate();
                 //autoArchive(p, LocalDateTime.now());
                 System.out.println("Publication ajoutée avec succés");
@@ -102,6 +103,7 @@ public class PublicationCRUD {
             p.setDesc(rs.getString(3));
             p.setArchive(rs.getBoolean(4));
             p.setId_client(rs.getInt(5));
+            p.setDatePub(rs.getDate(6));
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -121,6 +123,7 @@ public class PublicationCRUD {
                 p.setDesc(rs.getString(3));
                 p.setArchive(rs.getBoolean(4));
                 p.setId_client(rs.getInt(5));
+                p.setDatePub(rs.getDate(6));
                 listePublications.add(p);
             }
         } catch (SQLException ex) {
@@ -149,12 +152,15 @@ public class PublicationCRUD {
     }
 
     public void archiver(Publication p) {
-        if (p.isArchive()) {
+        if (!p.isArchive()) {
             p.setArchive(true);
-            modifierPublication(p);
+            System.out.println("publication archivé");
+            
         } else {
-            System.out.println("publication déja archivé");
+            p.setArchive(false);
+            System.out.println("publication déarchivé");
         }
+        modifierPublication(p);
     }
 
     /*

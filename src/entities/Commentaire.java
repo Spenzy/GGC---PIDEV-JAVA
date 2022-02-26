@@ -1,9 +1,12 @@
 package entities;
 
+import java.sql.Date;
+
 public class Commentaire {
 
     int id_commentaire, id_publication, idClient;
     String description;
+    Date datePost;
 
     public Commentaire() {
     }
@@ -12,13 +15,8 @@ public class Commentaire {
         this.id_publication = id_publication;
         this.idClient = idClient;
         this.description = description;
-    }
-
-    public Commentaire(int id_commentaire, int id_publication, int idClient, String description) {
-        this.id_commentaire = id_commentaire;
-        this.id_publication = id_publication;
-        this.idClient = idClient;
-        this.description = description;
+        Date sysdate = new Date(System.currentTimeMillis());
+        this.datePost = sysdate;
     }
 
     public int getIdClient() {
@@ -53,12 +51,23 @@ public class Commentaire {
         this.description = description;
     }
 
+    public Date getDatePost() {
+        return datePost;
+    }
+
+    public void setDatePost(Date datePost) {
+        this.datePost = datePost;
+    }
+
     @Override
     public String toString() {
-        return "Commentaire{"
-                + "id_commentaire=" + id_commentaire
-                + ", id_publication=" + id_publication
-                + ", description='" + description + '\''
-                + '}';
+        return "Commentaire{" 
+                + "id_commentaire=" + id_commentaire 
+                + ", id_publication=" + id_publication 
+                + ", idClient=" + idClient 
+                + ", description=" + description 
+                + ", datePost=" + datePost + '}';
     }
+
+    
 }

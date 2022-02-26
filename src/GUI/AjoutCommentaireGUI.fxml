@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="lblClient" layoutX="43.0" layoutY="24.0" prefHeight="17.0" prefWidth="45.0" text="User:">
+      <Label fx:id="lblClient" layoutX="43.0" layoutY="24.0" text="User:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

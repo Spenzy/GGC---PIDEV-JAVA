@@ -15,7 +15,7 @@ public class MainClass {
         BasicConfigurator.configure();
 
         //*************Publication
-        Publication p = new Publication(-1,30,"QUESTION?","JUST RANDOM FOLLOW STUFF",false);
+//        Publication p = new Publication(-1,30,"QUESTION?","JUST RANDOM FOLLOW STUFF",false);
         PublicationCRUD pc = new PublicationCRUD();
 
         //pc.ajouterPublication(p);
@@ -27,7 +27,7 @@ public class MainClass {
 
         //*************Commentaire
         CommentaireCRUD cc = new CommentaireCRUD();
-        Commentaire c1 = new Commentaire(1,1,30,"Banana");
+//        Commentaire c1 = new Commentaire(1,30,"Banana");
 
         //cc.ajouterCommentaire(c1);
         //System.out.println(cc.afficherCommentaires());
@@ -40,7 +40,7 @@ public class MainClass {
 
         //************Vote
         VoteCRUD vc = new VoteCRUD();
-        Vote v = new Vote(1,1,"UP");
+//        Vote v = new Vote(1,1,"UP");
 
         //vc.ajouterVote(v);
         //Vote ve = new Vote(1,1,"DOWN");

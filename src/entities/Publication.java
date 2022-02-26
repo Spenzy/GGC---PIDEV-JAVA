@@ -1,26 +1,24 @@
 package entities;
 
+import java.sql.Date;
+
 public class Publication {
-    int id_publication,id_client;
-    String titre,desc;
+
+    int id_publication, id_client;
+    String titre, desc;
     boolean archive;
+    Date datePub;
 
     public Publication() {
     }
-    
-    public Publication(int id_client,String titre, String desc, boolean archive) {
-        this.id_client = id_client;
-        this.titre = titre;
-        this.desc = desc;
-        this.archive = archive;
-    }
 
-    public Publication(int id_publication, int id_client,String titre, String desc, boolean archive) {
-        this.id_publication = id_publication;
+    public Publication(int id_client, String titre, String desc, boolean archive) {
         this.id_client = id_client;
         this.titre = titre;
         this.desc = desc;
         this.archive = archive;
+        Date sysdate = new Date(System.currentTimeMillis());
+        this.datePub = sysdate;
     }
 
     public int getId_publication() {
@@ -63,14 +61,23 @@ public class Publication {
         this.archive = archive;
     }
 
+    public Date getDatePub() {
+        return datePub;
+    }
+
+    public void setDatePub(Date datePub) {
+        this.datePub = datePub;
+    }
+
     @Override
     public String toString() {
-        return "Publication{" +
-                "id_publication=" + id_publication +
-                ", id_client=" + id_client +
-                ", titre='" + titre + '\'' +
-                ", desc='" + desc + '\'' +
-                ", archive=" + archive +
-                '}';
+        return "Publication{"
+                + "id_publication=" + id_publication
+                + ", id_client=" + id_client
+                + ", titre=" + titre
+                + ", desc=" + desc
+                + ", archive=" + archive
+                + ", datePub=" + datePub + '}';
     }
+
 }

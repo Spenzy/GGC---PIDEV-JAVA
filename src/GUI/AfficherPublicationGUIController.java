@@ -9,8 +9,6 @@ import entities.Commentaire;
 import entities.Publication;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -20,17 +18,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.control.TreeView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import services.CommentaireCRUD;
+import services.PersonneCRUD;
 import services.PublicationCRUD;
 import services.VoteCRUD;
 
@@ -52,13 +50,20 @@ public class AfficherPublicationGUIController implements Initializable {
     @FXML
     private ToggleButton tBtnDown;
     @FXML
+    private Label lblDate;
+    @FXML
+    private Label lblUser;
+    @FXML
     private VBox vboxComm;
-
+    @FXML
+    private Button btnForum;
+    
     int idClient;//un id pour tester les fonctionalités de l'application
     int idPublication;// id pub de test
 
     PublicationCRUD pc = new PublicationCRUD();
     CommentaireCRUD cc = new CommentaireCRUD();
+    PersonneCRUD pcrud = new PersonneCRUD();
     VoteCRUD vc = new VoteCRUD();
 
     public AfficherPublicationGUIController() {
@@ -68,7 +73,7 @@ public class AfficherPublicationGUIController implements Initializable {
         this.idClient = idClient;
         this.idPublication = idPublication;
     }
-    
+
     /**
      * Initializes the controller class.
      *
@@ -83,7 +88,8 @@ public class AfficherPublicationGUIController implements Initializable {
         tfTitre.setEditable(false);//disable TF
         taDesc.setText(p.getDesc());
         taDesc.setEditable(false);//disable TA
-
+        lblDate.setText(p.getDatePub().toString());
+        lblUser.setText(pcrud.getUsername(p.getId_client()));
         initCommentaires();
 
         lblNbrVote.setText(vc.calculNbrVote(idPublication) + "");
@@ -107,6 +113,11 @@ public class AfficherPublicationGUIController implements Initializable {
         tBtnDown.setOnAction((ActionEvent a) -> {
             updateVote("DOWN");
         });
+        
+        btnForum.setOnAction(a -> {
+            ForumHomeGUIController fhc = new ForumHomeGUIController(idClient);
+            ((Stage) btnForum.getScene().getWindow()).setScene(fhc.refreshForum(idClient));
+        });
     }
 
     public void updateVote(String type) {
@@ -128,13 +139,12 @@ public class AfficherPublicationGUIController implements Initializable {
 
     public void initCommentaires() {
         List commentaires = cc.afficherCommentaires(idPublication);
-        ArrayList<Parent> panes = new ArrayList<>();
-        int i = 0;
         commentaires.stream()
                 .forEach((Object c) -> {
                     try {
+                        System.out.println(c);
                         FXMLLoader cLoader = new FXMLLoader(getClass().getResource("AfficherCommentaireGUI.fxml"));
-                        AfficherCommentaireGUIController controller = new AfficherCommentaireGUIController((Commentaire) c);
+                        AfficherCommentaireGUIController controller = new AfficherCommentaireGUIController((Commentaire) c, idClient);
                         cLoader.setController(controller);
                         Parent cNode = cLoader.load();
                         vboxComm.getChildren().add(cNode);
@@ -142,17 +152,12 @@ public class AfficherPublicationGUIController implements Initializable {
                         Logger.getLogger(AfficherPublicationGUIController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 });
-        vboxComm.getChildren().addAll(panes);
         commenter();
     }
 
-    public void commenter(){
+    public void commenter() {
         try {
             FXMLLoader cLoader = new FXMLLoader(getClass().getResource("AjoutCommentaireGUI.fxml"));
-//            FXMLLoader parentLoader = (FXMLLoader) vboxComm.getScene().getUserData();
-//            System.out.println(parentLoader);
-//            AfficherPublicationGUIController parentController = parentLoader.<AfficherPublicationGUIController>getController();
-//            System.out.println("hay");
             AjoutCommentaireGUIController controller = new AjoutCommentaireGUIController(idClient, idPublication);
             cLoader.setController(controller);
             Parent cNode = cLoader.load();
@@ -162,5 +167,25 @@ public class AfficherPublicationGUIController implements Initializable {
             Logger.getLogger(AfficherPublicationGUIController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    public void refreshPublication(Button btn) {
+        try {
+            //init loader root
+            FXMLLoader testLoad = new FXMLLoader(getClass().getResource("AfficherPublicationGUI.fxml"));
+
+            //init Controller
+            AfficherPublicationGUIController controller = new AfficherPublicationGUIController(1, idPublication);
+            testLoad.setController(controller);
+
+            Parent root = testLoad.load();
+
+            //scene switch
+            Scene affPubScene = new Scene(root);
+            ((Stage) btn.getScene().getWindow()).setScene(affPubScene);
+
+        } catch (IOException ex) {
+            Logger.getLogger(ForumHomeGUIController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

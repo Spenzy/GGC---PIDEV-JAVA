@@ -5,16 +5,13 @@
  */
 package GUI;
 
-import GUI.AfficherPublicationGUIController;
+import entities.Publication;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,9 +19,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import services.PublicationCRUD;
 
 /**
  * FXML Controller class
@@ -34,11 +31,21 @@ import javafx.stage.Stage;
 public class ForumHomeGUIController implements Initializable {
 
     int idClient;
+    PublicationCRUD pc = new PublicationCRUD();
 
     @FXML
-    private TableView<ObservableList<String>> tblPublication;
-    @FXML
     private Button btnTest;
+    @FXML
+    private Button btnAjoutPub;
+    @FXML
+    private VBox vboxPub;
+
+    public ForumHomeGUIController() {
+    }
+
+    public ForumHomeGUIController(int idClient) {
+        this.idClient = idClient;
+    }
 
     /**
      * Initializes the controller class.
@@ -48,49 +55,47 @@ public class ForumHomeGUIController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        initTableView();
-        int idPublication = 2;
 
-        btnTest.setOnAction((ActionEvent a) -> {
-            try {
-                //init loader root
-                FXMLLoader testLoad = new FXMLLoader(getClass().getResource("AfficherPublicationGUI.fxml"));
+        initPublications();
 
-                //init Controller
-                AfficherPublicationGUIController controller = new AfficherPublicationGUIController(1,idPublication);
-                testLoad.setController(controller);
-               
-                Parent root = testLoad.load();
-
-                //scene switch
-                Scene affPubScene = new Scene(root);
-                affPubScene.setUserData(testLoad);
-                ((Stage) btnTest.getScene().getWindow()).setScene(affPubScene);
-
-            } catch (IOException ex) {
-                Logger.getLogger(ForumHomeGUIController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        btnAjoutPub.setOnAction((ActionEvent a) -> {
+            PublierGUIController ppc = new PublierGUIController(idClient);
+            Scene newScene = ppc.refreshPublier(btnAjoutPub);
+            ((Stage)btnAjoutPub.getScene().getWindow()).setScene(newScene);
         });
-
     }
 
-    public void initTableView() {
-        // add columns
-        List<String> colonnes = Arrays.asList(new String[]{"NbrVotes", "Titre", "Description", "Auteur", "Modifier", "Archiver"});
-        for (int i = 0; i < colonnes.size(); i++) {
-            final int finalId = i;
-            TableColumn<ObservableList<String>, String> column = new TableColumn<>(
-                    colonnes.get(i)
-            );
-            column.setCellValueFactory(param
-                    -> new ReadOnlyObjectWrapper<>(param.getValue().get(finalId))
-            );
-            tblPublication.getColumns().add(column);
+    public void initPublications() {
+        List publications = pc.afficherPublication();
+        publications.stream()
+                .forEach((Object p) -> {
+                    try {
+                        FXMLLoader cLoader = new FXMLLoader(getClass().getResource("PublicationForumGUI.fxml"));
+                        PublicationForumGUIController controller = new PublicationForumGUIController((Publication) p, idClient);
+                        cLoader.setController(controller);
+                        Parent cNode = cLoader.load();
+                        vboxPub.getChildren().add(cNode);
+                    } catch (IOException ex) {
+                        Logger.getLogger(AfficherPublicationGUIController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+    }
+
+    public Scene refreshForum(int idClient) {//temp jusqau vrai main
+        Scene scene = new Scene(new Parent() {
+        });
+        try {
+            //init FXML loader et controller
+            FXMLLoader forumMain = new FXMLLoader(getClass().getResource("ForumHomeGUI.fxml"));
+            ForumHomeGUIController fhc = new ForumHomeGUIController(idClient);
+            forumMain.setController(fhc);
+            Parent root = forumMain.load();
+            //init du scene 
+            scene = new Scene(root);
+        } catch (IOException ex) {
+            Logger.getLogger(ForumMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public void setIdClient(int idClient) {
-        this.idClient = idClient;
+        return scene;
     }
 
 }

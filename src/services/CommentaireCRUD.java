@@ -23,12 +23,13 @@ public class CommentaireCRUD {
     public int ajouterCommentaire(Commentaire c) {
         int id = 0;
         if (verifCommentaire(c)) {
-            String req = "INSERT INTO commentaire (idPublication,description,idClient) VALUES (?,?,?)";
+            String req = "INSERT INTO commentaire (idPublication,description,idClient,date) VALUES (?,?,?,?)";
             try {
                 PreparedStatement pst = cnxx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
                 pst.setInt(1, c.getId_publication());
                 pst.setString(2, c.getDescription());
                 pst.setInt(3, c.getIdClient());
+                pst.setDate(4, c.getDatePost());
                 pst.executeUpdate(); //execution update query
                 //execution d'autoarchivage
                 //pc.autoArchive(pc.afficherPublication(c.getIdClient()), LocalDateTime.now());
@@ -87,6 +88,7 @@ public class CommentaireCRUD {
             c.setId_publication(rs.getInt(2));
             c.setDescription(rs.getString(3));
             c.setIdClient(rs.getInt(4));
+            c.setDatePost(rs.getDate(5));
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -106,12 +108,28 @@ public class CommentaireCRUD {
                 c.setId_publication(rs.getInt(2));
                 c.setDescription(rs.getString(3));
                 c.setIdClient(rs.getInt(4));
+                c.setDatePost(rs.getDate(5));
                 listeCommentaires.add(c);
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
         return listeCommentaires;
+    }
+    
+    public int calculNbrCommentaire(int idP) {
+        String req = "SELECT count(*) FROM commentaire WHERE idPublication = ?";
+        try {
+            PreparedStatement pst = cnxx.prepareStatement(req);
+            pst.setInt(1, idP);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return -1; //en cas d'erreur
     }
 
 }

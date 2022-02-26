@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ModifierPublicationGUIController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1">
     <children>
       <Button fx:id="btnModifier" layoutX="421.0" layoutY="348.0" mnemonicParsing="false" text="Modifier" />
       <Label layoutX="47.0" layoutY="26.0" text="Titre" />

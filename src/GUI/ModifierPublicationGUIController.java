@@ -6,12 +6,18 @@
 package GUI;
 
 import entities.Publication;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -44,10 +50,18 @@ public class ModifierPublicationGUIController implements Initializable {
     private Label errWindow;
     
     
-    int idClient = 1;//un id pour tester les fonctionalités de l'application
-    int idPublication = 3;// id pub de test
+    int idClient;//un id pour tester les fonctionalités de l'application
+    int idPublication;// id pub de test
         
     PublicationCRUD pc = new PublicationCRUD();
+
+    public ModifierPublicationGUIController() {
+    }
+
+    public ModifierPublicationGUIController(int idClient, int idPublication) {
+        this.idClient = idClient;
+        this.idPublication = idPublication;
+    }
     
     /**
      * Initializes the controller class.
@@ -105,6 +119,33 @@ public class ModifierPublicationGUIController implements Initializable {
     public void resetErrLabels(){
         errTitre.setText("");
         errDesc.setText("");
+    }
+    
+    public Scene refreshPublier(Button btn) {
+        ForumHomeGUIController fhc = new ForumHomeGUIController();
+        try {
+            //init loader root
+            System.out.println("wselt lenna");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierPublicationGUI.fxml"));
+
+            //init Controller
+            ModifierPublicationGUIController controller = new ModifierPublicationGUIController(idClient,idPublication);
+            loader.setController(controller);
+
+            Parent root = loader.load();
+
+            //scene switch
+            Scene affPubScene = new Scene(root);
+//            ((Stage) btn.getScene().getWindow()).setScene(affPubScene);
+            Stage stage = new Stage();
+            stage.setScene(affPubScene);
+            stage.showAndWait();
+
+            fhc = new ForumHomeGUIController(idClient);
+        } catch (IOException ex) {
+            Logger.getLogger(ForumHomeGUIController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return fhc.refreshForum(idClient);
     }
 
 }
