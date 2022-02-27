@@ -13,6 +13,7 @@ public class Avis {
 
     private int idAvis;
     private int referenceProduit;
+    private int idClient;
     private String description;
     private String type;
 
@@ -20,14 +21,23 @@ public class Avis {
 
     }
 
-    public Avis(int referenceProduit, String description, String type) {
+    public Avis(int referenceProduit,int idClient, String description, String type) {
         this.referenceProduit = referenceProduit;
         this.description = description;
+        this.idClient=idClient;
         if (type.equals("excellent") || type.equals("mediocre") || type.equals("moyen")) {
             this.type = type;
         } else {
             System.out.println("le type doit etre excellent , moyen ou mediocre");
         }
+    }
+
+    public int getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
     }
 
     public int getIdAvis() {
@@ -68,7 +78,8 @@ public class Avis {
 
     @Override
     public String toString() {
-        return "Avis{" + "idAvis=" + idAvis + ", referenceProduit=" + referenceProduit + ", description=" + description + ", type=" + type + '}';
+        return "Avis{" + "idAvis=" + idAvis + ", referenceProduit=" + referenceProduit + ", idClient=" + idClient + ", description=" + description + ", type=" + type + '}';
     }
 
+    
 }

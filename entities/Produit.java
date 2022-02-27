@@ -12,37 +12,47 @@ package javaapplication12.entities;
 public class Produit {
 
     private int reference;
-    private String nom;
+    private String libelle;
     private String categorie;
-    private String fiche_technique;
+    private String description;
     private float prix;
+    private int note;
 
     public Produit() {
 
     }
 
-    public Produit(int reference, String nom, String categorie, String fiche_technique, float prix) {
+    public Produit(int reference, String libelle, String categorie, String description, float prix) {
         this.reference = reference;
-        this.nom = nom;
+        this.libelle = libelle;
         this.categorie = categorie;
-        this.fiche_technique = fiche_technique;
+        this.description = description;
         this.prix = prix;
+        this.note=0;
     }
 
     public int getReference() {
         return reference;
     }
 
-    public String getNom() {
-        return nom;
+    public String getLibelle() {
+        return libelle;
     }
 
     public String getCategorie() {
         return categorie;
     }
 
-    public String getFiche_technique() {
-        return fiche_technique;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setNote(int note) {
+        this.note = note;
+    }
+
+    public int getNote() {
+        return note;
     }
 
     public float getPrix() {
@@ -53,16 +63,16 @@ public class Produit {
         this.reference = reference;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
     }
 
     public void setCategorie(String categorie) {
         this.categorie = categorie;
     }
 
-    public void setFiche_technique(String fiche_technique) {
-        this.fiche_technique = fiche_technique;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setPrix(float prix) {
@@ -71,7 +81,7 @@ public class Produit {
 
     @Override
     public String toString() {
-        return "Produit{" + "reference=" + reference + ", nom=" + nom + ", categorie=" + categorie + ", fiche_technique=" + fiche_technique + ", prix=" + prix + '}';
+        return "Produit{" + "reference=" + reference + ", libelle=" + libelle + ", categorie=" + categorie + ", description=" + description + ", prix=" + prix + ", note=" + note + '}';
     }
 
 }
