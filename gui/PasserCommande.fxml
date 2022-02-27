@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sprint1.pidev.gui.PasserCommandeController">
+   <children>
+      <Button fx:id="btnAjouter" layoutX="492.0" layoutY="297.0" mnemonicParsing="false" onAction="#ajouterCommandeOnclick" text="Valider" />
+      <Label layoutX="45.0" layoutY="40.0" text="Adresse" />
+      <TextField fx:id="tfAdresse" layoutX="109.0" layoutY="36.0" />
+      <Label fx:id="lProduit" layoutX="45.0" layoutY="96.0" text="Produit" />
+      <Spinner fx:id="sQuantite" layoutX="302.0" layoutY="92.0" prefHeight="25.0" prefWidth="66.0" />
+      <Button fx:id="btnAjouterLigne" layoutX="438.0" layoutY="92.0" mnemonicParsing="false" onAction="#AjouterLigneOnclick" text="Ajouter au Panier" />
+      <ComboBox fx:id="cbProduit" layoutX="108.0" layoutY="92.0" prefHeight="25.0" prefWidth="149.0" />
+      <Label fx:id="labelQuantite" layoutX="302.0" layoutY="131.0" prefHeight="17.0" prefWidth="74.0" text="Quantie &gt; 0" textFill="RED" />
+      <Label fx:id="labelAdresse" layoutX="108.0" layoutY="69.0" prefHeight="17.0" prefWidth="170.0" text="Veuillez donnez votre adresse" textFill="RED" />
+      <Button fx:id="btnAnnuler" layoutX="570.0" layoutY="297.0" mnemonicParsing="false" onAction="#AnnulerOnclick" text="Annuler" />
+      <ScrollPane layoutX="58.0" layoutY="172.0" prefHeight="247.0" prefWidth="393.0">
+         <content>
+            <AnchorPane fx:id="panePanier" prefHeight="251.0" prefWidth="394.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

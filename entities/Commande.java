@@ -20,17 +20,18 @@ public class Commande {
     private float prix;
     private boolean livree;
     private Date DateCommande;
-    private List<LigneCommande> Lignes=new ArrayList<>();
-   
+    private List<LigneCommande> Lignes = new ArrayList<>();
+
     public Commande() {
     }
 
-    public Commande(int idClient, String adresse, Date DateCommande) {
+    public Commande(int idClient, String adresse) {
         this.idClient = idClient;
         this.adresse = adresse;
         this.prix = 0;
         this.livree = false;
-        this.DateCommande = DateCommande;
+        Date sysdate = new Date(System.currentTimeMillis());
+        this.DateCommande = sysdate;
     }
 
     public void setLignes(List<LigneCommande> Lignes) {

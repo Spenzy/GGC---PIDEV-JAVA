@@ -36,13 +36,13 @@ public class Sprint1 {
         } catch (ParseException exp) {
             exp.getMessage();
         }
-        Commande c1 = new Commande(111, "carthage byrsa", date);
+        Commande c1 = new Commande(111, "carthage byrsa");
         LigneCommande lc1 = new LigneCommande(1, 1010, 2, 0);
         LigneCommande lc2 = new LigneCommande(9, 1010, 2, 100);
 
         CommandeCRUD c = new CommandeCRUD();
         LigneCommandeCRUD LC = new LigneCommandeCRUD();
-
+System.out.println(c.affecterProduit());
         
         /*
         //ajout commande
@@ -62,7 +62,7 @@ public class Sprint1 {
 */
         
         //affichage des commandes suivies de leurs lignes
-        System.out.println(c.afficher());
+     /*   System.out.println(c.afficher());
 
         
         
@@ -71,7 +71,7 @@ public class Sprint1 {
         //modification lignes commandes
         c1.setIdCommande(9);
         c1.setLivree(true);
-        c1.setAdresse("gammarth");
+        c1.setAdresse("gammarth");*/
 
         /*if (c.VerifCommande(c1.getIdCommande())) {
             if (c.VerifClient(c1.getIdClient())) {
@@ -85,12 +85,12 @@ public class Sprint1 {
         }*/
         
         
-        //test métier calcul prix ligne commande (jointure 2 tables)
+      /*  //test métier calcul prix ligne commande (jointure 2 tables)
         lc1.setIdLigne(13);
         lc1.setIdCommande(9);
         lc1.setIdProduit(9512);
         lc1.setQuantite(5);
-        //LC.calculPrixLigne(lc1);
+        //LC.calculPrixLigne(lc1);*/
         
         /*
         //modification d'une ligne 
@@ -120,7 +120,7 @@ public class Sprint1 {
  
 
         //test CRUD livraison
-         LivraisonCRUD l = new LivraisonCRUD();
+        // LivraisonCRUD l = new LivraisonCRUD();
 
       /*  java.sql.Date date=null;
         try{
@@ -168,7 +168,7 @@ public class Sprint1 {
         //System.out.println(l.afficher());
         //l.RemiseLivraison();System.out.println(l.afficher());//remise livraison ssi elle n'est pas livrée et en retard (jointure)
         //c.commandeLivree(c1);System.out.println(l.afficher());
-        //System.out.println(l.recupererMailClient(456)); //test récuperer email client pour le mail d'excuse
+        //System.out.println(l.recupererMailClient(456)); //test récuperer email client pour le mail d'excuse*/*/
     }
 
 }

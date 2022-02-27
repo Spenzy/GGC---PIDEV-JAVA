@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import sprint1.pidev.entities.Commande;
 import sprint1.pidev.utils.MyConnection;
 
@@ -46,7 +48,7 @@ public class CommandeCRUD {
             rs.next();
             long pk = rs.getLong(1);
             c.setIdCommande((int) pk);
-            
+
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -87,7 +89,7 @@ public class CommandeCRUD {
 
     }
 
-    public List<Commande> afficher() {
+    public ObservableList<Commande> afficher() {
 
         List<Commande> myList = new ArrayList();
 
@@ -105,18 +107,23 @@ public class CommandeCRUD {
                 p.setPrix(rs.getFloat(4));
                 p.setLivree(rs.getBoolean(5));
                 p.setDateCommande(rs.getDate(6));
-                
-                LigneCommandeCRUD LC=new LigneCommandeCRUD();
-                p.setLignes(LC.afficher(rs.getInt(1)));       
-                
+
+                LigneCommandeCRUD LC = new LigneCommandeCRUD();
+                p.setLignes(LC.afficher(rs.getInt(1)));
+
                 myList.add(p);
-                                
+
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
             //   return null;
         }
-        return myList;
+        ObservableList<Commande> list = FXCollections.observableArrayList();
+        for (Commande p : myList) {
+            list.add(p);
+        }
+
+        return list;
     }
 
     public boolean VerifCommande(int idCommande) {
@@ -170,11 +177,70 @@ public class CommandeCRUD {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+
     }
 
-    public void commandeLivree(Commande c) {
-        c.setLivree(true);
-        modifierCommande(c);
-        System.out.println("Commande " + c.getIdCommande() + " livrée");
+    public void commandeLivree(int idCommande) {
+        String req = "update commande set livree=1 where idCommande = ? ";
+        PreparedStatement pst;
+        try {
+            pst = cnxx.prepareStatement(req);
+            pst.setInt(1, idCommande);
+
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
+
+    public ObservableList<String> affecterProduit() {
+        ObservableList<String> listProduit = FXCollections.observableArrayList();
+
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT libelle FROM produit";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            while (rs.next()) {
+                listProduit.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        return listProduit;
+    }
+
+    public int recupererReference(String libelle) {
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT reference FROM produit where (libelle like '" + libelle + "')";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            while (rs.next()) {
+                return rs.getInt((1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        return 0;
+    }
+
+    public float RecupererPrixCommande(int idCommande) {
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "select sum(prix) from LigneCommande where (idCommande=" + idCommande + ")";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            if (rs.next()) {
+                return rs.getFloat((1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        return 0;
+    }
+
 }

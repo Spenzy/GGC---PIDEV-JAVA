@@ -45,7 +45,7 @@ public class LigneCommandeCRUD {
             rs.next();
             long pk = rs.getLong(1);
             lc.setIdLigne((int) pk);
-            
+
             calculPrixLigne(lc);
 
         } catch (SQLException ex) {
@@ -78,7 +78,7 @@ public class LigneCommandeCRUD {
             pst.setInt(4, lc.getIdCommande());
             pst.setInt(5, lc.getIdLigne());
             pst.executeUpdate();
-            
+
             calculPrixLigne(lc);
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -92,7 +92,7 @@ public class LigneCommandeCRUD {
 
         try {
             Statement st = cnxx.createStatement();
-            String req = "SELECT * FROM LigneCommande where( idCommande= "+idCommande+" )";
+            String req = "SELECT * FROM LigneCommande where( idCommande= " + idCommande + " )";
             ResultSet rs;
             rs = st.executeQuery(req);
             while (rs.next()) {
@@ -111,7 +111,7 @@ public class LigneCommandeCRUD {
         }
         return myList;
     }
-    
+
     public boolean VerifProduit(int idProduit) {
         boolean testProduit = false;
         try {
@@ -131,21 +131,70 @@ public class LigneCommandeCRUD {
         return testProduit;
     }
 
-    public void calculPrixLigne(LigneCommande lc1){
-        String req = "select produit.prix*lignecommande.quantite from produit inner join lignecommande on(produit.reference=lignecommande.idProduit) where (lignecommande.idProduit="+lc1.getIdProduit()+")";
+    public void calculPrixLigne(LigneCommande lc1) {
+        String req = "select produit.prix*lignecommande.quantite from lignecommande inner join produit on(produit.reference=lignecommande.idProduit) where( lignecommande.idLigne=" + lc1.getIdLigne() + ")";
         try {
             Statement st = cnxx.createStatement();
             ResultSet rs;
             rs = st.executeQuery(req);
-            while (rs.next()) {
-                float prixLigne=rs.getFloat(1);
+            if (rs.next()) {
+                float prixLigne = rs.getFloat(1);
                 lc1.setPrix(prixLigne);
-                modifierLigneCommande(lc1);
-                
+                modifierPrixLigneCommande(lc1);
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
 
     }
+
+    private void modifierPrixLigneCommande(LigneCommande lc) {
+        String req = "update LigneCommande set prix=? where (idLigne = ?)";
+        PreparedStatement pst;
+        try {
+            pst = cnxx.prepareStatement(req);
+            pst.setFloat(1, lc.getPrix());
+            pst.setInt(2, lc.getIdLigne());
+            pst.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    public String recupererLibelle(int idProduit) {
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT libelle FROM produit where (reference="+idProduit+")";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            if (rs.next()) {
+                return rs.getString((1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        return "";
+    }
+
+    public void setLigne(LigneCommande lc) {
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT * FROM LigneCommande where( idLigne= " + lc.getIdLigne() + " )";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            while (rs.next()) {
+
+                lc.setIdLigne(rs.getInt(1));
+                lc.setIdCommande(rs.getInt(2));
+                lc.setIdProduit(rs.getInt(3));
+                lc.setQuantite(rs.getInt(4));
+                lc.setPrix(rs.getFloat(5));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+    }
+
 }

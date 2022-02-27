@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import sprint1.pidev.entities.Commande;
 import sprint1.pidev.entities.Livraison;
 import sprint1.pidev.utils.MyConnection;
@@ -76,7 +78,7 @@ public class LivraisonCRUD {
 
     }
 
-    public List<Livraison> afficher() {
+    public ObservableList<Livraison> afficher() {
 
         List<Livraison> myList = new ArrayList();
 
@@ -97,7 +99,12 @@ public class LivraisonCRUD {
             System.err.println(ex.getMessage());
             //   return null;
         }
-        return myList;
+        ObservableList<Livraison> list = FXCollections.observableArrayList();
+        for (Livraison p : myList) {
+            list.add(p);
+        }
+
+        return list;
     }
 
     public boolean VerifCommande(int idCommande) {
@@ -152,7 +159,7 @@ public class LivraisonCRUD {
                     System.out.println("livraison en retard, vous aurez une remise de 70% sur la commande " + rs.getInt(1));
                     remiseRetard(rs.getInt(1));
                     String email = recupererMailClient(rs.getInt(1));
-                    //envoyerMailExcuse(email);
+                    //envoyerMailExcuse(email); API
                 }
             }
         } catch (SQLException ex) {
@@ -177,7 +184,7 @@ public class LivraisonCRUD {
     public String recupererMailClient(int idCommande) {
         try {
             Statement st = cnxx.createStatement();
-            String req = "select personne.email from livraison inner join commande on(commande.idCommande=livraison.idCommande) inner join client on(client.idClient=commande.idClient) inner join personne on(personne.id_personne=client.idClient) where(commande.idCommande="+idCommande+");";
+            String req = "select personne.email from livraison inner join commande on(commande.idCommande=livraison.idCommande) inner join client on(client.idClient=commande.idClient) inner join personne on(personne.id_personne=client.idClient) where(commande.idCommande=" + idCommande + ");";
             ResultSet rs;
             rs = st.executeQuery(req);
             while (rs.next()) {
@@ -192,5 +199,47 @@ public class LivraisonCRUD {
 
     public void envoyerMailExcuse(String email) {
 
+    }
+
+    public ObservableList<Integer> affecterCommande() {
+        List<Integer> myList = new ArrayList();
+
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT idCommande FROM commande where livree=0";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            while (rs.next()) {
+                myList.add(rs.getInt(1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        ObservableList<Integer> list = FXCollections.observableArrayList();
+        for (Integer p : myList) {
+            list.add(p);
+        }
+        return list;
+    }
+
+    public ObservableList<Integer> affecterLivreur() {
+        List<Integer> myList = new ArrayList();
+
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT idLivreur FROM Livreur where disponibilite=1";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            while (rs.next()) {
+                myList.add(rs.getInt(1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        ObservableList<Integer> list = FXCollections.observableArrayList();
+        for (Integer p : myList) {
+            list.add(p);
+        }
+        return list;
     }
 }

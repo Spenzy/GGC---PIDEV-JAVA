@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="529.0" prefWidth="1025.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sprint1.pidev.gui.AffecterLivraisonController">
+   <children>
+      <TableView fx:id="tvCommande" layoutX="28.0" layoutY="20.0" prefHeight="200.0" prefWidth="451.0">
+        <columns>
+          <TableColumn fx:id="tcCCommande" prefWidth="85.0" text="Commande" />
+          <TableColumn fx:id="tcClient" prefWidth="65.0" text="Client" />
+            <TableColumn fx:id="tcAdresse" prefWidth="75.0" text="Adresse" />
+            <TableColumn fx:id="tcPrix" prefWidth="75.0" text="Prix" />
+            <TableColumn fx:id="tcLivree" prefWidth="75.0" text="Livree" />
+            <TableColumn fx:id="tcCDate" prefWidth="75.0" text="Date" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tvLivraison" layoutX="134.0" layoutY="269.0" prefHeight="200.0" prefWidth="240.0">
+        <columns>
+          <TableColumn fx:id="tcLCommande" prefWidth="75.0" text="Commande" />
+          <TableColumn fx:id="tcLivreur" prefWidth="75.0" text="Livreur" />
+            <TableColumn fx:id="tcLDate" prefWidth="89.0" text="Date" />
+        </columns>
+      </TableView>
+      <ComboBox fx:id="cbCommande" layoutX="698.0" layoutY="97.0" prefWidth="150.0" />
+      <ComboBox fx:id="cbLivreur" layoutX="698.0" layoutY="176.0" prefWidth="150.0" />
+      <DatePicker fx:id="dpLivraison" layoutX="698.0" layoutY="256.0" prefHeight="25.0" prefWidth="150.0" />
+      <Label layoutX="698.0" layoutY="67.0" text="Commande" />
+      <Label layoutX="698.0" layoutY="144.0" text="Livreur" />
+      <Label layoutX="698.0" layoutY="228.0" text="Date de livraison" />
+      <Separator layoutX="586.0" layoutY="45.0" orientation="VERTICAL" prefHeight="422.0" prefWidth="4.0" />
+      <Button fx:id="btnValider" layoutX="747.0" layoutY="334.0" mnemonicParsing="false" onAction="#ValiderOnclick" text="Valider" />
+      <Label fx:id="title" layoutX="667.0" layoutY="14.0" prefHeight="48.0" prefWidth="240.0" text="Affectation Commande Livraison" textFill="#e121ed">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="LabelDateVide" layoutX="859.0" layoutY="260.0" prefHeight="17.0" prefWidth="144.0" text="Veuillez saisir une date" textFill="RED" />
+      <Label fx:id="LabelSysDate" layoutX="698.0" layoutY="294.0" text="La date doit etre supérieure à celle d'aujourd'hui" textFill="RED" />
+      <Button fx:id="btnModifier" layoutX="177.0" layoutY="484.0" mnemonicParsing="false" onAction="#ModifierOnclick" text="Modifier" />
+      <Button fx:id="btnSupprimer" layoutX="273.0" layoutY="484.0" mnemonicParsing="false" onAction="#SupprimerOnclick" text="Supprimer" />
+      <Button fx:id="Modification" layoutX="686.0" layoutY="334.0" mnemonicParsing="false" onAction="#ModifierLivraisonOnclick" text="Modifier" />
+      <Button fx:id="btnAnnulerModification" layoutX="800.0" layoutY="334.0" mnemonicParsing="false" onAction="#AnnulerModificationµOnclick" text="Annuler" />
+      <Button fx:id="btnRetardLivraison" layoutX="195.0" layoutY="233.0" mnemonicParsing="false" onAction="#RetardLivraisonOnclick" text="Retard Livraison" />
+   </children>
+</AnchorPane>
