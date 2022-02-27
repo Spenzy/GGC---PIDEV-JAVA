@@ -8,6 +8,7 @@ package GUI;
 import entities.Publication;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -21,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import services.PersonneCRUD;
 import services.PublicationCRUD;
 
 /**
@@ -32,13 +34,14 @@ public class ForumHomeGUIController implements Initializable {
 
     int idClient;
     PublicationCRUD pc = new PublicationCRUD();
+    PersonneCRUD pcrud = new PersonneCRUD();
 
-    @FXML
-    private Button btnTest;
     @FXML
     private Button btnAjoutPub;
     @FXML
     private VBox vboxPub;
+    @FXML
+    private VBox vboxPubArch;
 
     public ForumHomeGUIController() {
     }
@@ -61,24 +64,33 @@ public class ForumHomeGUIController implements Initializable {
         btnAjoutPub.setOnAction((ActionEvent a) -> {
             PublierGUIController ppc = new PublierGUIController(idClient);
             Scene newScene = ppc.refreshPublier(btnAjoutPub);
-            ((Stage)btnAjoutPub.getScene().getWindow()).setScene(newScene);
+            ((Stage) btnAjoutPub.getScene().getWindow()).setScene(newScene);
         });
     }
 
     public void initPublications() {
-        List publications = pc.afficherPublication();
+        ArrayList publications = pc.afficherPublication();
         publications.stream()
-                .forEach((Object p) -> {
+                .forEach(p -> {
                     try {
+//                        if (!((Publication) p).isArchive() && !pcrud.isAdmin(idClient)) {
                         FXMLLoader cLoader = new FXMLLoader(getClass().getResource("PublicationForumGUI.fxml"));
                         PublicationForumGUIController controller = new PublicationForumGUIController((Publication) p, idClient);
                         cLoader.setController(controller);
                         Parent cNode = cLoader.load();
-                        vboxPub.getChildren().add(cNode);
+                        if (((Publication) p).isArchive()) {
+                            vboxPubArch.getChildren().add(cNode);
+                        } else {
+                            vboxPub.getChildren().add(cNode);
+                        }
+
+//                        }
                     } catch (IOException ex) {
                         Logger.getLogger(AfficherPublicationGUIController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 });
+        System.out.println(vboxPubArch.getChildren());
+        System.out.println(vboxPub.getChildren());
     }
 
     public Scene refreshForum(int idClient) {//temp jusqau vrai main

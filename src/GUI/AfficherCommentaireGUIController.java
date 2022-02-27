@@ -47,17 +47,18 @@ public class AfficherCommentaireGUIController implements Initializable {
     private Label errDesc;
     @FXML
     private Label lblDate;
-    
+
     public AfficherCommentaireGUIController() {
     }
 
-    public AfficherCommentaireGUIController(Commentaire c,int idClient) {
+    public AfficherCommentaireGUIController(Commentaire c, int idClient) {
         this.c = c;
         this.idClient = idClient;
     }
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -65,28 +66,28 @@ public class AfficherCommentaireGUIController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         initAffichage();
 
-        btnSupp.setOnAction((ActionEvent a) ->{
+        btnSupp.setOnAction((ActionEvent a) -> {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Supprimer?");
-                alert.setHeaderText("Supprimer votre commentaire?");
-                alert.setContentText("Votre commentaire sera supprimée lors de l'acceptation");
+            alert.setTitle("Supprimer?");
+            alert.setHeaderText("Supprimer votre commentaire?");
+            alert.setContentText("Votre commentaire sera supprimée lors de l'acceptation");
 
-                Optional<ButtonType> option = alert.showAndWait();
-                //confirmation d'ajout
-                if (option.get() == ButtonType.OK) {
-                    cc.supprimerCommentaire(c.getId_commentaire());
-                    //message de test
-                    System.out.println("Commentaire supprimée avec succée!");
+            Optional<ButtonType> option = alert.showAndWait();
+            //confirmation d'ajout
+            if (option.get() == ButtonType.OK) {
+                cc.supprimerCommentaire(c.getId_commentaire());
+                //message de test
+                System.out.println("Commentaire supprimée avec succée!");
 
-                    //refresh
-                    AfficherPublicationGUIController apc = new AfficherPublicationGUIController(c.getIdClient(),c.getId_publication());
-                    apc.refreshPublication(btnSupp);
-                } else {
-                    System.out.println("Erreur de confirmation!");
-                }
+                //refresh
+                AfficherPublicationGUIController apc = new AfficherPublicationGUIController(c.getIdClient(), c.getId_publication());
+                apc.refreshPublication(btnSupp);
+            } else {
+                System.out.println("Erreur de confirmation!");
+            }
         });
 
-        btnMod.setOnAction(a->{
+        btnMod.setOnAction(a -> {
             initModification();
         });
 
@@ -110,7 +111,7 @@ public class AfficherCommentaireGUIController implements Initializable {
                     //message de test
                     System.out.println("Commentaire modifiée avec succée!");
                     //refresh
-                    AfficherPublicationGUIController apc = new AfficherPublicationGUIController(c.getIdClient(),c.getId_publication());
+                    AfficherPublicationGUIController apc = new AfficherPublicationGUIController(c.getIdClient(), c.getId_publication());
                     apc.refreshPublication(btnMod);
                 } else {
                     System.out.println("Erreur de confirmation!");
@@ -119,16 +120,16 @@ public class AfficherCommentaireGUIController implements Initializable {
         });
 
         btnAnnuler.setOnAction((ActionEvent a) -> {
-                initAffichage();
+            initAffichage();
         });
     }
 
-    public void initAffichage(){
+    public void initAffichage() {
         btnApp.setVisible(false);
         btnAnnuler.setVisible(false);
         btnSupp.setVisible(false);
         btnMod.setVisible(false);
-        if(verifOwner()){
+        if (verifOwner()) {
             btnSupp.setVisible(true);
             btnMod.setVisible(true);
         }
@@ -138,16 +139,16 @@ public class AfficherCommentaireGUIController implements Initializable {
         taCommentaire.setText(c.getDescription());
         taCommentaire.setEditable(false);
     }
-    
-    public void initModification(){
+
+    public void initModification() {
         btnAnnuler.setVisible(true);
         btnSupp.setVisible(false);
         btnMod.setVisible(false);
         btnApp.setVisible(true);
         taCommentaire.setEditable(true);
     }
-    
-    public boolean verifOwner(){
+
+    public boolean verifOwner() {
         return idClient == c.getIdClient();
     }
 

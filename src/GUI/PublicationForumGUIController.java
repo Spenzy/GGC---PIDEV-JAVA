@@ -7,15 +7,19 @@ package GUI;
 
 import entities.Publication;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import services.CommentaireCRUD;
+import services.PersonneCRUD;
 import services.PublicationCRUD;
 import services.VoteCRUD;
 
@@ -30,6 +34,7 @@ public class PublicationForumGUIController implements Initializable {
     Publication p;
     PublicationCRUD pc = new PublicationCRUD();
     CommentaireCRUD cc = new CommentaireCRUD();
+    PersonneCRUD pcrud = new PersonneCRUD();
     VoteCRUD vc = new VoteCRUD();
 
     @FXML
@@ -57,6 +62,7 @@ public class PublicationForumGUIController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -65,28 +71,56 @@ public class PublicationForumGUIController implements Initializable {
         initPublication();
 
         btnAfficher.setOnAction((ActionEvent a) -> {
+            
             AfficherPublicationGUIController apc = new AfficherPublicationGUIController(idClient, p.getId_publication());
             apc.refreshPublication(btnAfficher);
         });
-        
+
         btnArchiver.setOnAction((ActionEvent a) -> {
-            pc.archiver(p);
-            ForumHomeGUIController fhc = new ForumHomeGUIController(idClient);
-            ((Stage) btnArchiver.getScene().getWindow()).setScene(fhc.refreshForum(idClient));
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Archiver?");
+            alert.setHeaderText("Archiver cette publication?");
+            alert.setContentText("Votre publication sera archivé lors de l'acceptation");
+
+            Optional<ButtonType> option = alert.showAndWait();
+            //confirmation d'archivage
+            if (option.get() == ButtonType.OK) {
+                pc.archiver(p);
+                ForumHomeGUIController fhc = new ForumHomeGUIController(idClient);
+                ((Stage) btnArchiver.getScene().getWindow()).setScene(fhc.refreshForum(idClient));
+            } else {
+                System.out.println("Erreur de confirmation!");
+            }
+            
         });
-        
-        btnModifier.setOnAction(a -> {
+
+        btnModifier.setOnAction((ActionEvent a) -> {
             ModifierPublicationGUIController mpc = new ModifierPublicationGUIController(idClient, p.getId_publication());
             ((Stage) btnModifier.getScene().getWindow()).setScene(mpc.refreshPublier(btnModifier));
         });
     }
 
     public void initPublication() {
-        System.out.println(p);
+        btnModifier.setVisible(false);
+        btnArchiver.setVisible(false);
+        if (isOwner(idClient)) {
+            btnModifier.setVisible(true);
+        }
+        if (pcrud.isAdmin(idClient)){
+            if(p.isArchive())
+            {
+                btnArchiver.setText("Désarchiver");
+            }
+            btnArchiver.setVisible(true);
+        }
         lblNbrVotes.setText(vc.calculNbrVote(p.getId_publication()) + "");
         tfTitre.setText(p.getTitre());
         lblDate.setText(p.getDatePub().toString());
-        lblNbrCommentaire.setText(cc.calculNbrCommentaire(p.getId_publication())+"");
+        lblNbrCommentaire.setText(cc.calculNbrCommentaire(p.getId_publication()) + "");
+    }
+
+    public boolean isOwner(int idClient) {
+        return p.getId_client() == idClient;
     }
 
 }

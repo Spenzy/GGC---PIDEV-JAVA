@@ -15,7 +15,7 @@
 
 <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="700.0" prefHeight="595.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
    <content>
-      <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
+      <AnchorPane fx:id="anchorPub" minHeight="-Infinity" minWidth="-Infinity">
         <children>
             <Pane layoutX="4.0" prefHeight="219.0" prefWidth="592.0">
                <children>

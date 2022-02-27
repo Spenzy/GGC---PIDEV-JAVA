@@ -15,7 +15,7 @@ public class MainClass {
         BasicConfigurator.configure();
 
         //*************Publication
-//        Publication p = new Publication(-1,30,"QUESTION?","JUST RANDOM FOLLOW STUFF",false);
+        Publication p = new Publication(30,"QUESTION?","JUST RANDOM FOLLOW STUFF",false);
         PublicationCRUD pc = new PublicationCRUD();
 
         //pc.ajouterPublication(p);
@@ -49,7 +49,7 @@ public class MainClass {
         //vc.supprimerVote(1,1);
 
         //************testing
-        //pc.autoArchive(p);
-        //System.out.println(cc.afficherCommentaires(2));
+        pc.autoArchive(p);
     }
+    
 }

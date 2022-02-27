@@ -24,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -57,9 +58,11 @@ public class AfficherPublicationGUIController implements Initializable {
     private VBox vboxComm;
     @FXML
     private Button btnForum;
-    
-    int idClient;//un id pour tester les fonctionalités de l'application
-    int idPublication;// id pub de test
+    @FXML
+    private AnchorPane anchorPub;
+
+    int idClient;
+    int idPublication;
 
     PublicationCRUD pc = new PublicationCRUD();
     CommentaireCRUD cc = new CommentaireCRUD();
@@ -76,7 +79,6 @@ public class AfficherPublicationGUIController implements Initializable {
 
     /**
      * Initializes the controller class.
-     *
      * @param url
      * @param rb
      */
@@ -93,6 +95,10 @@ public class AfficherPublicationGUIController implements Initializable {
         initCommentaires();
 
         lblNbrVote.setText(vc.calculNbrVote(idPublication) + "");
+        
+        if(p.isArchive()){
+            anchorPub.setDisable(true);
+        }
 
         if (vc.verifVote(idClient, idPublication)) {
             if (vc.afficherVote(idClient, idPublication).getType().equals("UP")) {
@@ -113,7 +119,7 @@ public class AfficherPublicationGUIController implements Initializable {
         tBtnDown.setOnAction((ActionEvent a) -> {
             updateVote("DOWN");
         });
-        
+
         btnForum.setOnAction(a -> {
             ForumHomeGUIController fhc = new ForumHomeGUIController(idClient);
             ((Stage) btnForum.getScene().getWindow()).setScene(fhc.refreshForum(idClient));
@@ -174,7 +180,7 @@ public class AfficherPublicationGUIController implements Initializable {
             FXMLLoader testLoad = new FXMLLoader(getClass().getResource("AfficherPublicationGUI.fxml"));
 
             //init Controller
-            AfficherPublicationGUIController controller = new AfficherPublicationGUIController(1, idPublication);
+            AfficherPublicationGUIController controller = new AfficherPublicationGUIController(idClient, idPublication);
             testLoad.setController(controller);
 
             Parent root = testLoad.load();

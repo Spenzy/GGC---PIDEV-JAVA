@@ -5,13 +5,11 @@
  */
 package services;
 
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import utils.MyConnection;
 import java.sql.SQLException;
-
 
 /**
  *
@@ -28,11 +26,11 @@ public class PersonneCRUD {
     public String getUsername(int id_personne) {
         try {
             Statement st = cnxx.createStatement();
-            String req = "SELECT nom,prenom FROM Personne where id_personne="+ id_personne;
+            String req = "SELECT nom,prenom FROM Personne where id_personne=" + id_personne;
             ResultSet rs;
             rs = st.executeQuery(req);
-            if(rs.next()) {
-                return rs.getString(1)+" "+rs.getString(2);
+            if (rs.next()) {
+                return rs.getString(1) + " " + rs.getString(2);
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -40,21 +38,19 @@ public class PersonneCRUD {
         }
         return "";
     }
-    
-    public String isModerator(int id_personne) {
+
+    public boolean isAdmin(int id_personne) {
         try {
             Statement st = cnxx.createStatement();
-            String req = "SELECT * FROM Moderateur where id_personne="+ id_personne;
+            String req = "SELECT id_admin FROM admin where id_admin=" + id_personne;
             ResultSet rs;
             rs = st.executeQuery(req);
-            if(rs.next()) {
-                return rs.getString(1)+" "+rs.getString(2);
-            }
+            return rs.next();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
             //   return null;
         }
-        return "";
+        return false;
     }
 
 }

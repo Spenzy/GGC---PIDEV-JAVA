@@ -7,7 +7,11 @@ import java.sql.*;
 import static java.sql.JDBCType.NULL;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import org.quartz.Job;
 import static org.quartz.JobBuilder.newJob;
 import org.quartz.JobDetail;
@@ -155,7 +159,7 @@ public class PublicationCRUD {
         if (!p.isArchive()) {
             p.setArchive(true);
             System.out.println("publication archivé");
-            
+
         } else {
             p.setArchive(false);
             System.out.println("publication déarchivé");
@@ -163,20 +167,21 @@ public class PublicationCRUD {
         modifierPublication(p);
     }
 
-    /*
-    public void autoArchive(Publication p, LocalDateTime dateAjout){
+//    public void autoArchive(Publication p, LocalDateTime dateAjout){
+//        
+//        //ScheduledExecutorService nécessite un objet runnable pour fonctionner ou on fait appel a notre methode archiver
+//        final Runnable autoArch = new Runnable() { 
+//            public void run() {
+//                //archiver(p);
+//                p.setArchive(!p.isArchive());
+//                System.out.println(p);//pour tester le chrono
+//            }
+//        };                                                          //pour tester 5 secondes au lieu de 5 jrs
+//        long delai = ChronoUnit.MILLIS.between(dateAjout, dateAjout.plusSeconds(5)); //ici on fait calculer le delai de 5 jours depuis la date d'ajout
+//        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1); //ici on initialise un nouveau thread de ScheduledExecutorService
+//        scheduler.schedule(autoArch, delai, TimeUnit.MILLISECONDS); //ici on programme le chrono du methode
+//    } 
 
-        final Runnable autoArch = new Runnable() { //ScheduledExecutorService nécessite un objet runnable pour fonctionner ou on fait appel a notre methode archiver
-            public void run() {
-                //archiver(p);
-                p.setArchive(!p.isArchive());
-                System.out.println(p);//pour tester le chrono
-            }
-        };                                                          //pour tester 5 secondes au lieu de 5 jrs
-        long delai = ChronoUnit.MILLIS.between(dateAjout, dateAjout.plusSeconds(5)); //ici on fait calculer le delai de 5 jours depuis la date d'ajout
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1); //ici on initialise un nouveau thread de ScheduledExecutorService
-        scheduler.schedule(autoArch, delai, TimeUnit.MILLISECONDS); //ici on programme le chrono du methode
-    } */
     public void autoArchive(Publication p) {
         SchedulerFactory schedulerFactory = new StdSchedulerFactory();
         try {
@@ -197,6 +202,7 @@ public class PublicationCRUD {
             System.out.println(archJob.getKey() + " will run at: " + dateArch);
 
             scheduler.start();
+
         } catch (SchedulerException e) {
             System.err.println(e.getMessage());
         }
