@@ -13,17 +13,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="700.0" prefHeight="595.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="700.0" prefHeight="595.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <AnchorPane fx:id="anchorPub" minHeight="-Infinity" minWidth="-Infinity">
         <children>
-            <Pane layoutX="4.0" prefHeight="219.0" prefWidth="592.0">
+            <Pane fx:id="panePub" layoutX="-3.0" prefHeight="219.0" prefWidth="599.0">
                <children>
                   <TextArea fx:id="taDesc" layoutX="79.0" layoutY="70.0" minHeight="-Infinity" prefHeight="110.0" prefWidth="497.0" />
                   <TextField fx:id="tfTitre" layoutX="79.0" layoutY="39.0" prefHeight="25.0" prefWidth="496.0" />
-                  <ToggleButton fx:id="tBtnUP" layoutY="39.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="54.0" text="UP" />
-                  <Label fx:id="lblNbrVote" layoutX="23.0" layoutY="70.0" text="0" />
-                  <ToggleButton fx:id="tBtnDown" layoutY="93.0" mnemonicParsing="false" text="DOWN" />
+                  <ToggleButton fx:id="tBtnUP" layoutX="14.0" layoutY="39.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="54.0" text="UP" />
+                  <Label fx:id="lblNbrVote" layoutX="37.0" layoutY="70.0" text="0" />
+                  <ToggleButton fx:id="tBtnDown" layoutX="14.0" layoutY="93.0" mnemonicParsing="false" text="DOWN" />
                   <HBox layoutX="79.0" layoutY="14.0">
                      <children>
                         <Label fx:id="lblUser" text="User:">
@@ -41,10 +41,14 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Button fx:id="btnForum" layoutX="522.0" layoutY="-4.0" mnemonicParsing="false" text="Forum" />
                </children>
             </Pane>
             <VBox fx:id="vboxComm" layoutX="14.0" layoutY="159.0" />
+            <AnchorPane prefHeight="35.0" prefWidth="612.0">
+               <children>
+                  <Button fx:id="btnForum" layoutX="503.0" layoutY="-5.0" mnemonicParsing="false" text="Forum" />
+               </children>
+            </AnchorPane>
         </children>
       </AnchorPane>
    </content>

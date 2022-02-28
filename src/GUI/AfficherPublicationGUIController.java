@@ -26,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import services.CommentaireCRUD;
@@ -60,6 +61,8 @@ public class AfficherPublicationGUIController implements Initializable {
     private Button btnForum;
     @FXML
     private AnchorPane anchorPub;
+    @FXML
+    private Pane panePub;
 
     int idClient;
     int idPublication;
@@ -79,6 +82,7 @@ public class AfficherPublicationGUIController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -95,9 +99,10 @@ public class AfficherPublicationGUIController implements Initializable {
         initCommentaires();
 
         lblNbrVote.setText(vc.calculNbrVote(idPublication) + "");
-        
-        if(p.isArchive()){
-            anchorPub.setDisable(true);
+
+        if (p.isArchive()) {
+            panePub.setDisable(true);
+            vboxComm.setDisable(true);
         }
 
         if (vc.verifVote(idClient, idPublication)) {
