@@ -71,7 +71,7 @@ public class PublicationForumGUIController implements Initializable {
         initPublication();
 
         btnAfficher.setOnAction((ActionEvent a) -> {
-            
+
             AfficherPublicationGUIController apc = new AfficherPublicationGUIController(idClient, p.getId_publication());
             apc.refreshPublication(btnAfficher);
         });
@@ -91,7 +91,7 @@ public class PublicationForumGUIController implements Initializable {
             } else {
                 System.out.println("Erreur de confirmation!");
             }
-            
+
         });
 
         btnModifier.setOnAction((ActionEvent a) -> {
@@ -103,12 +103,11 @@ public class PublicationForumGUIController implements Initializable {
     public void initPublication() {
         btnModifier.setVisible(false);
         btnArchiver.setVisible(false);
-        if (isOwner(idClient)) {
+        if (isOwner(idClient) && !p.isArchive()) {
             btnModifier.setVisible(true);
         }
-        if (pcrud.isAdmin(idClient)){
-            if(p.isArchive())
-            {
+        if (pcrud.isAdmin(idClient)) {
+            if (p.isArchive()) {
                 btnArchiver.setText("Désarchiver");
             }
             btnArchiver.setVisible(true);

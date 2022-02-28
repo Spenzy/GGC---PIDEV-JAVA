@@ -16,7 +16,7 @@ public class ForumMain extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        int idClient = 1;
+        int idClient = 4;
         ForumHomeGUIController fhc = new ForumHomeGUIController();
 
         primaryStage.setScene(fhc.refreshForum(idClient));

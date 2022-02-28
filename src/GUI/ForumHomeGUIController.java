@@ -73,7 +73,6 @@ public class ForumHomeGUIController implements Initializable {
         publications.stream()
                 .forEach(p -> {
                     try {
-//                        if (!((Publication) p).isArchive() && !pcrud.isAdmin(idClient)) {
                         FXMLLoader cLoader = new FXMLLoader(getClass().getResource("PublicationForumGUI.fxml"));
                         PublicationForumGUIController controller = new PublicationForumGUIController((Publication) p, idClient);
                         cLoader.setController(controller);
@@ -84,7 +83,6 @@ public class ForumHomeGUIController implements Initializable {
                             vboxPub.getChildren().add(cNode);
                         }
 
-//                        }
                     } catch (IOException ex) {
                         Logger.getLogger(AfficherPublicationGUIController.class.getName()).log(Level.SEVERE, null, ex);
                     }
