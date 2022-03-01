@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane maxHeight="700.0" maxWidth="931.0" prefHeight="414.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="700.0" maxWidth="931.0" prefHeight="414.0" prefWidth="775.0" stylesheets="@ressources/theme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="673.0">
          <children>
-            <TabPane>
+            <TabPane layoutX="14.0">
                <tabs>
                   <Tab closable="false" text="Postes Courantes">
                      <content>

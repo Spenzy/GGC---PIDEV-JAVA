@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+<VBox stylesheets="@ressources/theme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="24.0" prefWidth="478.0">
          <children>
-            <Button fx:id="btnAnnuler" cancelButton="true" layoutX="403.0" layoutY="4.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Annuler" />
-            <Button fx:id="btnSupp" layoutX="403.0" layoutY="4.0" mnemonicParsing="false" text="Supprimer" />
-            <Button fx:id="btnApp" layoutX="328.0" layoutY="4.0" mnemonicParsing="false" text="Appliquer" />
-            <Button fx:id="btnMod" layoutX="328.0" layoutY="4.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Modifier" />
+            <Button fx:id="btnAnnuler" cancelButton="true" layoutX="396.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Annuler" />
+            <Button fx:id="btnApp" layoutX="291.0" layoutY="-4.0" mnemonicParsing="false" text="Appliquer" />
+            <Button fx:id="btnMod" layoutX="289.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" text="Modifier" />
+            <Button fx:id="btnSupp" layoutX="382.0" layoutY="-4.0" mnemonicParsing="false" text="Supprimer" />
             <HBox layoutX="3.0" layoutY="5.0" spacing="3.0">
                <children>
                   <Label fx:id="lblClient" text="User:">

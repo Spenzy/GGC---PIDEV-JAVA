@@ -6,6 +6,7 @@
 package GUI;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -16,10 +17,10 @@ public class ForumMain extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        int idClient = 5;
+        int idClient = 1;
         ForumHomeGUIController fhc = new ForumHomeGUIController();
-
-        primaryStage.setScene(fhc.refreshForum(idClient));
+        Scene scene = fhc.refreshForum(idClient);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

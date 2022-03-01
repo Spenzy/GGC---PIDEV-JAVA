@@ -3,11 +3,17 @@ package main;
 import entities.Commentaire;
 import entities.Publication;
 import entities.Vote;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import services.CommentaireCRUD;
 import services.PublicationCRUD;
 import services.VoteCRUD;
 
 import org.apache.log4j.BasicConfigurator;
+import utils.MailAPI;
+import utils.PdfAPI;
 
 public class MainClass {
     public static void main(String[] args) {
@@ -15,7 +21,7 @@ public class MainClass {
         BasicConfigurator.configure();
 
         //*************Publication
-        Publication p = new Publication(30,"QUESTION?","JUST RANDOM FOLLOW STUFF",false);
+        //Publication p = new Publication(30,"QUESTION?","JUST RANDOM FOLLOW STUFF",false);
         PublicationCRUD pc = new PublicationCRUD();
 
         //pc.ajouterPublication(p);
@@ -49,7 +55,18 @@ public class MainClass {
         //vc.supprimerVote(1,1);
 
         //************testing
-        pc.autoArchive(p);
+        //pc.autoArchive(p);
+        
+        //***************mails4
+//        try {
+//            MailAPI.sendMail("dridi.zied@esprit.tn", "Test Api", "Test body");
+//        } catch (MessagingException ex) {
+//            Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        //***************Pdf & mailfile
+        Publication p = pc.afficherPublication(1);
+        List commentaires = cc.afficherCommentaires(1);
+        PdfAPI.createAndSendForumPost("dridi.zied@esprit.tn", p, commentaires);
     }
     
 }
