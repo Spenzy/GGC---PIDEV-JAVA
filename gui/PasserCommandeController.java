@@ -262,6 +262,7 @@ public class PasserCommandeController implements Initializable {
         c1.setPrix(c.RecupererPrixCommande(c1.getIdCommande()));
         c1.setLignes(lc.afficher(c1.getIdCommande()));
         String email=c.recupererMail(c1.getIdClient());
+        System.out.println(email);
         PdfAPI.createAndSendCommande(email,c1);
     }else {
             Alert alert2 = new Alert(Alert.AlertType.ERROR);

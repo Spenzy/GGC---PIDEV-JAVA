@@ -58,6 +58,8 @@ public class PdfAPI {
             Image image1 = Image.getInstance("src/sprint1/pidev/img/LogoGGC.png");
             double percent = 0.5;
             image1.scaleAbsolute(150, 130);
+            document.add(image1);
+            
             CommandeCRUD c = new CommandeCRUD();
             LivraisonCRUD l = new LivraisonCRUD();
             Paragraph chapterTitle = new Paragraph("Commande de " + p.getIdClient() + " à la date " + p.getDateCommande());
@@ -69,16 +71,16 @@ public class PdfAPI {
                     + "Prix Total : " + p.getPrix()+ "DT\n \n");
             
             Paragraph paragraphsignature = new Paragraph("Gamer Geeks Community APP");
-            Chapter chapter1 = new Chapter(chapterTitle, 1);
-            chapter1.setNumberDepth(0);
+           // Chapter chapter1 = new Chapter(chapterTitle, 1);
+            //chapter1.setNumberDepth(0);
 
-            document.add(chapter1);
+            document.add(chapterTitle);
             document.add(paragraph);
 
             List<LigneCommande> lignes=p.getLignes();
             for (LigneCommande ligne : lignes) {
                 document.add(new Paragraph(
-                        "* Produit: " + c.recupererLibelle(ligne.getIdProduit()) + "\n* Quantite: " + ligne.getQuantite() 
+                        "\n* Produit: " + c.recupererLibelle(ligne.getIdProduit()) + "\n* Quantite: " + ligne.getQuantite() 
                         + "\n* Prix: " + ligne.getPrix() + "DT\n"));
 
             }
