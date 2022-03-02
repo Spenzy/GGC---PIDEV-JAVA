@@ -13,10 +13,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javax.mail.MessagingException;
 import sprint1.pidev.entities.Commande;
 import sprint1.pidev.entities.Livraison;
+import sprint1.pidev.utils.MailAPI;
 import sprint1.pidev.utils.MyConnection;
 
 /**
@@ -159,7 +163,11 @@ public class LivraisonCRUD {
                     System.out.println("livraison en retard, vous aurez une remise de 70% sur la commande " + rs.getInt(1));
                     remiseRetard(rs.getInt(1));
                     String email = recupererMailClient(rs.getInt(1));
-                    //envoyerMailExcuse(email); API
+                    try {
+                        MailAPI.sendMail(email, "Retard Livraison","Bonjour ,Nous sommes désolé pour le retard de la livraison de votre commande "+rs.getInt(1)+"Pour cela nous vous offrons une remise de 70%");
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(LivraisonCRUD.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         } catch (SQLException ex) {
@@ -222,24 +230,56 @@ public class LivraisonCRUD {
         return list;
     }
 
-    public ObservableList<Integer> affecterLivreur() {
-        List<Integer> myList = new ArrayList();
+    public ObservableList<String> affecterLivreur() {
+        List<String> myList = new ArrayList();
 
         try {
             Statement st = cnxx.createStatement();
-            String req = "SELECT idLivreur FROM Livreur where disponibilite=1";
+            String req = "SELECT personne.nom,livreur.idLivreur FROM Livreur inner join Personne on(personne.id_personne=livreur.idLivreur)where livreur.disponibilite=1;";
             ResultSet rs;
             rs = st.executeQuery(req);
             while (rs.next()) {
-                myList.add(rs.getInt(1));
+                myList.add(rs.getString(1));
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        ObservableList<Integer> list = FXCollections.observableArrayList();
-        for (Integer p : myList) {
+        ObservableList<String> list = FXCollections.observableArrayList();
+        for (String p : myList) {
             list.add(p);
         }
         return list;
     }
+
+    public int recupererIdLivreur(String Livreur) {
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT livreur.idLivreur FROM Livreur inner join personne on(livreur.idLivreur=personne.id_personne) where (personne.nom like '" + Livreur + "')";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            if (rs.next()) {
+                return rs.getInt((1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        return 0;
+    }
+        public String recupererNomLivreur(int idLivreur) {
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT personne.nom FROM personne inner join livreur on(personne.id_personne=livreur.idLivreur)where livreur.idLivreur="+idLivreur;
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            if (rs.next()) {
+                return rs.getString((1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        return "";
+    }
+    
 }

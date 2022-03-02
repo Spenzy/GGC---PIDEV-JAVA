@@ -7,8 +7,6 @@ package sprint1.pidev.gui;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -23,18 +21,17 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
-import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.AnchorPane;
+import org.controlsfx.control.textfield.TextFields;
 import sprint1.pidev.entities.Commande;
 import sprint1.pidev.entities.LigneCommande;
 import sprint1.pidev.services.CommandeCRUD;
 import sprint1.pidev.services.LigneCommandeCRUD;
+import sprint1.pidev.utils.PdfAPI;
 
 /**
  * FXML Controller class
@@ -54,8 +51,6 @@ public class PasserCommandeController implements Initializable {
     @FXML
     private Spinner<Integer> sQuantite;
     @FXML
-    private Label lProduit;
-    @FXML
     private Button btnAjouterLigne;
     @FXML
     private ComboBox<String> cbProduit;
@@ -67,12 +62,23 @@ public class PasserCommandeController implements Initializable {
     private Button btnAnnuler;
     @FXML
     private AnchorPane panePanier;
+    String[] words = {"carthege","carthage Byrsa","Ariana","sidi Bou said","gammarth","marsa","kram","manzah1"
+    ,"manzah2","manzah3","manzah4","manzah5"
+    ,"manzah6","manzah7","manzah8","manzah9"
+    ,"nasr","tunis","monastir","mahdia"
+    ,"sousse","sfax","mednine" ," selyenna"
+    ,"beja","benzart","gammarth","marssa"
+    ,"tabarka","aindrahem","jandouba"
+    };
+    @FXML
+    private Button pdf;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        TextFields.bindAutoCompletion(tfAdresse,words);
         cbProduit.setItems(c.affecterProduit());
         cbProduit.getSelectionModel().selectFirst();
 
@@ -236,6 +242,15 @@ public class PasserCommandeController implements Initializable {
 
         panePanier.getChildren().clear();
 
+    }
+
+    @FXML
+    private void pdfOnclick(ActionEvent event) {
+        LigneCommandeCRUD lc=new LigneCommandeCRUD();
+        c.calculPrixCommande(c1.getIdCommande());
+        c1.setPrix(c.RecupererPrixCommande(c1.getIdCommande()));
+        c1.setLignes(lc.afficher(c1.getIdCommande()));
+        PdfAPI.createAndSendCommande("maroua.ayari@esprit.tn",c1);
     }
 
 }

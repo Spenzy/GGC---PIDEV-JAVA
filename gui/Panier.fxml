@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="panier" prefHeight="245.0" prefWidth="382.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="panier" prefHeight="245.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane fx:id="productGridPane">
         <padding>
             <Insets bottom="25" left="25" right="25" top="25" />

@@ -5,7 +5,6 @@
  */
 package sprint1.pidev.gui;
 
-import java.awt.Font;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -13,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
@@ -143,7 +141,12 @@ public class PanierController implements Initializable {
             }
         });
 
-        layout.setSpacing(5);
+        layout.setSpacing(8);
+        productName.setPrefWidth(250);
+        plusBtn.setPrefWidth(45);
+        minusBtn.setPrefWidth(45);
+        Quantite.setPrefWidth(50);
+        Prix.setPrefWidth(70);
         layout.getChildren().addAll(productName, plusBtn, Quantite, minusBtn, Prix, LabelRouge);
 
         return layout;

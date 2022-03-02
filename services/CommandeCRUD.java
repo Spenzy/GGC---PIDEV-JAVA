@@ -192,6 +192,18 @@ public class CommandeCRUD {
             System.err.println(ex.getMessage());
         }
     }
+    public void commandeNonLivree(int idCommande) {
+        String req = "update commande set livree=0 where idCommande = ? ";
+        PreparedStatement pst;
+        try {
+            pst = cnxx.prepareStatement(req);
+            pst.setInt(1, idCommande);
+
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
 
     public ObservableList<String> affecterProduit() {
         ObservableList<String> listProduit = FXCollections.observableArrayList();
@@ -242,5 +254,50 @@ public class CommandeCRUD {
         }
         return 0;
     }
+
+    public List<Commande> afficherList() {
+        ArrayList myList= new ArrayList();
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT * FROM commande";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            while (rs.next()) {
+
+                Commande p = new Commande();
+                p.setIdCommande(rs.getInt(1));
+                p.setIdClient(rs.getInt(2));
+                p.setAdresse(rs.getString(3));
+                p.setPrix(rs.getFloat(4));
+                p.setLivree(rs.getBoolean(5));
+                p.setDateCommande(rs.getDate(6));
+
+               
+
+                myList.add(p);
+
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        return myList;
+    }
+
+    public String recupererLibelle(int idProduit) {
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT libelle FROM produit where (reference=" + idProduit + ")";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            if (rs.next()) {
+                return rs.getString((1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        return "";
+    }    
 
 }

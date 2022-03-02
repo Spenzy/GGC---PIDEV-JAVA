@@ -5,23 +5,34 @@
  */
 package sprint1.pidev.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 import sprint1.pidev.entities.Commande;
 import sprint1.pidev.entities.Livraison;
 import sprint1.pidev.services.CommandeCRUD;
@@ -61,7 +72,7 @@ public class AffecterLivraisonController implements Initializable {
     @FXML
     private ComboBox<Integer> cbCommande;
     @FXML
-    private ComboBox<Integer> cbLivreur;
+    private ComboBox<String> cbLivreur;
     @FXML
     private DatePicker dpLivraison;
     @FXML
@@ -82,6 +93,12 @@ public class AffecterLivraisonController implements Initializable {
     private Label title;
     @FXML
     private Button btnRetardLivraison;
+    @FXML
+    private Button majCheck;
+    @FXML
+    private Button majNCheck;
+    @FXML
+    private Button btnstat;
 
     /**
      * Initializes the controller class.
@@ -98,11 +115,14 @@ public class AffecterLivraisonController implements Initializable {
         tcPrix.setCellValueFactory(new PropertyValueFactory<>("prix"));
         tcLivree.setCellValueFactory(new PropertyValueFactory<>("livree"));
         tcCDate.setCellValueFactory(new PropertyValueFactory<>("dateCommande"));
+
         tvCommande.setItems(c.afficher());
         //remplissage table view livraison
         tcLCommande.setCellValueFactory(new PropertyValueFactory<>("IdCommande"));
         tcLivreur.setCellValueFactory(new PropertyValueFactory<>("idLivreur"));
         tcLDate.setCellValueFactory(new PropertyValueFactory<>("DateHeure"));
+        tvLivraison.setEditable(true);
+
         tvLivraison.setItems(l.afficher());
 
         //remplissage comboBox Commande
@@ -131,11 +151,13 @@ public class AffecterLivraisonController implements Initializable {
 
             if (dpLivraison.getValue() == null) {
                 LabelDateVide.setVisible(true);
+                LabelSysDate.setVisible(false);
             } else {
                 LabelDateVide.setVisible(false);
+                LabelSysDate.setVisible(false);
 
                 int Commande = cbCommande.getSelectionModel().getSelectedItem();
-                int Livreur = cbLivreur.getSelectionModel().getSelectedItem();
+                String Livreur = cbLivreur.getSelectionModel().getSelectedItem();
                 LocalDate dateLivraison = dpLivraison.getValue();
                 LocalDate sysdate = LocalDate.now();
 
@@ -143,7 +165,7 @@ public class AffecterLivraisonController implements Initializable {
                     LabelSysDate.setVisible(true);
                 } else {
                     LabelSysDate.setVisible(false);
-                    Livraison l1 = new Livraison(Commande, Livreur, java.sql.Date.valueOf(dateLivraison));
+                    Livraison l1 = new Livraison(Commande, l.recupererIdLivreur(Livreur), java.sql.Date.valueOf(dateLivraison));
                     l.ajouterLivraison(l1);
                     c.commandeLivree(Commande);
 
@@ -199,7 +221,7 @@ public class AffecterLivraisonController implements Initializable {
             cbCommande.getSelectionModel().selectLast();
             cbCommande.setEditable(false);
 
-            cbLivreur.setValue(l1.getIdLivreur());
+            cbLivreur.setValue(l.recupererNomLivreur(l1.getIdLivreur()));
 
             dpLivraison.setValue(l1.getDateHeure().toLocalDate());
 
@@ -273,11 +295,13 @@ public class AffecterLivraisonController implements Initializable {
             //Modifier Livraison
             if (dpLivraison.getValue() == null) {
                 LabelDateVide.setVisible(true);
+                LabelSysDate.setVisible(false);
             } else {
                 LabelDateVide.setVisible(false);
+                LabelSysDate.setVisible(false);
 
                 int Commande = cbCommande.getSelectionModel().getSelectedItem();
-                int Livreur = cbLivreur.getSelectionModel().getSelectedItem();
+                String Livreur = cbLivreur.getSelectionModel().getSelectedItem();
                 LocalDate dateLivraison = dpLivraison.getValue();
                 LocalDate sysdate = LocalDate.now();
 
@@ -285,7 +309,7 @@ public class AffecterLivraisonController implements Initializable {
                     LabelSysDate.setVisible(true);
                 } else {
                     LabelSysDate.setVisible(false);
-                    Livraison l1 = new Livraison(Commande, Livreur, java.sql.Date.valueOf(dateLivraison));
+                    Livraison l1 = new Livraison(Commande, l.recupererIdLivreur(Livreur), java.sql.Date.valueOf(dateLivraison));
                     l.modifierLivraison(l1);
                     c.commandeLivree(Commande);
 
@@ -369,6 +393,109 @@ public class AffecterLivraisonController implements Initializable {
         LabelDateVide.setVisible(false);
         LabelSysDate.setVisible(false);
         title.setText("Affectation Livraison Commande");
+    }
+
+    @FXML
+    private void majCheckOnclick(ActionEvent event) {
+        //int ligneSelected=tvLivraison.getSelectionModel().getFocusedIndex();
+
+        //System.out.println(tvLivraison.getVisibleLeafColumn(3).getCellData(ligneSelected+1));
+        //System.out.println(tvLivraison.getColumns().get(3).get);
+        Livraison l1 = tvLivraison.getSelectionModel().getSelectedItem();
+        if (l1 == null) {
+            //veuillez selectionner une liiiiiiiiiiiiiiiigne
+            Alert alert1 = new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Erreur !");
+            alert1.setHeaderText(null);
+            alert1.setContentText("veuillez selectionner une ligne du tableau puis appuyez sur le bouton marquer comme livré");
+            alert1.show();
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Validation");
+            alert.setHeaderText("Voulez vous vraiment marquer comme livrée cette livraison ?");
+            //alert.setContentText("");
+
+            Optional<ButtonType> option = alert.showAndWait();
+            //confirmation 
+            if (option.get() == ButtonType.OK) {
+                c.commandeLivree(l1.getIdCommande());
+                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                alert2.setTitle("Confirmation");
+                alert2.setHeaderText(null);
+                alert2.setContentText("La commande est livrée avec succées");
+                alert2.show();
+            } else {
+                Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                alert2.setTitle("Annuation");
+                alert2.setHeaderText(null);
+                alert2.setContentText("La commande n'a pas été livrée");
+                alert2.show();
+            }
+
+        }
+        tvCommande.setItems(c.afficher());
+        //remplissage comboBox Commande
+        cbCommande.setItems(l.affecterCommande());
+        cbCommande.getSelectionModel().selectFirst();
+
+    }
+
+    @FXML
+    private void majNCheckOnclick(ActionEvent event) {
+        Livraison l1 = tvLivraison.getSelectionModel().getSelectedItem();
+        if (l1 == null) {
+            //veuillez selectionner une liiiiiiiiiiiiiiiigne
+            Alert alert1 = new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Erreur !");
+            alert1.setHeaderText(null);
+            alert1.setContentText("veuillez selectionner une ligne du tableau puis appuyez sur le bouton marquer comme Non livrée");
+            alert1.show();
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Validation");
+            alert.setHeaderText("Voulez vous vraiment marquer comme Non livrée cette livraison ?");
+            //alert.setContentText("");
+
+            Optional<ButtonType> option = alert.showAndWait();
+            //confirmation 
+            if (option.get() == ButtonType.OK) {
+                c.commandeNonLivree(l1.getIdCommande());
+                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                alert2.setTitle("Confirmation");
+                alert2.setHeaderText(null);
+                alert2.setContentText("La commande est non livrée");
+                alert2.show();
+            } else {
+                Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                alert2.setTitle("Annuation");
+                alert2.setHeaderText(null);
+                alert2.setContentText("");
+                alert2.show();
+            }
+
+        }
+        tvCommande.setItems(c.afficher());
+        //remplissage comboBox Commande
+        cbCommande.setItems(l.affecterCommande());
+        cbCommande.getSelectionModel().selectFirst();
+
+    }
+
+    @FXML
+    private void StatOnclick(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("StatisticCommande.fxml"));
+            Stage primaryStage=new Stage();
+            primaryStage.setTitle("Statistique des Commandes par Mois en 2022");
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
