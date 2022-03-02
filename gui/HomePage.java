@@ -24,8 +24,8 @@ public class HomePage extends Application {
     public void start(Stage primaryStage) {
         try {
             
-            //Parent root=FXMLLoader.load(getClass().getResource("AffecterLivraison.fxml"));
-            Parent root=FXMLLoader.load(getClass().getResource("PasserCommande.fxml"));
+            Parent root=FXMLLoader.load(getClass().getResource("AffecterLivraison.fxml"));
+            //Parent root=FXMLLoader.load(getClass().getResource("PasserCommande.fxml"));
            
             Scene scene = new Scene(root);
             

@@ -87,12 +87,11 @@ public class PdfAPI {
             document.close();
             MailAPI.sendMailWithFile(mail, "Commande GGC", new File(filepath));
             //auto open for testing
-            File myFile = new File("/path/to/file.pdf");
-           Desktop.getDesktop().open(myFile);
+          //  File myFile = new File("/path/to/file.pdf");
+           //Desktop.getDesktop().open(myFile);
         } catch (DocumentException | IOException | MessagingException e) {
             System.err.println(e.getMessage());
         }
-        System.out.println("generation success");
     }
 
 }

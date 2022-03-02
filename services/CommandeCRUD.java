@@ -300,4 +300,20 @@ public class CommandeCRUD {
         return "";
     }    
 
+    public String recupererMail(int idClient) {
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT email FROM personne where (id_personne=" + idClient + ")";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            if (rs.next()) {
+                return rs.getString((1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        return "";
+    }
+
 }

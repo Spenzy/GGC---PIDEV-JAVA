@@ -78,6 +78,7 @@ public class PasserCommandeController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         TextFields.bindAutoCompletion(tfAdresse,words);
         cbProduit.setItems(c.affecterProduit());
         cbProduit.getSelectionModel().selectFirst();
@@ -145,6 +146,7 @@ public class PasserCommandeController implements Initializable {
                 int quantite = sQuantite.getValue();
 
                 //ajouter commande
+                c1.setLivree(false);
                 c.ajouterCommande(c1);
                 this.idCommande = c1.getIdCommande();
                 //ajouter ligne
@@ -221,6 +223,7 @@ public class PasserCommandeController implements Initializable {
             labelAdresse.setVisible(true);
         } else {
             c1.setAdresse(tfAdresse.getText());
+            c1.setLivree(false);
             c.modifierCommande(c1);
             c.calculPrixCommande(idCommande);
             labelAdresse.setVisible(false);
@@ -246,11 +249,27 @@ public class PasserCommandeController implements Initializable {
 
     @FXML
     private void pdfOnclick(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Génération PDF");
+        alert.setHeaderText("Voulez vous vraiment envoyer cette commande par mail ?");
+        //alert.setContentText("");
+
+        Optional<ButtonType> option = alert.showAndWait();
+        //confirmation 
+        if (option.get() == ButtonType.OK) {
         LigneCommandeCRUD lc=new LigneCommandeCRUD();
         c.calculPrixCommande(c1.getIdCommande());
         c1.setPrix(c.RecupererPrixCommande(c1.getIdCommande()));
         c1.setLignes(lc.afficher(c1.getIdCommande()));
-        PdfAPI.createAndSendCommande("maroua.ayari@esprit.tn",c1);
+        String email=c.recupererMail(c1.getIdClient());
+        PdfAPI.createAndSendCommande(email,c1);
+    }else {
+            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+            alert2.setTitle("Erreur!");
+            alert2.setHeaderText(null);
+            alert2.setContentText("Pas d'exportation PDF ni envoi de mail");
+            alert2.show();
+        }
     }
 
 }

@@ -28,15 +28,15 @@ import sprint1.pidev.utils.MyConnection;
  * @author Marwa
  */
 public class LivraisonCRUD {
-
+    
     Connection cnxx;
-
+    
     public LivraisonCRUD() {
         cnxx = MyConnection.getInstance().getCnx();
     }
-
+    
     public void ajouterLivraison(Livraison l) {
-
+        
         String req = "INSERT INTO livraison (idLivreur,idCommande,DateHeure) VALUES (?,?,?)";
         PreparedStatement pst;
         try {
@@ -48,11 +48,11 @@ public class LivraisonCRUD {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-
+        
     }
-
+    
     public void supprimerLivraison(int idCommande) {
-
+        
         String req = "delete from livraison where (idCommande=? )";
         PreparedStatement pst;
         try {
@@ -62,11 +62,11 @@ public class LivraisonCRUD {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-
+        
     }
-
+    
     public void modifierLivraison(Livraison l) {
-
+        
         String req = "update livraison set idLivreur=? , DateHeure=? where idCommande = ? ";
         PreparedStatement pst;
         try {
@@ -74,25 +74,25 @@ public class LivraisonCRUD {
             pst.setInt(1, l.getIdLivreur());
             pst.setDate(2, l.getDateHeure());
             pst.setInt(3, l.getIdCommande());
-
+            
             pst.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-
+        
     }
-
+    
     public ObservableList<Livraison> afficher() {
-
+        
         List<Livraison> myList = new ArrayList();
-
+        
         try {
             Statement st = cnxx.createStatement();
             String req = "SELECT * FROM livraison";
             ResultSet rs;
             rs = st.executeQuery(req);
             while (rs.next()) {
-
+                
                 Livraison l = new Livraison();
                 l.setIdCommande(rs.getInt(1));
                 l.setIdLivreur(rs.getInt(2));
@@ -107,10 +107,10 @@ public class LivraisonCRUD {
         for (Livraison p : myList) {
             list.add(p);
         }
-
+        
         return list;
     }
-
+    
     public boolean VerifCommande(int idCommande) {
         boolean testCommande = false;
         try {
@@ -129,7 +129,7 @@ public class LivraisonCRUD {
         }
         return testCommande;
     }
-
+    
     public boolean VerifLivreur(int idLivreur) {
         boolean testLivreur = false;
         try {
@@ -164,7 +164,8 @@ public class LivraisonCRUD {
                     remiseRetard(rs.getInt(1));
                     String email = recupererMailClient(rs.getInt(1));
                     try {
-                        MailAPI.sendMail(email, "Retard Livraison","Bonjour ,Nous sommes désolé pour le retard de la livraison de votre commande "+rs.getInt(1)+"Pour cela nous vous offrons une remise de 70%");
+                        CommandeCRUD c = new CommandeCRUD();
+                        MailAPI.sendMail(email, "Retard Livraison", "Bonjour, Nous sommes désolé pour le retard de la livraison de votre commande " + rs.getInt(1) + "\nPour cela nous vous offrons une remise de 70% \nNouveau Prix: " + c.RecupererPrixCommande(rs.getInt(1)));
                     } catch (MessagingException ex) {
                         Logger.getLogger(LivraisonCRUD.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -175,7 +176,7 @@ public class LivraisonCRUD {
             //   return null;
         }
     }
-
+    
     public void remiseRetard(int idCommande) {
         String req = "update commande set prix=prix*30/100 where idCommande = ?";
         PreparedStatement pst;
@@ -186,9 +187,9 @@ public class LivraisonCRUD {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-
+        
     }
-
+    
     public String recupererMailClient(int idCommande) {
         try {
             Statement st = cnxx.createStatement();
@@ -204,14 +205,14 @@ public class LivraisonCRUD {
         }
         return "Erreur dans idCommande , cette commande n'est pas affectée à une livraison donc il est inutile de récuperer l'adresse mail du client";
     }
-
+    
     public void envoyerMailExcuse(String email) {
-
+        
     }
-
+    
     public ObservableList<Integer> affecterCommande() {
         List<Integer> myList = new ArrayList();
-
+        
         try {
             Statement st = cnxx.createStatement();
             String req = "SELECT idCommande FROM commande where livree=0";
@@ -229,10 +230,10 @@ public class LivraisonCRUD {
         }
         return list;
     }
-
+    
     public ObservableList<String> affecterLivreur() {
         List<String> myList = new ArrayList();
-
+        
         try {
             Statement st = cnxx.createStatement();
             String req = "SELECT personne.nom,livreur.idLivreur FROM Livreur inner join Personne on(personne.id_personne=livreur.idLivreur)where livreur.disponibilite=1;";
@@ -250,7 +251,7 @@ public class LivraisonCRUD {
         }
         return list;
     }
-
+    
     public int recupererIdLivreur(String Livreur) {
         try {
             Statement st = cnxx.createStatement();
@@ -266,10 +267,11 @@ public class LivraisonCRUD {
         }
         return 0;
     }
-        public String recupererNomLivreur(int idLivreur) {
+
+    public String recupererNomLivreur(int idLivreur) {
         try {
             Statement st = cnxx.createStatement();
-            String req = "SELECT personne.nom FROM personne inner join livreur on(personne.id_personne=livreur.idLivreur)where livreur.idLivreur="+idLivreur;
+            String req = "SELECT personne.nom FROM personne inner join livreur on(personne.id_personne=livreur.idLivreur)where livreur.idLivreur=" + idLivreur;
             ResultSet rs;
             rs = st.executeQuery(req);
             if (rs.next()) {
