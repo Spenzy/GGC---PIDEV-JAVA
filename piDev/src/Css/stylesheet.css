@@ -15,7 +15,7 @@ and open the template in the editor.
     -fx-border-color: #D5CBEB;
     -fx-border-radius: 5px;
     -fx-border-width: 1px;
-    -fx-text-fill: whitesmoke;
+    -fx-text-fill: black;
 }
 .tf2{
      -fx-background-color: white;
@@ -23,7 +23,7 @@ and open the template in the editor.
     -fx-border-color: #cccccc;
     -fx-border-radius: 5px;
     -fx-border-width: 1px;
-    -fx-text-fill: whitesmoke;
+    -fx-text-fill: black;
 }
 .tf3{
      -fx-background-color: white;
@@ -31,7 +31,7 @@ and open the template in the editor.
     -fx-border-color: #cccccc;
     -fx-border-radius: 5px;
     -fx-border-width: 1px;
-    -fx-text-fill: whitesmoke;
+    -fx-text-fill: black;
 }
 .tf4{
      -fx-background-color: white;
@@ -39,7 +39,7 @@ and open the template in the editor.
     -fx-border-color: #cccccc;
     -fx-border-radius: 5px;
     -fx-border-width: 1px;
-    -fx-text-fill: whitesmoke;
+    -fx-text-fill: black;
 }
 .tf5{
      -fx-background-color: white;
@@ -47,7 +47,7 @@ and open the template in the editor.
     -fx-border-color: #cccccc;
     -fx-border-radius: 5px;
     -fx-border-width: 1px;
-    -fx-text-fill: whitesmoke;
+    -fx-text-fill: black;
      -fx-font-family: "Lucida Console";
 }
 .tf6{
@@ -56,8 +56,8 @@ and open the template in the editor.
     -fx-border-color: #cccccc;
     -fx-border-radius: 5px;
     -fx-border-width: 1px;
-    -fx-text-fill: whitesmoke;
-    -fx-font-size: 40;
+    -fx-text-fill: black;
+    -fx-font-size: 12;
  -fx-font-family: "Lucida Console";
 
  
@@ -195,3 +195,16 @@ and open the template in the editor.
     -fx-border-color: #DEDEE4;
     -fx-border-width: 0px 0px 1px 0px;
 }
+/*
+.ajoutbnt{
+    -fx-background-color :  #5ED6EB;
+}
+.supprimerbtn{
+     -fx-background-color :  #5ED6EB;
+}
+.modifierbtn{
+    -fx-background-color :  #5ED6EB;
+}
+.refreshbtn{
+    -fx-background-color :  #5ED6EB;
+}*/

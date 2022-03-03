@@ -26,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
 
 /**
  * FXML Controller class
@@ -46,6 +47,15 @@ public class ModifierEvenementController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    String[] words = {"manzah1"
+    ,"manzah2","manzah3","manzah4","manzah5"
+    ,"manzah6","manzah7","manzah8","manzah9"
+    ,"nasr","tunis","monastir","mahdia"
+    ,"sousse","sfax","mednine" ," selyenna"
+    ,"beja","benzart","gammarth","marssa"
+    ,"tabarka","aindrahem","jandouba"
+    };
+    
     
     int reference = 1;
     EvenementCrud ec = new EvenementCrud();
@@ -69,6 +79,7 @@ public class ModifierEvenementController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        TextFields.bindAutoCompletion(tfLocalisation,words);
         e = ec.afficherEvenement(reference);
         tfReference.setText(e.getReference()+"");
         tfReference.setEditable(false);

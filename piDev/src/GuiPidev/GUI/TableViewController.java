@@ -44,6 +44,7 @@ public class TableViewController implements Initializable {
     private TableColumn<Evenement,String> localisationCol;
     private TableColumn<Evenement,String> descriptionCol;
     private TableColumn<Evenement,String> nbrParticipantsCol;
+    private TableColumn<Evenement,String> imageCol;
     
 
     /**
@@ -102,8 +103,12 @@ public class TableViewController implements Initializable {
       
       nbrParticipantsCol = new TableColumn<>("Nbres Participants");//nom de l'afichage
       nbrParticipantsCol.setCellValueFactory(new PropertyValueFactory<>("nbrParticipant"));
+      imageCol = new TableColumn<>("image");//nom de l'afichage
       
-      evenementsTable.getColumns().addAll(refCol, dateDebutCol, dateFinCol, localisationCol, descriptionCol, nbrParticipantsCol);
+      imageCol.setCellValueFactory(new PropertyValueFactory<>("image"));
+      
+      
+      evenementsTable.getColumns().addAll(refCol, dateDebutCol, dateFinCol, localisationCol, descriptionCol, nbrParticipantsCol,imageCol);
     }
    
     public void loadEvenements() {

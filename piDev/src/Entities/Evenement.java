@@ -6,6 +6,8 @@
 package Entities;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -15,11 +17,14 @@ public class Evenement {
 
     private int reference;
     private Date dateDebut;
-    private String heureDebut;
-    private String heureFin;
+    private Date dateFin;
+    //private String heureDebut;
+    //private String heureFin;
     private String localisation;
     private String description;
     private int nbrParticipant;
+    private String image ;
+    private Button participer;
 
     public Evenement() {
     }
@@ -28,15 +33,17 @@ public class Evenement {
         this.reference = reference;
     }
 
-    public Evenement(int reference, Date dateDebut, String heureDebut, String heureFin, String localisation, String description, int nbrParticipant) {
+    public Evenement(int reference, Date dateDebut, Date dateFin, String localisation, String description, int nbrParticipant , String image) {
         this.reference = reference;
         this.dateDebut = dateDebut;
-        this.heureDebut = heureDebut;
-        this.heureFin = heureFin;
+        this.dateFin = dateFin;
         this.localisation = localisation;
         this.description = description;
         this.nbrParticipant = nbrParticipant;
+        this.image = image;
     }
+
+
 
     public int getReference() {
         return reference;
@@ -46,13 +53,13 @@ public class Evenement {
         return dateDebut;
     }
 
-    public String getHeureDebut() {
+    /*public String getHeureDebut() {
         return heureDebut;
     }
 
     public String getHeureFin() {
         return heureFin;
-    }
+    }*/
 
     public String getLocalisation() {
         return localisation;
@@ -66,6 +73,15 @@ public class Evenement {
         return nbrParticipant;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
+
     public void setReference(int reference) {
         this.reference = reference;
     }
@@ -74,13 +90,21 @@ public class Evenement {
         this.dateDebut = dateDebut;
     }
 
-    public void setHeureDebut(String heureDebut) {
+    public void setDateFin(Date dateFin) {
+        this.dateFin = dateFin;
+    }
+
+    public Date getDateFin() {
+        return dateFin;
+    }
+
+   /* public void setHeureDebut(String heureDebut) {
         this.heureDebut = heureDebut;
     }
 
     public void setHeureFin(String heureFin) {
         this.heureFin = heureFin;
-    }
+    }*/
 
     public void setLocalisation(String localisation) {
         this.localisation = localisation;
@@ -96,7 +120,7 @@ public class Evenement {
 
     @Override
     public String toString() {
-        return "Evenement{" + "reference=" + reference + ", dateDebut=" + dateDebut + ", heureDebut=" + heureDebut + ", heureFin=" + heureFin + ", localisation=" + localisation + ", description=" + description + ", nbrParticipant=" + nbrParticipant + '}';
+        return "Evenement{" + "reference=" + reference + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin  + ", localisation=" + localisation + ", description=" + description + ", nbrParticipant=" + nbrParticipant + '}';
     }
 
 }

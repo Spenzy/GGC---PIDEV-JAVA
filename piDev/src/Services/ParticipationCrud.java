@@ -30,15 +30,16 @@ public class ParticipationCrud {
 
     public void ajouterParticipation(Participation p) {
         if (verifNbrParticipant(p.getIdEvent())) {
-            String req = "INSERT INTO participation ( idParticipation ,idClient,idEvent,nbrEtoile) VALUES (?,?,?,?)";
+            String req = "INSERT INTO participation ( idClient,idEvent,nbrEtoile) VALUES (?,?,?)";
             PreparedStatement pst;
             try {
                 pst = cnxx.prepareStatement(req);
-                pst.setInt(1, p.getIdParticipation());
-                pst.setInt(2, p.getIdClient());
-                pst.setInt(3, p.getIdEvent());
-                pst.setInt(4, p.getNbrEtoile());
-                pst.executeUpdate();pst = cnxx.prepareStatement(req);
+               // pst.setInt(1, p.getIdParticipation());
+                pst.setInt(1, p.getIdClient());
+                pst.setInt(2, p.getIdEvent());
+                pst.setInt(3, p.getNbrEtoile());
+                pst.executeUpdate();
+                pst = cnxx.prepareStatement(req);
                 
                 System.out.println("Participation Ajoutée avec succées");
 
@@ -46,7 +47,7 @@ public class ParticipationCrud {
                 System.err.println(ex.getMessage());
             }
         } else {
-            System.out.println("Nbr de Participants depacées");
+            System.out.println("le nombre des participations sont occupées");
         }
 
     }
@@ -62,7 +63,7 @@ public class ParticipationCrud {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-
+        System.out.println("Participation Supprimé");
     }
 
     public List<Participation> afficherParticipation() {
@@ -121,7 +122,7 @@ public class ParticipationCrud {
 
     // vérifier si le client a participer deja ou bien nn 
     public boolean verifParticipation(int idClient) {
-        String req = "SELECT * FROM participation WHERE idClient = ?";
+        String req = "SELECT * FROM participation WHERE idClient = ? ";
         try {
             PreparedStatement pst = cnxx.prepareStatement(req);
             pst.setInt(1, idClient);
@@ -133,14 +134,12 @@ public class ParticipationCrud {
         return false;
     }
 
-    public void participer(int idParticipation, int idClient, int idEvent, int nbrEtoile) {
+    public void participer(int idClient, int idEvent, int nbrEtoile) {
         if (verifParticipation(idClient)) {
-            supprimerParticipation(idParticipation);
-            System.out.println("le client a particpé deja ");
+            System.out.println("le client a participé deja ");
         } else {
-            Participation p = new Participation(idParticipation, idClient, idEvent, nbrEtoile);
+            Participation p = new Participation(idClient, idEvent, nbrEtoile);
             ajouterParticipation(p);
-            System.out.println("waw");
         }
     }
 

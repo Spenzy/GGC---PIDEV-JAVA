@@ -20,7 +20,7 @@ public class MyConnection {
     public Connection getCnx() {
         return cnx;
     }
-    public String url = "jdbc:mysql://localhost:3308/pidev";
+    public String url = "jdbc:mysql://localhost:3308/ggcbd";
     public String login = "root";
     public String pwd = "";
     Connection cnx;

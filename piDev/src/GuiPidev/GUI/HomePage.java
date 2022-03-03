@@ -29,10 +29,10 @@ public class HomePage extends Application {
     public void start(Stage primaryStage) {
         
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("TableView.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("AffichEvent.fxml"));
             
             Scene scene = new Scene(root);
-            primaryStage.setTitle("Ajouter Evenement");
+            primaryStage.setTitle("Table Admin");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {

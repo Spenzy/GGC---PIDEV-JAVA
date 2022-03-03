@@ -29,16 +29,18 @@ public class EvenementCrud   {
 
     public int ajouterEvenement(Evenement e) {
         int idE = 0;
-        String req = "INSERT INTO Evenement (reference,dateDebut,heureDebut,heureFin,localisation,description,nbrParticipant) VALUES (?,?,?,?,?,?,?)";
+        String req = "INSERT INTO Evenement (reference,dateDebut, dateFin,localisation,description,nbrParticipant,image) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement pst = cnxx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, e.getReference());
             pst.setDate(2, e.getDateDebut());
-            pst.setString(3, e.getHeureDebut());
-            pst.setString(4, e.getHeureFin());
-            pst.setString(5, e.getLocalisation());
-            pst.setString(6, e.getDescription());
-            pst.setInt(7, e.getNbrParticipant());
+            pst.setDate(3, e.getDateFin());
+            //pst.setString(3, e.getHeureDebut());
+            //pst.setString(4, e.getHeureFin());
+            pst.setString(4, e.getLocalisation());
+            pst.setString(5, e.getDescription());
+            pst.setInt(6, e.getNbrParticipant());
+            pst.setString(7, e.getImage());
             pst.executeUpdate();
             System.out.println("Evenement Ajouté avec succés");
             ResultSet rs = pst.getGeneratedKeys();
@@ -54,18 +56,19 @@ public class EvenementCrud   {
     
 
     public void modifierEvenement(Evenement e) {
-        String req = "UPDATE Evenement set dateDebut=?,heureDebut=?,heureFin=? ,localisation=?,description=?,nbrParticipant=? WHERE reference=?";
+        String req = "UPDATE Evenement set dateDebut=?,dateFin=? ,localisation=?,description=?,nbrParticipant=? WHERE reference=?";
 
         PreparedStatement pst;
         try {
             pst = cnxx.prepareStatement(req);
             pst.setDate(1, e.getDateDebut());
-            pst.setString(2, e.getHeureDebut());
-            pst.setString(3, e.getHeureFin());
-            pst.setString(4, e.getLocalisation());
-            pst.setString(5, e.getDescription());
-            pst.setInt(6, e.getNbrParticipant());
-            pst.setInt(7, e.getReference());
+            pst.setDate(2, e.getDateFin());
+            //pst.setString(2, e.getHeureDebut());
+            //pst.setString(3, e.getHeureFin());
+            pst.setString(3, e.getLocalisation());
+            pst.setString(4, e.getDescription());
+            pst.setInt(5, e.getNbrParticipant());
+            pst.setInt(6, e.getReference());
             pst.executeUpdate();
             System.out.println("Evenement Modifié ");
         } catch (SQLException ex) {
@@ -85,10 +88,10 @@ public class EvenementCrud   {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-
+        System.out.println("Evenement supprimé");
     }
 
-    public List<Evenement> afficher() {
+    public List<Evenement> afficherEvenements() {
 
         List<Evenement> myList = new ArrayList();
 
@@ -102,12 +105,16 @@ public class EvenementCrud   {
                 Evenement e = new Evenement();
                 e.setReference(rs.getInt(1));
                 e.setDateDebut(rs.getDate(2));
-                e.setHeureDebut(rs.getString(3));
-                e.setHeureFin(rs.getString(4));
-                e.setLocalisation(rs.getString(5));
-                e.setDescription(rs.getString(6));
-                e.setNbrParticipant(rs.getInt(7));
+                e.setDateFin(rs.getDate(3));
+               // e.setHeureDebut(rs.getString(3));
+               // e.setHeureFin(rs.getString(4));
+                e.setLocalisation(rs.getString(4));
+                e.setDescription(rs.getString(5));
+                e.setNbrParticipant(rs.getInt(6));
+                e.setImage(rs.getString(7));
                 myList.add(e);
+                
+       
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -115,6 +122,29 @@ public class EvenementCrud   {
         }
         return myList;
     }
+    public Evenement afficherEvenement(int idE){
+        Evenement e = new Evenement();
+        try {
+            String req = "SELECT * FROM evenement WHERE reference = ?";
+            PreparedStatement pst = cnxx.prepareStatement(req);
+            pst.setInt(1,idE);
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            e.setReference(rs.getInt(1));
+            e.setDateDebut(rs.getDate(2));
+            e.setDateFin(rs.getDate(3));
+            e.setLocalisation(rs.getString(4));
+            e.setDescription(rs.getString(5));
+            e.setNbrParticipant(rs.getInt(6));
+            
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return e;
+    }
+    
+    
+    
         public boolean VerifEvenement(int reference) {
         boolean testEvenement = false;
         try {
@@ -133,6 +163,8 @@ public class EvenementCrud   {
         }
         return testEvenement;
     }
+        
+      
         
         
 

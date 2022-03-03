@@ -28,18 +28,19 @@ public class PiDev {
         ParticipationCrud pc = new ParticipationCrud();
         
         Date date = new Date(1998, 12, 1);
-        Evenement e = new Evenement(1, date, "02:06", "03:06", "sousse", "Azer particpant", 10);
-        Evenement e1 = new Evenement(2, date, "02:06", "03:06", "sousse", "Azer particpant", 12);
-        Evenement e2 = new Evenement(3, date, "02:06", "03:06", "soussa", "Azer particpant", 11);
-        Participation p = new Participation(1,1,1,3);
-        Participation p1 = new Participation(2,2,2,4);
-          Participation p2 = new Participation(3,3,2,4);
-           Participation p3 = new Participation(4,3,1,2);
-           Participation p4 = new Participation(5,3,1,2);
+        Date date2 = new Date(1998, 12, 2);
+        Evenement e = new Evenement(8, date, date2, "sousse", "Azer particpant", 1,"htttphh");
+        Evenement e1 = new Evenement(2, date, date2, "sousse", "Azer particpant", 12,"httpp");
+        Evenement e2 = new Evenement(3, date, date2, "soussa", "Azer particpant", 11,"httyyyuu");
+        Participation p = new Participation(1,1,3);
+        Participation p1 = new Participation(2,2,4);
+          Participation p2 = new Participation(3,3,4);
+          Participation p3 = new Participation(3,1,2);
+          Participation p4 = new Participation(3,1,2);
            
         //**************************CRUD EVENEMENT**************************
         //**Ajout d'un evenement** 
-        //ec.ajouterEvenement(e);
+       //ec.ajouterEvenement(e);
         //System.out.println(ec.ajouterEvenement(e1));
         //System.out.println(ec.VerifEvenement(2));
         
@@ -48,16 +49,17 @@ public class PiDev {
         //ec.modifierEvenement(e);
         
         //**Supprimer Evenement** 
-        //ec.supprimerEvenement(4);
+        //ec.supprimerEvenement(1);
         
         //**Afficher Evenement**
-        //System.out.println(ec.afficher());
+        //System.out.println(ec.afficherEvenement());
+        //System.out.println(ec.afficherEvenement(1));
         
         //*********************Crud Participation****************
         
         //**Ajouter participation**
-        //pc.ajouterParticipation(p4);
-        pc.participer(1,1,1,2);
+        //pc.ajouterParticipation(p2);
+        //pc.participer(1,1,21,3);
         
         //**Supprimer Participation**
         //pc.supprimerParticipation(1);

@@ -5,6 +5,8 @@
  */
 package Entities;
 
+import javafx.scene.control.Button;
+
 /**
  *
  * @author Azer Lahmer
@@ -15,16 +17,18 @@ public class Participation {
     private int idClient;
     private int idEvent;
     private int nbrEtoile;
+    
 
     public Participation() {
 
     }
 
-    public Participation(int idParticipation, int idClient, int idEvent, int nbrEtoile) {
-        this.idParticipation = idParticipation;
+    public Participation(int idClient, int idEvent, int nbrEtoile) {
+        
         this.idClient = idClient;
         this.idEvent = idEvent;
         this.nbrEtoile = nbrEtoile;
+        
     }
 
     public int getIdParticipation() {

@@ -17,7 +17,7 @@
     </stylesheets>
    <children>
       <TableView fx:id="evenementsTable" layoutX="27.0" layoutY="152.0" onMouseClicked="#ModifierTable" prefHeight="308.0" prefWidth="618.0" style="-fx-background-color: #5ED6EB;" styleClass="tableView" stylesheets="@../../Css/stylesheet.css" />
-      <Pane layoutY="57.0" prefHeight="7.0" prefWidth="671.0" style="-fx-background-color: #5ED6EB;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Pane layoutY="57.0" prefHeight="7.0" prefWidth="671.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Text fill="WHITE" layoutX="71.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evenements Details" wrappingWidth="242.13671875">
          <font>
             <Font name="Bodoni MT Black" size="24.0" />
@@ -25,19 +25,19 @@
       </Text>
       <HBox layoutX="32.0" layoutY="93.0" prefHeight="42.0" prefWidth="337.0" style="visibility: #1976D2;">
          <children>
-            <Button mnemonicParsing="false" onAction="#Ajouter" prefHeight="30.0" prefWidth="76.0" style="-fx-border-color: #5ED6EB;" text="Ajouter">
+            <Button mnemonicParsing="false" onAction="#Ajouter" prefHeight="30.0" prefWidth="76.0" style="-fx-border-color: black;" styleClass="ajoutbnt" stylesheets="@../../Css/stylesheet.css" text="Ajouter">
                <font>
                   <Font name="Arial Black" size="12.0" />
                </font></Button>
-            <Button mnemonicParsing="false" onAction="#Supprimer" prefHeight="30.0" prefWidth="99.0" style="-fx-border-color: #5ED6EB;" text="Supprimer">
+            <Button mnemonicParsing="false" onAction="#Supprimer" prefHeight="30.0" prefWidth="99.0" style="-fx-border-color: black;" styleClass="supprimerbtn" stylesheets="@../../Css/stylesheet.css" text="Supprimer">
                <font>
                   <Font name="Arial Black" size="12.0" />
                </font></Button>
-            <Button fx:id="btnModif" mnemonicParsing="false" prefHeight="30.0" prefWidth="95.0" style="-fx-border-color: #5ED6EB;" text="Modifier">
+            <Button fx:id="btnModif" mnemonicParsing="false" prefHeight="30.0" prefWidth="95.0" style="-fx-border-color: black;" styleClass="modifierbtn" stylesheets="@../../Css/stylesheet.css" text="Modifier">
                <font>
                   <Font name="Arial Black" size="12.0" />
                </font></Button>
-            <Button fx:id="btnRefresh" mnemonicParsing="false" onAction="#Refresh" prefHeight="30.0" prefWidth="95.0" style="-fx-border-color: #5ED6EB;" text="Refresh">
+            <Button fx:id="btnRefresh" mnemonicParsing="false" onAction="#Refresh" prefHeight="30.0" prefWidth="95.0" style="-fx-border-color: black;" styleClass="refreshbtn" stylesheets="@../../Css/stylesheet.css" text="Refresh">
                <font>
                   <Font name="Arial Black" size="12.0" />
                </font>
@@ -45,7 +45,7 @@
          </children></HBox>
       <ImageView fitHeight="58.0" fitWidth="74.0" layoutX="4.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../Downloads/LogoGGC%20(1).png" />
+            <Image url="@../../img/LogoGGC%20(1).png" />
          </image>
       </ImageView>
    </children>
