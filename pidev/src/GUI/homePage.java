@@ -22,14 +22,16 @@ import javafx.stage.Stage;
 
 public class homePage extends Application {
 
+    public static int loggedInID;
+    
     @Override
     public void start(Stage primaryStage) {
 
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("ListeClient.fxml"));
+    try {
+            Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 
             Scene scene = new Scene(root);
-            primaryStage.setTitle("Ajouter Personne");
+            //primaryStage.setTitle("Ajouter Personne");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {

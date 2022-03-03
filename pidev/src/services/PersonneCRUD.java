@@ -5,6 +5,8 @@
  */
 package services;
 
+import Bcrypt.BCrypt;
+import GUI.homePage;
 import entities.Client;
 import entities.Personne;
 import java.sql.Connection;
@@ -16,6 +18,7 @@ import utils.MyConnection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -24,6 +27,7 @@ import java.util.List;
 public class PersonneCRUD {
 
     Connection cnxx;
+    Authentification aa = new Authentification();
 
     public PersonneCRUD() {
         cnxx = MyConnection.getInstance().getCnx();
@@ -40,7 +44,7 @@ public class PersonneCRUD {
             pst.setDate(3, P.getDateNaissance());
             pst.setString(4, P.getEmail());
             pst.setInt(5, P.getTelephone());
-            pst.setString(6,P.getPassword());
+            pst.setString(6, P.getPassword());
             pst.executeUpdate();
             System.out.println("personne ajoute");
             ResultSet rs = pst.getGeneratedKeys();
@@ -54,12 +58,12 @@ public class PersonneCRUD {
     }
 
     public void modifierPersonne(Personne p) {
-         //  int id = 0;
+        //  int id = 0;
         String req = "update Personne set nom=?,prenom=?,dateNaissance=?,email=?,telephone=?,password=? WHERE id_personne=?";
         PreparedStatement pst;
         try {
             pst = cnxx.prepareStatement(req);
-           
+
             pst.setString(1, p.getNom());
             pst.setString(2, p.getPrenom());
             pst.setDate(3, p.getDateNaissance());
@@ -74,11 +78,11 @@ public class PersonneCRUD {
             if (rs.next()) {
                 id = rs.getInt(1);
             }
-            */
+             */
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-       // return id;
+        // return id;
     }
 
     public void supprimerPersonne(int id_personne) {
@@ -93,7 +97,7 @@ public class PersonneCRUD {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-       
+
     }
 
     /*public Commentaire afficherCommentaire(int idC){
@@ -139,6 +143,7 @@ public class PersonneCRUD {
         }
         return myList;
     }
+
     /*
     public List<Personne> afficherParid(int id_personne) {
 
@@ -167,7 +172,26 @@ public class PersonneCRUD {
         }
         return myList;
     }
-*/
-
+     */
+    public boolean getUserBy(String email, String pwdId) {
+        String requete = "SELECT id_personne, password FROM personne"
+                + " WHERE ( email = ? )";
+        try {
+            PreparedStatement ps = cnxx.prepareStatement(requete);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String pwdBD = rs.getString(2);
+                if (aa.hashagePWD(pwdId).equals(pwdBD)) {
+                    int idUser = rs.getInt(1);
+                    homePage.loggedInID = idUser;
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 
 }

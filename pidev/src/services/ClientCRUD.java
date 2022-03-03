@@ -41,6 +41,7 @@ public class ClientCRUD extends PersonneCRUD {
             pst.setDate(5, c.getDateDebutBlock());
             pst.setDate(6, c.getDateFinBlock());
             pst.executeUpdate();
+            System.out.println(c.getPassword());
             System.out.println("Client ajoute");
             ResultSet rs = pst.getGeneratedKeys();
 

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="614.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ListeModerateurController">
+  <children>
+      <VBox prefHeight="614.0" prefWidth="224.0" spacing="5.0" styleClass="blue-bg" stylesheets="@../css/Stylesheet.css">
+         <children>
+            <ImageView fitHeight="130.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/LogoGGC.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="48.0" top="15.0" />
+               </VBox.margin>
+            </ImageView>
+            <Label prefHeight="32.0" prefWidth="224.0" text="  Gamer Gecks Communty" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Aldhabi" size="29.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets left="15.0" />
+               </opaqueInsets>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#clientRoot" prefHeight="34.0" prefWidth="224.0" styleClass="button1" stylesheets="@../css/Stylesheet.css" text="  Client">
+               
+               <font>
+                  <Font name="Baskerville Old Face" size="17.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="224.0" styleClass="button1" stylesheets="@../css/Stylesheet.css" text="  Moderateur">
+               
+               <font>
+                  <Font name="Baskerville Old Face" size="17.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="224.0" styleClass="button1" stylesheets="@../css/Stylesheet.css" text="  Statistique">
+               <font>
+                  <Font name="Baskerville Old Face" size="17.0" />
+               </font>
+               
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="224.0" styleClass="button1" stylesheets="@../css/Stylesheet.css" text="  Setting">
+               <font>
+                  <Font name="Baskerville Old Face" size="17.0" />
+               </font>
+               
+            </Button>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="76.0" layoutY="92.0" prefHeight="27.0" prefWidth="84.0" text="Keep Too" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+      
+      <VBox layoutX="249.0" layoutY="265.0" prefHeight="276.0" prefWidth="88.0" spacing="15.0">
+         <children>
+            <Label prefHeight="26.0" prefWidth="84.0" text="idModerateur" />
+            <Label prefHeight="27.0" prefWidth="105.0" text="Nom" />
+            <Label prefHeight="27.0" prefWidth="64.0" text="Prenom" />
+            <Label prefHeight="26.0" prefWidth="88.0" text="DateNaissance" />
+            <Label prefHeight="27.0" prefWidth="92.0" text="email" />
+            <Label prefHeight="27.0" prefWidth="88.0" text="Telephone" />
+            <Label text="Password" />
+         </children>
+      </VBox>
+      <VBox layoutX="366.0" layoutY="265.0" prefHeight="249.0" prefWidth="172.0" spacing="15.0">
+         <children>
+            <TextField fx:id="tfidmoderateur" />
+            <TextField fx:id="tfnom" />
+            <TextField fx:id="tfprenom" />
+            <DatePicker fx:id="tfdatenaissance" />
+            <TextField fx:id="tfemail" />
+            <TextField fx:id="tftelephone" />
+            <TextField fx:id="tfpassword" />
+         </children>
+      </VBox>
+      <TableView fx:id="tvmoderateur" layoutX="329.0" layoutY="25.0" onMouseClicked="#handlemousseclick1" onSort="#showModerateur" prefHeight="224.0" prefWidth="417.0">
+        <columns>
+          <TableColumn fx:id="colidmoderateur" prefWidth="51.0" text="id_moderateur" />
+          <TableColumn fx:id="colnom" prefWidth="36.0" text="nom" />
+            <TableColumn fx:id="colprenom" prefWidth="49.0" text="prenom" />
+            <TableColumn fx:id="coldatenaissance" prefWidth="99.0" text="DateNaissance" />
+            <TableColumn fx:id="colemail" prefWidth="54.0" text="email" />
+            <TableColumn fx:id="coltelephone" prefWidth="64.0" text="Telephone" />
+            <TableColumn fx:id="colpassword" prefWidth="63.0" text="Password" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnajouterm" layoutX="265.0" layoutY="565.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="64.0" styleClass="blue-bg" stylesheets="@../css/Stylesheet.css" text="Insert" textFill="WHITE">
+         
+      </Button>
+      <Button fx:id="btndeletem" layoutX="461.0" layoutY="565.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="64.0" styleClass="blue-bg" stylesheets="@../css/Stylesheet.css" text="Delete" textFill="WHITE" />
+      <Button fx:id="btnupdatem" layoutX="366.0" layoutY="565.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="64.0" styleClass="blue-bg" stylesheets="@../css/Stylesheet.css" text="Update" textFill="WHITE" />
+   </children>  
+</AnchorPane>

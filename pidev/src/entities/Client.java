@@ -28,6 +28,21 @@ public class Client extends Personne {
     public Client() {
     }
 
+    public Client(Integer idClient, Integer nbrAvertissement, Integer ban, Integer etat, Date dateDebutBlock, Date dateFinBlock) {
+        this.idClient = idClient;
+        this.nbrAvertissement = nbrAvertissement;
+        this.ban = ban;
+        this.etat = etat;
+        this.dateDebutBlock = dateDebutBlock;
+        this.dateFinBlock = dateFinBlock;
+    }
+    
+
+    public Client(String nom, String prenom, Date dateNaissance, String email, int telephone, String password) {
+        super(nom, prenom, dateNaissance, email, telephone, password);
+    }
+    
+
     public Client(int id_personne,String nom, String prenom, Date dateNaissance, String email, int telephone, String password) {
         super(id_personne, nom, prenom, dateNaissance, email, telephone, password);
         this.nbrAvertissement = 0;

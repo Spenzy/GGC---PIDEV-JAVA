@@ -18,19 +18,24 @@ public class Moderateur extends Personne {
     public Moderateur() {
     }
 
-    public Moderateur(int id_moderateur, String nom, String prenom, Date dateNaissance, String email, int telephone, String password) {
+    public Moderateur( String nom, String prenom, Date dateNaissance, String email, int telephone, String password) {
         super(nom, prenom, dateNaissance, email, telephone, password);
+       
+    }
+    
+
+    public Moderateur(int id_moderateur) {
         this.id_moderateur = id_moderateur;
     }
     
 
-/*
+
     public Moderateur(int id_personne, String nom, String prenom, Date dateNaissance, String email, int telephone, String password) {
         super(id_personne, nom, prenom, dateNaissance, email, telephone, password);
         
         
     }
-*/
+
 /*
        public Moderateur(int id_moderateur, String nom, String prenom, Date dateNaissance, String email, int telephone, String password) {
         this.id_moderateur=id_moderateur;

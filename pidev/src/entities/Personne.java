@@ -30,17 +30,20 @@ public class Personne {
 
     }
 
+    public Personne(int id_personne, String nom, String prenom) {
+        this.id_personne = id_personne;
+        this.nom = nom;
+        this.prenom = prenom;
+    }
+    
+
     public Personne(int id_personne, String nom, String prenom, Date dateNaissance, String email, int telephone, String password) {
         this.id_personne = id_personne;
         this.nom = nom;
         this.prenom = prenom;
-        SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            java.sql.Date date = new java.sql.Date(sdformat.parse("3000-01-25").getTime());
-            this.dateNaissance = date;
-        } catch (ParseException ex) {
-            Logger.getLogger(Pidev.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+            this.dateNaissance = dateNaissance;
+       
 
         this.email = email;
         this.telephone = telephone;
@@ -50,13 +53,7 @@ public class Personne {
     public Personne(String nom, String prenom, Date dateNaissance, String email, int telephone, String password) {
         this.nom = nom;
         this.prenom = prenom;
-        SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            java.sql.Date date = new java.sql.Date(sdformat.parse("3000-01-25").getTime());
-            this.dateNaissance = date;
-        } catch (ParseException ex) {
-            Logger.getLogger(Pidev.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.dateNaissance = dateNaissance;
         this.email = email;
         this.telephone = telephone;
         this.password = password;
