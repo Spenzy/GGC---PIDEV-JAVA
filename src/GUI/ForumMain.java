@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- *
+ 
  * @author Spenz
  */
 public class ForumMain extends Application {

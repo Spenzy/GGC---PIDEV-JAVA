@@ -38,8 +38,8 @@ public class PdfAPI {
 
             document.open();
             Image image1 = Image.getInstance("src/GUI/ressources/ggc.png");
-            double percent = 0.5;
             image1.scaleAbsolute(150, 130);
+            
             VoteCRUD vc = new VoteCRUD();
             PersonneCRUD pcrud = new PersonneCRUD();
             Paragraph chapterTitle = new Paragraph("Publication de " + pcrud.getUsername(p.getId_client()) + " à la date " + p.getDatePub());
@@ -64,9 +64,6 @@ public class PdfAPI {
 
             document.close();
             MailAPI.sendMailWithFile(mail, "GGC Requested Post Details ", new File(filepath));
-//            //auto open for testing
-//            File myFile = new File("/path/to/file.pdf");
-//            Desktop.getDesktop().open(myFile);
         } catch (DocumentException | IOException | MessagingException e) {
             System.err.println(e.getMessage());
         }

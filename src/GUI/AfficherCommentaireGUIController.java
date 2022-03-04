@@ -67,7 +67,7 @@ public class AfficherCommentaireGUIController implements Initializable {
         initAffichage();
 
         btnSupp.setOnAction((ActionEvent a) -> {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Supprimer?");
             alert.setHeaderText("Supprimer votre commentaire?");
             alert.setContentText("Votre commentaire sera supprimée lors de l'acceptation");

@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import org.quartz.Job;
 import static org.quartz.JobBuilder.newJob;
 import org.quartz.JobDetail;
@@ -23,10 +26,12 @@ import org.quartz.SchedulerFactory;
 import org.quartz.Trigger;
 import static org.quartz.TriggerBuilder.newTrigger;
 import org.quartz.impl.StdSchedulerFactory;
+import utils.MailAPI;
 
 public class PublicationCRUD {
 
     Connection cnxx;
+    PersonneCRUD pcrud = new PersonneCRUD();
 
     public PublicationCRUD() {
         cnxx = MyConnection.getInstance().getCnx();
@@ -165,6 +170,14 @@ public class PublicationCRUD {
             System.out.println("publication déarchivé");
         }
         modifierPublication(p);
+        try {
+            MailAPI.sendMail(pcrud.afficherPersonne(
+                    p.getId_client()).getEmail()
+                    , "Archivage Publication"
+                    , "Votre Publication " + p.getTitre() + "à été archivé");
+        } catch (MessagingException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 
 //    public void autoArchive(Publication p, LocalDateTime dateAjout){

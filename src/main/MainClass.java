@@ -64,9 +64,9 @@ public class MainClass {
 //            Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
 //        }
         //***************Pdf & mailfile
-        Publication p = pc.afficherPublication(1);
-        List commentaires = cc.afficherCommentaires(1);
-        PdfAPI.createAndSendForumPost("dridi.zied@esprit.tn", p, commentaires);
+//        Publication p = pc.afficherPublication(1);
+//        List commentaires = cc.afficherCommentaires(1);
+//        PdfAPI.createAndSendForumPost("dridi.zied@esprit.tn", p, commentaires);
     }
     
 }
