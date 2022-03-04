@@ -15,6 +15,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import entities.Commande;
 import entities.Commentaire;
 import entities.LigneCommande;
+import entities.Produit;
 import entities.Publication;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,6 +25,7 @@ import javax.mail.MessagingException;
 import services.CommandeCRUD;
 import services.LivraisonCRUD;
 import services.PersonneCRUD;
+import services.ProduitCRUD;
 import services.VoteCRUD;
 
 /**
@@ -72,6 +74,39 @@ public class PdfAPI {
             System.err.println(e.getMessage());
         }
         System.out.println("generation success");
+    }
+    
+    public static void createAndSendListProduit(String mail) {
+        ProduitCRUD p = new ProduitCRUD();
+        try {
+            Rectangle pageSize = new Rectangle(350, 720);
+            Document document = new Document(pageSize);
+            String filepath = "produits.pdf";
+            PdfWriter instance = PdfWriter.getInstance(document, new FileOutputStream(filepath));
+
+            document.open();
+            Image image1 = Image.getInstance("src/javaapplication12/css/LogoGGC.png");
+            double percent = 0.5;
+            image1.scaleAbsolute(150, 130);
+            document.add(image1);
+            document.add(new Paragraph("Voici la liste de tous les produits du shop\n"));
+           
+            List<Produit> products = p.afficherList();
+            for (Produit ligne : products) {
+                document.add(new Paragraph(
+                        "\n\n* Référence: " + ligne.getReference() +"\n* Libelle: " + ligne.getLibelle() + "\n* Categorie: " + ligne.getCategorie()+ "\n* Description: " + ligne.getDescription()+ "\n* Note: " + ligne.getNote()
+                        + "\n* Prix: " + ligne.getPrix() + "DT\n\n"));
+
+            }
+
+            document.close();
+            MailAPI.sendMailWithFile(mail, "Produits GGC", new File(filepath));
+            //auto open for testing
+            //  File myFile = new File("/path/to/file.pdf");
+            //Desktop.getDesktop().open(myFile);
+        } catch (DocumentException | IOException | MessagingException e) {
+            System.err.println(e.getMessage());
+        }
     }
     
      public static void createAndSendCommande(String mail, Commande p) {
