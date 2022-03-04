@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import GUI.Commande.PasserCommandeController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,6 +44,8 @@ public class DashboardController implements Initializable {
     private Button btnSetting;
     @FXML
     private AnchorPane homeClient;
+    @FXML
+    private Button btnCommande;
 
     /**
      * Initializes the controller class.
@@ -69,6 +72,19 @@ public class DashboardController implements Initializable {
                 AffichageProduitClientController fhc = new AffichageProduitClientController(idClient);
                 shopPage.setController(fhc);
                 Parent root = shopPage.load();
+                homeClient.getChildren().clear();
+                homeClient.getChildren().add(root);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        });
+        btnCommande.setOnAction(a -> {
+            try {
+
+                FXMLLoader cmdPage = new FXMLLoader(getClass().getResource("Commande/PasserCommande.fxml"));
+                PasserCommandeController fhc = new PasserCommandeController(idClient);
+                cmdPage.setController(fhc);
+                Parent root = cmdPage.load();
                 homeClient.getChildren().clear();
                 homeClient.getChildren().add(root);
             } catch (IOException ex) {

@@ -40,7 +40,7 @@ import utils.PdfAPI;
  */
 public class PasserCommandeController implements Initializable {
 
-    public int idClient;
+    public int idClient=111;
     public int idCommande = 0;
     public Commande c1 = new Commande(idClient, "");
     public CommandeCRUD c = new CommandeCRUD();

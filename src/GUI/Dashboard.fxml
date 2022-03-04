@@ -59,14 +59,16 @@
 <!--                        <FontAwesomeIconView fill="WHITE" glyphName="USD" />-->
                      </graphic>
                   </Button>
-                  <Button fx:id="btnStreamer" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="Streamers" textFill="WHITE">
+                 <Button fx:id="btnCommande" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="Passer Commande" textFill="WHITE">
                      <font>
                         <Font name="Cambria" size="19.0" />
                      </font>
                      <graphic>
-<!--                        <FontAwesomeIconView fill="WHITE" glyphName="USER" />-->
+<!--                        <FontAwesomeIconView fill="WHITE" glyphName="USD" />-->
                      </graphic>
                   </Button>
+       
+                        
                   <Button fx:id="btnEvennement" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="Evenement" textFill="WHITE">
                      <font>
                         <Font name="Cambria" size="19.0" />
