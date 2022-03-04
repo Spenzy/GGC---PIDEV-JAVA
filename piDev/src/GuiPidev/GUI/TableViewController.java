@@ -103,8 +103,8 @@ public class TableViewController implements Initializable {
       
       nbrParticipantsCol = new TableColumn<>("Nbres Participants");//nom de l'afichage
       nbrParticipantsCol.setCellValueFactory(new PropertyValueFactory<>("nbrParticipant"));
-      imageCol = new TableColumn<>("image");//nom de l'afichage
       
+      imageCol = new TableColumn<>("image");//nom de l'afichage
       imageCol.setCellValueFactory(new PropertyValueFactory<>("image"));
       
       

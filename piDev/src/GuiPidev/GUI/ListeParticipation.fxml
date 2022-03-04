@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="blue-bg" stylesheets="@../../Css/stylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GuiPidev.GUI.ListeParticipationController">
+   <children>
+      <TableView fx:id="participationTable" layoutX="45.0" layoutY="109.0" prefHeight="231.0" prefWidth="514.0" />
+      <Pane layoutX="-14.0" layoutY="61.0" prefHeight="3.0" prefWidth="601.0" style="-fx-background-color: white;" />
+      <Text fill="WHITE" layoutX="109.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste Participations" wrappingWidth="277.13671875">
+         <font>
+            <Font name="Bodoni MT Black" size="25.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="62.0" fitWidth="86.0" layoutX="15.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/LogoGGC%20(1).png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

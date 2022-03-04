@@ -175,11 +175,13 @@ final TableCell<Evenement,String> cell=new TableCell<Evenement,String>(){
     private void pdf1(ActionEvent event)throws FileNotFoundException, SQLException, DocumentException {
        // int i=1;
         //for(i=1;i<10;i++){
-        int max=100;
-        int min=1;
-        int b = (int)(Math.random()*(max-min+1)+min);
+//        int max=100;
+//        int min=1;
+//        int b = (int)(Math.random()*(max-min+1)+min);
+//        pdf Pdf=new pdf();
+//        Pdf.add("event("+b+").pdf");
         pdf Pdf=new pdf();
-        Pdf.add("event("+b+").pdf");
+        Pdf.add("event.pdf");
        // i=i+1;
         // }
         
