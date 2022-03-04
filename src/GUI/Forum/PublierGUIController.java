@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package GUI.Forum;
 
 import entities.Publication;
 import java.io.IOException;
@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -32,10 +33,10 @@ import services.PublicationCRUD;
  *
  * @author Spenz
  */
-public class ModifierPublicationGUIController implements Initializable {
+public class PublierGUIController implements Initializable {
 
     @FXML
-    private Button btnModifier;
+    private Button btnPublier;
     @FXML
     private TextField tfTitre;
     @FXML
@@ -46,52 +47,47 @@ public class ModifierPublicationGUIController implements Initializable {
     private Label errTitre;
     @FXML
     private Label errDesc;
+
+    int idClient;
+
+    public PublierGUIController() {
+    }
+
+    public PublierGUIController(int idClient) {
+        this.idClient = idClient;
+    }
+
+    PublicationCRUD pc = new PublicationCRUD();
     @FXML
     private Label errWindow;
-    
-    
-    int idClient;//un id pour tester les fonctionalités de l'application
-    int idPublication;// id pub de test
-        
-    PublicationCRUD pc = new PublicationCRUD();
 
-    public ModifierPublicationGUIController() {
-    }
-
-    public ModifierPublicationGUIController(int idClient, int idPublication) {
-        this.idClient = idClient;
-        this.idPublication = idPublication;
-    }
-    
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Publication p = pc.afficherPublication(idPublication);
-        //init des champs de modification
-        tfTitre.setText(p.getTitre());
-        taDesc.setText(p.getDesc());
-        
+
         //Lors du click sur le bouton publier
         btnAnnuler.setOnAction((ActionEvent a) -> {
-            Stage stage = (Stage) btnAnnuler.getScene().getWindow();
-            stage.close();
+            closeWindow(btnAnnuler);
         });
 
         //Lors du click sur le bouton publier
-        btnModifier.setOnAction((ActionEvent a) -> {
+        btnPublier.setOnAction((ActionEvent a) -> {
             resetErrLabels();
             //test si l'un des champs est vide
             if (tfTitre.getText().isEmpty()) {
                 errTitre.setText("Erreur, Champ vide!");
+            } else if (pc.verifQuotaPub(idClient)) {
+                errTitre.setText("Vous avez attein la limite de publications courantes!");
             } else {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Modifier?");
-                alert.setHeaderText("Etes vous sur de vos modifications?");
-                alert.setContentText("Acceptez pour modifier votre publication");
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+                alert.setTitle("Publier?");
+                alert.setHeaderText("Etes vous pret a publier?");
+                alert.setContentText("Acceptez pour publier votre publication");
 
                 Optional<ButtonType> option = alert.showAndWait();
                 //tous les conséquences de l'alerte de confirmation
@@ -100,36 +96,38 @@ public class ModifierPublicationGUIController implements Initializable {
                 } else if (option.get() == ButtonType.CANCEL) {
                     this.errWindow.setText("Vous avez annulé la selection!");
                 } else if (option.get() == ButtonType.OK) {
-                    p.setTitre(tfTitre.getText());
-                    p.setDesc(taDesc.getText());
-                    pc.modifierPublication(p);
+                    Publication p = new Publication(idClient, tfTitre.getText(), taDesc.getText(), false);
+                    pc.ajouterPublication(p);
                     //message de test
                     this.errWindow.setText("Poste ajouté avec succée!");
-                    //on ferme l'interface d'ajout après un cas succéssive
-                    Stage stage = (Stage) btnAnnuler.getScene().getWindow();
-                    stage.close();
+                    //close window
+                    closeWindow(btnPublier);
                 } else {
                     this.errWindow.setText("-");
                 }
             }
         });
-
     }
-    
-    public void resetErrLabels(){
+
+    public void resetErrLabels() {
         errTitre.setText("");
         errDesc.setText("");
     }
-    
+
+    public void closeWindow(Button btn) {
+        Stage stage = (Stage) btn.getScene().getWindow();
+        stage.close();
+    }
+
     public Scene refreshPublier(Button btn) {
         ForumHomeGUIController fhc = new ForumHomeGUIController();
         try {
             //init loader root
             System.out.println("wselt lenna");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierPublicationGUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PublierGUI.fxml"));
 
             //init Controller
-            ModifierPublicationGUIController controller = new ModifierPublicationGUIController(idClient,idPublication);
+            PublierGUIController controller = new PublierGUIController(idClient);
             loader.setController(controller);
 
             Parent root = loader.load();

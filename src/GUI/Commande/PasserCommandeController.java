@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sprint1.pidev.gui;
+package GUI.Commande;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,11 +27,11 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.textfield.TextFields;
-import sprint1.pidev.entities.Commande;
-import sprint1.pidev.entities.LigneCommande;
-import sprint1.pidev.services.CommandeCRUD;
-import sprint1.pidev.services.LigneCommandeCRUD;
-import sprint1.pidev.utils.PdfAPI;
+import entities.Commande;
+import entities.LigneCommande;
+import services.CommandeCRUD;
+import services.LigneCommandeCRUD;
+import utils.PdfAPI;
 
 /**
  * FXML Controller class

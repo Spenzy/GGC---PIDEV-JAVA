@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sprint1.pidev.gui;
+package GUI.Commande;
 
 import java.net.URL;
 import java.text.DateFormatSymbols;
@@ -19,8 +19,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
-import sprint1.pidev.entities.Commande;
-import sprint1.pidev.services.CommandeCRUD;
+import entities.Commande;
+import services.CommandeCRUD;
 
 /**
  * FXML Controller class

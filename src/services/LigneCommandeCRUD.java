@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sprint1.pidev.services;
+package services;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,9 +12,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import sprint1.pidev.entities.Commande;
-import sprint1.pidev.entities.LigneCommande;
-import sprint1.pidev.utils.MyConnection;
+import entities.Commande;
+import entities.LigneCommande;
+import utils.MyConnection;
 
 /**
  *

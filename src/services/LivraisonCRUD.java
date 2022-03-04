@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sprint1.pidev.services;
+package services;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -18,10 +18,10 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.mail.MessagingException;
-import sprint1.pidev.entities.Commande;
-import sprint1.pidev.entities.Livraison;
-import sprint1.pidev.utils.MailAPI;
-import sprint1.pidev.utils.MyConnection;
+import entities.Commande;
+import entities.Livraison;
+import utils.MailAPI;
+import utils.MyConnection;
 
 /**
  *

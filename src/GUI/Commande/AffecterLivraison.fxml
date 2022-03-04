@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="578.0" prefWidth="1053.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sprint1.pidev.gui.AffecterLivraisonController">
+<AnchorPane id="AnchorPane" prefHeight="578.0" prefWidth="1053.0" stylesheets="@../ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Commande.AffecterLivraisonController">
    <children>
       <TableView fx:id="tvCommande" layoutX="247.0" layoutY="22.0" prefHeight="200.0" prefWidth="453.0">
         <columns>

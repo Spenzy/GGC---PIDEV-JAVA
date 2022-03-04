@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sprint1.pidev.gui;
+package GUI.Commande;
 
 import java.net.URL;
 import java.util.List;
@@ -19,9 +19,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import sprint1.pidev.entities.LigneCommande;
-import sprint1.pidev.services.CommandeCRUD;
-import sprint1.pidev.services.LigneCommandeCRUD;
+import entities.LigneCommande;
+import services.CommandeCRUD;
+import services.LigneCommandeCRUD;
 
 /**
  * FXML Controller class

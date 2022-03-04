@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sprint1.pidev.services;
+package services;
 
+import entities.Commande;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,8 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import sprint1.pidev.entities.Commande;
-import sprint1.pidev.utils.MyConnection;
+import utils.MyConnection;
 
 /**
  *

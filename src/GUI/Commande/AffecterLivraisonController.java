@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sprint1.pidev.gui;
+package GUI.Commande;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,10 +33,10 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import sprint1.pidev.entities.Commande;
-import sprint1.pidev.entities.Livraison;
-import sprint1.pidev.services.CommandeCRUD;
-import sprint1.pidev.services.LivraisonCRUD;
+import entities.Commande;
+import entities.Livraison;
+import services.CommandeCRUD;
+import services.LivraisonCRUD;
 
 /**
  * FXML Controller class
