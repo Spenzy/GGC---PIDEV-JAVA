@@ -27,19 +27,16 @@ public class HomePage extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+            
 
             
-            /*
             Parent root = FXMLLoader.load(getClass().getResource("GestionProduit.fxml"));
             primaryStage.setTitle("Interface Administrateur Gestion des produits");
-            */
-            
-            
+             
+              /*
             Parent root = FXMLLoader.load(getClass().getResource("AffichageProduitClient.fxml"));
             primaryStage.setTitle("Interface Client Produits et Avis");
-            
-
-            
+             */
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();

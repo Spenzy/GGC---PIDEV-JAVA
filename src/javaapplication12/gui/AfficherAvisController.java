@@ -8,6 +8,7 @@ package javaapplication12.gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +22,9 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.AnchorPane;
@@ -100,6 +103,7 @@ public class AfficherAvisController implements Initializable {
         } else {
             Label Label = new Label("Voici les avis du produit " + Libelle);
             Label.setStyle("-fx-padding:5px; -fx-font-size: 15px;");
+            Label.setTranslateX(200);
             Avis.getChildren().add(Label);
 
             Label LabelLibelle = new Label(Libelle);
@@ -181,10 +185,30 @@ public class AfficherAvisController implements Initializable {
                 + "    -fx-background-color: linear-gradient(#DDFAFC, #A1E0E6);\n"
                 + "    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );");
         supprimer.setOnAction(e -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Validation");
+            alert.setHeaderText("Voulez vous supprimer cet avis? ?");
+            //alert.setContentText("");
+
+            Optional<ButtonType> option = alert.showAndWait();
+            //confirmation 
+            if (option.get() == ButtonType.OK) {
             a.supprimerAvis(a1.getIdAvis());
             p.CalculAffectationNote();
             Note = a.recupererNote(a1.getReferenceProduit());
             refreshAffichageAvis(supprimer);
+            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                alert1.setTitle("Information!");
+                alert1.setHeaderText(null);
+                alert1.setContentText("Suppression avec Succées!");
+                alert1.show();
+            }else{
+                Alert alert1 = new Alert(Alert.AlertType.ERROR);
+                alert1.setTitle("Erreur!");
+                alert1.setHeaderText(null);
+                alert1.setContentText("Suppression abandonnée!");
+                alert1.show();
+            }
         });
         supprimer.setTranslateX(550);
         supprimer.setScaleX(0.9);

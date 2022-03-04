@@ -5,15 +5,24 @@
  */
 package javaapplication12.gui;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javaapplication12.entities.Produit;
 import javaapplication12.services.AvisCRUD;
 import javaapplication12.services.ProduitCRUD;
+import javaapplication12.utils.MailAPI;
+import javaapplication12.utils.PdfAPI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -23,6 +32,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javax.mail.MessagingException;
 
 /**
  * FXML Controller class
@@ -74,6 +85,10 @@ public class GestionProduitController implements Initializable {
     private Button btnAnnuler;
     @FXML
     private TextField tfCategorieRemise;
+    @FXML
+    private Button btnpdf;
+    @FXML
+    private Button btnStat;
 
     /**
      * Initializes the controller class.
@@ -174,12 +189,21 @@ public class GestionProduitController implements Initializable {
                         p.remisePrixCategorie(categorie, pourcentage);
                         tvProduit.setItems(p.afficher());
 
+                        
+                        List<String> mails=p.recupererEmails();
+                        System.out.println(mails);
+                        for(String mail:mails){
+                            try {
+                                MailAPI.sendMail(mail,"Remise Sur Produits","Bonjour mr/mme,nous vous offrons une remise de "+pourcentage+"% sur tous les produits de catégorie "+categorie+"  .Visitez notre application GGC.");
+                            } catch (MessagingException ex) {
+                                Logger.getLogger(GestionProduitController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                         Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                         alert2.setTitle("Information!");
                         alert2.setHeaderText(null);
-                        alert2.setContentText("Remise affectée avec succées");
+                        alert2.setContentText("Remise affectée avec succées et tous les clients ont été notifié par mail");
                         alert2.show();
-
                     } else {
                         Alert alert3 = new Alert(Alert.AlertType.ERROR);
                         alert3.setTitle("Erreur!");
@@ -383,6 +407,47 @@ public class GestionProduitController implements Initializable {
         tfCategorie.setText("");
         teDescription.setText("");
         tfPrix.setText("");
+    }
+
+    @FXML
+    private void pdfOnclick(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Modification");
+                alert.setHeaderText("Voulez vous recevoir la liste des produits par mail?");
+                //alert.setContentText("");
+
+                Optional<ButtonType> option = alert.showAndWait();
+                //confirmation 
+                if (option.get() == ButtonType.OK) {
+                    PdfAPI.createAndSendListProduit("gamergeekscommunity@gmail.com");
+                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                    alert2.setTitle("Information!");
+                    alert2.setHeaderText(null);
+                    alert2.setContentText("Mail et pdf envoyés");
+                    alert2.show();
+                } else {
+                    Alert alert3 = new Alert(Alert.AlertType.ERROR);
+                    alert3.setTitle("Erreur!");
+                    alert3.setHeaderText(null);
+                    alert3.setContentText("Erreur d'envoi!");
+                    alert3.show();
+                }
+        
+    }
+
+    @FXML
+    private void statOnclick(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("StatistiqueProduit.fxml"));
+            Stage primaryStage=new Stage();
+            primaryStage.setTitle("Statistique des Notes de chaque produit");
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

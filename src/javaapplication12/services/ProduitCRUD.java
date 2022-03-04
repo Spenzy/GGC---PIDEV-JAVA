@@ -248,4 +248,89 @@ public class ProduitCRUD {
         return false;
     }
 
+    public List<String> recupererEmails() {
+        List<String> myList = new ArrayList();
+
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT personne.email FROM personne inner join client on(personne.id_personne=idClient)";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            myList.clear();
+            while (rs.next()) {
+
+                
+                myList.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        return myList;
+    }
+
+    public List<String> recupererLibelle() {
+        List<String> listProduit = new ArrayList();
+
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT libelle FROM produit order by note desc";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            while (rs.next()) {
+                listProduit.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        
+        return listProduit;
+    }   
+    public List<Integer> recupererNote() {
+        List<Integer> listProduit = null;
+
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT note FROM produit";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            while (rs.next()) {
+                listProduit.add(rs.getInt(1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        
+        return listProduit;
+    }   
+
+    public ArrayList<Produit> afficherList() {
+        ArrayList<Produit> myList = new ArrayList();
+
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT * FROM produit order by note desc";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            myList.clear();
+            while (rs.next()) {
+
+                Produit p = new Produit();
+                p.setReference(rs.getInt(1));
+                p.setLibelle(rs.getString(2));
+                p.setCategorie(rs.getString(3));
+                p.setDescription(rs.getString(4));
+                p.setPrix(rs.getFloat(5));
+                p.setNote(rs.getInt(6));
+                myList.add(p);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        return myList;
+    }
+
 }
