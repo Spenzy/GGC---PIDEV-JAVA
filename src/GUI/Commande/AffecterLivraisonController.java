@@ -167,7 +167,6 @@ public class AffecterLivraisonController implements Initializable {
                     LabelSysDate.setVisible(false);
                     Livraison l1 = new Livraison(Commande, l.recupererIdLivreur(Livreur), java.sql.Date.valueOf(dateLivraison));
                     l.ajouterLivraison(l1);
-                    c.commandeLivree(Commande);
 
                     //refresh table views and ComboBox s
                     tvCommande.setItems(c.afficher());
