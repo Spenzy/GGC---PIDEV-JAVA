@@ -9,7 +9,11 @@ import Entities.Evenement;
 import Entities.Participation;
 import Services.EvenementCrud;
 import Services.ParticipationCrud;
+import Services.pdf;
+import com.itextpdf.text.DocumentException;
+import java.io.FileNotFoundException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -57,6 +61,8 @@ public class AffichEventController implements Initializable {
     int idClient = 2;
     int idEvent=2;
     ParticipationCrud pc = new ParticipationCrud();
+    @FXML
+    private Button pdfID;
     /**
      * Initializes the controller class.
      */
@@ -163,5 +169,19 @@ final TableCell<Evenement,String> cell=new TableCell<Evenement,String>(){
 
         evenementsTable.getColumns().add(participer);
 
+    }
+
+    @FXML
+    private void pdf1(ActionEvent event)throws FileNotFoundException, SQLException, DocumentException {
+       // int i=1;
+        //for(i=1;i<10;i++){
+        int max=100;
+        int min=1;
+        int b = (int)(Math.random()*(max-min+1)+min);
+        pdf Pdf=new pdf();
+        Pdf.add("event("+b+").pdf");
+       // i=i+1;
+        // }
+        
     }
 }
