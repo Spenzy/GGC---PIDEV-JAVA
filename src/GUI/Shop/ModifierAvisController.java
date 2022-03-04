@@ -5,6 +5,7 @@
  */
 package GUI.Shop;
 
+import GUI.DashboardController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -33,6 +34,7 @@ import javafx.stage.Stage;
  */
 public class ModifierAvisController implements Initializable {
 
+    int idClient;
     public Avis a1;
     @FXML
     private ComboBox<String> cbType;
@@ -44,14 +46,13 @@ public class ModifierAvisController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    public ModifierAvisController() {
+ public ModifierAvisController() {
     }
 
-    public ModifierAvisController(Avis a1) {
+    public ModifierAvisController(int idClient, Avis a1) {
+        this.idClient = idClient;
         this.a1 = a1;
     }
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -120,19 +121,19 @@ public class ModifierAvisController implements Initializable {
             FXMLLoader testLoad = new FXMLLoader(getClass().getResource("AfficherAvis.fxml"));
 
             //init Controller
-            AvisCRUD a=new AvisCRUD();
-            
-            AfficherAvisController controller = new AfficherAvisController(a1.getReferenceProduit(), a.recupererNote(a1.getReferenceProduit()),a.recupererLibelle(a1.getReferenceProduit()));
+            AvisCRUD a = new AvisCRUD();
+
+            AfficherAvisController controller = new AfficherAvisController(idClient,a1.getReferenceProduit(), a.recupererNote(a1.getReferenceProduit()), a.recupererLibelle(a1.getReferenceProduit()));
             testLoad.setController(controller);
 
             Parent root = testLoad.load();
 
             //scene switch
-            Scene affPubScene = new Scene(root);
-            ((Stage) btn.getScene().getWindow()).setScene(affPubScene);
+            DashboardController.refreshParent(root);
 
         } catch (IOException ex) {
             Logger.getLogger(AfficherAvisController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

@@ -5,6 +5,7 @@
  */
 package GUI.Shop;
 
+import GUI.DashboardController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -38,7 +39,7 @@ import javafx.stage.Stage;
  */
 public class DonnerAvisController implements Initializable {
 
-    public int idClient = 111;
+    public int idClient;
     public String Libelle;
     public int idProduit;
     public int Note;
@@ -50,14 +51,16 @@ public class DonnerAvisController implements Initializable {
     private TextArea teDescription;
     @FXML
     private Button btnAjouterAvis;
+    
 
     /**
      * Initializes the controller class.
      */
-    public DonnerAvisController() {
+     public DonnerAvisController() {
     }
 
-    public DonnerAvisController(int idProduit, int Note, String Libelle) {
+    public DonnerAvisController(int idClient,int idProduit, int Note, String Libelle) {
+        this.idClient=idClient;
         this.Libelle = Libelle;
         this.idProduit = idProduit;
         this.Note = Note;
@@ -99,7 +102,7 @@ public class DonnerAvisController implements Initializable {
             //alert.setContentText("");
 
             Optional<ButtonType> option = alert.showAndWait();
-            //confirmation 
+            //confirmation
             if (option.get() == ButtonType.OK) {
 
                 int reference = a.recupererReference(Libelle);
@@ -121,8 +124,8 @@ public class DonnerAvisController implements Initializable {
                 alert3.show();
             }
         }
-        
-        
+       
+       
         //refresh AffichageAvisProduit.fxml
     }
 
@@ -132,14 +135,13 @@ public class DonnerAvisController implements Initializable {
             FXMLLoader testLoad = new FXMLLoader(getClass().getResource("AfficherAvis.fxml"));
 
             //init Controller
-            AfficherAvisController controller = new AfficherAvisController(idProduit, Note, Libelle);
+            AfficherAvisController controller = new AfficherAvisController(idClient,idProduit, Note, Libelle);
             testLoad.setController(controller);
 
             Parent root = testLoad.load();
 
             //scene switch
-            Scene affPubScene = new Scene(root);
-            ((Stage) btn.getScene().getWindow()).setScene(affPubScene);
+            DashboardController.refreshParent(root);
 
         } catch (IOException ex) {
             Logger.getLogger(AfficherAvisController.class.getName()).log(Level.SEVERE, null, ex);

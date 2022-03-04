@@ -5,13 +5,15 @@
  */
 package GUI.Shop;
 
+import GUI.Commande.PasserCommandeController;
+import GUI.DashboardController;
+import entities.Produit;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import entities.Produit;
 import services.ProduitCRUD;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,12 +39,20 @@ import javafx.stage.Stage;
  */
 public class AffichageProduitClientController implements Initializable {
 
+    int idClient;
     public Produit p1 = new Produit();
     public ProduitCRUD p = new ProduitCRUD();
 
+    public AffichageProduitClientController() {
+    }
+
+    public AffichageProduitClientController(int idClient) {
+        this.idClient = idClient;
+    }
+
     @FXML
     private VBox Products;
-    
+
     /**
      * Initializes the controller class.
      */
@@ -57,8 +67,32 @@ public class AffichageProduitClientController implements Initializable {
             Label emptyLabel = new Label("Aucun produit n'est disponible pour le moment");
             Products.getChildren().add(emptyLabel);
         } else {
-            Label Label = new Label("Voici Nos produits");
-            Products.getChildren().add(Label);
+            Button ButtonCommande = new Button("Passer Commande");
+            Products.getChildren().add(ButtonCommande);
+            ButtonCommande.setTranslateX(480);
+            ButtonCommande.setPrefHeight(90);
+            ButtonCommande.setStyle("-fx-text-fill: black;\n"
+                    + "    -fx-font-family: \"Arial\";\n"
+                    + "    -fx-font-weight: bold;\n"
+                    + "    -fx-background-color: linear-gradient(#61a2b1, #A945B4 );\n"
+                    + "    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 )");
+
+            ButtonCommande.setOnAction(e -> {
+                try {
+                    //init loader root
+                    FXMLLoader testLoad = new FXMLLoader(getClass().getResource("Commande/PasserCommande.fxml"));
+
+                    //init Controller
+                    PasserCommandeController controller = new PasserCommandeController(idClient);
+                    testLoad.setController(controller);
+
+                    Parent root = testLoad.load();
+                    DashboardController.refreshParent(root);
+
+                } catch (IOException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            });
 
             for (Produit p1 : ListProduits) {
                 VBox vbox = AffichageProduit(p1);
@@ -114,30 +148,16 @@ public class AffichageProduitClientController implements Initializable {
                 + "    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );");
         btnAvis.setOnAction(e -> {
             //nemch lel interface affichageAvis
-            FXMLLoader AfficherAvis = new FXMLLoader(getClass().getResource("AfficherAvis.fxml"));
             try {
-
-                AfficherAvisController AfficherAvisController = new AfficherAvisController(p1.getReference(), p1.getNote(), p1.getLibelle());
+                FXMLLoader AfficherAvis = new FXMLLoader(getClass().getResource("AfficherAvis.fxml"));
+                AfficherAvisController AfficherAvisController = new AfficherAvisController(idClient, p1.getReference(), p1.getNote(), p1.getLibelle());
                 AfficherAvis.setController(AfficherAvisController);
                 Parent root = AfficherAvis.load();
+                Products.getChildren().clear();
+                Products.getChildren().add(root);
 
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                stage.setTitle("Les Avis du Produit " + p1.getLibelle());
-                stage.setScene(scene);
-                
-                
-                /*
-                fermer l'interface affichageProduits
-                 */
-                Stage stageParent = (Stage) btnAvis.getScene().getWindow();
-                stageParent.close();
-                
-                
-
-                stage.show();
             } catch (IOException ex) {
-                Logger.getLogger(GestionProduitController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DonnerAvisController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         });

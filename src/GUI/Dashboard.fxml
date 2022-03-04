@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.DashbordController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.DashboardController">
    <children>
       <BorderPane layoutY="-7.0" prefHeight="519.0" prefWidth="207.0" stylesheets="@ressources/StyleSheet.css">
          <left>
@@ -87,7 +87,7 @@
             </VBox>
          </left>
       </BorderPane>
-      <ScrollPane layoutX="210.0" prefHeight="512.0" prefWidth="667.0">
+      <ScrollPane layoutX="213.0" prefHeight="512.0" prefWidth="664.0">
          <content>
             <AnchorPane fx:id="homeClient" />
          </content>

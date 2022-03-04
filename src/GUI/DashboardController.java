@@ -15,16 +15,20 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import GUI.Forum.ForumHomeGUIController;
+import GUI.Shop.AffichageProduitClientController;
+import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
  * @author Spenz
  */
-public class DashbordController implements Initializable {
-    
-    int idClient;
-    
+public class DashboardController implements Initializable {
+
+    int idClient = 111;
+    public static AnchorPane parentClient;
+
     @FXML
     private Button btnHome;
     @FXML
@@ -45,18 +49,38 @@ public class DashbordController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        parentClient = homeClient;
         btnForum.setOnAction(a -> {
             try {
                 FXMLLoader forumPage = new FXMLLoader(getClass().getResource("Forum/ForumHomeGUI.fxml"));
                 ForumHomeGUIController fhc = new ForumHomeGUIController(idClient);
                 forumPage.setController(fhc);
                 Parent root = forumPage.load();
+
+                refreshParent(root);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        });
+        btnShop.setOnAction(a -> {
+            try {
+
+                FXMLLoader shopPage = new FXMLLoader(getClass().getResource("Shop/AffichageProduitClient.fxml"));
+                AffichageProduitClientController fhc = new AffichageProduitClientController(idClient);
+                shopPage.setController(fhc);
+                Parent root = shopPage.load();
                 homeClient.getChildren().clear();
                 homeClient.getChildren().add(root);
             } catch (IOException ex) {
                 System.err.println(ex.getMessage());
             }
         });
-    }    
-    
+    }
+
+    public static void refreshParent(Parent root) {
+        Stage stg=((Stage) parentClient.getScene().getWindow());
+        stg.sizeToScene();
+        parentClient.getChildren().clear();
+        parentClient.getChildren().add(root);
+    }
 }

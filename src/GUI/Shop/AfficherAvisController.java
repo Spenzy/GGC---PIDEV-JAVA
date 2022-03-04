@@ -58,7 +58,8 @@ public class AfficherAvisController implements Initializable {
     public AfficherAvisController() {
     }
 
-    public AfficherAvisController(int idProduit, int Note, String Libelle) {
+    public AfficherAvisController(int idClient, int idProduit, int Note, String Libelle) {
+        this.idClient = idClient;
         this.idProduit = idProduit;
         this.Note = Note;
         this.Libelle = Libelle;
@@ -68,42 +69,37 @@ public class AfficherAvisController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //detecter la fermeture de la fentere et ouvrir affichage produits
         arrierePlan.setStyle("-fx-background-color: white");
-        btnRetour.setOnAction(e -> {
-            Stage stage = (Stage) btnRetour.getScene().getWindow();
-            stage.close();
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("AffichageProduitClient.fxml"));
-                Stage primaryStage = new Stage();
-                primaryStage.setTitle("Interface Client Produits et Avis");
-
-                Scene scene = new Scene(root);
-                primaryStage.setScene(scene);
-                primaryStage.show();
-            } catch (IOException ex) {
-                Logger.getLogger(AfficherAvisController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        
-        /* stage.setOnCloseRequest(e -> {
-            System.out.println("tsaaaker w nhelou ejdid");
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("AffichageProduitClient.fxml"));
-            } catch (IOException ex) {
-                Logger.getLogger(AfficherAvisController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-         */
 
         List<Avis> ListAvis = a.afficher(idProduit);
         Avis.getChildren().clear();
         Avis.setStyle("-fx-background-color: white");
+        Button btnRetour = new Button("<-");
+        btnRetour.setPrefSize(40, 34);
+        btnRetour.setOnAction(e -> {
+
+            try {
+                FXMLLoader AfficherProduit = new FXMLLoader(getClass().getResource("AffichageProduitClient.fxml"));
+                AffichageProduitClientController AfficherController = new AffichageProduitClientController(idClient);
+                AfficherProduit.setController(AfficherController);
+                Parent root = AfficherProduit.load();
+                Avis.getChildren().clear();
+                Avis.getChildren().add(root);
+
+            } catch (IOException ex) {
+                Logger.getLogger(DonnerAvisController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        Avis.getChildren().add(btnRetour);
+
         if (ListAvis.isEmpty()) {
             Label emptyLabel = new Label("Aucun avis n'a été donné");
             Avis.getChildren().add(emptyLabel);
         } else {
+
             Label Label = new Label("Voici les avis du produit " + Libelle);
             Label.setStyle("-fx-padding:5px; -fx-font-size: 15px;");
             Label.setTranslateX(200);
+
             Avis.getChildren().add(Label);
 
             Label LabelLibelle = new Label(Libelle);
@@ -191,18 +187,18 @@ public class AfficherAvisController implements Initializable {
             //alert.setContentText("");
 
             Optional<ButtonType> option = alert.showAndWait();
-            //confirmation 
+            //confirmation
             if (option.get() == ButtonType.OK) {
-            a.supprimerAvis(a1.getIdAvis());
-            p.CalculAffectationNote();
-            Note = a.recupererNote(a1.getReferenceProduit());
-            refreshAffichageAvis(supprimer);
-            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                a.supprimerAvis(a1.getIdAvis());
+                p.CalculAffectationNote();
+                Note = a.recupererNote(a1.getReferenceProduit());
+                refreshAffichageAvis(supprimer);
+                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                 alert1.setTitle("Information!");
                 alert1.setHeaderText(null);
                 alert1.setContentText("Suppression avec Succées!");
                 alert1.show();
-            }else{
+            } else {
                 Alert alert1 = new Alert(Alert.AlertType.ERROR);
                 alert1.setTitle("Erreur!");
                 alert1.setHeaderText(null);
@@ -229,14 +225,12 @@ public class AfficherAvisController implements Initializable {
             FXMLLoader testLoad = new FXMLLoader(getClass().getResource("AfficherAvis.fxml"));
 
             //init Controller
-            AfficherAvisController controller = new AfficherAvisController(idProduit, Note, Libelle);
+            AfficherAvisController controller = new AfficherAvisController(idClient, idProduit, Note, Libelle);
             testLoad.setController(controller);
 
             Parent root = testLoad.load();
-
-            //scene switch
-            Scene affPubScene = new Scene(root);
-            ((Stage) btn.getScene().getWindow()).setScene(affPubScene);
+            Avis.getChildren().clear();
+            Avis.getChildren().add(root);
 
         } catch (IOException ex) {
             Logger.getLogger(AffichageProduitClientController.class.getName()).log(Level.SEVERE, null, ex);
@@ -247,7 +241,7 @@ public class AfficherAvisController implements Initializable {
         try {
             btnAjouter.setVisible(false);
             FXMLLoader AvisMain = new FXMLLoader(getClass().getResource("DonnerAvis.fxml"));
-            DonnerAvisController avisController = new DonnerAvisController(idProduit, Note, Libelle);
+            DonnerAvisController avisController = new DonnerAvisController(idClient, idProduit, Note, Libelle);
             AvisMain.setController(avisController);
             Parent root = AvisMain.load();
 
@@ -262,7 +256,7 @@ public class AfficherAvisController implements Initializable {
         try {
             btnAjouter.setVisible(false);
             FXMLLoader AvisMain = new FXMLLoader(getClass().getResource("ModifierAvis.fxml"));
-            ModifierAvisController avisController = new ModifierAvisController(a1);
+            ModifierAvisController avisController = new ModifierAvisController(idClient, a1);
             AvisMain.setController(avisController);
             Parent root = AvisMain.load();
 

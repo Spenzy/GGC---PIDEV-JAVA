@@ -1,73 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="590.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Shop.AffichageProduitClientController">
+<AnchorPane id="AnchorPane" prefHeight="616.0" prefWidth="677.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="614.0" prefWidth="251.0" styleClass="button1" stylesheets="@../css/StyleSheet.css">
-         <children>
-            <ImageView fitHeight="125.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../css/LogoGGC.png" />
-               </image>
-               <VBox.margin>
-                  <Insets left="60.0" top="20.0" />
-               </VBox.margin>
-            </ImageView>
-            <Label alignment="CENTER" prefHeight="35.0" prefWidth="251.0" text="Gamer Geeks communty" textFill="WHITE">
-               <font>
-                  <Font name="Bodoni MT" size="18.0" />
-               </font>
-            </Label>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="41.0" prefWidth="251.0" styleClass="button1" stylesheets="@../css/StyleSheet.css" text="Home">
-               <font>
-                  <Font name="Bodoni MT" size="18.0" />
-               </font>
-            </Button>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="41.0" prefWidth="251.0" styleClass="button1" stylesheets="@../css/StyleSheet.css" text="Forum">
-               <font>
-                  <Font name="Bodoni MT" size="18.0" />
-               </font>
-            </Button>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="41.0" prefWidth="251.0" styleClass="button1" stylesheets="@../css/StyleSheet.css" text="Shop">
-               <font>
-                  <Font name="Bodoni MT" size="18.0" />
-               </font>
-            </Button>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="41.0" prefWidth="251.0" styleClass="button1" stylesheets="@../css/StyleSheet.css" text="Evenement">
-               <font>
-                  <Font name="Bodoni MT" size="18.0" />
-               </font>
-            </Button>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="41.0" prefWidth="251.0" styleClass="button1" stylesheets="@../css/StyleSheet.css" text="Setting">
-               <font>
-                  <Font name="Bodoni MT" size="18.0" />
-               </font>
-            </Button>
-            <Pane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Label layoutX="73.0" layoutY="75.0" prefHeight="51.0" prefWidth="130.0" text="KeepToo" textFill="WHITE">
-                     <font>
-                        <Font name="Bodoni MT Black" size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-         </children>
-      </VBox>
-      <ScrollPane layoutX="251.0" layoutY="4.0" prefHeight="614.0" prefWidth="674.0">
-         <content>
-            <VBox fx:id="Products" prefHeight="614.0" prefWidth="659.0" spacing="1.0" />
-         </content>
-      </ScrollPane>
+      <VBox fx:id="Products" prefHeight="614.0" prefWidth="659.0" spacing="1.0" />
    </children>
 </AnchorPane>

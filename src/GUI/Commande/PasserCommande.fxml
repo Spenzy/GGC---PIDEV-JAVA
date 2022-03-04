@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="545.0" prefWidth="878.0" stylesheets="@../ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Commande.PasserCommandeController">
+<AnchorPane id="AnchorPane" prefHeight="545.0" prefWidth="878.0" stylesheets="@../ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="545.0" prefWidth="234.0" styleClass="blue-bg" stylesheets="@StyleSheet.css">
          <children>
