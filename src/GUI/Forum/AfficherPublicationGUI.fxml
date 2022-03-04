@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="700.0" stylesheets="@ressources/theme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="700.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <AnchorPane fx:id="anchorPub" minHeight="-Infinity" minWidth="-Infinity">
         <children>
@@ -21,7 +21,7 @@
             <Pane fx:id="panePub" layoutX="13.0" prefHeight="219.0" prefWidth="627.0">
                <children>
                   <TextArea fx:id="taDesc" layoutX="101.0" layoutY="82.0" minHeight="-Infinity" prefHeight="110.0" prefWidth="497.0" />
-                  <TextField fx:id="tfTitre" layoutX="102.0" layoutY="45.0" prefHeight="25.0" prefWidth="496.0" />
+                  <TextField fx:id="tfTitre" layoutX="102.0" layoutY="45.0" prefHeight="25.0" prefWidth="496.0" styleClass="text-field" />
                   <ToggleButton fx:id="tBtnUP" layoutX="19.0" layoutY="45.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" text="UP" />
                   <Label fx:id="lblNbrVote" layoutX="53.0" layoutY="81.0" text="0" />
                   <ToggleButton fx:id="tBtnDown" layoutX="19.0" layoutY="101.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="73.0" text="DOWN" />
