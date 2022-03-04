@@ -82,5 +82,6 @@
       <Hyperlink layoutX="480.0" layoutY="357.0" prefHeight="25.0" prefWidth="105.0" text="Forget Password ?" />
       <Label fx:id="errorLogin" layoutX="487.0" layoutY="240.0" prefHeight="25.0" prefWidth="231.0" textFill="#ff3737" />
       <Label fx:id="ereurpassword" layoutX="481.0" layoutY="314.0" prefHeight="25.0" prefWidth="231.0" textFill="#ff0e2a" />
+      <Button fx:id="valider" layoutX="443.0" layoutY="387.0" mnemonicParsing="false" onMouseClicked="#resetP" text="Button" />
    </children>
 </AnchorPane>

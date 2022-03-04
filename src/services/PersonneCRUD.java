@@ -19,6 +19,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,6 +30,7 @@ public class PersonneCRUD {
 
     Connection cnxx;
     Authentification aa = new Authentification();
+    private Statement st;
 
     public PersonneCRUD() {
         cnxx = MyConnection.getInstance().getCnx();
@@ -83,6 +86,46 @@ public class PersonneCRUD {
             System.err.println(ex.getMessage());
         }
         // return id;
+    }
+
+    public boolean ResetPass1(String Email, String Token) {
+        String qry = "UPDATE Personne SET  password='" + Token + "' WHERE email='" + Email + "' ";
+        PreparedStatement pst;
+        try {
+            pst = cnxx.prepareStatement(qry);
+            pst.setString(1, Token);
+
+            if (pst.executeUpdate() > 0) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonneCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+    }
+
+    public boolean ResetPass(String Email, String Token) {
+        String qry = "UPDATE personne p SET p.password= ? WHERE email= ? ";
+        try {
+            PreparedStatement pst = cnxx.prepareStatement(qry);
+            pst.setString(1, aa.hashagePWD(Token));
+            pst.setString(2, Email);
+            int res = pst.executeUpdate();
+            if (res > 0) {
+                return true;
+            }else
+            {
+                System.out.println("Erreur");
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonneCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
     }
 
     public void supprimerPersonne(int id_personne) {
@@ -192,6 +235,24 @@ public class PersonneCRUD {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    public Optional<Personne> getUserBy(String email) {
+        String requete = "SELECT * FROM personne"
+                + " WHERE email = ? ";
+        try {
+            PreparedStatement ps = cnxx.prepareStatement(requete);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Personne us = new Personne(rs.getInt("id_personne"), rs.getString("nom"), rs.getString("prenom"), rs.getDate("dateDeNaissance"), rs.getString("email"), rs.getInt("telephone"), rs.getString("password"));
+                return Optional.ofNullable(us);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
 }

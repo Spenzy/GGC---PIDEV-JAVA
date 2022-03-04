@@ -35,7 +35,7 @@ public class InscriptionController implements Initializable {
     @FXML
     private TextField tfnom;
     @FXML
-    private TextField tfpassword;
+    private PasswordField tfpassword;
     @FXML
     private TextField tfprenom;
     @FXML
