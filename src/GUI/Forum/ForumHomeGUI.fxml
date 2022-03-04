@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane maxHeight="700.0" maxWidth="931.0" prefHeight="414.0" prefWidth="775.0" stylesheets="@ressources/theme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="673.0">
+         <children>
+            <TabPane layoutX="14.0">
+               <tabs>
+                  <Tab closable="false" text="Postes Courantes">
+                     <content>
+                        <AnchorPane>
+                           <children>
+                              <VBox fx:id="vboxPub">
+                                 <children>
+                                    <HBox spacing="10.0">
+                                       <children>
+                                          <Label fx:id="lblNbrVotes" text="Nombre Votes" wrapText="true">
+                                             <padding>
+                                                <Insets top="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <TextField fx:id="tfTitre" disable="true" editable="false" prefHeight="25.0" prefWidth="121.0" text="Titre Publication" />
+                                          <Label fx:id="lblDate" text="Date Publication">
+                                             <padding>
+                                                <Insets top="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="lblNbrCommentaire" text="Nombre Commentaires">
+                                             <padding>
+                                                <Insets top="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Button fx:id="btnAjoutPub" mnemonicParsing="false" prefHeight="25.0" prefWidth="187.0" text="Publier" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab closable="false" text="Postes Archivées">
+                    <content>
+                      <AnchorPane>
+                           <children>
+                              <VBox fx:id="vboxPubArch">
+                                 <children>
+                                    <HBox spacing="10.0">
+                                       <children>
+                                          <Label fx:id="lblNbrVotes1" text="Nombre Votes" wrapText="true">
+                                             <padding>
+                                                <Insets top="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <TextField fx:id="tfTitre1" disable="true" editable="false" prefHeight="25.0" prefWidth="121.0" text="Titre Publication" />
+                                          <Label fx:id="lblDate1" text="Date Publication">
+                                             <padding>
+                                                <Insets top="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label fx:id="lblNbrCommentaire1" text="Nombre Commentaires">
+                                             <padding>
+                                                <Insets top="5.0" />
+                                             </padding>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>
