@@ -31,9 +31,6 @@ import javafx.stage.Stage;
  */
 public class DashboardAdminController implements Initializable {
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
     @FXML
     private Button btnGestProduit;
     @FXML
@@ -52,6 +49,7 @@ public class DashboardAdminController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        parentAdmin = homeAdmin;
         btnGestProduit.setOnAction(a -> {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("Shop/GestionProduit.fxml"));

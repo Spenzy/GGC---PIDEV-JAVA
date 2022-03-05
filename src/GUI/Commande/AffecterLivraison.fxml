@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -9,16 +8,12 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="578.0" prefWidth="1053.0" stylesheets="@../ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Commande.AffecterLivraisonController">
+<AnchorPane id="AnchorPane" prefHeight="578.0" prefWidth="872.0" stylesheets="@../ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Commande.AffecterLivraisonController">
    <children>
-      <TableView fx:id="tvCommande" layoutX="247.0" layoutY="22.0" prefHeight="200.0" prefWidth="453.0">
+      <TableView fx:id="tvCommande" layoutX="27.0" layoutY="25.0" prefHeight="200.0" prefWidth="453.0">
         <columns>
           <TableColumn fx:id="tcCCommande" prefWidth="85.0" text="Commande" />
           <TableColumn fx:id="tcClient" prefWidth="65.0" text="Client" />
@@ -28,86 +23,40 @@
             <TableColumn fx:id="tcCDate" prefWidth="75.0" text="Date" />
         </columns>
       </TableView>
-      <TableView fx:id="tvLivraison" layoutX="349.0" layoutY="315.0" prefHeight="200.0" prefWidth="240.0">
+      <TableView fx:id="tvLivraison" layoutX="129.0" layoutY="318.0" prefHeight="200.0" prefWidth="240.0">
         <columns>
           <TableColumn fx:id="tcLCommande" prefWidth="75.0" text="Commande" />
           <TableColumn fx:id="tcLivreur" prefWidth="75.0" text="Livreur" />
             <TableColumn fx:id="tcLDate" prefWidth="89.0" text="Date" />
         </columns>
       </TableView>
-      <ComboBox fx:id="cbCommande" layoutX="798.0" layoutY="97.0" prefWidth="150.0" />
-      <ComboBox fx:id="cbLivreur" layoutX="798.0" layoutY="172.0" prefWidth="150.0" />
-      <DatePicker fx:id="dpLivraison" layoutX="799.0" layoutY="256.0" prefHeight="25.0" prefWidth="150.0" />
-      <Label layoutX="834.0" layoutY="62.0" text="Commande" />
-      <Label layoutX="834.0" layoutY="140.0" text="Livreur" />
-      <Label layoutX="834.0" layoutY="225.0" text="Date de livraison" />
-      <Separator layoutX="738.0" layoutY="23.0" orientation="VERTICAL" prefHeight="422.0" prefWidth="4.0" />
-      <Button fx:id="btnValider" layoutX="844.0" layoutY="347.0" mnemonicParsing="false" onAction="#ValiderOnclick" styleClass="button1" stylesheets="@StyleSheet.css" text="Valider" />
-      <Label fx:id="title" layoutX="773.0" layoutY="14.0" prefHeight="48.0" prefWidth="240.0" text="Affectation Commande Livraison" textFill="#2100f5">
+      <ComboBox fx:id="cbCommande" layoutX="622.0" layoutY="100.0" prefWidth="150.0" />
+      <ComboBox fx:id="cbLivreur" layoutX="622.0" layoutY="175.0" prefWidth="150.0" />
+      <DatePicker fx:id="dpLivraison" layoutX="623.0" layoutY="259.0" prefHeight="25.0" prefWidth="150.0" />
+      <Label layoutX="658.0" layoutY="65.0" text="Commande" />
+      <Label layoutX="658.0" layoutY="143.0" text="Livreur" />
+      <Label layoutX="658.0" layoutY="228.0" text="Date de livraison" />
+      <Separator layoutX="535.0" layoutY="22.0" orientation="VERTICAL" prefHeight="422.0" prefWidth="4.0" />
+      <Button fx:id="btnValider" layoutX="668.0" layoutY="350.0" mnemonicParsing="false" onAction="#ValiderOnclick" styleClass="button1" text="Valider" />
+      <Label fx:id="title" layoutX="574.0" layoutY="25.0" prefHeight="48.0" prefWidth="240.0" text="Affectation Commande Livraison" textFill="#2100f5">
          <font>
             <Font name="System Italic" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="LabelDateVide" layoutX="802.0" layoutY="286.0" prefHeight="17.0" prefWidth="144.0" text="Veuillez saisir une date" textFill="#2100f5" />
-      <Button fx:id="btnModifier" layoutX="382.0" layoutY="533.0" mnemonicParsing="false" onAction="#ModifierOnclick" prefHeight="25.0" prefWidth="72.0" styleClass="button1" stylesheets="@StyleSheet.css" text="Modifier" />
-      <Button fx:id="btnSupprimer" layoutX="476.0" layoutY="533.0" mnemonicParsing="false" onAction="#SupprimerOnclick" styleClass="button1" stylesheets="@StyleSheet.css" text="Supprimer" />
-      <Button fx:id="Modification" layoutX="791.0" layoutY="347.0" mnemonicParsing="false" onAction="#ModifierLivraisonOnclick" styleClass="button1" stylesheets="@StyleSheet.css" text="Modifier" />
-      <Button fx:id="btnAnnulerModification" layoutX="917.0" layoutY="347.0" mnemonicParsing="false" onAction="#AnnulerModificationµOnclick" styleClass="button1" stylesheets="@StyleSheet.css" text="Annuler" />
-      <Button fx:id="btnRetardLivraison" layoutX="416.0" layoutY="230.0" mnemonicParsing="false" onAction="#RetardLivraisonOnclick" styleClass="button1" stylesheets="@StyleSheet.css" text="Retard Livraison" />
-      <VBox prefHeight="578.0" prefWidth="218.0" styleClass="blue-bg" stylesheets="@StyleSheet.css">
-         <children>
-            <ImageView fitHeight="137.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/LogoGGC.png" />
-               </image>
-               <VBox.margin>
-                  <Insets left="45.0" top="15.0" />
-               </VBox.margin>
-            </ImageView>
-            <Label alignment="CENTER" prefHeight="34.0" prefWidth="218.0" text="Gamer Geeks Comminity" textAlignment="RIGHT" textFill="WHITE">
-               <font>
-                  <Font name="Bodoni MT" size="18.0" />
-               </font>
-            </Label>
-            <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="218.0" styleClass="button1" stylesheets="@StyleSheet.css" text="Client">
-               <font>
-                  <Font name="Bodoni MT" size="19.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="218.0" styleClass="button1" stylesheets="@StyleSheet.css" text="Moderateur">
-               <font>
-                  <Font name="Bodoni MT" size="19.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="218.0" styleClass="button1" stylesheets="@StyleSheet.css" text="Statistique">
-               <font>
-                  <Font name="Bodoni MT" size="19.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="218.0" styleClass="button1" stylesheets="@StyleSheet.css" text="Setting">
-               <font>
-                  <Font name="Bodoni MT" size="19.0" />
-               </font>
-            </Button>
-            <Pane prefHeight="178.0" prefWidth="218.0">
-               <children>
-                  <Label layoutX="63.0" layoutY="47.0" prefHeight="68.0" prefWidth="125.0" text="Keep Too" textFill="WHITE">
-                     <font>
-                        <Font name="Bodoni MT Black" size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-         </children>
-      </VBox>
-      <Label fx:id="LabelSysDate" layoutX="766.0" layoutY="294.0" text="La date doit etre supérieure à celle d'aujourd'hui" textFill="#2100f5" />
-      <Button fx:id="majCheck" layoutX="612.0" layoutY="388.0" mnemonicParsing="false" onAction="#majCheckOnclick" stylesheets="@StyleSheet.css" text="Marquer Livrée">
+      <Label fx:id="LabelDateVide" layoutX="626.0" layoutY="289.0" prefHeight="17.0" prefWidth="144.0" text="Veuillez saisir une date" textFill="#2100f5" />
+      <Button fx:id="btnModifier" layoutX="162.0" layoutY="536.0" mnemonicParsing="false" onAction="#ModifierOnclick" prefHeight="25.0" prefWidth="72.0" styleClass="button1" text="Modifier" />
+      <Button fx:id="btnSupprimer" layoutX="256.0" layoutY="536.0" mnemonicParsing="false" onAction="#SupprimerOnclick" styleClass="button1" text="Supprimer" />
+      <Button fx:id="Modification" layoutX="615.0" layoutY="350.0" mnemonicParsing="false" onAction="#ModifierLivraisonOnclick" styleClass="button1" text="Modifier" />
+      <Button fx:id="btnAnnulerModification" layoutX="741.0" layoutY="350.0" mnemonicParsing="false" onAction="#AnnulerModificationµOnclick" styleClass="button1" text="Annuler" />
+      <Button fx:id="btnRetardLivraison" layoutX="196.0" layoutY="233.0" mnemonicParsing="false" onAction="#RetardLivraisonOnclick" styleClass="button1" text="Retard Livraison" />
+      <Label fx:id="LabelSysDate" layoutX="590.0" layoutY="297.0" text="La date doit etre supérieure à celle d'aujourd'hui" textFill="#2100f5" />
+      <Button fx:id="majCheck" layoutX="392.0" layoutY="391.0" mnemonicParsing="false" onAction="#majCheckOnclick" text="Marquer Livrée">
          <styleClass>
             <String fx:value="button1" />
             <String fx:value="button2" />
          </styleClass>
       </Button>
-      <Button fx:id="majNCheck" layoutX="599.0" layoutY="432.0" mnemonicParsing="false" onAction="#majNCheckOnclick" styleClass="button2" stylesheets="@StyleSheet.css" text="Marquer Non Livrée" />
-      <Button fx:id="btnstat" layoutX="406.0" layoutY="268.0" mnemonicParsing="false" onAction="#StatOnclick" styleClass="button1" stylesheets="@StyleSheet.css" text="Graph Commandes" />
+      <Button fx:id="majNCheck" layoutX="379.0" layoutY="435.0" mnemonicParsing="false" onAction="#majNCheckOnclick" styleClass="button2" text="Marquer Non Livrée" />
+      <Button fx:id="btnstat" layoutX="186.0" layoutY="271.0" mnemonicParsing="false" onAction="#StatOnclick" styleClass="button1" text="Graph Commandes" />
    </children>
 </AnchorPane>
