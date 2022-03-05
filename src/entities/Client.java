@@ -27,11 +27,10 @@ public class Client extends Personne {
     public Client() {
     }
 
-    public Client(Integer idClient, Integer nbrAvertissement, Integer ban, Integer etat, Date dateDebutBlock, Date dateFinBlock) {
+    public Client(Integer idClient, Integer nbrAvertissement, Integer ban, Date dateDebutBlock, Date dateFinBlock) {
         this.idClient = idClient;
         this.nbrAvertissement = nbrAvertissement;
         this.ban = ban;
-        this.etat = etat;
         this.dateDebutBlock = dateDebutBlock;
         this.dateFinBlock = dateFinBlock;
     }
@@ -40,11 +39,10 @@ public class Client extends Personne {
         super(nom, prenom, dateNaissance, email, telephone, password);
     }
 
-    public Client(int id_personne, String nom, String prenom, Date dateNaissance, String email, int telephone, String password, int nbrAvertissement, int ban, int etat, Date dateDebutBlock, Date dateFinBlock) {
+    public Client(int id_personne, String nom, String prenom, Date dateNaissance, String email, int telephone, String password, int nbrAvertissement, int ban, Date dateDebutBlock, Date dateFinBlock) {
         super(id_personne, nom, prenom, dateNaissance, email, telephone, password);
         this.nbrAvertissement = nbrAvertissement;
         this.ban = ban;
-        this.etat = etat;
         this.dateDebutBlock = dateDebutBlock;
         this.dateFinBlock = dateFinBlock;
     }
@@ -99,7 +97,7 @@ public class Client extends Personne {
 
     @Override
     public String toString() {
-        return "Client{" + "idClient=" + idClient + ", nbrAvertissement=" + nbrAvertissement + ", ban=" + ban + ", etat=" + etat + ", dateDebutBlock=" + dateDebutBlock + ", dateFinBlock=" + dateFinBlock + '}';
+        return "Client{" + "idClient=" + idClient + ", nbrAvertissement=" + nbrAvertissement + ", ban=" + ban + ", dateDebutBlock=" + dateDebutBlock + ", dateFinBlock=" + dateFinBlock + '}';
     }
 
 }

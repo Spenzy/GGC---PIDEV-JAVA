@@ -2,17 +2,17 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="GUI.UpdateClientController">
+<AnchorPane id="AnchorPane" prefHeight="376.0" prefWidth="600.0" stylesheets="@ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.UpdateClientController">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0">
-         <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="372.0" prefWidth="600.0">
+         <top>
+            <Pane prefHeight="368.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
                   <TextField fx:id="tfidClient" layoutX="207.0" layoutY="44.0" />
                   <TextField fx:id="tfNom" layoutX="207.0" layoutY="81.0" />
@@ -22,9 +22,16 @@
                   <DatePicker fx:id="tfdate" layoutX="207.0" layoutY="155.0" prefHeight="25.0" prefWidth="149.0" />
                   <TextField fx:id="tfpassword" layoutX="207.0" layoutY="265.0" />
                   <Button fx:id="tfupdate" layoutX="207.0" layoutY="314.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="149.0" styleClass="button1" stylesheets="@../css/Stylesheet.css" text="Update" />
+                  <Label layoutX="164.0" layoutY="48.0" text="Id" />
+                  <Label layoutX="155.0" layoutY="85.0" text="Nom" />
+                  <Label layoutX="147.0" layoutY="120.0" text="Prénom" />
+                  <Label layoutX="155.0" layoutY="159.0" text="Date" />
+                  <Label layoutX="152.0" layoutY="192.0" text="Email" />
+                  <Label layoutX="96.0" layoutY="228.0" text="Numéro Téléphone" />
+                  <Label layoutX="142.0" layoutY="269.0" text="Password" />
                </children>
             </Pane>
-         </center>
+         </top>
       </BorderPane>
    </children>
 </AnchorPane>

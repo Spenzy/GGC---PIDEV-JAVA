@@ -43,6 +43,14 @@
 <!--                        <FontAwesomeIconView fill="WHITE" glyphName="HOME" />-->
                      </graphic>
                   </Button>
+                  <Button fx:id="btnForum" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="Gestion Forum" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="19.0" />
+                     </font>
+                     <graphic>
+<!--                        <FontAwesomeIconView fill="WHITE" glyphName="HOME" />-->
+                     </graphic>
+                  </Button>
                   <Button fx:id="btnGestCommande" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="Gestion Commande" textFill="WHITE">
                      <font>
                         <Font name="Cambria" size="19.0" />

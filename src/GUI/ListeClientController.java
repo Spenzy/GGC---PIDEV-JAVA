@@ -43,8 +43,8 @@ public class ListeClientController implements Initializable {
     private TextField tfnbr;
     @FXML
     private TextField tfban;
-    @FXML
-    private TextField tfetat;
+//    @FXML
+//    private TextField tfetat;
     @FXML
     private DatePicker tfdatedebut;
     @FXML
@@ -57,8 +57,8 @@ public class ListeClientController implements Initializable {
     private TableColumn<Client, Integer> colnbr;
     @FXML
     private TableColumn<Client, Integer> colban;
-    @FXML
-    private TableColumn<Client, Integer> coletat;
+//    @FXML
+//    private TableColumn<Client, Integer> coletat;
     @FXML
     private TableColumn<Client, Date> coldatedebut;
     @FXML
@@ -136,7 +136,7 @@ public class ListeClientController implements Initializable {
             rs = st.executeQuery(req);
             Client client;
             while (rs.next()) {
-                client = new Client(rs.getInt("idClient"), rs.getInt("nbrAvertissement"), rs.getInt("ban"), rs.getInt("etat"), rs.getDate("dateDebutBlock"), rs.getDate("dateFinBlock"));
+                client = new Client(rs.getInt("idClient"), rs.getInt("nbrAvertissement"), rs.getInt("ban"), rs.getDate("dateDebutBlock"), rs.getDate("dateFinBlock"));
                 Clientlist.add(client);
             }
 
@@ -153,7 +153,7 @@ public class ListeClientController implements Initializable {
         colid.setCellValueFactory(new PropertyValueFactory<Client, Integer>("idClient"));
         colnbr.setCellValueFactory(new PropertyValueFactory<Client, Integer>("nbrAvertissement"));
         colban.setCellValueFactory(new PropertyValueFactory<Client, Integer>("ban"));
-        coletat.setCellValueFactory(new PropertyValueFactory<Client, Integer>("etat"));
+//        coletat.setCellValueFactory(new PropertyValueFactory<Client, Integer>("etat"));
         coldatedebut.setCellValueFactory(new PropertyValueFactory<Client, Date>("dateDebutBlock"));
         coldatefin.setCellValueFactory(new PropertyValueFactory<Client, Date>("dateFinBlock"));
         tvBooks.setItems(list);
@@ -171,7 +171,7 @@ public class ListeClientController implements Initializable {
 
     private void UpdateRecord() {
 
-        String req = " UPDATE client SET nbrAvertissement ='" + tfnbr.getText() + "', ban ='" + tfban.getText() + "', etat ='" + tfetat.getText() + "' , dateDebutBlock = '" + java.sql.Date.valueOf(tfdatedebut.getValue()) + "', dateFinBlock = '" + java.sql.Date.valueOf(tfdatefin.getValue()) + "' WHERE idClient = '" + tfid.getText() + "'";
+        String req = " UPDATE client SET nbrAvertissement ='" + tfnbr.getText() + "', ban ='" + tfban.getText() + "' , dateDebutBlock = '" + java.sql.Date.valueOf(tfdatedebut.getValue()) + "', dateFinBlock = '" + java.sql.Date.valueOf(tfdatefin.getValue()) + "' WHERE idClient = '" + tfid.getText() + "'";
         executeQuery(req);
 
         showClient();
@@ -198,7 +198,7 @@ public class ListeClientController implements Initializable {
         tfid.setText("" + client.getIdClient());
         tfnbr.setText("" + client.getNbrAvertissement());
         tfban.setText("" + client.getBan());
-        tfetat.setText("" + client.getEtat());
+//        tfetat.setText("" + client.getEtat());
         //tfdatenaissance.setValue(client.getDateNaissance().toLocalDate());
 
         tfdatedebut.setValue(client.getDateDebutBlock().toLocalDate());

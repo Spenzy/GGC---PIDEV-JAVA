@@ -52,7 +52,9 @@ public class DashboardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        idClient = homePage.loggedInID;
+        idClient = 5;
+        
         parentClient = homeClient;
         btnForum.setOnAction(a -> {
             try {
@@ -69,9 +71,8 @@ public class DashboardController implements Initializable {
 
         btnShop.setOnAction(a -> {
             try {
-                idClient = 111;
                 FXMLLoader shopPage = new FXMLLoader(getClass().getResource("Shop/AffichageProduitClient.fxml"));
-                AffichageProduitClientController fhc = new AffichageProduitClientController(idClient);
+                AffichageProduitClientController fhc = new AffichageProduitClientController(111);
                 shopPage.setController(fhc);
                 Parent root = shopPage.load();
                 refreshParent(root);
@@ -79,6 +80,7 @@ public class DashboardController implements Initializable {
                 System.err.println(ex.getMessage());
             }
         });
+        
         btnCommande.setOnAction(a -> {
             try {
                 FXMLLoader cmdPage = new FXMLLoader(getClass().getResource("Commande/PasserCommande.fxml"));
@@ -95,6 +97,16 @@ public class DashboardController implements Initializable {
         btnEvennement.setOnAction(a -> {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("Evennement/AffichEvent.fxml"));
+
+                refreshParent(root);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        });
+        
+        btnSetting.setOnAction(a -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("UpdateClient.fxml"));
 
                 refreshParent(root);
             } catch (IOException ex) {

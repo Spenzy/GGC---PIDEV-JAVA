@@ -40,6 +40,8 @@ public class DashboardAdminController implements Initializable {
     @FXML
     private Button btnGestModerateur;
     @FXML
+    private Button btnForum;
+    @FXML
     private AnchorPane homeAdmin;
     
     public static AnchorPane parentAdmin;
@@ -71,6 +73,19 @@ public class DashboardAdminController implements Initializable {
             }
         });
         
+        btnForum.setOnAction(a -> {
+            try {
+                FXMLLoader forumPage = new FXMLLoader(getClass().getResource("Forum/ForumHomeGUI.fxml"));
+                ForumHomeGUIController fhc = new ForumHomeGUIController(1);
+                forumPage.setController(fhc);
+                Parent root = forumPage.load();
+
+                refreshParent(root);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        });
+        
         btnGestClient.setOnAction(a -> {
             try {
                 FXMLLoader forumPage = new FXMLLoader(getClass().getResource("ListeClient.fxml"));
@@ -92,6 +107,8 @@ public class DashboardAdminController implements Initializable {
                 System.err.println(ex.getMessage());
             }
         });
+        
+        
     }
 
     public static void refreshParent(Parent root) {

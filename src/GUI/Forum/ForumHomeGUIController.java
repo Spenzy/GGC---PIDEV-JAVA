@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import services.PersonneCRUD;
@@ -42,6 +43,8 @@ public class ForumHomeGUIController implements Initializable {
     private VBox vboxPub;
     @FXML
     private VBox vboxPubArch;
+    @FXML
+    private Button btnStat;
 
     public ForumHomeGUIController() {
     }
@@ -60,6 +63,17 @@ public class ForumHomeGUIController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         initPublications();
+        
+        btnStat.setOnAction(a->{
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("StatistiqueForum.fxml"));
+                Stage stg = new Stage();
+                stg.setScene(new Scene(root));
+                stg.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ForumHomeGUIController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
 
         btnAjoutPub.setOnAction((ActionEvent a) -> {
             PublierGUIController ppc = new PublierGUIController(idClient);
@@ -70,13 +84,16 @@ public class ForumHomeGUIController implements Initializable {
 
     public void initPublications() {
         ArrayList publications = pc.afficherPublication();
+        System.out.println("1");
         publications.stream()
                 .forEach(p -> {
+                    System.out.println("2");
                     try {
                         FXMLLoader cLoader = new FXMLLoader(getClass().getResource("PublicationForumGUI.fxml"));
                         PublicationForumGUIController controller = new PublicationForumGUIController((Publication) p, idClient);
                         cLoader.setController(controller);
                         Parent cNode = cLoader.load();
+                        System.out.println("hazerbi");
                         if (((Publication) p).isArchive()) {
                             vboxPubArch.getChildren().add(cNode);
                         } else {

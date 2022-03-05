@@ -5,7 +5,12 @@
  */
 package GUI.Forum;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -17,11 +22,14 @@ public class ForumMain extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-//        int idClient = 1;
-//        ForumHomeGUIController fhc = new ForumHomeGUIController();
-//        Scene scene = fhc.refreshForum(idClient);
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
+        try {
+            int idClient = 1;
+            Parent root = FXMLLoader.load(getClass().getResource("ForumHomeGUI.fxml"));
+            primaryStage.setScene(new Scene(root));
+            primaryStage.show();
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 
     /**
