@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="GUI.UpdateClientController">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="600.0">
+         <center>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="tfidClient" layoutX="207.0" layoutY="44.0" />
+                  <TextField fx:id="tfNom" layoutX="207.0" layoutY="81.0" />
+                  <TextField fx:id="tfPrenom" layoutX="207.0" layoutY="116.0" />
+                  <TextField fx:id="tftelephone" layoutX="207.0" layoutY="224.0" />
+                  <TextField fx:id="tfemail" layoutX="207.0" layoutY="188.0" />
+                  <DatePicker fx:id="tfdate" layoutX="207.0" layoutY="155.0" prefHeight="25.0" prefWidth="149.0" />
+                  <TextField fx:id="tfpassword" layoutX="207.0" layoutY="265.0" />
+                  <Button fx:id="tfupdate" layoutX="207.0" layoutY="314.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="149.0" styleClass="button1" stylesheets="@../css/Stylesheet.css" text="Update" />
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
