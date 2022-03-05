@@ -97,9 +97,9 @@ public class DashboardController implements Initializable {
     }
 
     public static void refreshParent(Parent root) {
-        Stage stg=((Stage) parentClient.getScene().getWindow());
-        stg.sizeToScene();
         parentClient.getChildren().clear();
         parentClient.getChildren().add(root);
+        Stage stg=((Stage) parentClient.getScene().getWindow());
+        stg.sizeToScene();
     }
 }
