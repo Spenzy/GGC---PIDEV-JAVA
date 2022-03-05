@@ -32,17 +32,9 @@ public class DashboardController implements Initializable {
     public static AnchorPane parentClient;
 
     @FXML
-    private Button btnHome;
-    @FXML
     private Button btnForum;
     @FXML
     private Button btnShop;
-    @FXML
-    private Button btnStreamer;
-    @FXML
-    private Button btnEvennement;
-    @FXML
-    private Button btnSetting;
     @FXML
     private AnchorPane homeClient;
     @FXML
