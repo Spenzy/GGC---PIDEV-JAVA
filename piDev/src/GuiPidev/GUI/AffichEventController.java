@@ -58,7 +58,7 @@ public class AffichEventController implements Initializable {
     private TableColumn<Evenement,Button> participerCol;
     EvenementCrud ec = new EvenementCrud();
     private Button participe;
-    int idClient = 2;
+    int idClient = 1;
     int idEvent=2;
     ParticipationCrud pc = new ParticipationCrud();
     @FXML
@@ -66,6 +66,7 @@ public class AffichEventController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -79,9 +80,10 @@ public class AffichEventController implements Initializable {
         if (event.getSource()==participe){
             Participation p = new Participation(idClient ,idEvent, 4);
             pc.ajouterParticipation(p);
-            
+               
         }
     }
+    
      private void initCols() {
       refCol = new TableColumn<>("Reference");//nom de l'afichage
       refCol.setCellValueFactory(new PropertyValueFactory<>("reference"));

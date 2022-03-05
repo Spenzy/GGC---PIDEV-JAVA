@@ -3,10 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Azer%20Lahmer/Documents/NetBeansProjects/piDev/src/GuiPidev/GUI/ListeParticipationController.java</file>
             <file>file:/C:/Users/Azer%20Lahmer/Documents/NetBeansProjects/piDev/src/Services/pdf.java</file>
+            <file>file:/C:/Users/Azer%20Lahmer/Documents/NetBeansProjects/piDev/src/GuiPidev/GUI/AjouterEvenementController.java</file>
+            <file>file:/C:/Users/Azer%20Lahmer/Documents/NetBeansProjects/piDev/src/GuiPidev/GUI/ListeParticipation.fxml</file>
             <file>file:/C:/Users/Azer%20Lahmer/Documents/NetBeansProjects/piDev/src/Services/EvenementCrud.java</file>
+            <file>file:/C:/Users/Azer%20Lahmer/Documents/NetBeansProjects/piDev/src/GuiPidev/GUI/HomePage.java</file>
+            <file>file:/C:/Users/Azer%20Lahmer/Documents/NetBeansProjects/piDev/src/Entities/Client.java</file>
+            <file>file:/C:/Users/Azer%20Lahmer/Documents/NetBeansProjects/piDev/src/Services/ParticipationCrud.java</file>
             <file>file:/C:/Users/Azer%20Lahmer/Documents/NetBeansProjects/piDev/src/GuiPidev/GUI/AffichEventController.java</file>
-            <file>file:/C:/Users/Azer%20Lahmer/Documents/NetBeansProjects/piDev/src/Entities/Evenement.java</file>
+            <file>file:/C:/Users/Azer%20Lahmer/Documents/NetBeansProjects/piDev/src/Entities/Personne.java</file>
         </group>
     </open-files>
 </project-private>

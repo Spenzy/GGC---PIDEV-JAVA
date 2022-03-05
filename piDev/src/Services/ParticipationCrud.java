@@ -38,9 +38,9 @@ public class ParticipationCrud {
                 pst.setInt(1, p.getIdClient());
                 pst.setInt(2, p.getIdEvent());
                 pst.setInt(3, p.getNbrEtoile());
-                pst.executeUpdate();
+                 pst.executeUpdate();
                 pst = cnxx.prepareStatement(req);
-                
+            
                 System.out.println("Participation Ajoutée avec succées");
 
             } catch (SQLException ex) {
@@ -89,6 +89,7 @@ public class ParticipationCrud {
         }
         return myList;
     }
+    
 
     public int getNbrParticipant(int idEvent) {
         String req = "SELECT nbrParticipant FROM evenement WHERE reference = ? ";

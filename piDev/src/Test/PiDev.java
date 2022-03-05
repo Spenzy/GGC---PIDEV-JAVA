@@ -29,9 +29,9 @@ public class PiDev {
         
         Date date = new Date(1998, 12, 1);
         Date date2 = new Date(1998, 12, 2);
-        Evenement e = new Evenement(8, date, date2, "sousse", "Azer particpant", 1,"htttphh");
-        Evenement e1 = new Evenement(2, date, date2, "sousse", "Azer particpant", 12,"httpp");
-        Evenement e2 = new Evenement(3, date, date2, "soussa", "Azer particpant", 11,"httyyyuu");
+        Evenement e = new Evenement(8, date, date2, "sousse", "Azer particpant", 1);
+        Evenement e1 = new Evenement(2, date, date2, "sousse", "Azer particpant", 12);
+        Evenement e2 = new Evenement(3, date, date2, "soussa", "Azer particpant", 11);
         Participation p = new Participation(1,1,3);
         Participation p1 = new Participation(2,2,4);
           Participation p2 = new Participation(3,3,4);

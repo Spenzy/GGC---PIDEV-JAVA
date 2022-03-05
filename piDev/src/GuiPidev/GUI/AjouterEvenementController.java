@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package GuiPidev.GUI;
+
 /*import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +24,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -49,6 +51,7 @@ import javafx.stage.Stage;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import org.controlsfx.control.textfield.TextFields;
+import java.util.Date;
 
 /**
  * FXML Controller class
@@ -77,8 +80,9 @@ public class AjouterEvenementController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    /*Evenement e = new Evenement();
-    EvenementCrud ec = new EvenementCrud();*/
+    Evenement e = new Evenement();
+
+    EvenementCrud ec = new EvenementCrud();
     String[] words = {"manzah1",
         "manzah2", "manzah3", "manzah4", "manzah5",
         "manzah6", "manzah7", "manzah8", "manzah9",
@@ -105,6 +109,7 @@ public class AjouterEvenementController implements Initializable {
     @FXML
     private void ajouterEvenement(ActionEvent event) {
 
+        //// verif champ vide
         if (tfReference.getText().isEmpty() || tfLocalisation.getText().isEmpty() || tfDescription.getText().isEmpty() || tfNbrParticipants.getText().isEmpty()) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erreur!");
@@ -112,27 +117,76 @@ public class AjouterEvenementController implements Initializable {
             alert.setContentText(" Champ vide!");
             alert.show();
         } else {
-
             try {
+                LocalDate dateDebut = tfDateDebut.getValue();
+                LocalDate dateFin = tfDateFin.getValue();
+                
+                SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
+                
+                boolean dateTrue = true;
+                
+                //String[] dateDebutArr = dateDebut.toString().split("-");
+                //String[] dateFinArr = dateFin.toString().split("-");
+                
+                try {
+                    
+                  Date  _dateDebut = sdformat.parse(dateDebut.toString()); 
+                  Date  _dateFin = sdformat.parse(dateFin.toString()); 
+                  
+                  if (_dateDebut.compareTo(_dateFin) > 0) {
+                      dateTrue=false;
+                  }
+                } catch(ParseException e ) {
+                    
+                } 
+                /* 
+                TODO:
+                    Condition
+                        Date debut > current date
+                        Date Fin >= Date debut
+                
+                    1. get current date
+                    2. split current date
+                
+                    if ( date-debut-annee < datefinannee ) 
+                        if  (datedebut mois < datefin mois)
+                            if ( datedebut jour < datefin jour)
+                
+                    datedebut > current date
+                */
+                    
+                /// Verifier nbrParticipants
                 if (Integer.parseInt(tfNbrParticipants.getText()) < 1) {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Erreur!");
                     alert.setHeaderText(null);
                     alert.setContentText(" nombre de participants doit etre superieur à 1");
                     alert.show();
+
+                    ///Verifier reference
+                } else if (ec.VerifEvenement(Integer.parseInt(tfReference.getText()))) {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Erreur!");
+                    alert.setHeaderText(null);
+                    alert.setContentText("La reference de cet evenement Existe ");
+                    alert.show();
+                } else if (dateTrue) {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Erreur!");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Date ");
+                    alert.show();
                 } else {
 
                     //Récuperer les données saisies dans le formulaire 
                     int ref = Integer.parseInt(tfReference.getText());
-                    LocalDate dateDebut = tfDateDebut.getValue();
-                    LocalDate dateFin = tfDateFin.getValue();
                     String local = tfLocalisation.getText();
                     String desc = tfDescription.getText();
                     int nbrPart = Integer.parseInt(tfNbrParticipants.getText());
-                    String img = tfImage.getText();
-                    img = img.replace("//", "///");
+                    //String img = tfImage.getText();
+                    //img = img.replace("//", "///");
 
-                    Evenement e = new Evenement(ref, java.sql.Date.valueOf(dateDebut), java.sql.Date.valueOf(dateFin), local, desc, nbrPart, img);
+                    Evenement e = new Evenement(ref, java.sql.Date.valueOf(dateDebut), java.sql.Date.valueOf(dateFin), local, desc, nbrPart);
                     EvenementCrud ec = new EvenementCrud();
                     ec.ajouterEvenement(e);
 
@@ -153,7 +207,7 @@ public class AjouterEvenementController implements Initializable {
         }
 
     }
-/*
+    /*
     @FXML
     private void uploadPic(MouseEvent event) {
 
@@ -168,9 +222,9 @@ public class AjouterEvenementController implements Initializable {
         tfload.setIcon(icon);
 
     }
-    */
+     */
 
-    /*
+ /*
     @FXML
     private void uploadPic(MouseEvent event) {
        
@@ -191,15 +245,7 @@ public class AjouterEvenementController implements Initializable {
                         }
     
     }*/
-    
-    
-    
-    
-    
-    
-    
-    
-    /*private void uploadPic(MouseEvent event) throws IOException {
+ /*private void uploadPic(MouseEvent event) throws IOException {
       //creating the image object
       InputStream stream = new FileInputStream("D:\\images\\elephant.jpg");
       Image image = new Image(stream);
@@ -219,6 +265,4 @@ public class AjouterEvenementController implements Initializable {
       stage.setScene(scene);
       stage.show();
    }*/
-    
-     
 }

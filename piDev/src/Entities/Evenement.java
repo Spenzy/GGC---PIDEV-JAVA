@@ -23,7 +23,7 @@ public class Evenement {
     private String localisation;
     private String description;
     private int nbrParticipant;
-    private String image ;
+    //private String image ;
     private Button participer;
 
     public Evenement() {
@@ -33,14 +33,14 @@ public class Evenement {
         this.reference = reference;
     }
 
-    public Evenement(int reference, Date dateDebut, Date dateFin, String localisation, String description, int nbrParticipant , String image) {
+    public Evenement(int reference, Date dateDebut, Date dateFin, String localisation, String description, int nbrParticipant) {
         this.reference = reference;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.localisation = localisation;
         this.description = description;
         this.nbrParticipant = nbrParticipant;
-        this.image = image;
+        //this.image = image;
     }
 
 
@@ -73,13 +73,13 @@ public class Evenement {
         return nbrParticipant;
     }
 
-    public String getImage() {
-        return image;
-    }
+//    public String getImage() {
+//        return image;
+//    }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
+//    public void setImage(String image) {
+//        this.image = image;
+//    }
     
 
     public void setReference(int reference) {

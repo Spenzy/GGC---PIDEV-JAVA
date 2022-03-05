@@ -17,19 +17,19 @@
     </stylesheets>
    <children>
       <TableView fx:id="evenementsTable" layoutX="27.0" layoutY="152.0" onMouseClicked="#ModifierTable" prefHeight="308.0" prefWidth="618.0" style="-fx-background-color: #5ED6EB;" styleClass="tableView" stylesheets="@../../Css/stylesheet.css" />
-      <Pane layoutY="57.0" prefHeight="7.0" prefWidth="671.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Pane layoutX="1.0" layoutY="86.0" prefHeight="7.0" prefWidth="671.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" />
       <Text fill="WHITE" layoutX="71.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evenements Details" wrappingWidth="242.13671875">
          <font>
             <Font name="Bodoni MT Black" size="24.0" />
          </font>
       </Text>
-      <HBox layoutX="32.0" layoutY="93.0" prefHeight="42.0" prefWidth="337.0" style="visibility: #1976D2;">
+      <HBox layoutX="32.0" layoutY="107.0" prefHeight="43.0" prefWidth="337.0" style="visibility: #1976D2;">
          <children>
             <Button mnemonicParsing="false" onAction="#Ajouter" prefHeight="30.0" prefWidth="76.0" style="-fx-border-color: black;" styleClass="ajoutbnt" stylesheets="@../../Css/stylesheet.css" text="Ajouter">
                <font>
                   <Font name="Arial Black" size="12.0" />
                </font></Button>
-            <Button mnemonicParsing="false" onAction="#Supprimer" prefHeight="30.0" prefWidth="99.0" style="-fx-border-color: black;" styleClass="supprimerbtn" stylesheets="@../../Css/stylesheet.css" text="Supprimer">
+            <Button mnemonicParsing="false" onAction="#Supprimer" prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: black;" styleClass="supprimerbtn" stylesheets="@../../Css/stylesheet.css" text="Supprimer">
                <font>
                   <Font name="Arial Black" size="12.0" />
                </font></Button>
@@ -48,5 +48,7 @@
             <Image url="@../../img/LogoGGC%20(1).png" />
          </image>
       </ImageView>
+      <Button fx:id="tfListeEvenements" layoutX="63.0" layoutY="55.0" mnemonicParsing="false" onAction="#listeEvenements" prefHeight="30.0" prefWidth="119.0" text="liste evenements" />
+      <Button fx:id="tfListeParticipations" layoutX="182.0" layoutY="55.0" mnemonicParsing="false" onAction="#listeParticipations" prefHeight="30.0" prefWidth="125.0" text="liste participations" />
    </children>
 </AnchorPane>
