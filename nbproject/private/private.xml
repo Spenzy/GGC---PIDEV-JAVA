@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Spenz/Desktop/STUFF/GitFun/GGC-PIDEV/src/services/CommandeCRUD.java</file>
+            <file>file:/C:/Users/Spenz/Desktop/STUFF/GitFun/GGC-PIDEV/src/GUI/DashboardController.java</file>
+            <file>file:/C:/Users/Spenz/Desktop/STUFF/GitFun/GGC-PIDEV/src/GUI/Forum/AfficherPublicationGUIController.java</file>
+            <file>file:/C:/Users/Spenz/Desktop/STUFF/GitFun/GGC-PIDEV/src/GUI/GccMain.java</file>
+            <file>file:/C:/Users/Spenz/Desktop/STUFF/GitFun/GGC-PIDEV/src/GUI/Dashboard.fxml</file>
         </group>
     </open-files>
 </project-private>

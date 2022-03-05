@@ -5,6 +5,7 @@
  */
 package GUI.Forum;
 
+import GUI.DashboardController;
 import entities.Publication;
 import java.io.IOException;
 import java.net.URL;
@@ -62,8 +63,8 @@ public class ForumHomeGUIController implements Initializable {
 
         btnAjoutPub.setOnAction((ActionEvent a) -> {
             PublierGUIController ppc = new PublierGUIController(idClient);
-            Scene newScene = ppc.refreshPublier(btnAjoutPub);
-            ((Stage) btnAjoutPub.getScene().getWindow()).setScene(newScene);
+            DashboardController.refreshParent(ppc.refreshPublier(btnAjoutPub));
+            
         });
     }
 
@@ -83,28 +84,25 @@ public class ForumHomeGUIController implements Initializable {
                         }
 
                     } catch (IOException ex) {
-                        Logger.getLogger(AfficherPublicationGUIController.class.getName()).log(Level.SEVERE, null, ex);
+                        System.err.println(ex.getMessage());
                     }
                 });
         System.out.println(vboxPubArch.getChildren());
         System.out.println(vboxPub.getChildren());
     }
 
-    public Scene refreshForum(int idClient) {//temp jusqau vrai main
-        Scene scene = new Scene(new Parent() {
-        });
+    public Parent refreshForum() {//temp jusqau vrai main
         try {
             //init FXML loader et controller
             FXMLLoader forumMain = new FXMLLoader(getClass().getResource("ForumHomeGUI.fxml"));
             ForumHomeGUIController fhc = new ForumHomeGUIController(idClient);
             forumMain.setController(fhc);
             Parent root = forumMain.load();
-            //init du scene 
-            scene = new Scene(root);
+            return root;
         } catch (IOException ex) {
-            Logger.getLogger(ForumMain.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
-        return scene;
+        return null;
     }
 
 }

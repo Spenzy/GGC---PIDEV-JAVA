@@ -15,16 +15,18 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import GUI.Forum.ForumHomeGUIController;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
  * @author Spenz
  */
-public class DashbordController implements Initializable {
-    
+public class DashboardController implements Initializable {
+
     int idClient;
-    
+    public static AnchorPane parentClient;
+
     @FXML
     private Button btnHome;
     @FXML
@@ -45,18 +47,26 @@ public class DashbordController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        parentClient = homeClient;
         btnForum.setOnAction(a -> {
             try {
                 FXMLLoader forumPage = new FXMLLoader(getClass().getResource("Forum/ForumHomeGUI.fxml"));
                 ForumHomeGUIController fhc = new ForumHomeGUIController(idClient);
                 forumPage.setController(fhc);
                 Parent root = forumPage.load();
-                homeClient.getChildren().clear();
-                homeClient.getChildren().add(root);
+
+                refreshParent(root);
             } catch (IOException ex) {
                 System.err.println(ex.getMessage());
             }
         });
-    }    
-    
+    }
+
+    public static void refreshParent(Parent root) {
+        parentClient.getChildren().clear();
+        parentClient.getChildren().add(root);
+        Stage stg = ((Stage) parentClient.getScene().getWindow());
+        stg.sizeToScene();
+    }
+
 }

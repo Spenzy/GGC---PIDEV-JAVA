@@ -5,6 +5,7 @@
  */
 package GUI.Forum;
 
+import GUI.DashboardController;
 import entities.Commentaire;
 import java.net.URL;
 import java.util.Optional;
@@ -79,7 +80,7 @@ public class AjoutCommentaireGUIController implements Initializable {
 
                     //refresh
                     AfficherPublicationGUIController apc = new AfficherPublicationGUIController(idClient,idPublication);
-                    apc.refreshPublication(btnCommenter);
+                    DashboardController.refreshParent(apc.refreshPublication());
                 } else {
                     System.out.println("Erreur de confirmation!");
                 }

@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.DashbordController">
+<AnchorPane id="AnchorPane" prefHeight="271.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.DashboardController">
    <children>
-      <BorderPane layoutY="-7.0" prefHeight="519.0" prefWidth="207.0" stylesheets="@ressources/StyleSheet.css">
+      <BorderPane layoutY="-7.0" prefHeight="516.0" prefWidth="210.0" stylesheets="@ressources/StyleSheet.css">
          <left>
-            <VBox prefHeight="519.0" prefWidth="210.0" spacing="5.0" styleClass="blue-bg" BorderPane.alignment="CENTER">
+            <VBox prefHeight="480.0" prefWidth="210.0" spacing="5.0" styleClass="blue-bg" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fitHeight="130.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -59,6 +59,11 @@
 <!--                        <FontAwesomeIconView fill="WHITE" glyphName="USD" />-->
                      </graphic>
                   </Button>
+                  <Button fx:id="btnCommande" mnemonicParsing="false" prefHeight="24.0" prefWidth="210.0" styleClass="button1" stylesheets="@ressources/StyleSheet.css" text="Passer Commande">
+                     <font>
+                        <Font name="Cambria" size="19.0" />
+                     </font>
+                  </Button>
                   <Button fx:id="btnStreamer" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="Streamers" textFill="WHITE">
                      <font>
                         <Font name="Cambria" size="19.0" />
@@ -87,7 +92,7 @@
             </VBox>
          </left>
       </BorderPane>
-      <ScrollPane layoutX="210.0" prefHeight="512.0" prefWidth="667.0">
+      <ScrollPane layoutX="210.0" prefHeight="509.0">
          <content>
             <AnchorPane fx:id="homeClient" />
          </content>

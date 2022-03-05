@@ -5,6 +5,7 @@
  */
 package GUI.Forum;
 
+import GUI.DashboardController;
 import entities.Commentaire;
 import entities.Publication;
 import java.io.IOException;
@@ -127,7 +128,7 @@ public class AfficherPublicationGUIController implements Initializable {
 
         btnForum.setOnAction(a -> {
             ForumHomeGUIController fhc = new ForumHomeGUIController(idClient);
-            ((Stage) btnForum.getScene().getWindow()).setScene(fhc.refreshForum(idClient));
+            DashboardController.refreshParent(fhc.refreshForum());
         });
     }
 
@@ -160,7 +161,7 @@ public class AfficherPublicationGUIController implements Initializable {
                         Parent cNode = cLoader.load();
                         vboxComm.getChildren().add(cNode);
                     } catch (IOException ex) {
-                        Logger.getLogger(AfficherPublicationGUIController.class.getName()).log(Level.SEVERE, null, ex);
+                        System.err.println(ex.getMessage());
                     }
                 });
         commenter();
@@ -175,11 +176,11 @@ public class AfficherPublicationGUIController implements Initializable {
             HBox hb = new HBox(cNode);
             vboxComm.getChildren().add(hb);
         } catch (IOException ex) {
-            Logger.getLogger(AfficherPublicationGUIController.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
     }
 
-    public void refreshPublication(Button btn) {
+    public Parent refreshPublication() {
         try {
             //init loader root
             FXMLLoader testLoad = new FXMLLoader(getClass().getResource("AfficherPublicationGUI.fxml"));
@@ -190,13 +191,13 @@ public class AfficherPublicationGUIController implements Initializable {
 
             Parent root = testLoad.load();
 
-            //scene switch
-            Scene affPubScene = new Scene(root);
-            ((Stage) btn.getScene().getWindow()).setScene(affPubScene);
+            return root;
 
         } catch (IOException ex) {
-            Logger.getLogger(ForumHomeGUIController.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
+        
+        return null;
     }
 
 }

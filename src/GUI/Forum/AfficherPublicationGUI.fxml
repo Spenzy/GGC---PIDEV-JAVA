@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
@@ -13,47 +12,40 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="700.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
-   <content>
-      <AnchorPane fx:id="anchorPub" minHeight="-Infinity" minWidth="-Infinity">
-        <children>
-            <VBox fx:id="vboxComm" layoutX="29.0" layoutY="204.0" />
-            <Pane fx:id="panePub" layoutX="13.0" prefHeight="219.0" prefWidth="627.0">
+<AnchorPane fx:id="anchorPub" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox fx:id="vboxComm" layoutX="29.0" layoutY="204.0" />
+      <Pane fx:id="panePub" layoutX="13.0" prefHeight="219.0" prefWidth="627.0">
+         <children>
+            <TextArea fx:id="taDesc" layoutX="101.0" layoutY="82.0" minHeight="-Infinity" prefHeight="110.0" prefWidth="497.0" />
+            <TextField fx:id="tfTitre" layoutX="102.0" layoutY="45.0" prefHeight="25.0" prefWidth="496.0" styleClass="text-field" />
+            <ToggleButton fx:id="tBtnUP" layoutX="19.0" layoutY="45.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" text="UP" />
+            <Label fx:id="lblNbrVote" layoutX="53.0" layoutY="81.0" text="0" />
+            <ToggleButton fx:id="tBtnDown" layoutX="19.0" layoutY="101.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="73.0" text="DOWN" />
+            <HBox layoutX="102.0" layoutY="25.0">
                <children>
-                  <TextArea fx:id="taDesc" layoutX="101.0" layoutY="82.0" minHeight="-Infinity" prefHeight="110.0" prefWidth="497.0" />
-                  <TextField fx:id="tfTitre" layoutX="102.0" layoutY="45.0" prefHeight="25.0" prefWidth="496.0" styleClass="text-field" />
-                  <ToggleButton fx:id="tBtnUP" layoutX="19.0" layoutY="45.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" text="UP" />
-                  <Label fx:id="lblNbrVote" layoutX="53.0" layoutY="81.0" text="0" />
-                  <ToggleButton fx:id="tBtnDown" layoutX="19.0" layoutY="101.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="73.0" text="DOWN" />
-                  <HBox layoutX="102.0" layoutY="25.0">
-                     <children>
-                        <Label fx:id="lblUser" text="User:">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblDate">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <HBox.margin>
-                              <Insets top="2.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <ToggleButton fx:id="tBtnDown1" layoutX="28.0" layoutY="160.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="56.0" text="Send" />
+                  <Label fx:id="lblUser" text="User:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblDate">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets top="2.0" />
+                     </HBox.margin>
+                  </Label>
                </children>
-            </Pane>
-            <AnchorPane layoutX="36.0" prefHeight="35.0" prefWidth="612.0">
-               <children>
-                  <Button fx:id="btnForum" layoutX="503.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="Forum" />
-               </children>
-            </AnchorPane>
-        </children>
+            </HBox>
+            <ToggleButton fx:id="tBtnDown1" layoutX="28.0" layoutY="160.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="56.0" text="Send" />
+         </children>
+      </Pane>
+      <AnchorPane layoutX="36.0" prefHeight="35.0" prefWidth="612.0">
+         <children>
+            <Button fx:id="btnForum" layoutX="503.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="Forum" />
+         </children>
       </AnchorPane>
-   </content>
-   <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-   </padding>
-</ScrollPane>
+   </children>
+</AnchorPane>

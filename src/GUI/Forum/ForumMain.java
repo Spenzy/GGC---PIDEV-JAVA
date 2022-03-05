@@ -17,11 +17,11 @@ public class ForumMain extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        int idClient = 1;
-        ForumHomeGUIController fhc = new ForumHomeGUIController();
-        Scene scene = fhc.refreshForum(idClient);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+//        int idClient = 1;
+//        ForumHomeGUIController fhc = new ForumHomeGUIController();
+//        Scene scene = fhc.refreshForum(idClient);
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
     }
 
     /**

@@ -121,7 +121,7 @@ public class ModifierPublicationGUIController implements Initializable {
         errDesc.setText("");
     }
     
-    public Scene refreshPublier(Button btn) {
+    public Parent refreshPublier() {
         ForumHomeGUIController fhc = new ForumHomeGUIController();
         try {
             //init loader root
@@ -145,7 +145,7 @@ public class ModifierPublicationGUIController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ForumHomeGUIController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return fhc.refreshForum(idClient);
+        return fhc.refreshForum();
     }
 
 }

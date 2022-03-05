@@ -5,6 +5,7 @@
  */
 package GUI.Forum;
 
+import GUI.DashboardController;
 import entities.Publication;
 import java.net.URL;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -71,9 +73,8 @@ public class PublicationForumGUIController implements Initializable {
         initPublication();
 
         btnAfficher.setOnAction((ActionEvent a) -> {
-
             AfficherPublicationGUIController apc = new AfficherPublicationGUIController(idClient, p.getId_publication());
-            apc.refreshPublication(btnAfficher);
+            DashboardController.refreshParent(apc.refreshPublication());
         });
 
         btnArchiver.setOnAction((ActionEvent a) -> {
@@ -87,7 +88,7 @@ public class PublicationForumGUIController implements Initializable {
             if (option.get() == ButtonType.OK) {
                 pc.archiver(p);
                 ForumHomeGUIController fhc = new ForumHomeGUIController(idClient);
-                ((Stage) btnArchiver.getScene().getWindow()).setScene(fhc.refreshForum(idClient));
+                DashboardController.refreshParent(fhc.refreshForum());
             } else {
                 System.out.println("Erreur de confirmation!");
             }
@@ -96,7 +97,7 @@ public class PublicationForumGUIController implements Initializable {
 
         btnModifier.setOnAction((ActionEvent a) -> {
             ModifierPublicationGUIController mpc = new ModifierPublicationGUIController(idClient, p.getId_publication());
-            ((Stage) btnModifier.getScene().getWindow()).setScene(mpc.refreshPublier(btnModifier));
+            DashboardController.refreshParent(mpc.refreshPublier());
         });
     }
 

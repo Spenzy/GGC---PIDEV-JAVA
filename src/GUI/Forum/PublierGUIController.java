@@ -119,11 +119,10 @@ public class PublierGUIController implements Initializable {
         stage.close();
     }
 
-    public Scene refreshPublier(Button btn) {
+    public Parent refreshPublier(Button btn) {
         ForumHomeGUIController fhc = new ForumHomeGUIController();
         try {
             //init loader root
-            System.out.println("wselt lenna");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PublierGUI.fxml"));
 
             //init Controller
@@ -141,9 +140,9 @@ public class PublierGUIController implements Initializable {
 
             fhc = new ForumHomeGUIController(idClient);
         } catch (IOException ex) {
-            Logger.getLogger(ForumHomeGUIController.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
-        return fhc.refreshForum(idClient);
+        return fhc.refreshForum();
     }
 
 }

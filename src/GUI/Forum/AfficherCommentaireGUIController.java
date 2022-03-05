@@ -5,6 +5,7 @@
  */
 package GUI.Forum;
 
+import GUI.DashboardController;
 import entities.Commentaire;
 import java.net.URL;
 import java.util.Optional;
@@ -81,7 +82,7 @@ public class AfficherCommentaireGUIController implements Initializable {
 
                 //refresh
                 AfficherPublicationGUIController apc = new AfficherPublicationGUIController(c.getIdClient(), c.getId_publication());
-                apc.refreshPublication(btnSupp);
+                apc.refreshPublication();
             } else {
                 System.out.println("Erreur de confirmation!");
             }
@@ -112,7 +113,7 @@ public class AfficherCommentaireGUIController implements Initializable {
                     System.out.println("Commentaire modifiée avec succée!");
                     //refresh
                     AfficherPublicationGUIController apc = new AfficherPublicationGUIController(c.getIdClient(), c.getId_publication());
-                    apc.refreshPublication(btnMod);
+                    DashboardController.refreshParent(apc.refreshPublication());
                 } else {
                     System.out.println("Erreur de confirmation!");
                 }
