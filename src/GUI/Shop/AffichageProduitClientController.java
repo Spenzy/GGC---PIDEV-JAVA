@@ -67,32 +67,6 @@ public class AffichageProduitClientController implements Initializable {
             Label emptyLabel = new Label("Aucun produit n'est disponible pour le moment");
             Products.getChildren().add(emptyLabel);
         } else {
-            Button ButtonCommande = new Button("Passer Commande");
-            Products.getChildren().add(ButtonCommande);
-            ButtonCommande.setTranslateX(480);
-            ButtonCommande.setPrefHeight(90);
-            ButtonCommande.setStyle("-fx-text-fill: black;\n"
-                    + "    -fx-font-family: \"Arial\";\n"
-                    + "    -fx-font-weight: bold;\n"
-                    + "    -fx-background-color: linear-gradient(#61a2b1, #A945B4 );\n"
-                    + "    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 )");
-
-            ButtonCommande.setOnAction(e -> {
-                try {
-                    //init loader root
-                    FXMLLoader testLoad = new FXMLLoader(getClass().getResource("Commande/PasserCommande.fxml"));
-
-                    //init Controller
-                    PasserCommandeController controller = new PasserCommandeController(idClient);
-                    testLoad.setController(controller);
-
-                    Parent root = testLoad.load();
-                    DashboardController.refreshParent(root);
-
-                } catch (IOException ex) {
-                    System.err.println(ex.getMessage());
-                }
-            });
 
             for (Produit p1 : ListProduits) {
                 VBox vbox = AffichageProduit(p1);

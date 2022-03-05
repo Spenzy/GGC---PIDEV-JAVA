@@ -73,7 +73,7 @@ public class DashboardAdminController implements Initializable {
         
         btnGestClient.setOnAction(a -> {
             try {
-                FXMLLoader forumPage = new FXMLLoader(getClass().getResource("Forum/ForumHomeGUI.fxml"));
+                FXMLLoader forumPage = new FXMLLoader(getClass().getResource("ListeClient.fxml"));
                 Parent root = forumPage.load();
                 
                 refreshParent(root);
@@ -84,7 +84,7 @@ public class DashboardAdminController implements Initializable {
                 
         btnGestModerateur.setOnAction(a -> {
             try {
-                FXMLLoader forumPage = new FXMLLoader(getClass().getResource("Forum/ForumHomeGUI.fxml"));
+                FXMLLoader forumPage = new FXMLLoader(getClass().getResource("ListeModerateur.fxml"));
                 Parent root = forumPage.load();
                 
                 refreshParent(root);

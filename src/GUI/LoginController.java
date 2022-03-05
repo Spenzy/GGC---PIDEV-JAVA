@@ -117,7 +117,7 @@ public class LoginController implements Initializable {
 
             } else if (repo.getModerateurBy(email.getText(), pwdId.getText())) {
                 System.out.println("aaaaaaaaaaaaaaaaaaaaaaaa");
-                Parent blah = FXMLLoader.load(getClass().getResource("ListeModerateur.fxml"));
+                Parent blah = FXMLLoader.load(getClass().getResource("DashboardModerateur.fxml"));
                 Scene scene = new Scene(blah);
                 Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 appStage.setScene(scene);

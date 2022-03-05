@@ -28,7 +28,6 @@ import javafx.stage.Stage;
 public class DashboardController implements Initializable {
 
     int idClient;
-    //int idClient = 111;
     public static AnchorPane parentClient;
 
     @FXML
@@ -70,13 +69,12 @@ public class DashboardController implements Initializable {
 
         btnShop.setOnAction(a -> {
             try {
-
+                idClient = 111;
                 FXMLLoader shopPage = new FXMLLoader(getClass().getResource("Shop/AffichageProduitClient.fxml"));
                 AffichageProduitClientController fhc = new AffichageProduitClientController(idClient);
                 shopPage.setController(fhc);
                 Parent root = shopPage.load();
-                homeClient.getChildren().clear();
-                homeClient.getChildren().add(root);
+                refreshParent(root);
             } catch (IOException ex) {
                 System.err.println(ex.getMessage());
             }
@@ -87,7 +85,7 @@ public class DashboardController implements Initializable {
                 PasserCommandeController fhc = new PasserCommandeController(idClient);
                 cmdPage.setController(fhc);
                 Parent root = cmdPage.load();
-                
+
                 refreshParent(root);
             } catch (IOException ex) {
                 System.err.println(ex.getMessage());

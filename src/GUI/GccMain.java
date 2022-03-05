@@ -28,21 +28,16 @@ public class GccMain extends Application {
     public void start(Stage primaryStage) {
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("DashboardAdmin.fxml"));
-            primaryStage.setTitle("Espace Administrateur");
-            
-            
-            
-           /* Parent root = FXMLLoader.load(getClass().getResource("DashboardModerateur.fxml"));
+            /* Parent root = FXMLLoader.load(getClass().getResource("DashboardAdmin.fxml"));
+            primaryStage.setTitle("Espace Administrateur");*/
+
+ /* Parent root = FXMLLoader.load(getClass().getResource("DashboardModerateur.fxml"));
             primaryStage.setTitle("Espace Moderateur");*/
-           
-           
-           /* Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
-            primaryStage.setTitle("Espace Client");*/
-            
+            Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
+            primaryStage.setTitle("Espace Client");
+
             Scene scene = new Scene(root);
-            
-            
+
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {
