@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="388.0" prefWidth="600.0" styleClass="blue-bg" stylesheets="@../ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Evennement.AjouterEvenementController">
+   <children>
+      <Label layoutX="86.0" layoutY="51.0" stylesheets="@../../Css/stylesheet.css" text="*Reference :" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font></Label>
+      <Label layoutX="86.0" layoutY="128.0" styleClass="label3" text="*localisation :" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font></Label>
+      <Label layoutX="85.0" layoutY="202.0" styleClass="label5" text="*nbrParticipants :" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font></Label>
+      <Label layoutX="380.0" layoutY="51.0" styleClass="label2" text="*dateDebut :" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font></Label>
+      <Label layoutX="386.0" layoutY="226.0" styleClass="label6" text="*description :" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfReference" layoutX="85.0" layoutY="73.0" style="-fx-border-color: black;" styleClass="tf1" stylesheets="@../../Css/stylesheet.css" />
+      <TextField fx:id="tfLocalisation" layoutX="85.0" layoutY="151.0" style="-fx-border-color: black;" styleClass="tf3" stylesheets="@../../Css/stylesheet.css" />
+      <TextField fx:id="tfNbrParticipants" layoutX="85.0" layoutY="223.0" style="-fx-border-color: black;" styleClass="tf5" stylesheets="@../../Css/stylesheet.css" />
+      <TextField fx:id="tfDescription" layoutX="382.0" layoutY="248.0" onAction="#ajouterEvenement" prefHeight="81.0" prefWidth="149.0" style="-fx-border-color: #D5CBEB;" styleClass="tf6" stylesheets="@../../Css/stylesheet.css">
+         <font>
+            <Font size="10.0" />
+         </font></TextField>
+      <Button fx:id="btnAjouter" layoutX="277.0" layoutY="354.0" mnemonicParsing="false" onAction="#ajouterEvenement" style="-fx-background-color: #00AEFF;" styleClass="button2" stylesheets="@../../Css/stylesheet.css" text="Ajouter">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font></Button>
+      <DatePicker fx:id="tfDateDebut" layoutX="379.0" layoutY="70.0" style="-fx-border-color: black;" styleClass="tf2" stylesheets="@../../Css/stylesheet.css" />
+      <Label layoutX="382.0" layoutY="133.0" prefHeight="25.0" prefWidth="77.0" styleClass="label4" text="*dateFin :" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font></Label>
+      <DatePicker fx:id="tfDateFin" layoutX="380.0" layoutY="160.0" style="-fx-border-color: black;" styleClass="tf4" stylesheets="@../../Css/stylesheet.css" />
+      <ImageView fitHeight="40.0" fitWidth="76.0" layoutX="18.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/LogoGGC%20(1).png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="585.0" layoutY="19.0" prefHeight="346.0" prefWidth="2.0" style="-fx-background-color: white;" />
+      <Pane layoutX="13.0" layoutY="17.0" prefHeight="2.0" prefWidth="574.0" style="-fx-background-color: white;" />
+      <Pane layoutX="344.0" layoutY="364.0" prefHeight="2.0" prefWidth="243.0" style="-fx-background-color: white;" />
+      <Pane layoutX="13.0" layoutY="16.0" prefHeight="352.0" prefWidth="2.0" style="-fx-background-color: white;" />
+      <Pane layoutX="15.0" layoutY="366.0" prefHeight="2.0" prefWidth="262.0" style="-fx-background-color: white;" />
+   </children>
+</AnchorPane>

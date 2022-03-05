@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="271.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.DashboardController">
+   <children>
+      <BorderPane layoutY="-7.0" prefHeight="516.0" prefWidth="210.0" stylesheets="@ressources/StyleSheet.css">
+         <left>
+            <VBox prefHeight="480.0" prefWidth="210.0" spacing="5.0" styleClass="blue-bg" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="130.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@ressources/ggc.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="40.0" top="15.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="209.0" text="Gamer Geeks Communty" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="15.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="Home" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="19.0" />
+                     </font>
+                     <graphic>
+<!--                        <FontAwesomeIconView fill="WHITE" glyphName="HOME" />-->
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnForum" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="Forum" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="19.0" />
+                     </font>
+                     <graphic>
+<!--                        <FontAwesomeIconView fill="WHITE" glyphName="GROUP" />-->
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnShop" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="Shop" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="19.0" />
+                     </font>
+                     <graphic>
+<!--                        <FontAwesomeIconView fill="WHITE" glyphName="USD" />-->
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnCommande" mnemonicParsing="false" prefHeight="24.0" prefWidth="210.0" styleClass="button1" stylesheets="@ressources/StyleSheet.css" text="Passer Commande">
+                     <font>
+                        <Font name="Cambria" size="19.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnStreamer" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="Streamers" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="19.0" />
+                     </font>
+                     <graphic>
+<!--                        <FontAwesomeIconView fill="WHITE" glyphName="USD" />-->
+                     </graphic>
+                  </Button>
+       
+                        
+                  <Button fx:id="btnEvennement" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="Evenement" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="19.0" />
+                     </font>
+                     <graphic>
+<!--                        <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" />-->
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnSetting" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="Setting" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="19.0" />
+                     </font>
+                     <graphic>
+<!--                        <FontAwesomeIconView fill="WHITE" glyphName="GEAR" />-->
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </left>
+      </BorderPane>
+      <ScrollPane layoutX="210.0" prefHeight="509.0">
+         <content>
+            <AnchorPane fx:id="homeClient" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
