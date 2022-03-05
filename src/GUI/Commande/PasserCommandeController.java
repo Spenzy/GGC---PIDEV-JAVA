@@ -40,7 +40,7 @@ import utils.PdfAPI;
  */
 public class PasserCommandeController implements Initializable {
 
-    public int idClient = 111;
+    public int idClient=111;
     public int idCommande = 0;
     public Commande c1 = new Commande(idClient, "");
     public CommandeCRUD c = new CommandeCRUD();
@@ -72,6 +72,13 @@ public class PasserCommandeController implements Initializable {
     };
     @FXML
     private Button pdf;
+
+    public PasserCommandeController() {
+    }
+
+    public PasserCommandeController(int idClient) {
+        this.idClient=idClient;
+    }
 
     /**
      * Initializes the controller class.

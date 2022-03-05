@@ -118,7 +118,7 @@ public class PdfAPI {
             PdfWriter instance = PdfWriter.getInstance(document, new FileOutputStream(filepath));
 
             document.open();
-            Image image1 = Image.getInstance("src/sprint1/pidev/img/LogoGGC.png");
+            Image image1 = Image.getInstance("src/GUI/ressources/ggc.png");
             double percent = 0.5;
             image1.scaleAbsolute(150, 130);
             document.add(image1);

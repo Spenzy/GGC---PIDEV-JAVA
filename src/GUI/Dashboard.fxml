@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane id="AnchorPane" prefHeight="271.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.DashboardController">
    <children>
       <BorderPane layoutY="-7.0" prefHeight="516.0" prefWidth="210.0" stylesheets="@ressources/StyleSheet.css">
@@ -69,9 +70,11 @@
                         <Font name="Cambria" size="19.0" />
                      </font>
                      <graphic>
-<!--                        <FontAwesomeIconView fill="WHITE" glyphName="USER" />-->
+<!--                        <FontAwesomeIconView fill="WHITE" glyphName="USD" />-->
                      </graphic>
                   </Button>
+       
+                        
                   <Button fx:id="btnEvennement" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="Evenement" textFill="WHITE">
                      <font>
                         <Font name="Cambria" size="19.0" />

@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import GUI.Commande.PasserCommandeController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +16,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import GUI.Forum.ForumHomeGUIController;
+import GUI.Shop.AffichageProduitClientController;
+import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
 /**
@@ -25,6 +28,7 @@ import javafx.stage.Stage;
 public class DashboardController implements Initializable {
 
     int idClient;
+    //int idClient = 111;
     public static AnchorPane parentClient;
 
     @FXML
@@ -41,12 +45,15 @@ public class DashboardController implements Initializable {
     private Button btnSetting;
     @FXML
     private AnchorPane homeClient;
+    @FXML
+    private Button btnCommande;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         parentClient = homeClient;
         btnForum.setOnAction(a -> {
             try {
@@ -60,13 +67,39 @@ public class DashboardController implements Initializable {
                 System.err.println(ex.getMessage());
             }
         });
+        
+        btnShop.setOnAction(a -> {
+            try {
+
+                FXMLLoader shopPage = new FXMLLoader(getClass().getResource("Shop/AffichageProduitClient.fxml"));
+                AffichageProduitClientController fhc = new AffichageProduitClientController(idClient);
+                shopPage.setController(fhc);
+                Parent root = shopPage.load();
+                homeClient.getChildren().clear();
+                homeClient.getChildren().add(root);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        });
+        btnCommande.setOnAction(a -> {
+            try {
+
+                FXMLLoader cmdPage = new FXMLLoader(getClass().getResource("Commande/PasserCommande.fxml"));
+                PasserCommandeController fhc = new PasserCommandeController(idClient);
+                cmdPage.setController(fhc);
+                Parent root = cmdPage.load();
+                homeClient.getChildren().clear();
+                homeClient.getChildren().add(root);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        });
     }
 
     public static void refreshParent(Parent root) {
+        Stage stg=((Stage) parentClient.getScene().getWindow());
+        stg.sizeToScene();
         parentClient.getChildren().clear();
         parentClient.getChildren().add(root);
-        Stage stg = ((Stage) parentClient.getScene().getWindow());
-        stg.sizeToScene();
     }
-
 }
