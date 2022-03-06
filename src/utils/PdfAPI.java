@@ -69,7 +69,9 @@ public class PdfAPI {
             document.add(paragraphsignature);
 
             document.close();
-            MailAPI.sendMailWithFile(mail, "GGC Requested Post Details ", new File(filepath));
+            File fileToSend = new File(filepath);
+            MailAPI.sendMailWithFile(mail, "Poste Forum GGC", fileToSend);
+            fileToSend.delete();
         } catch (DocumentException | IOException | MessagingException e) {
             System.err.println(e.getMessage());
         }

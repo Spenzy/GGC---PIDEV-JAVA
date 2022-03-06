@@ -39,11 +39,19 @@ public class DashboardModerateurController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         parentModerateur = homeModerateur;
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Evennement/TableView.fxml"));
+            homeModerateur.getChildren().add(root);
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+
         btnGestEvennement.setOnAction(a -> {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("Evennement/TableView.fxml"));
 
-                DashboardModerateurController.refreshParent(root);
+                refreshParent(root);
             } catch (IOException ex) {
                 System.err.println(ex.getMessage());
             }

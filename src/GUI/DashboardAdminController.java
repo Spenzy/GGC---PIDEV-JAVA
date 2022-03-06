@@ -43,7 +43,7 @@ public class DashboardAdminController implements Initializable {
     private Button btnForum;
     @FXML
     private AnchorPane homeAdmin;
-    
+
     public static AnchorPane parentAdmin;
 
     /**
@@ -52,27 +52,35 @@ public class DashboardAdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         parentAdmin = homeAdmin;
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Shop/GestionProduit.fxml"));
+            homeAdmin.getChildren().add(root);
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+
         btnGestProduit.setOnAction(a -> {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("Shop/GestionProduit.fxml"));
-                
+
                 refreshParent(root);
             } catch (IOException ex) {
                 System.err.println(ex.getMessage());
             }
         });
-        
+
         btnGestCommande.setOnAction(a -> {
             try {
                 FXMLLoader forumPage = new FXMLLoader(getClass().getResource("Commande/AffecterLivraison.fxml"));
                 Parent root = forumPage.load();
-                
+
                 refreshParent(root);
             } catch (IOException ex) {
                 System.err.println(ex.getMessage());
             }
         });
-        
+
         btnForum.setOnAction(a -> {
             try {
                 FXMLLoader forumPage = new FXMLLoader(getClass().getResource("Forum/ForumHomeGUI.fxml"));
@@ -85,30 +93,29 @@ public class DashboardAdminController implements Initializable {
                 System.err.println(ex.getMessage());
             }
         });
-        
+
         btnGestClient.setOnAction(a -> {
             try {
                 FXMLLoader forumPage = new FXMLLoader(getClass().getResource("ListeClient.fxml"));
                 Parent root = forumPage.load();
-                
+
                 refreshParent(root);
             } catch (IOException ex) {
                 System.err.println(ex.getMessage());
             }
         });
-                
+
         btnGestModerateur.setOnAction(a -> {
             try {
                 FXMLLoader forumPage = new FXMLLoader(getClass().getResource("ListeModerateur.fxml"));
                 Parent root = forumPage.load();
-                
+
                 refreshParent(root);
             } catch (IOException ex) {
                 System.err.println(ex.getMessage());
             }
         });
-        
-        
+
     }
 
     public static void refreshParent(Parent root) {

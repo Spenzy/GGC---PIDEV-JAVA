@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPub" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchorPub" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox fx:id="vboxComm" layoutX="29.0" layoutY="204.0" />
       <Pane fx:id="panePub" layoutX="13.0" prefHeight="219.0" prefWidth="627.0">
@@ -39,12 +39,12 @@
                   </Label>
                </children>
             </HBox>
-            <ToggleButton fx:id="tBtnDown1" layoutX="28.0" layoutY="160.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="56.0" text="Send" />
          </children>
       </Pane>
       <AnchorPane layoutX="36.0" prefHeight="35.0" prefWidth="612.0">
          <children>
             <Button fx:id="btnForum" layoutX="503.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="Forum" />
+            <Button fx:id="btnSendPub" layoutX="422.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="Send" />
          </children>
       </AnchorPane>
    </children>

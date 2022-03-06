@@ -17,6 +17,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import GUI.Forum.ForumHomeGUIController;
 import GUI.Shop.AffichageProduitClientController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
@@ -52,14 +54,28 @@ public class DashboardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         parentClient = homeClient;
+        parentClient = homeClient;
         idClient = homePage.loggedInID;
+        
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("PageHome.fxml"));
+            homeClient.getChildren().add(root);
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
 
-//        initHome();
         btnHome.setOnAction(a -> {
-            initHome();
-        });
+            try {
+                FXMLLoader forumPage = new FXMLLoader(getClass().getResource("PageHome.fxml"));
+                Parent root = forumPage.load();
 
+                refreshParent(root);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        });
+        
         btnForum.setOnAction(a -> {
             try {
                 FXMLLoader forumPage = new FXMLLoader(getClass().getResource("Forum/ForumHomeGUI.fxml"));
@@ -117,17 +133,7 @@ public class DashboardController implements Initializable {
                 System.err.println(ex.getMessage());
             }
         });
-    }
 
-    public void initHome() {
-        try {
-            FXMLLoader forumPage = new FXMLLoader(getClass().getResource("pagehome.fxml"));
-            Parent root = forumPage.load();
-
-            refreshParent(root);
-        } catch (IOException ex) {
-            System.err.println(ex.getMessage());
-        }
     }
 
     public static void refreshParent(Parent root) {

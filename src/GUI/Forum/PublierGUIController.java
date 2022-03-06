@@ -27,6 +27,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import services.PublicationCRUD;
+import utils.BadWordFilter;
 
 /**
  * FXML Controller class
@@ -83,6 +84,12 @@ public class PublierGUIController implements Initializable {
                 errTitre.setText("Erreur, Champ vide!");
             } else if (pc.verifQuotaPub(idClient)) {
                 errTitre.setText("Vous avez attein la limite de publications courantes!");
+            }else if(BadWordFilter.filterText(tfTitre.getText()) || BadWordFilter.filterText(taDesc.getText())) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Publication refusé!");
+                alert.setContentText("Votre commentaire contient des mots vulguéres!");
+                alert.show();
             } else {
                 Alert alert = new Alert(AlertType.CONFIRMATION);
                 alert.setTitle("Publier?");

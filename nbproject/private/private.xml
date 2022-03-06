@@ -3,25 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/services/ModerateurCRUD.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/GUI/ListeModerateurController.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/utils/MyConnection.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/GUI/ListeClientController.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/GUI/DataValidation.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/GUI/UpdateClientController.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/services/ClientCRUD.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/GUI/DashboardController.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/GUI/LoginController.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/GUI/Commande/AffecterLivraisonController.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/GUI/DashboardAdminController.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/GUI/Evennement/HomePage.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/GUI/Commande/PasserCommandeController.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/GUI/InscriptionController.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/GUI/Evennement/ListeParticipationController.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/GUI/Commande/PanierController.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/services/PersonneCRUD.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/main/MainClass.java</file>
-            <file>file:/C:/Users/Dell/Desktop/GGC-PIDEV/GGC/src/GUI/GccMain.java</file>
+            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/DashboardController.java</file>
+            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/DashboardModerateurController.java</file>
+            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/GccMain.java</file>
+            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/DashboardAdminController.java</file>
         </group>
     </open-files>
 </project-private>

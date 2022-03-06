@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import services.CommentaireCRUD;
 import services.PersonneCRUD;
+import utils.BadWordFilter;
 
 /**
  * FXML Controller class
@@ -64,6 +65,12 @@ public class AjoutCommentaireGUIController implements Initializable {
             //test si l'un des champs est vide
             if (taCommentaire.getText().isEmpty()) {
                 errDesc.setText("Erreur, Champ vide!");
+            }else if(BadWordFilter.filterText(taCommentaire.getText())) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Commentaire refusé!");
+                alert.setContentText("Votre commentaire contient des mots vulguéres!");
+                alert.show();
             } else {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Commenter?");

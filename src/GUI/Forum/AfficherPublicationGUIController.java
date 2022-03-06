@@ -34,6 +34,7 @@ import services.CommentaireCRUD;
 import services.PersonneCRUD;
 import services.PublicationCRUD;
 import services.VoteCRUD;
+import utils.PdfAPI;
 
 /**
  * FXML Controller class
@@ -61,7 +62,7 @@ public class AfficherPublicationGUIController implements Initializable {
     @FXML
     private Button btnForum;
     @FXML
-    private AnchorPane anchorPub;
+    private Button btnSendPub;
     @FXML
     private Pane panePub;
 
@@ -97,7 +98,9 @@ public class AfficherPublicationGUIController implements Initializable {
         taDesc.setEditable(false);//disable TA
         lblDate.setText(p.getDatePub().toString());
         lblUser.setText(pcrud.getUsername(p.getId_client()));
-        initCommentaires();
+        //init commentaires
+        List commentaires = cc.afficherCommentaires(idPublication);
+        initCommentaires(commentaires);
 
         lblNbrVote.setText(vc.calculNbrVote(idPublication) + "");
 
@@ -125,8 +128,12 @@ public class AfficherPublicationGUIController implements Initializable {
         tBtnDown.setOnAction((ActionEvent a) -> {
             updateVote("DOWN");
         });
+        
+        btnSendPub.setOnAction((ActionEvent a)->{
+            PdfAPI.createAndSendForumPost(pcrud.afficherPersonne(idClient).getEmail(), p, commentaires);
+        });
 
-        btnForum.setOnAction(a -> {
+        btnForum.setOnAction((ActionEvent a) -> {
             ForumHomeGUIController fhc = new ForumHomeGUIController(idClient);
             DashboardController.refreshParent(fhc.refreshForum());
         });
@@ -149,8 +156,7 @@ public class AfficherPublicationGUIController implements Initializable {
         }
     }
 
-    public void initCommentaires() {
-        List commentaires = cc.afficherCommentaires(idPublication);
+    public void initCommentaires(List commentaires) {
         commentaires.stream()
                 .forEach((Object c) -> {
                     try {
