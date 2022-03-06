@@ -80,7 +80,7 @@ public class UpdateClientController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) {
         if (event.getSource() == tfupdate) {
-            UpdateClient2(76);
+            UpdateClient2(idClient);
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setTitle("Validation");
             alert2.setHeaderText("Modification avec succés");

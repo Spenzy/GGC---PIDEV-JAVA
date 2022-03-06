@@ -182,9 +182,11 @@ public class LoginController implements Initializable {
             String emailp = email.getText();
             String Token = cToken(emailp);
             PersonneCRUD c = new PersonneCRUD();
-            // System.out.println("aaaaa");
-            //System.out.println("1"+Token);
-            System.out.println(c.ResetPass(emailp, Token));
+          c.ResetPass(emailp, Token);
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setTitle("Forget Password");
+            alert2.setHeaderText("check your email ");
+            alert2.show();
 
             String body = " Your password has been update -> " + Token;
 

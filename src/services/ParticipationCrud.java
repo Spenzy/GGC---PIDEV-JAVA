@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -34,19 +35,25 @@ public class ParticipationCrud {
             PreparedStatement pst;
             try {
                 pst = cnxx.prepareStatement(req);
-               // pst.setInt(1, p.getIdParticipation());
+                // pst.setInt(1, p.getIdParticipation());
                 pst.setInt(1, p.getIdClient());
                 pst.setInt(2, p.getIdEvent());
                 pst.setInt(3, p.getNbrEtoile());
-                 pst.executeUpdate();
+                pst.executeUpdate();
                 pst = cnxx.prepareStatement(req);
-            
+
                 System.out.println("Participation Ajoutée avec succées");
 
             } catch (SQLException ex) {
                 System.err.println(ex.getMessage());
+
             }
         } else {
+            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+            alert2.setTitle("Participation");
+            alert2.setHeaderText("le nombre des participations sont occupées");
+            alert2.show();
+
             System.out.println("le nombre des participations sont occupées");
         }
 
@@ -89,7 +96,6 @@ public class ParticipationCrud {
         }
         return myList;
     }
-    
 
     public int getNbrParticipant(int idEvent) {
         String req = "SELECT nbrParticipant FROM evenement WHERE reference = ? ";
@@ -113,7 +119,7 @@ public class ParticipationCrud {
             pst.setInt(1, idEvent);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1) < getNbrParticipant(idEvent);  
+                return rs.getInt(1) < getNbrParticipant(idEvent);
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

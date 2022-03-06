@@ -157,7 +157,7 @@ public class TableViewController implements Initializable {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setHeaderText(null);
-        alert.setContentText("Are you sure !");
+        alert.setContentText("vous voulez supprimer cet evenement !");
         //alert.show();
         Optional<ButtonType> action = alert.showAndWait();
         if (action.get() == (ButtonType.OK)) {

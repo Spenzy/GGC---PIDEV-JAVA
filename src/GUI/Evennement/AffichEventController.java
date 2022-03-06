@@ -5,6 +5,7 @@
  */
 package GUI.Evennement;
 
+import GUI.homePage;
 import entities.Evenement;
 import entities.Participation;
 import services.EvenementCrud;
@@ -31,6 +32,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.SortEvent;
 import javafx.scene.control.TableCell;
@@ -40,102 +42,99 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-
 /**
  * FXML Controller class
  *
  * @author Azer Lahmer
  */
 public class AffichEventController implements Initializable {
-@FXML
+
+    @FXML
     private TableView<Evenement> evenementsTable;
-    private TableColumn<Evenement,String > refCol;
-    private TableColumn<Evenement,String> titreCol;
-    private TableColumn<Evenement,String> dateDebutCol;
-    private TableColumn<Evenement,String> dateFinCol;
-    private TableColumn<Evenement,String> localisationCol;
-    private TableColumn<Evenement,String> descriptionCol;
-    private TableColumn<Evenement,String> nbrParticipantsCol;
-    
-    private TableColumn<Evenement,Button> participerCol;
+    private TableColumn<Evenement, String> refCol;
+    private TableColumn<Evenement, String> titreCol;
+    private TableColumn<Evenement, String> dateDebutCol;
+    private TableColumn<Evenement, String> dateFinCol;
+    private TableColumn<Evenement, String> localisationCol;
+    private TableColumn<Evenement, String> descriptionCol;
+    private TableColumn<Evenement, String> nbrParticipantsCol;
+
+    private TableColumn<Evenement, Button> participerCol;
     EvenementCrud ec = new EvenementCrud();
     private Button participe;
-    int idClient = 1;
-    int idEvent=2;
+    int idClient;
+    int idEvent ;
     ParticipationCrud pc = new ParticipationCrud();
     @FXML
     private Button btnImprimer;
+
     /**
      * Initializes the controller class.
      */
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-         initCols();
+
+        initCols();
         loadEvenements();
-             
-        
+
         // TODO
-    } 
-    private void handleButtonAction(ActionEvent event){
-        if (event.getSource()==participe){
-            Participation p = new Participation(idClient ,idEvent, 4);
+    }
+
+    private void handleButtonAction(ActionEvent event) {
+        idClient = homePage.loggedInID;
+        if (event.getSource() == participe) {
+            Participation p = new Participation(idClient, idEvent, 4);
             pc.ajouterParticipation(p);
-               
+
         }
     }
-    
-     private void initCols() {
-      refCol = new TableColumn<>("Reference");//nom de l'afichage
-      refCol.setCellValueFactory(new PropertyValueFactory<>("reference"));
-      
-      dateDebutCol = new TableColumn<>("Date Debut");//nom de l'afichage
-      dateDebutCol.setCellValueFactory(new PropertyValueFactory<>("dateDebut"));
-      
-      dateFinCol = new TableColumn<>("Date Fin");//nom de l'afichage
-      dateFinCol.setCellValueFactory(new PropertyValueFactory<>("dateFin"));
-      
-      localisationCol = new TableColumn<>("Localisation");//nom de l'afichage
-      localisationCol.setCellValueFactory(new PropertyValueFactory<>("localisation"));
-      
-      descriptionCol = new TableColumn<>("Description");//nom de l'afichage
-      descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
-      
-      nbrParticipantsCol = new TableColumn<>("Nbres Participants");//nom de l'afichage
-      nbrParticipantsCol.setCellValueFactory(new PropertyValueFactory<>("nbrParticipant"));
-      
-      titreCol = new TableColumn<>("Titre");//nom de l'afichage
-      titreCol.setCellValueFactory(new PropertyValueFactory<>("Titre"));
-      /*
+
+    private void initCols() {
+        refCol = new TableColumn<>("Reference");//nom de l'afichage
+        refCol.setCellValueFactory(new PropertyValueFactory<>("reference"));
+
+        dateDebutCol = new TableColumn<>("Date Debut");//nom de l'afichage
+        dateDebutCol.setCellValueFactory(new PropertyValueFactory<>("dateDebut"));
+
+        dateFinCol = new TableColumn<>("Date Fin");//nom de l'afichage
+        dateFinCol.setCellValueFactory(new PropertyValueFactory<>("dateFin"));
+
+        localisationCol = new TableColumn<>("Localisation");//nom de l'afichage
+        localisationCol.setCellValueFactory(new PropertyValueFactory<>("localisation"));
+
+        descriptionCol = new TableColumn<>("Description");//nom de l'afichage
+        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+        nbrParticipantsCol = new TableColumn<>("Nbres Participants");//nom de l'afichage
+        nbrParticipantsCol.setCellValueFactory(new PropertyValueFactory<>("nbrParticipant"));
+
+        titreCol = new TableColumn<>("Titre");//nom de l'afichage
+        titreCol.setCellValueFactory(new PropertyValueFactory<>("Titre"));
+        /*
        Callback<TableColumn<Evenement,String>,TableCell<Evenement,String>> cellFactory=(param)->{
 final TableCell<Evenement,String> cell=new TableCell<Evenement,String>(){
 
 
 }
 }
-   */   
-      
-      
-      
-      
-      evenementsTable.getColumns().addAll(refCol,titreCol, dateDebutCol, dateFinCol, localisationCol, descriptionCol, nbrParticipantsCol);
-    addButtonToTable();
-     }
-   
-   
-          public void loadEvenements() {
-      
-      List<Evenement> evenements = ec.afficherEvenements();
-      evenementsTable.getItems().clear();
-      //afficher par objet dans une boucle   
-      for (Evenement e : evenements) {
-       evenementsTable.getItems().add(e);   
-      }
-      
-      
+         */
+
+        evenementsTable.getColumns().addAll(refCol, titreCol, dateDebutCol, dateFinCol, localisationCol, descriptionCol, nbrParticipantsCol);
+        addButtonToTable();
     }
-          private void addButtonToTable() {
+
+    public void loadEvenements() {
+
+        List<Evenement> evenements = ec.afficherEvenements();
+        evenementsTable.getItems().clear();
+        //afficher par objet dans une boucle   
+        for (Evenement e : evenements) {
+            evenementsTable.getItems().add(e);
+        }
+
+    }
+
+    private void addButtonToTable() {
         TableColumn<Evenement, Void> participer = new TableColumn("Participation");
 
         Callback<TableColumn<Evenement, Void>, TableCell<Evenement, Void>> cellFactory = new Callback<TableColumn<Evenement, Void>, TableCell<Evenement, Void>>() {
@@ -147,11 +146,21 @@ final TableCell<Evenement,String> cell=new TableCell<Evenement,String>(){
 
                     {
                         btn.setOnAction((ActionEvent event) -> {
-                            
-                            Evenement data = getTableView().getItems().get(getIndex());
-                            System.out.println("selectedData: " + data);
-                            Participation p = new Participation(idClient ,data.getReference(), 4);
-                            pc.ajouterParticipation(p);
+                            if (pc.verifParticipation(idClient)) {
+                                Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                                alert2.setTitle("Participation");
+                                alert2.setHeaderText("Vous avez deja participer");
+                                alert2.show();
+                            } else {
+                                Evenement data = getTableView().getItems().get(getIndex());
+                                System.out.println("selectedData: " + data);
+                                Participation p = new Participation(idClient, data.getReference(), 4);
+                                pc.ajouterParticipation(p);
+                                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                                alert2.setTitle("Participation");
+                                alert2.setHeaderText("Participation avec succés");
+                                alert2.show();
+                            }
                         });
                     }
 
@@ -176,19 +185,19 @@ final TableCell<Evenement,String> cell=new TableCell<Evenement,String>(){
     }
 
     @FXML
-    private void pdf1(ActionEvent event)throws FileNotFoundException, SQLException, DocumentException {
-       // int i=1;
+    private void pdf1(ActionEvent event) throws FileNotFoundException, SQLException, DocumentException {
+        // int i=1;
         //for(i=1;i<10;i++){
 //        int max=100;
 //        int min=1;
 //        int b = (int)(Math.random()*(max-min+1)+min);
 //        pdf Pdf=new pdf();
 //        Pdf.add("event("+b+").pdf");
-        pdf Pdf=new pdf();
+        pdf Pdf = new pdf();
         Pdf.add("event.pdf");
-       // i=i+1;
+        // i=i+1;
         // }
-        
+
     }
 
 }
