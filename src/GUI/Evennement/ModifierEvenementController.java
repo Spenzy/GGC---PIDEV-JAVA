@@ -69,6 +69,8 @@ public class ModifierEvenementController implements Initializable {
     private Button btnModifier;
     
     Evenement e;
+    @FXML
+    private TextField tfTitre;
     
     
     
@@ -91,23 +93,26 @@ public class ModifierEvenementController implements Initializable {
         tfLocalisation.setText(e.getLocalisation());
         tfDescription.setText(e.getDescription());
         tfNbrParticipants.setText(e.getNbrParticipant()+"");
+        tfTitre.setText(e.getTitre());
         
     }
 
     @FXML
     private void modifierEvenement(ActionEvent event) {
-         if (tfReference.getText().isEmpty() || tfLocalisation.getText().isEmpty()|| tfDescription.getText().isEmpty()|| tfNbrParticipants.getText().isEmpty()) {
+         if (tfReference.getText().isEmpty() || tfLocalisation.getText().isEmpty()|| tfDescription.getText().isEmpty()|| tfNbrParticipants.getText().isEmpty()||tfTitre.getText().isEmpty()) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erreur!");
             alert.setHeaderText(null);
             alert.setContentText(" Champ vide!");
             alert.show();
         } else {
+        e.setTitre(tfTitre.getText());
         e.setDateDebut(java.sql.Date.valueOf(tfDateDebut.getValue()));
         e.setDateFin(java.sql.Date.valueOf(tfDateFin.getValue()));
         e.setLocalisation(tfLocalisation.getText());
         e.setDescription(tfDescription.getText());
         e.setNbrParticipant(Integer.parseInt(tfNbrParticipants.getText()));
+         
         ec.modifierEvenement(e);
          Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Succesful");

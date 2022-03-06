@@ -50,12 +50,13 @@ public class AffichEventController implements Initializable {
 @FXML
     private TableView<Evenement> evenementsTable;
     private TableColumn<Evenement,String > refCol;
+    private TableColumn<Evenement,String> titreCol;
     private TableColumn<Evenement,String> dateDebutCol;
     private TableColumn<Evenement,String> dateFinCol;
     private TableColumn<Evenement,String> localisationCol;
     private TableColumn<Evenement,String> descriptionCol;
     private TableColumn<Evenement,String> nbrParticipantsCol;
-    private TableColumn<Evenement,String> imageCol;
+    
     private TableColumn<Evenement,Button> participerCol;
     EvenementCrud ec = new EvenementCrud();
     private Button participe;
@@ -103,9 +104,9 @@ public class AffichEventController implements Initializable {
       
       nbrParticipantsCol = new TableColumn<>("Nbres Participants");//nom de l'afichage
       nbrParticipantsCol.setCellValueFactory(new PropertyValueFactory<>("nbrParticipant"));
-      imageCol = new TableColumn<>("image");//nom de l'afichage
       
-      imageCol.setCellValueFactory(new PropertyValueFactory<>("image"));
+      titreCol = new TableColumn<>("Titre");//nom de l'afichage
+      titreCol.setCellValueFactory(new PropertyValueFactory<>("Titre"));
       /*
        Callback<TableColumn<Evenement,String>,TableCell<Evenement,String>> cellFactory=(param)->{
 final TableCell<Evenement,String> cell=new TableCell<Evenement,String>(){
@@ -118,7 +119,7 @@ final TableCell<Evenement,String> cell=new TableCell<Evenement,String>(){
       
       
       
-      evenementsTable.getColumns().addAll(refCol, dateDebutCol, dateFinCol, localisationCol, descriptionCol, nbrParticipantsCol,imageCol);
+      evenementsTable.getColumns().addAll(refCol,titreCol, dateDebutCol, dateFinCol, localisationCol, descriptionCol, nbrParticipantsCol);
     addButtonToTable();
      }
    

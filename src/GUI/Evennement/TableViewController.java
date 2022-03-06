@@ -43,12 +43,14 @@ public class TableViewController implements Initializable {
     @FXML
     private TableView<Evenement> evenementsTable;
     private TableColumn<Evenement, String> refCol;
+   
+     private TableColumn<Evenement, String> titreCol;
     private TableColumn<Evenement, String> dateDebutCol;
     private TableColumn<Evenement, String> dateFinCol;
     private TableColumn<Evenement, String> localisationCol;
     private TableColumn<Evenement, String> descriptionCol;
     private TableColumn<Evenement, String> nbrParticipantsCol;
-    private TableColumn<Evenement, String> imageCol;
+   
 
     /**
      * Initializes the controller class.
@@ -94,6 +96,9 @@ public class TableViewController implements Initializable {
         refCol = new TableColumn<>("Reference");//nom de l'afichage
         refCol.setCellValueFactory(new PropertyValueFactory<>("reference"));
 
+             titreCol = new TableColumn<>("Titre");//nom de l'afichage
+        titreCol.setCellValueFactory(new PropertyValueFactory<>("Titre")); 
+        
         dateDebutCol = new TableColumn<>("Date Debut");//nom de l'afichage
         dateDebutCol.setCellValueFactory(new PropertyValueFactory<>("dateDebut"));
 
@@ -109,10 +114,9 @@ public class TableViewController implements Initializable {
         nbrParticipantsCol = new TableColumn<>("Nbres Participants");//nom de l'afichage
         nbrParticipantsCol.setCellValueFactory(new PropertyValueFactory<>("nbrParticipant"));
 
-        imageCol = new TableColumn<>("image");//nom de l'afichage
-        imageCol.setCellValueFactory(new PropertyValueFactory<>("image"));
+   
 
-        evenementsTable.getColumns().addAll(refCol, dateDebutCol, dateFinCol, localisationCol, descriptionCol, nbrParticipantsCol, imageCol);
+        evenementsTable.getColumns().addAll(refCol, titreCol, dateDebutCol, dateFinCol, localisationCol, descriptionCol, nbrParticipantsCol);
     }
 
     public void loadEvenements() {

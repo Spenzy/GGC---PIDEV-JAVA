@@ -38,21 +38,28 @@ public class pdf {
                 PdfWriter.getInstance(my_pdf_report, new FileOutputStream(file));
                   ResultSet rs=ste.executeQuery("select * from Evenement");
                 my_pdf_report.open();  
-                PdfPTable my_report_table = new PdfPTable(6);
+                PdfPTable my_report_table = new PdfPTable(7);
                   PdfPCell table_cell;
                                 
                               
                                 table_cell=new PdfPCell(new Phrase("reference"));
                                 my_report_table.addCell(table_cell);
                                
+                                table_cell=new PdfPCell(new Phrase("Titre"));
+                                my_report_table.addCell(table_cell);
+                                
                                 table_cell=new PdfPCell(new Phrase("dateDebut"));
                                 my_report_table.addCell(table_cell);
+                                
                                 table_cell=new PdfPCell(new Phrase("dateFin"));
                                 my_report_table.addCell(table_cell);
+                                
                                 table_cell=new PdfPCell(new Phrase("localisation"));
                                 my_report_table.addCell(table_cell);
+                                
                                  table_cell=new PdfPCell(new Phrase("description"));
                                 my_report_table.addCell(table_cell);
+                                
                                  table_cell=new PdfPCell(new Phrase("nbrParticipant"));
                                 my_report_table.addCell(table_cell);
                                 
@@ -63,9 +70,12 @@ public class pdf {
                                 table_cell=new PdfPCell(new Phrase(reference));
                                 my_report_table.addCell(table_cell);
                                 
+                                String Titre=rs.getString("Titre");
+                                table_cell=new PdfPCell(new Phrase(Titre));
+                                my_report_table.addCell(table_cell);
+                                
                                 
                                 Date dateDebut= rs.getDate("dateDebut");
-                                //String dateDebut=rs.getString("dateFin");
                                 String dd= String.valueOf(dateDebut);
                                 table_cell=new PdfPCell(new Phrase(dd));
                                 my_report_table.addCell(table_cell);

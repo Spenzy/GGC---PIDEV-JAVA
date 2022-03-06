@@ -17,9 +17,11 @@
             <Font name="Arial Black" size="12.0" />
          </font></Label>
       <TextField fx:id="tfReference" layoutX="66.0" layoutY="58.0" style="-fx-border-color: white;" stylesheets="@../../Css/stylesheet.css" />
+      <TextField fx:id="tfTitre" layoutX="64.0" layoutY="132.0" style="-fx-border-color: white;" stylesheets="@../../Css/stylesheet.css" />
+      <TextField fx:id="tfLocalisation" layoutX="64.0" layoutY="199.0" style="-fx-border-color: black;" />
+      <TextField fx:id="tfNbrParticipants" layoutX="63.0" layoutY="274.0" style="-fx-border-color: black;" />
       <DatePicker fx:id="tfDateDebut" layoutX="360.0" layoutY="55.0" style="-fx-border-color: black;" />
-      <TextField fx:id="tfLocalisation" layoutX="66.0" layoutY="145.0" style="-fx-border-color: black;" />
-      <Label layoutX="68.0" layoutY="121.0" text="*localisation :" textFill="WHITE">
+      <Label layoutX="61.0" layoutY="176.0" text="*localisation :" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font></Label>
@@ -32,9 +34,8 @@
             <Font name="Arial Black" size="12.0" />
          </font></Label>
       <DatePicker fx:id="tfDateFin" layoutX="361.0" layoutY="145.0" style="-fx-border-color: black;" />
-      <TextField fx:id="tfNbrParticipants" layoutX="66.0" layoutY="236.0" style="-fx-border-color: black;" />
       <TextField fx:id="tfDescription" layoutX="363.0" layoutY="233.0" prefHeight="81.0" prefWidth="149.0" style="-fx-border-color: black;" />
-      <Label layoutX="69.0" layoutY="212.0" text="*nbrParticipants :" textFill="WHITE">
+      <Label layoutX="66.0" layoutY="248.0" text="*nbrParticipants :" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font></Label>
@@ -56,5 +57,10 @@
       <Pane layoutX="12.0" layoutY="10.0" prefHeight="3.0" prefWidth="575.0" style="-fx-background-color: white;" />
       <Pane layoutX="330.0" layoutY="351.0" prefHeight="3.0" prefWidth="258.0" style="-fx-background-color: white;" />
       <Pane layoutX="12.0" layoutY="350.0" prefHeight="3.0" prefWidth="246.0" style="-fx-background-color: white;" />
+      <Label layoutX="66.0" layoutY="109.0" text="*Titre : " textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

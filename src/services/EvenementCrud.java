@@ -29,7 +29,7 @@ public class EvenementCrud   {
 
     public int ajouterEvenement(Evenement e) {
         int idE = 0;
-        String req = "INSERT INTO Evenement (reference,dateDebut, dateFin,localisation,description,nbrParticipant) VALUES (?,?,?,?,?,?)";
+        String req = "INSERT INTO Evenement (reference,dateDebut, dateFin,localisation,description,nbrParticipant , Titre) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement pst = cnxx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, e.getReference());
@@ -39,8 +39,10 @@ public class EvenementCrud   {
             //pst.setString(4, e.getHeureFin());
             pst.setString(4, e.getLocalisation());
             pst.setString(5, e.getDescription());
+           pst.setString(7, e.getTitre());
+    
             pst.setInt(6, e.getNbrParticipant());
-           // pst.setString(7, e.getImage());
+            
             pst.executeUpdate();
             System.out.println("Evenement Ajouté avec succés");
             ResultSet rs = pst.getGeneratedKeys();
@@ -56,7 +58,7 @@ public class EvenementCrud   {
     
 
     public void modifierEvenement(Evenement e) {
-        String req = "UPDATE Evenement set dateDebut=?,dateFin=? ,localisation=?,description=?,nbrParticipant=? WHERE reference=?";
+        String req = "UPDATE Evenement set dateDebut=?,dateFin=? ,localisation=?,description=?,nbrParticipant=? ,Titre=? WHERE reference=?";
 
         PreparedStatement pst;
         try {
@@ -68,7 +70,9 @@ public class EvenementCrud   {
             pst.setString(3, e.getLocalisation());
             pst.setString(4, e.getDescription());
             pst.setInt(5, e.getNbrParticipant());
-            pst.setInt(6, e.getReference());
+            
+            pst.setInt(7, e.getReference());
+            pst.setString(6, e.getTitre());
             pst.executeUpdate();
             System.out.println("Evenement Modifié ");
         } catch (SQLException ex) {
@@ -104,6 +108,7 @@ public class EvenementCrud   {
 
                 Evenement e = new Evenement();
                 e.setReference(rs.getInt(1));
+                 
                 e.setDateDebut(rs.getDate(2));
                 e.setDateFin(rs.getDate(3));
                // e.setHeureDebut(rs.getString(3));
@@ -111,7 +116,7 @@ public class EvenementCrud   {
                 e.setLocalisation(rs.getString(4));
                 e.setDescription(rs.getString(5));
                 e.setNbrParticipant(rs.getInt(6));
-               // e.setImage(rs.getString(7));
+               e.setTitre(rs.getString(7));
                 myList.add(e);
                 
        
@@ -131,11 +136,14 @@ public class EvenementCrud   {
             ResultSet rs = pst.executeQuery();
             rs.next();
             e.setReference(rs.getInt(1));
+                        
+
             e.setDateDebut(rs.getDate(2));
             e.setDateFin(rs.getDate(3));
             e.setLocalisation(rs.getString(4));
             e.setDescription(rs.getString(5));
             e.setNbrParticipant(rs.getInt(6));
+            e.setTitre(rs.getString(7));
             
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());

@@ -16,11 +16,11 @@
          <font>
             <Font name="Arial Black" size="12.0" />
          </font></Label>
-      <Label layoutX="86.0" layoutY="128.0" styleClass="label3" text="*localisation :" textFill="WHITE">
+      <Label layoutX="82.0" layoutY="186.0" styleClass="label3" text="*localisation :" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font></Label>
-      <Label layoutX="85.0" layoutY="202.0" styleClass="label5" text="*nbrParticipants :" textFill="WHITE">
+      <Label layoutX="88.0" layoutY="255.0" styleClass="label5" text="*nbrParticipants :" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font></Label>
@@ -33,8 +33,8 @@
             <Font name="Arial Black" size="12.0" />
          </font></Label>
       <TextField fx:id="tfReference" layoutX="85.0" layoutY="73.0" style="-fx-border-color: black;" styleClass="tf1" stylesheets="@../../Css/stylesheet.css" />
-      <TextField fx:id="tfLocalisation" layoutX="85.0" layoutY="151.0" style="-fx-border-color: black;" styleClass="tf3" stylesheets="@../../Css/stylesheet.css" />
-      <TextField fx:id="tfNbrParticipants" layoutX="85.0" layoutY="223.0" style="-fx-border-color: black;" styleClass="tf5" stylesheets="@../../Css/stylesheet.css" />
+      <TextField fx:id="tfLocalisation" layoutX="85.0" layoutY="213.0" style="-fx-border-color: black;" styleClass="tf3" stylesheets="@../../Css/stylesheet.css" />
+      <TextField fx:id="tfNbrParticipants" layoutX="85.0" layoutY="281.0" style="-fx-border-color: black;" styleClass="tf5" stylesheets="@../../Css/stylesheet.css" />
       <TextField fx:id="tfDescription" layoutX="382.0" layoutY="248.0" onAction="#ajouterEvenement" prefHeight="81.0" prefWidth="149.0" style="-fx-border-color: #D5CBEB;" styleClass="tf6" stylesheets="@../../Css/stylesheet.css">
          <font>
             <Font size="10.0" />
@@ -59,5 +59,11 @@
       <Pane layoutX="344.0" layoutY="364.0" prefHeight="2.0" prefWidth="243.0" style="-fx-background-color: white;" />
       <Pane layoutX="13.0" layoutY="16.0" prefHeight="352.0" prefWidth="2.0" style="-fx-background-color: white;" />
       <Pane layoutX="15.0" layoutY="366.0" prefHeight="2.0" prefWidth="262.0" style="-fx-background-color: white;" />
+      <Label layoutX="82.0" layoutY="124.0" stylesheets="@../../Css/stylesheet.css" text="*Titre :" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfTitre" layoutX="82.0" layoutY="145.0" style="-fx-border-color: black;" styleClass="tf1" stylesheets="@../../Css/stylesheet.css" />
    </children>
 </AnchorPane>

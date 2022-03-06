@@ -92,11 +92,7 @@ public class AjouterEvenementController implements Initializable {
         "tabarka", "aindrahem", "jandouba"
     };
     @FXML
-    private Button tfUpload;
-    @FXML
-    private TextField tfImage;
-    @FXML
-    private ImageView tfload;
+    private TextField tfTitre;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -183,10 +179,10 @@ public class AjouterEvenementController implements Initializable {
                     String local = tfLocalisation.getText();
                     String desc = tfDescription.getText();
                     int nbrPart = Integer.parseInt(tfNbrParticipants.getText());
-                    //String img = tfImage.getText();
+                    String Titre = tfTitre.getText();
                     //img = img.replace("//", "///");
 
-                    Evenement e = new Evenement(ref, java.sql.Date.valueOf(dateDebut), java.sql.Date.valueOf(dateFin), local, desc, nbrPart);
+                    Evenement e = new Evenement(ref, java.sql.Date.valueOf(dateDebut), java.sql.Date.valueOf(dateFin), local, desc, nbrPart , Titre);
                     EvenementCrud ec = new EvenementCrud();
                     ec.ajouterEvenement(e);
 

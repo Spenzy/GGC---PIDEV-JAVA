@@ -37,30 +37,13 @@ public class ListeParticipationController implements Initializable {
     private TableColumn<Participation, String> idClientCol;
     private TableColumn<Participation, String> idEventCol;
     private TableColumn<Participation, String> nbrEtoileCol;
-    private TableColumn<Personne, String> nomCol;
-    private TableColumn<Personne, String> prenomCol;
-    private TableColumn<Personne, Integer> telephoneCol;
-
+    
     Connection cnxx;
     PersonneCRUD pcrud = new PersonneCRUD();
+
     /*
-    @FXML
-    private TableView<String> tvp;
-    @FXML
-    private TableColumn<String, Integer> id;
-    @FXML
-    private TableColumn<String, Integer> idc;
-    @FXML
-    private TableColumn<String, Integer> ide;
-    @FXML
-    private TableColumn<String, Integer> nbrec;
-    @FXML
-    private TableColumn<String, String> nomc;
-    @FXML
-    private TableColumn<String, String> prenomc;
-    @FXML
-    private TableColumn<String, Integer> telephonec;
-*/
+  
+     */
     /**
      * Initializes the controller class.
      */
@@ -84,15 +67,6 @@ public class ListeParticipationController implements Initializable {
         nbrEtoileCol = new TableColumn<>("nbrEtoile");//nom de l'afichage
         nbrEtoileCol.setCellValueFactory(new PropertyValueFactory<>("nbrEtoile"));
 
-        nomCol = new TableColumn<>("nom");//nom de l'afichage
-        nomCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
-
-        prenomCol = new TableColumn<>("nom");//nom de l'afichage
-        prenomCol.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-
-        telephoneCol = new TableColumn<>("nom");//nom de l'afichage
-        telephoneCol.setCellValueFactory(new PropertyValueFactory<>("telephone"));
-
         participationTable.getColumns().addAll(idParticipationCol, idClientCol, idEventCol, nbrEtoileCol);
     }
 
@@ -102,15 +76,14 @@ public class ListeParticipationController implements Initializable {
         participationTable.getItems().clear();
         //afficher par objet dans une boucle   
         for (Participation e : participations) {
-            
+
             Personne p = pcrud.afficherPersonne(e.getIdClient());
-            System.out.println("ahawaaaa");
             participationTable.getItems().add(e);
-            
+
         }
 
     }
-/*
+    /*
     public ObservableList<Personne> getModerateurlist() {
         ObservableList<Personne> Clientlist = FXCollections.observableArrayList();
 
@@ -146,5 +119,5 @@ public class ListeParticipationController implements Initializable {
         telephonec.setCellValueFactory(new PropertyValueFactory<Personne, Integer>("telephone"));
         // tvp.setItems(list);
     }
-*/
+     */
 }

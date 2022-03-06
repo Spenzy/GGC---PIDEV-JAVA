@@ -33,7 +33,7 @@ public class GccMain extends Application {
 
  /* Parent root = FXMLLoader.load(getClass().getResource("DashboardModerateur.fxml"));
             primaryStage.setTitle("Espace Moderateur");*/
-            Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
             primaryStage.setTitle("Espace Client");
 
             Scene scene = new Scene(root);
