@@ -3,32 +3,52 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="376.0" prefWidth="600.0" stylesheets="@ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.UpdateClientController">
+<AnchorPane id="AnchorPane" prefHeight="376.0" prefWidth="459.0" stylesheets="@ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.UpdateClientController">
    <children>
-      <BorderPane prefHeight="372.0" prefWidth="600.0">
+      <BorderPane prefHeight="372.0" prefWidth="459.0">
          <top>
-            <Pane prefHeight="368.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="368.0" prefWidth="444.0" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="tfidClient" layoutX="207.0" layoutY="44.0" />
-                  <TextField fx:id="tfNom" layoutX="207.0" layoutY="81.0" />
-                  <TextField fx:id="tfPrenom" layoutX="207.0" layoutY="116.0" />
-                  <TextField fx:id="tftelephone" layoutX="207.0" layoutY="224.0" />
-                  <TextField fx:id="tfemail" layoutX="207.0" layoutY="188.0" />
-                  <DatePicker fx:id="tfdate" layoutX="207.0" layoutY="155.0" prefHeight="25.0" prefWidth="149.0" />
-                  <TextField fx:id="tfpassword" layoutX="207.0" layoutY="265.0" />
-                  <Button fx:id="tfupdate" layoutX="207.0" layoutY="314.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="149.0" styleClass="button1" stylesheets="@../css/Stylesheet.css" text="Update" />
-                  <Label layoutX="164.0" layoutY="48.0" text="Id" />
-                  <Label layoutX="155.0" layoutY="85.0" text="Nom" />
-                  <Label layoutX="147.0" layoutY="120.0" text="Prénom" />
-                  <Label layoutX="155.0" layoutY="159.0" text="Date" />
-                  <Label layoutX="152.0" layoutY="192.0" text="Email" />
-                  <Label layoutX="96.0" layoutY="228.0" text="Numéro Téléphone" />
-                  <Label layoutX="142.0" layoutY="269.0" text="Password" />
+                  <ImageView fitHeight="30.0" fitWidth="36.0" layoutX="37.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" rotate="-36.9">
+                     <image>
+                        <Image url="@../img/Video-Game-Controller-PNG-Picture.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="116.0" layoutY="31.0" prefHeight="257.0" prefWidth="110.0" spacing="23.0">
+                     <children>
+                        <Label text="Nom" />
+                        <Label text="Prénom" />
+                        <Label text="Date" />
+                        <Label text="Email" />
+                        <Label prefHeight="17.0" prefWidth="112.0" text=" Téléphone" />
+                        <Label text="Password" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="193.0" layoutY="29.0" prefHeight="260.0" prefWidth="172.0" spacing="15.0">
+                     <children>
+                        <TextField fx:id="tfNom" />
+                        <TextField fx:id="tfPrenom" />
+                        <DatePicker fx:id="tfdate" prefHeight="25.0" prefWidth="179.0" />
+                        <TextField fx:id="tfemail" />
+                        <TextField fx:id="tftelephone" />
+                        <PasswordField fx:id="tfpassword" prefHeight="25.0" prefWidth="179.0" />
+                     </children>
+                  </VBox>
+                  <Button fx:id="tfupdate" layoutX="196.0" layoutY="288.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="176.0" styleClass="button1" stylesheets="@../css/Stylesheet.css" text="Update" />
+                  <ImageView fitHeight="52.0" fitWidth="49.0" layoutX="401.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" rotate="-33.7">
+                     <image>
+                        <Image url="@../img/Gaming-PNG-Transparent-HD-Photo.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
          </top>

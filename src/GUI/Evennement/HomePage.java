@@ -29,7 +29,7 @@ public class HomePage extends Application {
     public void start(Stage primaryStage) {
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("AffichEvent.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("ListeParticipation.fxml"));
 
             Scene scene = new Scene(root);
             primaryStage.setTitle("Table Admin");

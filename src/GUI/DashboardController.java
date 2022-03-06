@@ -52,10 +52,14 @@ public class DashboardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         parentClient = homeClient;
         idClient = homePage.loggedInID;
-        idClient = 5;
-        
-        parentClient = homeClient;
+
+//        initHome();
+        btnHome.setOnAction(a -> {
+            initHome();
+        });
+
         btnForum.setOnAction(a -> {
             try {
                 FXMLLoader forumPage = new FXMLLoader(getClass().getResource("Forum/ForumHomeGUI.fxml"));
@@ -80,7 +84,7 @@ public class DashboardController implements Initializable {
                 System.err.println(ex.getMessage());
             }
         });
-        
+
         btnCommande.setOnAction(a -> {
             try {
                 FXMLLoader cmdPage = new FXMLLoader(getClass().getResource("Commande/PasserCommande.fxml"));
@@ -103,7 +107,7 @@ public class DashboardController implements Initializable {
                 System.err.println(ex.getMessage());
             }
         });
-        
+
         btnSetting.setOnAction(a -> {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("UpdateClient.fxml"));
@@ -113,6 +117,17 @@ public class DashboardController implements Initializable {
                 System.err.println(ex.getMessage());
             }
         });
+    }
+
+    public void initHome() {
+        try {
+            FXMLLoader forumPage = new FXMLLoader(getClass().getResource("pagehome.fxml"));
+            Parent root = forumPage.load();
+
+            refreshParent(root);
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 
     public static void refreshParent(Parent root) {

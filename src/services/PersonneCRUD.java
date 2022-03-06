@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -187,6 +188,38 @@ public class PersonneCRUD {
         return false;
     }
 
+    public Boolean verifEmail(String Email) {
+        try {
+            Statement st = cnxx.createStatement();
+
+            String req = "SELECT email FROM personne ";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+
+            while (rs.next()) {
+
+                String emailBd = rs.getString(1);
+                if (emailBd.equals(Email)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Erreur Email");
+                    alert.setHeaderText("Erreur input");
+                    alert.setContentText("Cet email est deja existant!");
+                    alert.show();
+
+                    return true;
+
+                }
+
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+
+            //   return null;
+        }
+
+        return false;
+    }
+
     public boolean getModerateurBy(String email, String pwdId) {
 
         String requete = "SELECT id_personne, password FROM personne,moderateur"
@@ -267,8 +300,5 @@ public class PersonneCRUD {
         }
         return p;
     }
-    
-   
-    
 
 }

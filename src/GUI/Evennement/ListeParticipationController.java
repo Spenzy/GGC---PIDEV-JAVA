@@ -104,6 +104,7 @@ public class ListeParticipationController implements Initializable {
         for (Participation e : participations) {
             
             Personne p = pcrud.afficherPersonne(e.getIdClient());
+            System.out.println("ahawaaaa");
             participationTable.getItems().add(e);
             
         }

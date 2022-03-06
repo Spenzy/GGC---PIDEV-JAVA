@@ -49,7 +49,6 @@ import static jdk.nashorn.tools.Shell.SUCCESS;
 import services.PersonneCRUD;
 //import static tray.animations.AnimationType.FADE;
 
-
 /**
  * FXML Controller class
  *
@@ -81,11 +80,21 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        btnsignup.setOnAction(a -> {
+            try {
+                Parent blah = FXMLLoader.load(getClass().getResource("inscription.fxml"));
+                Scene scene = new Scene(blah);
+                Stage appStage = (Stage) btnsignup.getScene().getWindow();
+                appStage.setScene(scene);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        });
     }
 
     @FXML
     private void Login(ActionEvent event) throws IOException {
+
         DataValidation validator = new DataValidation();
         PersonneCRUD repo = new PersonneCRUD();
         if (email.getText().isEmpty()) {
@@ -113,7 +122,6 @@ public class LoginController implements Initializable {
                 Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 appStage.setScene(scene);
                 appStage.show();
-            
 
             } else if (repo.getModerateurBy(email.getText(), pwdId.getText())) {
                 System.out.println("aaaaaaaaaaaaaaaaaaaaaaaa");
@@ -124,7 +132,7 @@ public class LoginController implements Initializable {
                 appStage.show();
 
             }
-            
+
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur login");
@@ -177,13 +185,10 @@ public class LoginController implements Initializable {
             // System.out.println("aaaaa");
             //System.out.println("1"+Token);
             System.out.println(c.ResetPass(emailp, Token));
-            System.out.println("2fsdf");
 
             String body = " Your password has been update -> " + Token;
-            System.out.println("345454");
 
-            sendMail(emailp, "test", body);
-            System.out.println("bbbbbb");
+            sendMail(emailp, "GGC", body);
 
             //TrayNotification tray = new TrayNotification("Password Reset", "A link has been sent to your Email",SUCCESS);
             //tray.setAnimationType(FADE);

@@ -5,8 +5,11 @@
  */
 package GUI;
 
+import entities.Personne;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -14,11 +17,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import services.Authentification;
+import services.PersonneCRUD;
 import utils.MyConnection;
 
 /**
@@ -28,7 +34,6 @@ import utils.MyConnection;
  */
 public class UpdateClientController implements Initializable {
 
-    @FXML
     private TextField tfidClient;
     @FXML
     private TextField tfNom;
@@ -41,11 +46,14 @@ public class UpdateClientController implements Initializable {
     @FXML
     private DatePicker tfdate;
     @FXML
-    private TextField tfpassword;
+    private PasswordField tfpassword;
     @FXML
     private Button tfupdate;
     Authentification aa = new Authentification();
+    Personne p = new Personne();
+    PersonneCRUD pc = new PersonneCRUD();
     Connection cnxx;
+    int idClient = homePage.loggedInID;
 
     /**
      * Initializes the controller class.
@@ -58,14 +66,22 @@ public class UpdateClientController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        p = pc.afficherPersonne(idClient);
+        tfNom.setText(p.getNom());
+        tfPrenom.setText(p.getPrenom());
+        tfdate.setValue(p.getDateNaissance().toLocalDate());
+        tfemail.setText(p.getEmail());
+        tftelephone.setText(p.getTelephone() + "");
+        tfpassword.setText(p.getPassword());
+
         // TODO
     }
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
         if (event.getSource() == tfupdate) {
-            UpdateClient1();
-            Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+            UpdateClient2(76);
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setTitle("Validation");
             alert2.setHeaderText("Modification avec succés");
 
@@ -76,13 +92,6 @@ public class UpdateClientController implements Initializable {
             alert2.setContentText("Pas de modification");
             alert2.show();
         }
-    }
-
-    private void UpdateClient1() {
-
-        String req = " UPDATE Personne SET nom ='" + tfNom.getText() + "', prenom ='" + tfPrenom.getText() + "', dateNaissance ='" + java.sql.Date.valueOf(tfdate.getValue()) + "' , email = '" + tfemail.getText() + "', telephone= '" + tftelephone.getText() + "', password ='" + aa.hashagePWD(tfpassword.getText()) + "' WHERE id_personne = '" + tfidClient.getText() + "'";
-        executeQuery(req);
-
     }
 
     private void executeQuery(String req) {
@@ -96,5 +105,17 @@ public class UpdateClientController implements Initializable {
             ex.printStackTrace();
         }
 
+    }
+
+    private void UpdateClient2(int idClient) {
+
+        String req = " UPDATE Personne SET nom ='" + tfNom.getText() + "', prenom ='" + tfPrenom.getText() + "', dateNaissance ='" + java.sql.Date.valueOf(tfdate.getValue()) + "' , email = '" + tfemail.getText() + "', telephone= '" + tftelephone.getText() + "', password ='" + aa.hashagePWD(tfpassword.getText()) + "' WHERE id_personne = '" + idClient + "'";
+        
+        executeQuery(req);
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Succesful");
+       alert.setHeaderText(null);
+        alert.setContentText(" Modification avec succées!");
+        alert.show();
     }
 }

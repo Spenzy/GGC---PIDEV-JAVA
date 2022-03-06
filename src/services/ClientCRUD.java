@@ -30,16 +30,16 @@ public class ClientCRUD extends PersonneCRUD {
 
     public void ajouterClient(Client c) {
         int idP = ajouterPersonne(c);
-        String req = "INSERT INTO client (idClient,nbrAvertissement,ban,etat,dateDebutBlock,dateFinBlock) VALUES (?,?,?,?,?,?)";
+        String req = "INSERT INTO client (idClient,nbrAvertissement,ban,dateDebutBlock,dateFinBlock) VALUES (?,?,?,?,?)";
         PreparedStatement pst;
         try {
             pst = cnxx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS); //returns generated DB keys
             pst.setInt(1, idP);
             pst.setInt(2, c.getNbrAvertissement());
             pst.setInt(3, c.getBan());
-            pst.setInt(4, c.getEtat());
-            pst.setDate(5, c.getDateDebutBlock());
-            pst.setDate(6, c.getDateFinBlock());
+            //pst.setInt(4, c.getEtat());
+            pst.setDate(4, c.getDateDebutBlock());
+            pst.setDate(5, c.getDateFinBlock());
             pst.executeUpdate();
             System.out.println(c.getPassword());
             System.out.println("Client ajoute");
@@ -99,9 +99,9 @@ public class ClientCRUD extends PersonneCRUD {
             c.setIdClient(rs.getInt(1));
             c.setNbrAvertissement(rs.getInt(2));
             c.setBan(rs.getInt(3));
-            c.setEtat(rs.getInt(4));
-            c.setDateDebutBlock(rs.getDate(5));
-            c.setDateFinBlock(rs.getDate(6));
+           // c.setEtat(rs.getInt(4));
+            c.setDateDebutBlock(rs.getDate(4));
+            c.setDateFinBlock(rs.getDate(5));
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -124,10 +124,10 @@ public class ClientCRUD extends PersonneCRUD {
                 c.setIdClient(rs.getInt(1));
                 c.setNbrAvertissement(rs.getInt(2));
                 c.setBan(rs.getInt(3));
-                c.setEtat(rs.getInt(4));
-                c.setDateDebutBlock(rs.getDate(5));
-                c.setDateFinBlock(rs.getDate(6));
-                c.setNom(rs.getString(7));
+                //c.setEtat(rs.getInt(4));
+                c.setDateDebutBlock(rs.getDate(4));
+                c.setDateFinBlock(rs.getDate(5));
+                c.setNom(rs.getString(6));
 
                 myList.add(c);
             }
@@ -137,5 +137,6 @@ public class ClientCRUD extends PersonneCRUD {
         }
         return myList;
     }
+  
 
 }

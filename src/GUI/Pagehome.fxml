@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="508.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.PagehomeController">
+   <children>
+      <HBox prefHeight="49.0" prefWidth="600.0">
+         <children>
+            <Pane prefHeight="49.0" prefWidth="604.0">
+               <children>
+                  <TextField layoutX="379.0" layoutY="16.0" prefHeight="25.0" prefWidth="171.0" promptText="Search here" />
+                  <Text layoutX="58.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Best Streamer" wrappingWidth="92.376953125" />
+                  <ImageView fitHeight="35.0" fitWidth="40.0" layoutX="14.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/LogoGGC.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="553.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/téléchargement%20(2).png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="NONE" />
+                     </cursor>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </ImageView>
+                 <!-- <FontAwesomeIcon iconName="SEARCH" layoutX="521.0" layoutY="33.0" />-->
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+      <HBox layoutX="52.0" layoutY="68.0" prefHeight="186.0" prefWidth="163.0" spacing="15.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="161.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
+                  <ImageView fitHeight="161.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/images.png" />
+                     </image>
+                  </ImageView>
+                  <HBox prefHeight="40.0" prefWidth="161.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <children>
+                        <ImageView fitHeight="15.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../esprit/pi/logo/téléchargement.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3 Weeks ago">
+                           <HBox.margin>
+                              <Insets left="5.0" top="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Bodoni MT" size="12.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="18.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/black-like-icon-png-13.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="50.0" top="8.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <!--<FontAwesomeIcon iconName="HEART" selectionFill="BLACK">
+                           <HBox.margin>
+                              <Insets left="40.0" top="11.0" />
+                           </HBox.margin>
+                        </FontAwesomeIcon>-->
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="161.0">
+               <children>
+                  <ImageView fitHeight="161.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/c635c9cda9e3bb2ae56266ab191712eb.jpg" />
+                     </image>
+                  </ImageView>
+                  <HBox prefHeight="159.0" prefWidth="511.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <children>
+                        <ImageView fitHeight="15.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../esprit/pi/logo/téléchargement.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2 min">
+                           <HBox.margin>
+                              <Insets left="4.0" top="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Bodoni MT" size="12.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="18.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/black-like-icon-png-13.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="85.0" top="8.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <!--<FontAwesomeIcon iconName="HEART" selectionFill="RED">
+                           <HBox.margin>
+                              <Insets left="80.0" top="11.0" />
+                           </HBox.margin>
+                        </FontAwesomeIcon>-->
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="161.0">
+               <children>
+                  <ImageView fitHeight="159.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/unnamed.jpg" />
+                     </image>
+                  </ImageView>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <children>
+                        <ImageView fitHeight="15.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../esprit/pi/logo/téléchargement.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3 Weeks ago">
+                           <HBox.margin>
+                              <Insets left="15.0" top="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Bodoni MT" size="12.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="18.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/black-like-icon-png-13.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="45.0" top="8.0" />
+                           </HBox.margin>
+                        </ImageView>
+                       <!-- <FontAwesomeIcon iconName="HEART" selectionFill="RED">
+                           <HBox.margin>
+                              <Insets left="40.0" top="11.0" />
+                           </HBox.margin>
+                        </FontAwesomeIcon>-->
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox layoutX="54.0" layoutY="271.0" prefHeight="186.0" prefWidth="163.0" spacing="15.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="161.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
+                  <ImageView fitHeight="161.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/unnamed%20(4).jpg" />
+                     </image>
+                  </ImageView>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <children>
+                        <ImageView fitHeight="15.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../esprit/pi/logo/téléchargement.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3 Weeks ago">
+                           <HBox.margin>
+                              <Insets left="5.0" top="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Bodoni MT" size="12.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="18.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/black-like-icon-png-13.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="48.0" top="8.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     <!--   <FontAwesomeIcon iconName="HEART" selectionFill="RED">
+                           <HBox.margin>
+                              <Insets left="40.0" top="11.0" />
+                           </HBox.margin>
+                        </FontAwesomeIcon>-->
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="161.0">
+               <children>
+                  <ImageView fitHeight="161.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/b7170ddebe19bb35f6aece4a152a7481.jpg" />
+                     </image>
+                  </ImageView>
+                  <HBox prefHeight="159.0" prefWidth="511.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <children>
+                        <ImageView fitHeight="15.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../esprit/pi/logo/téléchargement.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2 min">
+                           <HBox.margin>
+                              <Insets left="4.0" top="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Bodoni MT" size="12.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="18.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/black-like-icon-png-13.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="80.0" top="8.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     <!--   <FontAwesomeIcon iconName="HEART" selectionFill="RED">
+                           <HBox.margin>
+                              <Insets left="80.0" top="11.0" />
+                           </HBox.margin>
+                        </FontAwesomeIcon> -->
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="161.0">
+               <children>
+                  <ImageView fitHeight="159.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/téléchargemenhghght.png" />
+                     </image>
+                  </ImageView>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <children>
+                        <ImageView fitHeight="15.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../esprit/pi/logo/téléchargement.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3 Weeks ago">
+                           <HBox.margin>
+                              <Insets left="15.0" top="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Bodoni MT" size="12.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="18.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/black-like-icon-png-13.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="45.0" top="8.0" />
+                           </HBox.margin>
+                        </ImageView>
+                    <!--    <FontAwesomeIcon iconName="HEART" selectionFill="RED">
+                           <HBox.margin>
+                              <Insets left="40.0" top="11.0" />
+                           </HBox.margin>
+                        </FontAwesomeIcon> -->
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

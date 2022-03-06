@@ -5,9 +5,9 @@
  */
 package GUI;
 
-
 import entities.Client;
 import entities.Personne;
+import java.io.IOException;
 import java.net.URL;
 
 import java.time.LocalDate;
@@ -16,13 +16,18 @@ import java.time.Period;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import services.Authentification;
 import services.ClientCRUD;
 import services.PersonneCRUD;
@@ -51,6 +56,8 @@ public class InscriptionController implements Initializable {
     private Button btnSave;
     @FXML
     private Label ereurdate;
+    @FXML
+    private Button btnLogin;
 
     /**
      * Initializes the controller class.
@@ -58,25 +65,36 @@ public class InscriptionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        // TODO                   
+        btnLogin.setOnAction(a -> {
+            try {
+                Parent blah = FXMLLoader.load(getClass().getResource("Login.fxml"));
+                Scene scene = new Scene(blah);
+                Stage appStage = (Stage) btnLogin.getScene().getWindow();
+                appStage.setScene(scene);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        });
     }
-     public boolean isValidDateNaissance(){
-         if(tfdate.getValue() == null){
-        ereurdate.setText("champs vide");
-        return false;
-     }else if (Period.between(tfdate.getValue(), LocalDate.now()).getYears() < 18) {
-         LocalDate myDate = tfdate.getValue();
-        ereurdate.setText("date invalide");
-        return false;
-    }else{
-         
-         return true;
-     }
-     }
+
+    public boolean isValidDateNaissance() {
+        if (tfdate.getValue() == null) {
+            ereurdate.setText("champs vide");
+            return false;
+        } else if (Period.between(tfdate.getValue(), LocalDate.now()).getYears() < 18) {
+            LocalDate myDate = tfdate.getValue();
+            ereurdate.setText("date invalide");
+            return false;
+        } else {
+
+            return true;
+        }
+    }
 
     @FXML
     private void addPersonne(ActionEvent event) {
         DataValidation validator = new DataValidation();
+
         String nom = tfnom.getText();
         String prenom = tfprenom.getText();
         LocalDate myDate = tfdate.getValue();
@@ -84,19 +102,38 @@ public class InscriptionController implements Initializable {
         String email = tfemail.getText();
         int telephone = Integer.parseInt(tfphone.getText());
         String password = tfpassword.getText();
-        if(validator.isNotEmpty(tfemail) && validator.isNotEmpty(tfpassword) && validator.isNotEmpty(tfnom) && 
-          validator.isNotEmpty(tfprenom)  &&  validator.isNotEmpty(tfphone) && validator.isNotEmpty(tfdate.getEditor())){
+        if (validator.isNotEmpty(tfemail) && validator.isNotEmpty(tfpassword) && validator.isNotEmpty(tfnom)
+                && validator.isNotEmpty(tfprenom) && validator.isNotEmpty(tfphone) && validator.isNotEmpty(tfdate.getEditor())) {
 
-        
-        if (validator.emailFormat(tfemail) && validator.textNumeric(tfphone) && validator.dataLength(tfphone, "8") 
-            && validator.textAlphabet(tfnom) && validator.textAlphabet(tfprenom)&& Period.between(tfdate.getValue(), LocalDate.now()).getYears() > 18) {
+            if (validator.emailFormat(tfemail) && !pc.verifEmail(email) && validator.textNumeric(tfphone) && validator.dataLength(tfphone, "8")
+                    && validator.textAlphabet(tfnom) && validator.textAlphabet(tfprenom) && Period.between(tfdate.getValue(), LocalDate.now()).getYears() > 18) {
 
-            Authentification aa = new Authentification();
-            ClientCRUD cc = new ClientCRUD();      
-            Client c = new Client(nom, prenom, java.sql.Date.valueOf(myDate), email, telephone,aa.hashagePWD(password));
+                Authentification aa = new Authentification();
+                ClientCRUD cc = new ClientCRUD();
+                Client c = new Client(nom, prenom, java.sql.Date.valueOf(myDate), email, telephone, aa.hashagePWD(password));
 
-            cc.ajouterClient(c);
+                cc.ajouterClient(c);
+                redirectionLogin();
+            }
+        }
+
+    }
+
+    public void redirectionLogin() {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Alerte Inscription");
+        alert.setHeaderText("Inscription successive");
+        alert.setContentText("Vous etes inscrit! veuillez vous connecter!");
+        alert.showAndWait();
+
+        try {
+            Parent blah = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            Scene scene = new Scene(blah);
+            Stage appStage = (Stage) btnLogin.getScene().getWindow();
+            appStage.setScene(scene);
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
         }
     }
-}
 }

@@ -20,46 +20,32 @@ import java.util.regex.Pattern;
 public class DataValidation {
 
     Connection cnxx;
-
-    public Boolean verifEmail(String Email) {
-        boolean testEmail = false;
+/*
+     public boolean getUserBy(String email, String pwdId) {
+        String requete = "SELECT id_personne, password FROM personne,client"
+                + " WHERE ( email = ? ) AND (id_personne = idClient)";
         try {
-            Statement st = cnxx.createStatement();
-            String req = "SELECT email FROM personne";
-            ResultSet rs;
-            rs = st.executeQuery(req);
-            while (rs.next()) {
-                if (rs.getString(1) == Email) {
-                    testEmail = true;
+            PreparedStatement ps = cnxx.prepareStatement(requete);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String pwdBD = rs.getString(2);
+                if (aa.hashagePWD(pwdId).equals(pwdBD)) {
+                    int idUser = rs.getInt(1);
+                    homePage.loggedInID = idUser;
+                    return true;
                 }
             }
         } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-            //   return null;
+            ex.printStackTrace();
         }
-        return testEmail;
-
+        return false;
     }
+       */
+     
+   
 
-    /*
-    public boolean VerifEvenement(int reference) {
-        boolean testEvenement = false;
-        try {
-            Statement st = cnxx.createStatement();
-            String req = "SELECT reference FROM evenement";
-            ResultSet rs;
-            rs = st.executeQuery(req);
-            while (rs.next()) {
-                if (rs.getInt(1) == reference) {
-                    testEvenement = true;
-                }
-            }
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-            //   return null;
-        }
-        return testEvenement;
-    }*/
+   
 
     public static boolean emailFormat(TextField inputTextField) {
         boolean isEmail = true;

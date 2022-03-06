@@ -233,6 +233,7 @@ public class ListeModerateurController implements Initializable {
 
         Personne client = tvmoderateur.getSelectionModel().getSelectedItem();
         tfidmoderateur.setText("" + client.getId_personne());
+        tfidmoderateur.setDisable(true);
         tfnom.setText(client.getNom());
         tfprenom.setText(client.getPrenom());
 
