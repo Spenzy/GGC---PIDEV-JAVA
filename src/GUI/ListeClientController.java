@@ -6,6 +6,7 @@
 package GUI;
 
 import entities.Client;
+import entities.Personne;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -13,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,7 +30,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javax.mail.MessagingException;
 import services.ClientCRUD;
+import services.PersonneCRUD;
+import utils.MailAPI;
 import utils.MyConnection;
 
 /**
@@ -68,6 +74,7 @@ public class ListeClientController implements Initializable {
     Connection cnxx;
     @FXML
     private Button btnavertit;
+    PersonneCRUD pc =new PersonneCRUD();
 
     /**
      * Initializes the controller class.
@@ -108,6 +115,14 @@ public class ListeClientController implements Initializable {
                 alert2.setTitle("Validation");
                 alert2.setHeaderText("Avertssement donné avec succés");
                 UpdateRecordavertir();
+                Personne p = pc.afficherPersonne(Integer.parseInt(tfid.getText()));
+                try {
+                    MailAPI.sendMail(p.getEmail(), "Avertissement Compte GGC", "Bonjour, \n"
+                            + p.getNom()+" "+p.getPrenom()+"Votre compte GGC " +" a reçu un avertissmenet");
+                } catch (MessagingException ex) {
+                    Logger.getLogger(ListeClientController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             } else {
                 Alert alert2 = new Alert(Alert.AlertType.ERROR);
                 alert2.setTitle("Erreur!");

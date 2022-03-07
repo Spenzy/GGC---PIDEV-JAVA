@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="79.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="79.0" prefWidth="772.0" stylesheets="@../ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox layoutX="17.0" layoutY="26.0" spacing="20.0">
          <children>
@@ -16,7 +16,7 @@
                   <Insets top="5.0" />
                </padding>
             </Label>
-            <TextField fx:id="tfTitre" editable="false" prefHeight="25.0" prefWidth="349.0" />
+            <TextField fx:id="tfTitre" editable="false" prefHeight="25.0" prefWidth="349.0" styleClass="text-field" />
             <Label fx:id="lblDate" text="yyyy-MM-dd">
                <padding>
                   <Insets top="5.0" />
@@ -27,9 +27,9 @@
                   <Insets top="5.0" />
                </padding>
             </Label>
-            <Button fx:id="btnAfficher" mnemonicParsing="false" text="Afficher" />
-            <Button fx:id="btnModifier" mnemonicParsing="false" text="Modifier" />
-            <Button fx:id="btnArchiver" mnemonicParsing="false" text="Archiver" />
+            <Button fx:id="btnAfficher" mnemonicParsing="false" styleClass="button1" text="Afficher" />
+            <Button fx:id="btnModifier" mnemonicParsing="false" styleClass="button1" text="Modifier" />
+            <Button fx:id="btnArchiver" mnemonicParsing="false" styleClass="button1" text="Archiver" />
          </children>
       </HBox>
    </children>

@@ -84,16 +84,13 @@ public class ForumHomeGUIController implements Initializable {
 
     public void initPublications() {
         ArrayList publications = pc.afficherPublication();
-        System.out.println("1");
         publications.stream()
                 .forEach(p -> {
-                    System.out.println("2");
                     try {
                         FXMLLoader cLoader = new FXMLLoader(getClass().getResource("PublicationForumGUI.fxml"));
                         PublicationForumGUIController controller = new PublicationForumGUIController((Publication) p, idClient);
                         cLoader.setController(controller);
                         Parent cNode = cLoader.load();
-                        System.out.println("hazerbi");
                         if (((Publication) p).isArchive()) {
                             vboxPubArch.getChildren().add(cNode);
                         } else {
@@ -104,8 +101,6 @@ public class ForumHomeGUIController implements Initializable {
                         System.err.println(ex.getMessage());
                     }
                 });
-        System.out.println(vboxPubArch.getChildren());
-        System.out.println(vboxPub.getChildren());
     }
 
     public Parent refreshForum() {//temp jusqau vrai main

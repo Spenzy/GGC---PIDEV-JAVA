@@ -106,100 +106,54 @@ public class AjouterEvenementController implements Initializable {
     private void ajouterEvenement(ActionEvent event) {
 
         //// verif champ vide
-        if (tfReference.getText().isEmpty() || tfLocalisation.getText().isEmpty() || tfDescription.getText().isEmpty() || tfNbrParticipants.getText().isEmpty()) {
+        if (tfReference.getText().isEmpty() || tfLocalisation.getText().isEmpty() || tfDescription.getText().isEmpty() || tfNbrParticipants.getText().isEmpty() || tfTitre.getText().isEmpty()) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erreur!");
             alert.setHeaderText(null);
             alert.setContentText(" Champ vide!");
             alert.show();
+        } else /// Verifier nbrParticipants
+        if (Integer.parseInt(tfNbrParticipants.getText()) < 1) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur!");
+            alert.setHeaderText(null);
+            alert.setContentText(" nombre de participants doit etre superieur à 1");
+            alert.show();
+
+            ///Verifier reference
+        } else if (ec.VerifEvenement(Integer.parseInt(tfReference.getText()))) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur!");
+            alert.setHeaderText(null);
+            alert.setContentText("La reference de cet evenement Existe ");
+            alert.show();
+        } else if (tfDateDebut.getValue().isBefore(LocalDate.now()) || tfDateFin.getValue().isBefore(tfDateDebut.getValue())) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur!");
+            alert.setHeaderText(null);
+            alert.setContentText("Date deb et fin erronée");
+            alert.show();
+
         } else {
-            try {
-                LocalDate dateDebut = tfDateDebut.getValue();
-                LocalDate dateFin = tfDateFin.getValue();
-                
-                SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
-                
-                boolean dateTrue = true;
-                
-                //String[] dateDebutArr = dateDebut.toString().split("-");
-                //String[] dateFinArr = dateFin.toString().split("-");
-                
-                try {
-                    
-                  Date  _dateDebut = sdformat.parse(dateDebut.toString()); 
-                  Date  _dateFin = sdformat.parse(dateFin.toString()); 
-                  
-                  if (_dateDebut.compareTo(_dateFin) > 0) {
-                      dateTrue=false;
-                  }
-                } catch(ParseException e ) {
-                    
-                } 
-                /* 
-                TODO:
-                    Condition
-                        Date debut > current date
-                        Date Fin >= Date debut
-                
-                    1. get current date
-                    2. split current date
-                
-                    if ( date-debut-annee < datefinannee ) 
-                        if  (datedebut mois < datefin mois)
-                            if ( datedebut jour < datefin jour)
-                
-                    datedebut > current date
-                */
-                    
-                /// Verifier nbrParticipants
-                if (Integer.parseInt(tfNbrParticipants.getText()) < 1) {
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Erreur!");
-                    alert.setHeaderText(null);
-                    alert.setContentText(" nombre de participants doit etre superieur à 1");
-                    alert.show();
 
-                    ///Verifier reference
-                } else if (ec.VerifEvenement(Integer.parseInt(tfReference.getText()))) {
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Erreur!");
-                    alert.setHeaderText(null);
-                    alert.setContentText("La reference de cet evenement Existe ");
-                    alert.show();
-                } else if (dateTrue) {
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Erreur!");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Date ");
-                    alert.show();
-                } else {
+            //Récuperer les données saisies dans le formulaire 
+            int ref = Integer.parseInt(tfReference.getText());
+            String local = tfLocalisation.getText();
+            String desc = tfDescription.getText();
+            int nbrPart = Integer.parseInt(tfNbrParticipants.getText());
+            String Titre = tfTitre.getText();
+            //img = img.replace("//", "///");
 
-                    //Récuperer les données saisies dans le formulaire 
-                    int ref = Integer.parseInt(tfReference.getText());
-                    String local = tfLocalisation.getText();
-                    String desc = tfDescription.getText();
-                    int nbrPart = Integer.parseInt(tfNbrParticipants.getText());
-                    String Titre = tfTitre.getText();
-                    //img = img.replace("//", "///");
+            Evenement e = new Evenement(ref, java.sql.Date.valueOf(tfDateDebut.getValue()), java.sql.Date.valueOf(tfDateFin.getValue()), local, desc, nbrPart, Titre);
+            EvenementCrud ec = new EvenementCrud();
+            ec.ajouterEvenement(e);
 
-                    Evenement e = new Evenement(ref, java.sql.Date.valueOf(dateDebut), java.sql.Date.valueOf(dateFin), local, desc, nbrPart , Titre);
-                    EvenementCrud ec = new EvenementCrud();
-                    ec.ajouterEvenement(e);
-
-                    Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Succesful");
-                    alert.setHeaderText(null);
-                    alert.setContentText(" Evenement ajoutée avec succéez!");
-                    alert.show();
-                    ((Stage) btnAjouter.getScene().getWindow()).close();
-                }
-            } catch (NumberFormatException ex) {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Erreur!");
-                alert.setHeaderText(null);
-                alert.setContentText("Reference et nombre de participants doivent etre des nombres");
-                alert.show();
-            }
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Succesful");
+            alert.setHeaderText(null);
+            alert.setContentText(" Evenement ajoutée avec succéez!");
+            alert.show();
+            ((Stage) btnAjouter.getScene().getWindow()).close();
         }
 
     }

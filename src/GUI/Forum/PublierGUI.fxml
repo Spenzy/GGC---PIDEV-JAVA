@@ -6,14 +6,14 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="ajoutPub" prefHeight="400.0" prefWidth="600.0" stylesheets="@ressources/theme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" fx:id="ajoutPub" prefHeight="400.0" prefWidth="600.0" stylesheets="@../ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="btnPublier" layoutX="404.0" layoutY="336.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="63.0" text="Publier" />
+      <Button fx:id="btnPublier" layoutX="404.0" layoutY="336.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="63.0" styleClass="button1" text="Publier" />
       <Label layoutX="47.0" layoutY="26.0" text="Titre" />
       <TextField fx:id="tfTitre" layoutX="47.0" layoutY="43.0" prefHeight="25.0" prefWidth="506.0" />
       <TextArea fx:id="taDesc" layoutX="47.0" layoutY="115.0" prefHeight="200.0" prefWidth="506.0" />
       <Label layoutX="47.0" layoutY="98.0" text="Description" />
-      <Button fx:id="btnAnnuler" layoutX="484.0" layoutY="336.0" mnemonicParsing="false" text="Annuler" />
+      <Button fx:id="btnAnnuler" layoutX="484.0" layoutY="336.0" mnemonicParsing="false" styleClass="button1" text="Annuler" />
       <Label fx:id="errTitre" layoutX="47.0" layoutY="71.0" textFill="RED" />
       <Label fx:id="errDesc" layoutX="47.0" layoutY="319.0" textFill="RED" />
       <Label fx:id="errWindow" layoutX="94.0" layoutY="365.0" textFill="RED" />

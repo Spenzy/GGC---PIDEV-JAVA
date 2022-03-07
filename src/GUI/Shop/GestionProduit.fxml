@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="592.0" prefWidth="933.0" stylesheets="@../ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Shop.GestionProduitController">
+<AnchorPane id="AnchorPane" prefHeight="592.0" prefWidth="933.0" stylesheets="@../ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Shop.GestionProduitController">
    <children>
       <TableView fx:id="tvProduit" layoutX="51.0" layoutY="51.0" prefHeight="200.0" prefWidth="451.0">
         <columns>
@@ -47,8 +47,8 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Button fx:id="btnModifier" layoutX="664.0" layoutY="385.0" mnemonicParsing="false" onAction="#ModifierOnclick" prefHeight="25.0" prefWidth="72.0" styleClass="button1" stylesheets="@../css/StyleSheet.css" text="Modifier" visible="false" />
-      <Button fx:id="btnAnnuler" layoutX="785.0" layoutY="386.0" mnemonicParsing="false" onAction="#AnnulerOnclick" prefHeight="25.0" prefWidth="72.0" styleClass="button1" stylesheets="@../css/StyleSheet.css" text="Annuler" visible="false" />
+      <Button fx:id="btnModifier" layoutX="664.0" layoutY="385.0" mnemonicParsing="false" onAction="#ModifierOnclick" prefHeight="25.0" prefWidth="72.0" styleClass="button1" text="Modifier" visible="false" />
+      <Button fx:id="btnAnnuler" layoutX="785.0" layoutY="386.0" mnemonicParsing="false" onAction="#AnnulerOnclick" prefHeight="25.0" prefWidth="72.0" styleClass="button1" text="Annuler" visible="false" />
       <Label layoutX="149.0" layoutY="368.0" text="Affectation Remise Par Categorie" textFill="#2100f5">
          <font>
             <Font size="20.0" />

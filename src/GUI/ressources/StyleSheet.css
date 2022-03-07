@@ -78,3 +78,24 @@ and open the template in the editor.
 {
     -fx-background-color:aliceblue;
 }
+
+.text-field, .text-area {
+    -fx-border-color: #cccccc;
+    -fx-background-color: white;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-effect: innershadow(gaussian, transparent, 0, 0, 0, 0);
+}
+
+.text-field:focused, .text-area:focused {
+    -fx-border-color: #66afe9;
+    -fx-effect: dropshadow(gaussian, #66afe9, 10, 0, 0, 0);
+}
+
+.button:focused, .toggle-button:focused,
+.split-menu-button:focused, .menu-button:focused,
+.number-button:focused,
+.combo-box:focused .text-field, .choice-box:focused, .color-picker:focused, .date-picker:focused .text-field
+{
+    -fx-effect: dropshadow(gaussian, #b4d1f3, 3, 3, 0, 0);
+}

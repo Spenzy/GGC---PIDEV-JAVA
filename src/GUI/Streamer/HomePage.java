@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package GUI.Streamer;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -17,39 +17,40 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import static jdk.nashorn.internal.objects.NativeDebug.getClass;
+import static sun.security.x509.OIDMap.getClass;
 
 /**
  *
- * @author Spenz
+ * @author msi
  */
-public class GccMain extends Application {
+public class HomePage extends Application {
+
+    public static int loggedInID;
 
     @Override
     public void start(Stage primaryStage) {
 
         try {
-            /* Parent root = FXMLLoader.load(getClass().getResource("DashboardAdmin.fxml"));
-            primaryStage.setTitle("Espace Administrateur");*/
 
- /* Parent root = FXMLLoader.load(getClass().getResource("DashboardModerateur.fxml"));
-            primaryStage.setTitle("Espace Moderateur");*/
-            Parent root = FXMLLoader.load(getClass().getResource("DashboardModerateur.fxml"));
-            primaryStage.setTitle("Espace Client");
+            Parent root = FXMLLoader.load(getClass().getResource("BackStreamer.fxml"));
 
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 700, 500);
 
+            primaryStage.setTitle("Hello World!");
             primaryStage.setScene(scene);
             primaryStage.show();
+
         } catch (IOException ex) {
-            Logger.getLogger(GccMain.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
         launch(args);
     }
 

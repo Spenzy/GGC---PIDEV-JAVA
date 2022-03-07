@@ -19,7 +19,7 @@
       </Text>
       <ImageView fitHeight="62.0" fitWidth="86.0" layoutX="15.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../img/LogoGGC%20(1).png" />
+            <Image url="@../ressources/ggc.png" />
          </image>
       </ImageView>
    </children>

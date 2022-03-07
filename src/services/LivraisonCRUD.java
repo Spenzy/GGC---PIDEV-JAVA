@@ -215,7 +215,7 @@ public class LivraisonCRUD {
         
         try {
             Statement st = cnxx.createStatement();
-            String req = "SELECT idCommande FROM commande where livree=0";
+            String req = "select idCommande from commande where( livree=0 and idCommande NOT in(select idCommande from livraison) );";
             ResultSet rs;
             rs = st.executeQuery(req);
             while (rs.next()) {

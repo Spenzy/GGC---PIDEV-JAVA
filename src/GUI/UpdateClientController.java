@@ -5,17 +5,23 @@
  */
 package GUI;
 
+import static GUI.DashboardController.refreshParent;
 import entities.Personne;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -81,17 +87,9 @@ public class UpdateClientController implements Initializable {
     private void handleButtonAction(ActionEvent event) {
         if (event.getSource() == tfupdate) {
             UpdateClient2(idClient);
-            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-            alert2.setTitle("Validation");
-            alert2.setHeaderText("Modification avec succés");
+           
 
-        } else {
-            Alert alert2 = new Alert(Alert.AlertType.ERROR);
-            alert2.setTitle("Erreur!");
-            alert2.setHeaderText(null);
-            alert2.setContentText("Pas de modification");
-            alert2.show();
-        }
+        } 
     }
 
     private void executeQuery(String req) {
@@ -108,14 +106,40 @@ public class UpdateClientController implements Initializable {
     }
 
     private void UpdateClient2(int idClient) {
+        DataValidation validator = new DataValidation();
+        String pwd = p.getPassword();
+        if (!tfpassword.getText().equals(pwd))
+        {
+            pwd = aa.hashagePWD(tfpassword.getText());
+        }
 
-        String req = " UPDATE Personne SET nom ='" + tfNom.getText() + "', prenom ='" + tfPrenom.getText() + "', dateNaissance ='" + java.sql.Date.valueOf(tfdate.getValue()) + "' , email = '" + tfemail.getText() + "', telephone= '" + tftelephone.getText() + "', password ='" + aa.hashagePWD(tfpassword.getText()) + "' WHERE id_personne = '" + idClient + "'";
-        
-        executeQuery(req);
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Succesful");
-       alert.setHeaderText(null);
-        alert.setContentText(" Modification avec succées!");
-        alert.show();
+        if (validator.isNotEmpty(tfemail) && validator.isNotEmpty(tfpassword) && validator.isNotEmpty(tfNom)
+                && validator.isNotEmpty(tfPrenom) && validator.isNotEmpty(tftelephone) && validator.isNotEmpty(tfdate.getEditor()) && validator.emailFormat(tfemail) && validator.textNumeric(tftelephone) && validator.dataLength(tftelephone, "8")
+                && validator.textAlphabet(tfNom) && validator.textAlphabet(tfPrenom) && Period.between(tfdate.getValue(), LocalDate.now()).getYears() > 18) {
+           String req = " UPDATE Personne SET nom ='" + tfNom.getText() + "', prenom ='" + tfPrenom.getText() + "', dateNaissance ='" + java.sql.Date.valueOf(tfdate.getValue()) + "' , email = '" + tfemail.getText() + "', telephone= '" + tftelephone.getText() + "', password ='" + pwd + "' WHERE id_personne = '" + idClient + "'";
+
+            executeQuery(req);
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Succesful");
+            alert.setHeaderText(null);
+            alert.setContentText(" Modification avec succées!");
+            alert.showAndWait();
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("UpdateClient.fxml"));
+                DashboardController.refreshParent(root);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+            
+            
+        } else {
+
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Failed");
+            alert.setHeaderText(null);
+            alert.setContentText(" Champs incorrect!");
+            alert.show();
+        }
+
     }
 }

@@ -97,6 +97,24 @@ public class ParticipationCrud {
         return myList;
     }
 
+    public List<String> getParticipEmails(int idEvent) {
+        List<String> myList = new ArrayList();
+        String req = "SELECT email FROM personne inner JOIN client on(client.idClient=personne.id_personne) inner join participation ON (client.idClient = participation.idClient) WHERE participation.idEvent = ?";
+        try {
+
+            PreparedStatement pst = cnxx.prepareStatement(req);
+            pst.setInt(1, idEvent);
+            ResultSet rs;
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                myList.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return myList;
+    }
+
     public int getNbrParticipant(int idEvent) {
         String req = "SELECT nbrParticipant FROM evenement WHERE reference = ? ";
         try {
@@ -113,26 +131,28 @@ public class ParticipationCrud {
     }
 
     public boolean verifNbrParticipant(int idEvent) { //
-        String req = "SELECT count(*) FROM participation WHERE idEvent = ? ";
+        String req = "SELECT * FROM participation WHERE idEvent = ? ";
+        int i = 0;
         try {
             PreparedStatement pst = cnxx.prepareStatement(req);
             pst.setInt(1, idEvent);
             ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) < getNbrParticipant(idEvent);
+            while (rs.next()) {
+                i++;
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
-        return false;
+        return i < getNbrParticipant(idEvent);
     }
 
     // vérifier si le client a participer deja ou bien nn 
-    public boolean verifParticipation(int idClient) {
-        String req = "SELECT * FROM participation WHERE idClient = ? ";
+    public boolean verifParticipation(int idClient, int idEvent) {
+        String req = "SELECT * FROM participation WHERE idClient = ? AND idEvent = ? ";
         try {
             PreparedStatement pst = cnxx.prepareStatement(req);
             pst.setInt(1, idClient);
+            pst.setInt(2, idEvent);
             ResultSet rs = pst.executeQuery();
             return rs.next();
         } catch (SQLException e) {
@@ -141,13 +161,5 @@ public class ParticipationCrud {
         return false;
     }
 
-    public void participer(int idClient, int idEvent, int nbrEtoile) {
-        if (verifParticipation(idClient)) {
-            System.out.println("le client a participé deja ");
-        } else {
-            Participation p = new Participation(idClient, idEvent, nbrEtoile);
-            ajouterParticipation(p);
-        }
-    }
-
+   
 }

@@ -62,8 +62,8 @@ public class AffichEventController implements Initializable {
     private TableColumn<Evenement, Button> participerCol;
     EvenementCrud ec = new EvenementCrud();
     private Button participe;
-    int idClient;
-    int idEvent ;
+    int idClient = homePage.loggedInID;
+
     ParticipationCrud pc = new ParticipationCrud();
     @FXML
     private Button btnImprimer;
@@ -81,12 +81,13 @@ public class AffichEventController implements Initializable {
     }
 
     private void handleButtonAction(ActionEvent event) {
-        idClient = homePage.loggedInID;
-        if (event.getSource() == participe) {
+        //idClient = homePage.loggedInID;
+        /* if (event.getSource() == participe) {
             Participation p = new Participation(idClient, idEvent, 4);
             pc.ajouterParticipation(p);
 
         }
+         */
     }
 
     private void initCols() {
@@ -145,22 +146,19 @@ final TableCell<Evenement,String> cell=new TableCell<Evenement,String>(){
                     private final Button btn = new Button("Participer");
 
                     {
-                        btn.setOnAction((ActionEvent event) -> {
-                            if (pc.verifParticipation(idClient)) {
-                                Alert alert2 = new Alert(Alert.AlertType.ERROR);
-                                alert2.setTitle("Participation");
-                                alert2.setHeaderText("Vous avez deja participer");
-                                alert2.show();
-                            } else {
-                                Evenement data = getTableView().getItems().get(getIndex());
-                                System.out.println("selectedData: " + data);
-                                Participation p = new Participation(idClient, data.getReference(), 4);
-                                pc.ajouterParticipation(p);
-                                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-                                alert2.setTitle("Participation");
-                                alert2.setHeaderText("Participation avec succés");
-                                alert2.show();
+                        btn.setOnMouseEntered(a -> {
+                            Evenement data = getTableView().getItems().get(getIndex());
+                            if (pc.verifParticipation(idClient, data.getReference())) {
+                                btn.setDisable(true);
                             }
+                        });
+                        btn.setOnAction((ActionEvent event) -> {
+                            Evenement data = getTableView().getItems().get(getIndex());
+                            System.out.println("selectedData: " + data);
+                            Participation p = new Participation(idClient, data.getReference(), 4);
+                            btn.setDisable(true);
+                            pc.ajouterParticipation(p);
+
                         });
                     }
 

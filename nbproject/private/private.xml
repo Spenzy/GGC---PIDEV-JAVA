@@ -3,21 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/DashboardController.java</file>
-            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/DashboardAdminController.java</file>
-            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/Evennement/ModifierEvenement.fxml</file>
-            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/entities/Evenement.java</file>
-            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/Evennement/ListeParticipationController.java</file>
-            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/utils/pdf.java</file>
-            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/Evennement/AjouterEvenement.fxml</file>
-            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/DashboardModerateurController.java</file>
+            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/services/PublicationCRUD.java</file>
+            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/ListeClientController.java</file>
+            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/Evennement/AffichEventController.java</file>
+            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/services/VoteCRUD.java</file>
             <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/Evennement/TableViewController.java</file>
-            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/GccMain.java</file>
-            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/Evennement/ListeParticipation.fxml</file>
-            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/Evennement/AjouterEvenementController.java</file>
-            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/Evennement/ModifierEvenementController.java</file>
-            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/GUI/Evennement/TableView.fxml</file>
-            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/services/EvenementCrud.java</file>
+            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/services/CommentaireCRUD.java</file>
+            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/services/ParticipationCrud.java</file>
+            <file>file:/C:/Users/Spenz/Desktop/Stuff/GGC-PIDEV/src/services/PersonneCRUD.java</file>
         </group>
     </open-files>
 </project-private>

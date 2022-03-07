@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -9,14 +10,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox stylesheets="@ressources/theme.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+<VBox stylesheets="@../ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="24.0" prefWidth="478.0">
          <children>
-            <Button fx:id="btnAnnuler" cancelButton="true" layoutX="385.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" text="Annuler" />
-            <Button fx:id="btnApp" layoutX="291.0" layoutY="-4.0" mnemonicParsing="false" text="Appliquer" />
-            <Button fx:id="btnMod" layoutX="289.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" text="Modifier" />
-            <Button fx:id="btnSupp" layoutX="385.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" text="Supprimer" />
+            <Button fx:id="btnAnnuler" cancelButton="true" layoutX="366.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="97.0" styleClass="button1" text="Annuler">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="TIMES" size="20" />
+               </graphic></Button>
+            <Button fx:id="btnApp" layoutX="252.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="97.0" styleClass="button1" text="Appliquer">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="20" styleClass="button1" />
+               </graphic></Button>
             <HBox layoutX="3.0" layoutY="5.0" spacing="3.0">
                <children>
                   <Label fx:id="lblClient" text="User:">
@@ -27,6 +32,16 @@
                   <Label fx:id="lblDate" />
                </children>
             </HBox>
+            <Button fx:id="btnSupp" layoutX="366.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="97.0" styleClass="button1" text="Supprimer">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="TRASH" size="20" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnMod" layoutX="252.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="97.0" styleClass="button1" text="Modifier">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="20" />
+               </graphic>
+            </Button>
          </children>
       </Pane>
       <TextArea fx:id="taCommentaire" prefHeight="76.0" wrapText="true" />

@@ -17,6 +17,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +34,9 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javax.mail.MessagingException;
+import services.ParticipationCrud;
+import utils.MailAPI;
 
 /**
  * FXML Controller class
@@ -56,6 +61,7 @@ public class TableViewController implements Initializable {
      * Initializes the controller class.
      */
     EvenementCrud ec = new EvenementCrud();
+    ParticipationCrud pc = new ParticipationCrud();
     @FXML
     private Button btnModif;
     @FXML
@@ -162,62 +168,20 @@ public class TableViewController implements Initializable {
         Optional<ButtonType> action = alert.showAndWait();
         if (action.get() == (ButtonType.OK)) {
             evenementsTable.getItems().remove(e);
+            List<String> emails = pc.getParticipEmails(e.getReference());
             ec.supprimerEvenement(e.getReference());
+            
+            for(String mail : emails){
+                try {
+                    MailAPI.sendMail(mail, "Evennement Annulé", "L'évennement "+ e.getTitre() + " avec la référence "+ e.getReference() +" a été annulée");
+                } catch (MessagingException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }
         }
 
     }
 
-//    @FXML
-//    private void Modifier(ActionEvent event) {
-//      
-//        
-//        Stage primaryStage = new Stage();
-//        
-//        try {
-//            Evenement e = evenementsTable.getSelectionModel().getSelectedItem();
-//            //Parent root = FXMLLoader.load(getClass().getResource("ModifierEvenement.fxml"));
-//            
-//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModifierEvenement.fxml")); 
-// 
-//            Parent root = (Parent)fxmlLoader.load();          
-//            ModifierEvenementController controller = fxmlLoader.<ModifierEvenementController>getController();
-//            controller.setEvenement(e);
-//            
-//            Scene scene = new Scene(root);
-//            primaryStage.setTitle("Modifier cet Evenement");
-//            primaryStage.setScene(scene);
-//            primaryStage.show();
-//        } catch (IOException ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//        
-//        
-//        
-//        
-//        
-//        
-//        //       /*Evenement e = evenementsTable.getSelectionModel().getSelectedItem();
-//        Stage primaryStage = new Stage();
-//  
-//        try {
-//            
-//            FXMLLoader loader = FXMLLoader.load(getClass().getResource("ModifierEvenement.fxml"));
-//            
-//            ModifierEvenementController mec = new ModifierEvenementController();
-//            mec.setEvenement(e);
-//           
-//            //loader.setController(mec);
-//            
-//            Parent root = loader.load();
-//            Scene scene = new Scene(root);
-//            
-//            primaryStage.setTitle("Modifier Evenement");
-//            primaryStage.setScene(scene);
-//            primaryStage.show();
-//        } catch (IOException ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//    */}
     @FXML
     private void ModifierTable(javafx.scene.input.MouseEvent event) {
 

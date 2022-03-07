@@ -92,7 +92,7 @@ public class DashboardController implements Initializable {
         btnShop.setOnAction(a -> {
             try {
                 FXMLLoader shopPage = new FXMLLoader(getClass().getResource("Shop/AffichageProduitClient.fxml"));
-                AffichageProduitClientController fhc = new AffichageProduitClientController(111);
+                AffichageProduitClientController fhc = new AffichageProduitClientController(idClient);
                 shopPage.setController(fhc);
                 Parent root = shopPage.load();
                 refreshParent(root);
@@ -117,6 +117,16 @@ public class DashboardController implements Initializable {
         btnEvennement.setOnAction(a -> {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("Evennement/AffichEvent.fxml"));
+
+                refreshParent(root);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        });
+        
+        btnStreamer.setOnAction(a -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("Streamer/FrontStreamer.fxml"));
 
                 refreshParent(root);
             } catch (IOException ex) {

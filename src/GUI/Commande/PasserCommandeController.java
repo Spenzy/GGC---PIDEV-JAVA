@@ -40,7 +40,7 @@ import utils.PdfAPI;
  */
 public class PasserCommandeController implements Initializable {
 
-    public int idClient=111;
+    public int idClient;
     public int idCommande = 0;
     public Commande c1 = new Commande(idClient, "");
     public CommandeCRUD c = new CommandeCRUD();
@@ -62,13 +62,7 @@ public class PasserCommandeController implements Initializable {
     private Button btnAnnuler;
     @FXML
     private AnchorPane panePanier;
-    String[] words = {"carthege","carthage Byrsa","Ariana","sidi Bou said","gammarth","marsa","kram","manzah1"
-    ,"manzah2","manzah3","manzah4","manzah5"
-    ,"manzah6","manzah7","manzah8","manzah9"
-    ,"nasr","tunis","monastir","mahdia"
-    ,"sousse","sfax","mednine" ," selyenna"
-    ,"beja","benzart","gammarth","marssa"
-    ,"tabarka","aindrahem","jandouba"
+    String[] words = {"carthege", "carthage Byrsa", "Ariana", "sidi Bou said", "gammarth", "marsa", "kram", "manzah1", "manzah2", "manzah3", "manzah4", "manzah5", "manzah6", "manzah7", "manzah8", "manzah9", "nasr", "tunis", "monastir", "mahdia", "sousse", "sfax", "mednine", " selyenna", "beja", "benzart", "gammarth", "marssa", "tabarka", "aindrahem", "jandouba"
     };
     @FXML
     private Button pdf;
@@ -77,7 +71,7 @@ public class PasserCommandeController implements Initializable {
     }
 
     public PasserCommandeController(int idClient) {
-        this.idClient=idClient;
+        this.idClient = idClient;
     }
 
     /**
@@ -85,8 +79,8 @@ public class PasserCommandeController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        TextFields.bindAutoCompletion(tfAdresse,words);
+
+        TextFields.bindAutoCompletion(tfAdresse, words);
         cbProduit.setItems(c.affecterProduit());
         cbProduit.getSelectionModel().selectFirst();
 
@@ -154,25 +148,31 @@ public class PasserCommandeController implements Initializable {
 
                 //ajouter commande
                 c1.setLivree(false);
-                c.ajouterCommande(c1);
-                this.idCommande = c1.getIdCommande();
-                //ajouter ligne
-                int idProduit = c.recupererReference(libelle);
-                LigneCommande lc1 = new LigneCommande(c1.getIdCommande(), idProduit, quantite, 0);
-                LigneCommandeCRUD LC = new LigneCommandeCRUD();
-                LC.ajouterLigneCommande(lc1);
-                c.calculPrixCommande(c1.getIdCommande());
+                c1.setIdClient(idClient);
+                if (idCommande == 0) {
+                    c.ajouterCommande(c1);
+                }
+                    this.idCommande = c1.getIdCommande();
+                    //ajouter ligne
+                    int idProduit = c.recupererReference(libelle);
+                    LigneCommande lc1 = new LigneCommande(c1.getIdCommande(), idProduit, quantite, 0);
+                    LigneCommandeCRUD LC = new LigneCommandeCRUD();
+                    LC.ajouterLigneCommande(lc1);
+                    c.calculPrixCommande(c1.getIdCommande());
 
-                //affihcerPanier
-                AfficherPanier();
+                    //affihcerPanier
+                    AfficherPanier();
 
-                //faragh les champs
-                cbProduit.getSelectionModel().selectFirst();
-                SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, 1);
-                sQuantite.setValueFactory(valueFactory);
+                    //faragh les champs
+                    cbProduit.getSelectionModel().selectFirst();
+                    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, 1);
+                    sQuantite.setValueFactory(valueFactory);
+                
+                }
             }
         }
-    }
+
+    
 
     public void AfficherPanier() {
         try {
@@ -264,14 +264,16 @@ public class PasserCommandeController implements Initializable {
         Optional<ButtonType> option = alert.showAndWait();
         //confirmation 
         if (option.get() == ButtonType.OK) {
-        LigneCommandeCRUD lc=new LigneCommandeCRUD();
-        c.calculPrixCommande(c1.getIdCommande());
-        c1.setPrix(c.RecupererPrixCommande(c1.getIdCommande()));
-        c1.setLignes(lc.afficher(c1.getIdCommande()));
-        String email=c.recupererMail(c1.getIdClient());
-        System.out.println(email);
-        PdfAPI.createAndSendCommande(email,c1);
-    }else {
+            LigneCommandeCRUD lc = new LigneCommandeCRUD();
+            //   PersonneCRUD pcrud = new 
+            c.calculPrixCommande(c1.getIdCommande());
+            c1.setPrix(c.RecupererPrixCommande(c1.getIdCommande()));
+            c1.setLignes(lc.afficher(c1.getIdCommande()));
+            c1.setIdClient(idClient);
+            String email = c.recupererMail(c1.getIdClient());
+            System.out.println(email);
+            PdfAPI.createAndSendCommande(email, c1);
+        } else {
             Alert alert2 = new Alert(Alert.AlertType.ERROR);
             alert2.setTitle("Erreur!");
             alert2.setHeaderText(null);

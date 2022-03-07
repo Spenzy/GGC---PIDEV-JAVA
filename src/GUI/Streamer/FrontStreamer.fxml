@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="716.0" styleClass="blue-bg" stylesheets="@../ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Streamer.FrontStreamerController">
+   <children>
+      <TableView fx:id="tvfBS" layoutX="37.0" layoutY="22.0" prefHeight="431.0" prefWidth="622.0">
+         <columns>
+            <TableColumn fx:id="tvfBNomS" prefWidth="64.0" text="Nom" />
+            <TableColumn fx:id="tvfBPrenS" prefWidth="54.0" text="Prenom" />
+            <TableColumn fx:id="tvfBDateS" prefWidth="120.0" text="Date de naissance" />
+            <TableColumn fx:id="tvfBEmailS" prefWidth="71.0" text="Email" />
+            <TableColumn fx:id="tvfBNumS" text="numero" />
+            <TableColumn fx:id="tvfBInfoS" prefWidth="100.0" text="information" />
+            <TableColumn fx:id="tvfBLS" prefWidth="128.0" text="Lien" />
+         </columns>
+      </TableView>
+      <Button fx:id="btnMail" layoutX="319.0" layoutY="463.0" mnemonicParsing="false" onAction="#BackHome" styleClass="button2" text="Obtenir infos streamer" />
+      <Button fx:id="btnPlans" layoutX="244.0" layoutY="463.0" mnemonicParsing="false" onAction="#BackHome" styleClass="button2" text="Plans" />
+   </children>
+</AnchorPane>

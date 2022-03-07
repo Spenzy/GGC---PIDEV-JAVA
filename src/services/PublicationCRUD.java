@@ -15,17 +15,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
-import org.quartz.Job;
-import static org.quartz.JobBuilder.newJob;
-import org.quartz.JobDetail;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.SchedulerFactory;
-import org.quartz.Trigger;
-import static org.quartz.TriggerBuilder.newTrigger;
-import org.quartz.impl.StdSchedulerFactory;
 import utils.MailAPI;
 
 public class PublicationCRUD {
@@ -49,7 +38,7 @@ public class PublicationCRUD {
                 pst.setInt(4, p.getId_client());
                 pst.setDate(5, p.getDatePub());
                 pst.executeUpdate();
-                //autoArchive(p, LocalDateTime.now());
+                autoArchive(p, LocalDateTime.now());
                 System.out.println("Publication ajoutée avec succés");
                 ResultSet rs = pst.getGeneratedKeys();
                 if (rs.next()) {
@@ -164,7 +153,6 @@ public class PublicationCRUD {
         if (!p.isArchive()) {
             p.setArchive(true);
             System.out.println("publication archivé");
-
         } else {
             p.setArchive(false);
             System.out.println("publication déarchivé");
@@ -180,55 +168,17 @@ public class PublicationCRUD {
         }
     }
 
-//    public void autoArchive(Publication p, LocalDateTime dateAjout){
-//        
-//        //ScheduledExecutorService nécessite un objet runnable pour fonctionner ou on fait appel a notre methode archiver
-//        final Runnable autoArch = new Runnable() { 
-//            public void run() {
-//                //archiver(p);
-//                p.setArchive(!p.isArchive());
-//                System.out.println(p);//pour tester le chrono
-//            }
-//        };                                                          //pour tester 5 secondes au lieu de 5 jrs
-//        long delai = ChronoUnit.MILLIS.between(dateAjout, dateAjout.plusSeconds(5)); //ici on fait calculer le delai de 5 jours depuis la date d'ajout
-//        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1); //ici on initialise un nouveau thread de ScheduledExecutorService
-//        scheduler.schedule(autoArch, delai, TimeUnit.MILLISECONDS); //ici on programme le chrono du methode
-//    } 
+    public void autoArchive(Publication p, LocalDateTime dateAjout){
+        
+        //ScheduledExecutorService nécessite un objet runnable pour fonctionner ou on fait appel a notre methode archiver
+        final Runnable autoArch = () -> {
+            //archiver(p);
+            p.setArchive(!p.isArchive());
+            System.out.println(p);//pour tester le chrono
+        };                                                          //pour tester 5 secondes au lieu de 5 jrs
+        long delai = ChronoUnit.MILLIS.between(dateAjout, dateAjout.plusSeconds(5)); //ici on fait calculer le delai de 5 jours depuis la date d'ajout
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1); //ici on initialise un nouveau thread de ScheduledExecutorService
+        scheduler.schedule(autoArch, delai, TimeUnit.MILLISECONDS); //ici on programme le chrono du methode
+    } 
 
-    public void autoArchive(Publication p) {
-        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
-        try {
-            Scheduler scheduler = schedulerFactory.getScheduler();
-
-            JobDetail archJob = newJob(ArchJob.class)
-                    .withIdentity("ArchiveJob" + p.getId_publication() + ":" + p.getId_client(), "ArchJobGroup")
-                    .build();
-
-            java.util.Date dateArch = Date.from(LocalDateTime.now().plusSeconds(10).atZone(ZoneId.of("UTC")).toInstant());
-
-            Trigger archTrigger = newTrigger()
-                    .withIdentity("ArchiveTrigger" + p.getId_publication() + ":" + p.getId_client(), "ArchiveTriggerGroup")
-                    .startAt(dateArch)
-                    .build();
-
-            scheduler.scheduleJob(archJob, archTrigger);
-            System.out.println(archJob.getKey() + " will run at: " + dateArch);
-
-            scheduler.start();
-
-        } catch (SchedulerException e) {
-            System.err.println(e.getMessage());
-        }
-    }
-    
-   
-
-}
-
-class ArchJob implements Job {
-
-    @Override
-    public void execute(JobExecutionContext jec) throws JobExecutionException {
-        System.out.println("Knock! Knock!");
-    }
 }

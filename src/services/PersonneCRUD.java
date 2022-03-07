@@ -243,7 +243,10 @@ public class PersonneCRUD {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        System.out.println("444444");
+        Alert alert2 = new Alert(Alert.AlertType.ERROR);
+        alert2.setTitle("Password incorrect");
+        alert2.setHeaderText("Login interrompu! Mot de passe incorrect!!");
+        alert2.show();
         return false;
 
     }
@@ -300,5 +303,6 @@ public class PersonneCRUD {
         }
         return p;
     }
+      
 
 }

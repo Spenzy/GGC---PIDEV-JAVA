@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -19,9 +20,15 @@
          <children>
             <TextArea fx:id="taDesc" layoutX="101.0" layoutY="82.0" minHeight="-Infinity" prefHeight="110.0" prefWidth="497.0" />
             <TextField fx:id="tfTitre" layoutX="102.0" layoutY="45.0" prefHeight="25.0" prefWidth="496.0" styleClass="text-field" />
-            <ToggleButton fx:id="tBtnUP" layoutX="19.0" layoutY="45.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" text="UP" />
-            <Label fx:id="lblNbrVote" layoutX="53.0" layoutY="81.0" text="0" />
-            <ToggleButton fx:id="tBtnDown" layoutX="19.0" layoutY="101.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="73.0" text="DOWN" />
+            <ToggleButton fx:id="tBtnUP" layoutX="32.0" layoutY="43.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="42.0" styleClass="button1">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_UP" size="20" />
+               </graphic></ToggleButton>
+            <Label fx:id="lblNbrVote" layoutX="50.0" layoutY="82.0" text="0" />
+            <ToggleButton fx:id="tBtnDown" layoutX="32.0" layoutY="104.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="42.0" styleClass="button1">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_DOWN" size="20" />
+               </graphic></ToggleButton>
             <HBox layoutX="102.0" layoutY="25.0">
                <children>
                   <Label fx:id="lblUser" text="User:">
@@ -43,8 +50,14 @@
       </Pane>
       <AnchorPane layoutX="36.0" prefHeight="35.0" prefWidth="612.0">
          <children>
-            <Button fx:id="btnForum" layoutX="503.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="Forum" />
-            <Button fx:id="btnSendPub" layoutX="422.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="Send" />
+            <Button fx:id="btnForum" layoutX="474.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="92.0" styleClass="button1" text="Forum">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="20" />
+               </graphic></Button>
+            <Button fx:id="btnSendPub" layoutX="364.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="99.0" styleClass="button1" text="Send" textAlignment="RIGHT">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="ENVELOPE" size="20" />
+               </graphic></Button>
          </children>
       </AnchorPane>
    </children>

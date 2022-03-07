@@ -35,7 +35,7 @@
                         <Insets bottom="15.0" />
                      </padding>
                   </Label>
-                  <Button fx:id="btnGestEvennement" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="Gestion Evennement" textFill="WHITE">
+                  <Button fx:id="btnGestEvennement" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text=" Gestion Evennement" textFill="WHITE">
                      <font>
                         <Font name="Cambria" size="19.0" />
                      </font>
@@ -46,7 +46,15 @@
                         <Insets top="50.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="btnGestStreamer" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="Gestion Streamer" textFill="WHITE">
+                  <Button fx:id="btnGestStreamer" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="  Gestion Streamer" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria" size="19.0" />
+                     </font>
+                     <graphic>
+<!--                        <FontAwesomeIconView fill="WHITE" glyphName="GROUP" />-->
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnGestPlan" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="button1" text="  Gestion Plan" textFill="WHITE">
                      <font>
                         <Font name="Cambria" size="19.0" />
                      </font>

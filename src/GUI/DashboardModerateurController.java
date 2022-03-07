@@ -5,10 +5,10 @@
  */
 package GUI;
 
-import static GUI.DashboardAdminController.parentAdmin;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,6 +32,8 @@ public class DashboardModerateurController implements Initializable {
     private AnchorPane homeModerateur;
 
     public static AnchorPane parentModerateur;
+    @FXML
+    private Button btnGestPlan;
 
     /**
      * Initializes the controller class.
@@ -47,7 +49,7 @@ public class DashboardModerateurController implements Initializable {
             System.err.println(ex.getMessage());
         }
 
-        btnGestEvennement.setOnAction(a -> {
+        btnGestEvennement.setOnAction((ActionEvent a) -> {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("Evennement/TableView.fxml"));
 
@@ -57,8 +59,24 @@ public class DashboardModerateurController implements Initializable {
             }
         });
 
-        btnGestStreamer.setOnAction(a -> {
+        btnGestStreamer.setOnAction((ActionEvent a) -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("Streamer/BackStreamer.fxml"));
 
+                refreshParent(root);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        });
+        
+        btnGestPlan.setOnAction((ActionEvent a) -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("Streamer/StreamerPlan.fxml"));
+
+                refreshParent(root);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
         });
     }
 

@@ -18,7 +18,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.InscriptionController">
    <children>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="600.0" prefWidth="400.0" styleClass="blue-bg" stylesheets="@../../css/Stylesheet.css">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="600.0" prefWidth="400.0" styleClass="blue-bg">
          <children>
             <ImageView fitHeight="158.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -36,7 +36,7 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <Label layoutX="166.0" layoutY="381.0" text="Gamer Gecks Communty" textFill="WHITE">
+            <Label layoutX="166.0" layoutY="381.0" text="Gamer Geeks Communty" textFill="WHITE">
                <font>
                   <Font name="Forte" size="22.0" />
                </font>
@@ -77,12 +77,12 @@
       </Label>
       <TextField fx:id="tfnom" layoutX="480.0" layoutY="118.0" prefHeight="35.0" prefWidth="245.0" promptText="Name" />
       <TextField fx:id="tfprenom" layoutX="480.0" layoutY="168.0" prefHeight="35.0" prefWidth="245.0" promptText="SurName" />
-      <DatePicker fx:id="tfdate" layoutX="479.0" layoutY="233.0" prefHeight="35.0" prefWidth="245.0" promptText="Date of birth" stylesheets="@../../css/Stylesheet.css" />
+      <DatePicker fx:id="tfdate" layoutX="479.0" layoutY="233.0" prefHeight="35.0" prefWidth="245.0" promptText="Date of birth" />
       <TextField fx:id="tfemail" layoutX="481.0" layoutY="290.0" prefHeight="35.0" prefWidth="245.0" promptText="Email" />
       <TextField fx:id="tfphone" layoutX="481.0" layoutY="344.0" prefHeight="35.0" prefWidth="245.0" promptText="Phone Number" />
       <PasswordField fx:id="tfpassword" layoutX="481.0" layoutY="399.0" prefHeight="34.0" prefWidth="245.0" promptText="Password" />
-      <Button fx:id="btnSave" layoutX="467.0" layoutY="464.0" mnemonicParsing="false" onAction="#addPersonne" prefHeight="50.0" prefWidth="270.0" styleClass="button2" stylesheets="@../../css/Stylesheet.css" text="Save" />
+      <Button fx:id="btnSave" layoutX="467.0" layoutY="464.0" mnemonicParsing="false" onAction="#addPersonne" prefHeight="50.0" prefWidth="270.0" styleClass="button2" text="Save" />
       <Label fx:id="ereurdate" layoutX="479.0" layoutY="273.0" prefHeight="17.0" prefWidth="245.0" textFill="RED" />
-      <Button fx:id="btnLogin" layoutX="469.0" layoutY="530.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" styleClass="button2" stylesheets="@../../css/Stylesheet.css" text="Already signed up ? Login" />
+      <Button fx:id="btnLogin" layoutX="469.0" layoutY="530.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" styleClass="button2" text="Already signed up ? Login" />
    </children>
 </AnchorPane>

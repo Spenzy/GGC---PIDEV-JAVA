@@ -18,7 +18,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.LoginController">
    <children>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="600.0" prefWidth="400.0" styleClass="blue-bg" stylesheets="@../../css/Stylesheet.css">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="600.0" prefWidth="400.0" styleClass="blue-bg">
          <children>
             <ImageView fitHeight="158.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -36,7 +36,7 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <Label layoutX="166.0" layoutY="381.0" text="Gamer Gecks Communty" textFill="WHITE">
+            <Label layoutX="166.0" layoutY="381.0" text="Gamer Geeks Communty" textFill="WHITE">
                <font>
                   <Font name="Forte" size="22.0" />
                </font>
@@ -72,8 +72,8 @@
       </Pane>
       <TextField fx:id="email" layoutX="480.0" layoutY="199.0" prefHeight="35.0" prefWidth="245.0" promptText="Email" />
       <PasswordField fx:id="pwdId" layoutX="484.0" layoutY="273.0" prefHeight="34.0" prefWidth="239.0" promptText="password" />
-      <Button fx:id="btnsignin" layoutX="617.0" layoutY="352.0" mnemonicParsing="false" onAction="#Login" prefHeight="35.0" prefWidth="120.0" styleClass="button1" stylesheets="@../../css/Stylesheet.css" text="Sign in" />
-      <Button fx:id="btnsignup" layoutX="482.0" layoutY="438.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" styleClass="button2" stylesheets="@../../css/Stylesheet.css" text="Dont have an account ? Sign up" />
+      <Button fx:id="btnsignin" layoutX="617.0" layoutY="352.0" mnemonicParsing="false" onAction="#Login" prefHeight="35.0" prefWidth="120.0" styleClass="button1" text="Sign in" />
+      <Button fx:id="btnsignup" layoutX="482.0" layoutY="438.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" styleClass="button2" text="Dont have an account ? Sign up" />
       <Label layoutX="432.0" layoutY="114.0" prefHeight="50.0" prefWidth="151.0" text="Sign In">
          <font>
             <Font name="System Bold" size="26.0" />

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="986.0" stylesheets="@../ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Streamer.BackStreamerController">
+   <children>
+      <VBox layoutX="14.0" layoutY="56.0" prefHeight="322.0" prefWidth="118.0" spacing="20.0">
+         <children>
+            <Label text="IdStreamer:" />
+            <Label text="Nom:" />
+            <Label text="Prenom:" />
+            <Label text="date de naissance:" />
+            <Label text="email:" />
+            <Label text="numero de telephone:" />
+            <Label text="information:" />
+            <Label text="lien streamer:" />
+         </children>
+      </VBox>
+      <TableView fx:id="tvBS" layoutX="310.0" layoutY="14.0" prefHeight="431.0" prefWidth="595.0">
+        <columns>
+          <TableColumn fx:id="tvIdS" prefWidth="28.79998779296875" text="IdS" />
+          <TableColumn fx:id="tvBNomS" prefWidth="34.39996337890625" text="Nom" />
+            <TableColumn fx:id="tvBPrenS" prefWidth="53.60003662109375" text="Prenom" />
+            <TableColumn fx:id="tvBDateS" prefWidth="104.800048828125" text="Date de naissance" />
+            <TableColumn fx:id="tvBEmailS" prefWidth="81.60003662109375" text="Email" />
+            <TableColumn fx:id="tvBNumS" prefWidth="56.0" text="numero" />
+            <TableColumn fx:id="tvBInfoS" prefWidth="102.0" text="information" />
+            <TableColumn fx:id="tvBLS" prefWidth="131.0" text="Lien" />
+        </columns>
+      </TableView>
+      <VBox layoutX="125.0" layoutY="54.0" prefHeight="326.0" prefWidth="175.0" spacing="12.0">
+         <children>
+            <TextField fx:id="tfBIDS" />
+            <TextField fx:id="tfBNomS" />
+            <TextField fx:id="tfBPrenS" />
+            <DatePicker fx:id="tfBDateS" />
+            <TextField fx:id="tfBEmailS" layoutX="10.0" layoutY="61.0" />
+            <TextField fx:id="tfBNumS" layoutX="10.0" layoutY="87.0" />
+            <TextField fx:id="tfBInfoS" />
+            <TextField fx:id="tfBLS" />
+         </children>
+      </VBox>
+      <Button fx:id="btnBRS" layoutX="519.0" layoutY="464.0" mnemonicParsing="false" onAction="#BackHome" styleClass="button1" text="retour" />
+      <TextField fx:id="tfBLienStreamer" layoutX="34.0" layoutY="558.0" />
+      <TextField fx:id="tfBInfoStreamer" layoutX="34.0" layoutY="519.0" />
+      <TextField fx:id="tfBIDS1" layoutX="34.0" layoutY="476.0" />
+      <Button fx:id="btnRecuperer" layoutX="608.0" layoutY="464.0" mnemonicParsing="false" onAction="#RecupererOnclick" styleClass="button1" text="récuperer" />
+      <Button fx:id="btnBMS" layoutX="278.0" layoutY="519.0" mnemonicParsing="false" onAction="#ModifierStreamer" prefHeight="26.0" prefWidth="90.0" styleClass="button1" text="Modifier" />
+      <Button fx:id="btnBAS" layoutX="34.0" layoutY="380.0" mnemonicParsing="false" onAction="#AjouterStreamer" prefHeight="26.0" prefWidth="90.0" styleClass="button1" text="Ajouter" />
+      <Button fx:id="btnBDS" layoutX="165.0" layoutY="381.0" mnemonicParsing="false" onAction="#SupprimerStreamer" prefHeight="26.0" prefWidth="90.0" styleClass="button1" text="Supprimer" />
+   </children>
+</AnchorPane>

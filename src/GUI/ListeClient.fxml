@@ -2,6 +2,7 @@
 
 <!--<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>-->
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -12,10 +13,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="610.0" stylesheets="@ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ListeClientController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="610.0" stylesheets="@ressources/StyleSheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ListeClientController">
    <children>
       
-       <VBox layoutX="138.0" layoutY="276.0" prefHeight="231.0" prefWidth="142.0" spacing="15.0" stylesheets="@../css/Stylesheet.css">
+       <VBox layoutX="138.0" layoutY="276.0" prefHeight="231.0" prefWidth="142.0" spacing="15.0">
          <children>
             <Label prefHeight="27.0" prefWidth="64.0" text="idClient" />
             <Label prefHeight="27.0" prefWidth="105.0" text="nbrAvertissement" />
@@ -26,11 +27,11 @@
       </VBox>
       <VBox layoutX="279.0" layoutY="280.0" prefHeight="249.0" prefWidth="172.0" spacing="15.0">
          <children>
-            <TextField fx:id="tfid" styleClass="text-field" stylesheets="@../css/Stylesheet.css" />
+            <TextField fx:id="tfid" styleClass="text-field" />
             <TextField fx:id="tfnbr" />
             <TextField fx:id="tfban" />
             <DatePicker fx:id="tfdatedebut" />
-            <DatePicker fx:id="tfdatefin" stylesheets="@../css/Stylesheet.css" />
+            <DatePicker fx:id="tfdatefin" />
          </children>
       </VBox>
       <TableView fx:id="tvBooks" layoutX="82.0" layoutY="14.0" onMouseClicked="#handlemousseclick" onSort="#showClient" prefHeight="249.0" prefWidth="446.0">
@@ -42,13 +43,19 @@
             <TableColumn fx:id="coldatefin" prefWidth="130.0" text="dateFinBlock" />
         </columns>
       </TableView>
-      <Button fx:id="btnavertit" layoutX="273.0" layoutY="529.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="77.0" styleClass="button1" text="Avertir">
+      <Button fx:id="btnavertit" layoutX="288.0" layoutY="529.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="77.0" styleClass="button1" text="Avertir">
          
          <font>
             <Font size="13.0" />
-         </font></Button>
-      <Button fx:id="btnupdate" layoutX="175.0" layoutY="529.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="64.0" styleClass="button1" text="Update" />
-      <Button layoutX="372.0" layoutY="529.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" styleClass="button1" text="Ban">
+         </font>
+         <graphic>
+            <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="20" />
+         </graphic></Button>
+      <Button fx:id="btnupdate" layoutX="158.0" layoutY="530.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="28.0" prefWidth="88.0" styleClass="button1" text="Update">
+         <graphic>
+            <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="20" />
+         </graphic></Button>
+      <Button layoutX="409.0" layoutY="529.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" styleClass="button1" text="Ban">
          <font>
             <Font size="13.0" />
          </font></Button>
