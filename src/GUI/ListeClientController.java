@@ -211,6 +211,7 @@ public class ListeClientController implements Initializable {
 
         Client client = tvBooks.getSelectionModel().getSelectedItem();
         tfid.setText("" + client.getIdClient());
+        tfid.setDisable(true);
         tfnbr.setText("" + client.getNbrAvertissement());
         tfban.setText("" + client.getBan());
 //        tfetat.setText("" + client.getEtat());
