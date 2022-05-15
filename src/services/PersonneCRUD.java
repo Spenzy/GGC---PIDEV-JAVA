@@ -169,14 +169,15 @@ public class PersonneCRUD {
 
     public boolean getUserBy(String email, String pwdId) {
         String requete = "SELECT id_personne, password FROM personne,client"
-                + " WHERE ( email = ? ) AND (id_personne = idClient)";
+                + " WHERE ( email = ? ) AND (roles LIKE ?)";
         try {
             PreparedStatement ps = cnxx.prepareStatement(requete);
             ps.setString(1, email);
+            ps.setString(2, "user");
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 String pwdBD = rs.getString(2);
-                if (aa.hashagePWD(pwdId).equals(pwdBD)) {
+                if (pwdId.equals(pwdBD)) {
                     int idUser = rs.getInt(1);
                     homePage.loggedInID = idUser;
                     return true;
@@ -223,19 +224,17 @@ public class PersonneCRUD {
     public boolean getModerateurBy(String email, String pwdId) {
 
         String requete = "SELECT id_personne, password FROM personne,moderateur"
-                + " WHERE ( email = ? ) AND (id_personne = id_moderateur)";
+                + " WHERE ( email = ? ) AND (roles LIKE ?)";
         try {
             PreparedStatement ps = cnxx.prepareStatement(requete);
             ps.setString(1, email);
+            ps.setString(2, "moderateur");
             ResultSet rs = ps.executeQuery();
-            System.out.println("1111");
             if (rs.next()) {
                 String pwdBD = rs.getString(2);
-                if (aa.hashagePWD(pwdId).equals(pwdBD)) {
-                    System.out.println("2222");
+                if (pwdId.equals(pwdBD)) {
                     int idUser = rs.getInt(1);
                     homePage.loggedInID = idUser;
-                    System.out.println("33333");
                     return true;
 
                 }

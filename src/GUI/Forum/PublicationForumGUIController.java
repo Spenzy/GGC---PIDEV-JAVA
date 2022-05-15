@@ -6,6 +6,8 @@
 package GUI.Forum;
 
 import GUI.DashboardController;
+import GUI.DashboardAdminController;
+import GUI.homePage;
 import entities.Publication;
 import java.net.URL;
 import java.util.Optional;
@@ -74,7 +76,11 @@ public class PublicationForumGUIController implements Initializable {
 
         btnAfficher.setOnAction((ActionEvent a) -> {
             AfficherPublicationGUIController apc = new AfficherPublicationGUIController(idClient, p.getId_publication());
-            DashboardController.refreshParent(apc.refreshPublication());
+            if(homePage.loggedInID == 1)
+                DashboardAdminController.refreshParent(apc.refreshPublication());
+            else
+                DashboardController.refreshParent(apc.refreshPublication());
+            System.out.println("Hallou");
         });
 
         btnArchiver.setOnAction((ActionEvent a) -> {

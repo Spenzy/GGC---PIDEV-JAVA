@@ -194,11 +194,9 @@ public class AfficherPublicationGUIController implements Initializable {
             //init Controller
             AfficherPublicationGUIController controller = new AfficherPublicationGUIController(idClient, idPublication);
             testLoad.setController(controller);
-
             Parent root = testLoad.load();
-
+            
             return root;
-
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }

@@ -111,11 +111,13 @@ public class LoginController implements Initializable {
         if (!pwdId.getText().isEmpty() && !email.getText().isEmpty()) {
 
             if (email.getText().equals("admin") && pwdId.getText().equals("admin")) {
+                homePage.loggedInID = 1;
                 Parent blah = FXMLLoader.load(getClass().getResource("DashboardAdmin.fxml"));
                 Scene scene = new Scene(blah);
                 Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 appStage.setScene(scene);
                 appStage.show();
+                
             } else if (repo.getUserBy(email.getText(), pwdId.getText())) {
                 Parent blah = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
                 Scene scene = new Scene(blah);
@@ -124,7 +126,6 @@ public class LoginController implements Initializable {
                 appStage.show();
 
             } else if (repo.getModerateurBy(email.getText(), pwdId.getText())) {
-                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaa");
                 Parent blah = FXMLLoader.load(getClass().getResource("DashboardModerateur.fxml"));
                 Scene scene = new Scene(blah);
                 Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -171,7 +172,6 @@ public class LoginController implements Initializable {
     private void resetP(MouseEvent event) throws Exception {
 
         if (email.getText() == null || email.getText().trim().isEmpty()) {
-            System.out.println("eeeeeeeee");
             Alert a = new Alert(Alert.AlertType.WARNING);
             a.setContentText("Please enter an email to send the reset link to!");
             a.show();

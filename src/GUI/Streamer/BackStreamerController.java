@@ -30,6 +30,7 @@ import java.time.Period;
 import java.util.Optional;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import services.PersonneCRUD;
 
@@ -43,12 +44,7 @@ public class BackStreamerController implements Initializable {
     public PersonneCRUD PC = new PersonneCRUD();
     public StreamerCRUD SC = new StreamerCRUD();
 
-    @FXML
-    private TextField tfBIDS;
-    @FXML
-    private TextField tfBInfoS;
-    @FXML
-    private TextField tfBLS;
+    
     @FXML
     private TableView<Streamer> tvBS;
     @FXML
@@ -67,16 +63,7 @@ public class BackStreamerController implements Initializable {
     private TableColumn<Streamer, String> tvBInfoS;
     @FXML
     private TableColumn<Streamer, String> tvBLS;
-    @FXML
-    private TextField tfBNomS;
-    @FXML
-    private TextField tfBPrenS;
-    @FXML
-    private DatePicker tfBDateS;
-    @FXML
-    private TextField tfBEmailS;
-    @FXML
-    private TextField tfBNumS;
+    
     @FXML
     private Button btnBAS;
     @FXML
@@ -93,6 +80,8 @@ public class BackStreamerController implements Initializable {
     private TextField tfBIDS1;
     @FXML
     private Button btnRecuperer;
+    @FXML
+    private ComboBox<Integer> cbIdP;
 
     /**
      * Initializes the controller class.
@@ -101,39 +90,35 @@ public class BackStreamerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         showStreamers();
+        cbIdP.setItems(SC.affecterPersonne());
+        cbIdP.getSelectionModel().selectFirst();
     }
 
     @FXML
     private void AjouterStreamer(ActionEvent event) {
-        PersonneCRUD pc = new PersonneCRUD();
+        
 
-        String nom = tfBNomS.getText();
+        /*String nom = tfBNomS.getText();
         String prenom = tfBPrenS.getText();
         Date DateNais = Date.valueOf(tfBDateS.getValue());
         String email = tfBEmailS.getText();
         Integer NumStreamer = Integer.parseInt(tfBNumS.getText());
-        String PW = "";
-        Integer ids = Integer.parseInt(tfBIDS.getText());
-        String InfoS = tfBInfoS.getText();
-        String LienS = tfBLS.getText();
+        String PW = "";*/
+        Integer ids = cbIdP.getValue();
+        
+        String InfoS = tfBInfoStreamer.getText();
+        String LienS = tfBLienStreamer.getText();
 
-        if (DataValidation.isNotEmpty(tfBEmailS) && DataValidation.isNotEmpty(tfBNomS)
-                && DataValidation.isNotEmpty(tfBPrenS) && DataValidation.isNotEmpty(tfBNumS) && DataValidation.isNotEmpty(tfBDateS.getEditor())) {
+        if (DataValidation.isNotEmpty(tfBInfoStreamer) && DataValidation.isNotEmpty(tfBLienStreamer)) {
 
-            if (DataValidation.emailFormat(tfBEmailS) && !pc.verifEmail(email) && DataValidation.textNumeric(tfBNumS) && DataValidation.dataLength(tfBNumS, "8")
-                    && DataValidation.textAlphabet(tfBNomS) && DataValidation.textAlphabet(tfBPrenS) && Period.between(DateNais.toLocalDate(), LocalDate.now()).getYears() > 18) {
-
-                Streamer s = new Streamer(ids, nom, prenom, DateNais, email, NumStreamer, PW, InfoS, LienS);
+            
+                Streamer s = new Streamer(ids, InfoS, LienS);
 
                 SC.ajouterStreamer(s);
 
                 showStreamers();
-            } else {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Error");
-                alert.setHeaderText("Erreur! Champs invalides!");
-                alert.showAndWait();
-            }
+            
+            
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error");
@@ -147,11 +132,9 @@ public class BackStreamerController implements Initializable {
     private void ModifierStreamer(ActionEvent event) {
         PersonneCRUD pc = new PersonneCRUD();
 
-        if (DataValidation.isNotEmpty(tfBEmailS) && DataValidation.isNotEmpty(tfBNomS)
-                && DataValidation.isNotEmpty(tfBPrenS) && DataValidation.isNotEmpty(tfBNumS) && DataValidation.isNotEmpty(tfBDateS.getEditor())) {
-
-            if (DataValidation.emailFormat(tfBEmailS) && !pc.verifEmail(tfBEmailS.getText()) && DataValidation.textNumeric(tfBNumS) && DataValidation.dataLength(tfBNumS, "8")
-                    && DataValidation.textAlphabet(tfBNomS) && DataValidation.textAlphabet(tfBPrenS) && Period.between(tfBDateS.getValue(), LocalDate.now()).getYears() > 18) {
+        
+        
+        if (DataValidation.isNotEmpty(tfBInfoStreamer) && DataValidation.isNotEmpty(tfBLienStreamer)) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Validation");
                 alert.setHeaderText("Voulez vous valider la modification de ce Streamer ?");
@@ -175,12 +158,8 @@ public class BackStreamerController implements Initializable {
                 alert.setHeaderText("Erreur! Champs invalides!");
                 alert.showAndWait();
             }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Error");
-            alert.setHeaderText("Erreur! Champs vides!");
-            alert.showAndWait();
-        }
+        
+        
 
     }
 
@@ -261,7 +240,7 @@ public class BackStreamerController implements Initializable {
             alert1.show();
 
         } else {
-            tfBIDS1.setText(l1.getIdStreamer() + "");
+            cbIdP.setValue(l1.getIdStreamer());
             tfBInfoStreamer.setText(l1.getInformations());
             tfBLienStreamer.setText(l1.getLienStreaming());
         }

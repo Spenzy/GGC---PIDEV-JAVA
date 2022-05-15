@@ -63,7 +63,6 @@ public class DashboardController implements Initializable {
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
-        
 
         btnHome.setOnAction(a -> {
             try {

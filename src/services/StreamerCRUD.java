@@ -37,35 +37,34 @@ import static sun.security.x509.OIDMap.getClass;
  *
  * @author msi
  */
-public class StreamerCRUD extends PersonneCRUD{
-        Connection cnxx;
-    
-    public StreamerCRUD(){
-            cnxx = MyConnection.getInstance().getCnx();
+public class StreamerCRUD extends PersonneCRUD {
+
+    Connection cnxx;
+    PersonneCRUD cc = new PersonneCRUD();
+
+    public StreamerCRUD() {
+        cnxx = MyConnection.getInstance().getCnx();
 
     }
-    
-    
-    
+
     public void ajouterStreamer(Streamer s) {
-        int idP = ajouterPersonne(s);
         String req = "INSERT INTO streamer (idStreamer,informations,lienStreaming) VALUES (?,?,?)";
         PreparedStatement pst;
         try {
             pst = cnxx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS); //returns generated DB keys
-            pst.setInt(1, idP);
+            pst.setInt(1, s.getIdStreamer());
             pst.setString(2, s.getInformations());
-            pst.setString(3,s.getLienStreaming());
+            pst.setString(3, s.getLienStreaming());
             pst.executeUpdate();
             System.out.println("Streamer ajoute");
-            ResultSet rs = pst.getGeneratedKeys();
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
 
     }
-     public void modifierStreamer(Streamer s) {
+
+    public void modifierStreamer(Streamer s) {
 
         // int modif = modifierPersonne(c);  
         String req = "update streamer set informations=?,lienStreaming=? WHERE idStreamer=?";
@@ -75,7 +74,7 @@ public class StreamerCRUD extends PersonneCRUD{
             pst.setString(1, s.getInformations());
             pst.setString(2, s.getLienStreaming());
             pst.setInt(3, s.getIdStreamer());
-           
+
             pst.executeUpdate();
             System.out.println("Streamer modifier avec succes");
         } catch (SQLException ex) {
@@ -83,25 +82,26 @@ public class StreamerCRUD extends PersonneCRUD{
         }
 
     }
-     public Streamer afficherStramerid(int idc){
+
+    public Streamer afficherStramerid(int idc) {
         Streamer s = new Streamer();
         try {
             String req = "SELECT * FROM streamer WHERE idStreamer = ?";
             PreparedStatement pst = cnxx.prepareStatement(req);
-            pst.setInt(1,idc);
+            pst.setInt(1, idc);
             ResultSet rs = pst.executeQuery();
             rs.next();
             s.setIdStreamer(rs.getInt(1));
             s.setInformations(rs.getString(2));
             s.setLienStreaming(rs.getString(3));
-            
-          
+
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
         return s;
     }
-     public void supprimerStreamer(int idStreamer) {
+
+    public void supprimerStreamer(int idStreamer) {
 
         String req = "delete from streamer where idStreamer=?";
         PreparedStatement pst;
@@ -116,7 +116,8 @@ public class StreamerCRUD extends PersonneCRUD{
         }
 
     }
-         public List<Streamer> afficherSt() {
+
+    public List<Streamer> afficherSt() {
 
         List<Streamer> myList = new ArrayList();
 
@@ -140,54 +141,64 @@ public class StreamerCRUD extends PersonneCRUD{
         }
         return myList;
     }
-         
-         public ObservableList<Streamer> getStreamerList(){
-           
-             ObservableList<Streamer> StreamerList = FXCollections.observableArrayList();
-             
-             try{
-             String query = "SELECT * from streamer,personne where id_personne = idStreamer";
-             Statement st;
-             ResultSet rs;
-             
-             //try{
-                 st=cnxx.createStatement();
-                 rs=st.executeQuery(query);
-                 Streamer S;
-                 Personne p;
-                 
-                 while(rs.next()){
-                     
-                     Streamer s = new Streamer() ;
-                     s.setIdStreamer(rs.getInt(1));
-                     s.setNom(rs.getString("nom"));
-                     s.setPrenom(rs.getString("prenom"));
-                     s.setDateNaissance(rs.getDate("dateNaissance"));
-                     s.setEmail(rs.getString("email"));
-                     s.setPassword(rs.getString("password"));
-                     s.setTelephone(rs.getInt("telephone"));
-                     s.setInformations(rs.getString("informations"));
-                     s.setLienStreaming(rs.getString("lienStreaming"));
-                     
-                     StreamerList.add(s);
-                     
-//(rs.getInt(1, p.getId_personne());//,rs.getString("nom"),rs.getString("prenom"),rs.getDate("dateNaissance"),rs.getString("email"));
-                     
-                 }
-                 
-                 
-             }catch(Exception ex){
-                 
-                 ex.printStackTrace();
-             }
-             
-             return StreamerList;
-             
-             
-         };
-         
-         
-        
-          
-    
+
+    public ObservableList<Streamer> getStreamerList() {
+
+        ObservableList<Streamer> StreamerList = FXCollections.observableArrayList();
+
+        try {
+            String query = "SELECT * from streamer,personne where id_personne = idStreamer";
+            Statement st;
+            ResultSet rs;
+
+            //try{
+            st = cnxx.createStatement();
+            rs = st.executeQuery(query);
+            Streamer S;
+            Personne p;
+
+            while (rs.next()) {
+
+                Streamer s = new Streamer();
+                s.setIdStreamer(rs.getInt(1));
+                s.setNom(rs.getString("nom"));
+                s.setPrenom(rs.getString("prenom"));
+                s.setDateNaissance(rs.getDate("dateNaissance"));
+                s.setEmail(rs.getString("email"));
+                s.setPassword(rs.getString("password"));
+                s.setTelephone(rs.getInt("telephone"));
+                s.setInformations(rs.getString("informations"));
+                s.setLienStreaming(rs.getString("lienStreaming"));
+
+                StreamerList.add(s);
+
+            }
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+        }
+
+        return StreamerList;
+
+    }
+
+    public ObservableList<Integer> affecterPersonne() {
+        ObservableList<Integer> listIdPersonne = FXCollections.observableArrayList();
+
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT id_personne FROM personne";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            while (rs.next()) {
+                listIdPersonne.add(rs.getInt(1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        return listIdPersonne;
+    }
+
 }

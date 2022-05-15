@@ -28,7 +28,7 @@ import javax.mail.internet.MimeBodyPart;
 public class MailAPI {
 
     private static final String FROM = "gamergeekscommunity@gmail.com";
-    private static final String PASSWORD = "#ggc2022";
+    private static final String PASSWORD = "gamergeeks2022";
 
     public static void sendMail(String mail, String subject, String message) throws AddressException, MessagingException {
 

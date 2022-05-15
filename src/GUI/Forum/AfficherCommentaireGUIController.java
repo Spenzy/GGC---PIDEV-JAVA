@@ -82,7 +82,7 @@ public class AfficherCommentaireGUIController implements Initializable {
 
                 //refresh
                 AfficherPublicationGUIController apc = new AfficherPublicationGUIController(c.getIdClient(), c.getId_publication());
-                apc.refreshPublication();
+                DashboardController.refreshParent(apc.refreshPublication());
             } else {
                 System.out.println("Erreur de confirmation!");
             }
