@@ -170,6 +170,23 @@ public class PlanCRUD {
         return PlanList;
 
     }
-;
+
+    public ObservableList<Integer> affecterStreamer() {
+        ObservableList<Integer> listIdStreamer = FXCollections.observableArrayList();
+
+        try {
+            Statement st = cnxx.createStatement();
+            String req = "SELECT idStreamer FROM streamer";
+            ResultSet rs;
+            rs = st.executeQuery(req);
+            while (rs.next()) {
+                listIdStreamer.add(rs.getInt(1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            //   return null;
+        }
+        return listIdStreamer;
+    }
 
 }

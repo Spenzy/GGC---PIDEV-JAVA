@@ -33,7 +33,7 @@ public class HomePage extends Application {
 
         try {
 
-            Parent root = FXMLLoader.load(getClass().getResource("BackStreamer.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("ClienPlan.fxml"));
 
             Scene scene = new Scene(root, 700, 500);
 

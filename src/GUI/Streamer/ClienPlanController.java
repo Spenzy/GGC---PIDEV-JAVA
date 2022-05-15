@@ -124,7 +124,7 @@ public class ClienPlanController implements Initializable {
         
         
         
-        tvFPIdS.setCellValueFactory(new PropertyValueFactory<Plan, String>(ss.getNom()));
+        tvFPIdS.setCellValueFactory(new PropertyValueFactory<Plan, String>("idStreamer"));
         tvFPDate.setCellValueFactory(new PropertyValueFactory<Plan, Date>("date"));
         tvFPHeure.setCellValueFactory(new PropertyValueFactory<Plan, Date>("heure"));
         tvFPDuree.setCellValueFactory(new PropertyValueFactory<Plan, Float>("duree"));

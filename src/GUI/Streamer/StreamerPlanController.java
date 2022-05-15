@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -36,9 +37,9 @@ import services.StreamerCRUD;
 public class StreamerPlanController implements Initializable {
 
     public PlanCRUD plc = new PlanCRUD();
+    
     public int idP = 1;
 
-    @FXML
     private TextField tfBPidS;
     @FXML
     private DatePicker tfBPDate;
@@ -71,9 +72,9 @@ public class StreamerPlanController implements Initializable {
     @FXML
     private Button SupprimerPlan;
     @FXML
-    private Button RetourAcceuil;
-    @FXML
     private Button recupererP;
+    @FXML
+    private ComboBox<Integer> cbIdS;
 
     /**
      * Initializes the controller class.
@@ -82,12 +83,14 @@ public class StreamerPlanController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         showPlans();
+        cbIdS.setItems(plc.affecterStreamer());
+        cbIdS.getSelectionModel().selectFirst();
     }
 
     @FXML
     private void AjouterPlan(ActionEvent event) {
 
-        Integer IdS = Integer.parseInt(tfBPidS.getText());
+        Integer IdS = cbIdS.getValue();
         Date date = Date.valueOf(tfBPDate.getValue());
         Time heure = Time.valueOf(tfBPHeure.getText());
         Float duree = Float.parseFloat(tfBPDuree.getText());
@@ -116,7 +119,7 @@ public class StreamerPlanController implements Initializable {
             //Modifier Livraison
             //    if(!tfBInfoStreamer.getText().isEmpty() || !tfBLienStreamer.getText().isEmpty()||!tfBIDS1.getText().isEmpty()){
 
-            Integer IdS = Integer.parseInt(tfBPidS.getText());
+            Integer IdS = cbIdS.getValue();
             Date date = Date.valueOf(tfBPDate.getValue());
             Time heure = Time.valueOf(tfBPHeure.getText());
             Float duree = Float.parseFloat(tfBPDuree.getText());
@@ -175,9 +178,6 @@ public class StreamerPlanController implements Initializable {
 
     }
 
-    @FXML
-    private void RetourAcceuil(ActionEvent event) {
-    }
 
     public void showPlans() {
 
@@ -210,7 +210,7 @@ public class StreamerPlanController implements Initializable {
 
         } else {
             idP = p1.getIdPlan();
-            tfBPidS.setText(p1.getIdStreamer() + "");
+            cbIdS.setValue(p1.getIdStreamer());
             tfBPDate.setValue(p1.getDate().toLocalDate());
             tfBPHeure.setText(p1.getHeure() + "");
             tfBPDuree.setText(p1.getDuree() + "");
